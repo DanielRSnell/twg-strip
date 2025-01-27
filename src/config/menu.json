@@ -1,0 +1,115 @@
+{
+  "main": [
+    {
+      "name": "All Pages",
+      "url": "",
+      "hasChildren": true,
+      "children": [
+        {
+          "name": "Home",
+          "url": "/"
+        },
+        {
+          "name": "Career",
+          "url": "/career"
+        },
+        {
+          "name": "Blog",
+          "url": "/blog"
+        },
+        {
+          "name": "Reviews",
+          "url": "/reviews"
+        },
+        {
+          "name": "About",
+          "url": "/about"
+        },
+        {
+          "name": "FAQ",
+          "url": "/faq"
+        },
+        {
+          "name": "Contact",
+          "url": "/contact"
+        },
+        {
+          "name": "Privacy policy",
+          "url": "/privacy-policy"
+        },
+        {
+          "name": "Terms of Service",
+          "url": "/terms-of-service"
+        },
+        {
+          "name": "404",
+          "url": "/404"
+        }
+      ]
+    },
+    {
+      "name": "Company",
+      "url": "/about"
+    },
+    {
+      "name": "Services",
+      "url": "/services"
+    },
+    {
+      "name": "Resources",
+      "url": "/blog"
+    }
+  ],
+  "footer": [
+    {
+      "title": "links",
+      "items": [
+        {
+          "name": "Home",
+          "url": "/"
+        },
+        {
+          "name": "About Us",
+          "url": "/about"
+        },
+        {
+          "name": "Services",
+          "url": "/services"
+        },
+        {
+          "name": "Blog",
+          "url": "/blog"
+        },
+        {
+          "name": "Contact",
+          "url": "/contact"
+        }
+      ]
+    },
+    {
+      "title": "links",
+      "items": [
+        {
+          "name": "Company",
+          "url": "/about"
+        },
+        {
+          "name": "FAQ",
+          "url": "/faq"
+        },
+        {
+          "name": "Career",
+          "url": "/career"
+        },
+        {
+          "name": "Privacy Policy",
+          "url": "/privacy-policy"
+        },
+        {
+          "name": "Terms of Service",
+          "url": "/terms-of-service"
+        }
+      ]
+    }
+  ]
+}

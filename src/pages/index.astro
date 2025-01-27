@@ -1,0 +1,343 @@
+---
+import ImageMod from "@/components/ImageMod.astro";
+import Base from "@/layouts/Base.astro";
+import { markdownify } from "@/lib/utils/textConverter";
+import CallToAction from "@/partials/CallToAction.astro";
+import Testimonial from "@/partials/Testimonial.astro";
+import { getEntry } from "astro:content";
+import { Icon } from "astro-icon/components";
+import { getSinglePage } from "@/lib/contentParser.astro";
+import BlogCard from "@/components/BlogCard.astro";
+import Globe from "@/helpers/Globe";
+import ServiceSlider from "@/components/homepage/ServiceSlider";
+
+const homepage = await getEntry("homepage", "-index");
+const testimonial = await getEntry("sections", "testimonial");
+const call_to_action = await getEntry("sections", "call-to-action");
+const { banner, service, feature, about } = homepage.data;
+
+const BLOG_FOLDER = "blog";
+const postIndex = await getEntry(BLOG_FOLDER, "-index");
+const { homepage_title, homepage_description } = postIndex.data;
+const posts = await getSinglePage(BLOG_FOLDER);
+---
+
+<Base>
+  <!-- Banner -->
+  <section class="section pt-[75px] pb-0 bg-theme-light">
+    <div class="container relative">
+      <div class="justify-center row gy-3">
+        <div class="lg:col-8">
+          <h1
+            class="text-center"
+            data-aos="fade-up-sm"
+            data-aos-delay="100"
+            set:html={markdownify(banner.title)}
+          />
+        </div>
+        <div class="lg:col-6">
+          <p
+            class="pb-8 text-center"
+            data-aos="fade-up-sm"
+            data-aos-delay="200"
+            set:html={markdownify(banner.content)}
+          />
+        </div>
+        {
+          banner.button && (
+            <div
+              class="inline-block text-center"
+              data-aos="fade-up-sm"
+              data-aos-delay="300"
+            >
+              <a class="btn btn-primary" href={banner.button.link}>
+                {banner.button.label}
+              </a>
+            </div>
+          )
+        }
+      </div>
+
+      <Globe client:visible />
+    </div>
+  </section>
+  <!-- /Banner -->
+
+  <!-- brand -->
+  <section class="relative pb-0 overflow-hidden section">
+    <div class="swiper clientlogo-slider">
+      <div class="swiper-wrapper">
+        {
+          banner.brands.map((brand) => (
+            <div class="swiper-slide">
+              <ImageMod
+                src={brand}
+                alt="Company Logo"
+                class="w-auto h-8"
+                width={0}
+                height={150}
+              />
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+  <!-- brand -->
+
+  <!-- service -->
+  <section class="pb-0 section">
+    <div class="container">
+      <h2
+        class="pb-8"
+        data-aos="fade-right-sm"
+        set:html={markdownify(service.title)}
+      />
+      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          service.services.map((s, i: number) => (
+            <div
+              class="p-8 border rounded-xl"
+              data-aos="fade-right-sm"
+              data-aos-delay={i * 100}
+            >
+              <Icon name={s.image} class="w-16 h-16 mb-24" />
+              <h3 class="mb-4 text-2xl" set:html={markdownify(s.title)} />
+              <p class="mb-4" set:html={markdownify(s.content)} />
+              {s.button.enable && (
+                <a
+                  href={s.button.link}
+                  class="flex items-center gap-1 transition duration-300 text-secondary hover:opacity-80"
+                >
+                  Learn More <span class="sr-only">Details</span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="icon icon-tabler icons-tabler-outline icon-tabler-arrow-right"
+                  >
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path d="M5 12l14 0" />
+                    <path d="M13 18l6 -6" />
+                    <path d="M13 6l6 6" />
+                  </svg>
+                </a>
+              )}
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+  <!-- service -->
+
+  <!-- feature -->
+  <section class="section">
+    <div class="container">
+      <div class="justify-center mb-10 row xl:mb-14">
+        <div class="lg:col-8">
+          <h2
+            class="text-center"
+            data-aos="fade-up-sm"
+            data-aos-delay="100"
+            set:html={markdownify(feature.title)}
+          />
+        </div>
+        <div class="lg:col-6">
+          <p
+            class="text-center"
+            data-aos="fade-up-sm"
+            data-aos-delay="200"
+            set:html={markdownify(feature.content)}
+          />
+        </div>
+      </div>
+      <div
+        class="flex flex-col gap-10 md:flex-row justify-center lg:justify-between md:items-stretch"
+      >
+        <ServiceSlider feature={feature.features} client:idle />
+      </div>
+    </div>
+  </section>
+  <!-- feature -->
+
+  <!-- review -->
+  <section class="section bg-primary">
+    <div class="container text-white">
+      <div class="pb-24 lg:pb-28">
+        <div class="flex flex-col gap-10 justify-center">
+          <div>
+            <h2
+              class="text-white text-center pb-4"
+              data-aos="fade-up-sm"
+              data-aos-delay="100"
+              set:html={markdownify(testimonial.data.homepage_title)}
+            />
+            <p
+              class="max-w-xl mx-auto text-center text-theme-light/80"
+              data-aos="fade-up-sm"
+              data-aos-delay="200"
+              set:html={markdownify(testimonial.data.content)}
+            />
+          </div>
+
+          <Testimonial
+            testimonials={testimonial.data.testimonials.slice(0, 3)}
+          />
+
+          <div class="inline-block text-center">
+            <a href="/reviews" class="btn btn-outline-secondary">
+              Read All Reviews
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="pt-24 border-t lg:pt-28 border-border/20">
+        <div
+          class="items-center justify-center row md:justify-between gy-5 gx-4 xl:gx-5"
+        >
+          <div class="col-12 md:col-5 order-2 md:order-1">
+            <div class="flex flex-col gap-6">
+              <h2
+                class="text-white"
+                data-aos="fade-up-sm"
+                data-aos-delay="100"
+                set:html={markdownify(about.title)}
+              />
+              <p
+                class="text-theme-light/80"
+                data-aos="fade-up-sm"
+                data-aos-delay="200"
+                set:html={markdownify(about.content)}
+              />
+              <p
+                class="text-theme-light/80"
+                data-aos="fade-up-sm"
+                data-aos-delay="300"
+                set:html={markdownify(about.content_2)}
+              />
+              {
+                about.button.enable && (
+                  <div
+                    class="inline-block"
+                    data-aos="fade-up-sm"
+                    data-aos-delay="400"
+                  >
+                    <a
+                      href={about.button.link}
+                      class="btn btn-outline-secondary"
+                      set:html={about.button.label}
+                    />
+                  </div>
+                )
+              }
+            </div>
+          </div>
+          <div
+            class="col-12 md:col-6 order-1 md:order-2"
+            data-aos="fade-up-sm"
+            data-aos-delay="200"
+          >
+            <div
+              class="p-8 border bg-tertiary/20 border-border/20 rounded-xl md:px-24 md:py-14"
+            >
+              <ImageMod
+                class="mx-auto"
+                src={about.image}
+                width={0}
+                height={435}
+                alt={about.title}
+                format="webp"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- review -->
+
+  <!-- blog -->
+  <section class="pb-0 section">
+    <div class="container">
+      <div class="flex flex-col gap-14">
+        <div class="justify-center row">
+          <div class="lg:col-8">
+            <h2
+              class="pb-4 text-center"
+              data-aos="fade-up-sm"
+              data-aos-delay="100"
+              set:html={markdownify(homepage_title!)}
+            />
+            <p
+              class="text-center"
+              data-aos="fade-up-sm"
+              data-aos-delay="200"
+              set:html={markdownify(homepage_description!)}
+            />
+          </div>
+        </div>
+        <div class="row g-4">
+          {
+            posts.map((post, i: number) => (
+              <div
+                class="relative sm:col-6 lg:col-4 group"
+                data-aos="fade-up-sm"
+                data-aos-delay={(i + 1) * 100}
+              >
+                <BlogCard post={post} />
+              </div>
+            ))
+          }
+        </div>
+        <div class="inline-block text-center">
+          <a class="btn btn-outline-primary" href="/blog">
+            Read All Articles
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- blog -->
+
+  <CallToAction call_to_action={call_to_action} />
+</Base>
+
+<script>
+  import { Swiper } from "swiper";
+  import "swiper/css";
+  import { Autoplay } from "swiper/modules";
+
+  document.addEventListener("astro:page-load", () => {
+    new Swiper(".clientlogo-slider", {
+      modules: [Autoplay],
+      centeredSlides: true,
+      speed: 6000,
+      spaceBetween: 24,
+      autoplay: {
+        delay: 0,
+        disableOnInteraction: false,
+      },
+      loop: true,
+
+      breakpoints: {
+        320: {
+          slidesPerView: 2,
+        },
+        768: {
+          slidesPerView: 4,
+        },
+        1200: {
+          slidesPerView: 6,
+        },
+      },
+      allowTouchMove: false,
+    });
+  });
+</script>

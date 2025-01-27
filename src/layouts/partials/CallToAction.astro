@@ -1,0 +1,75 @@
+---
+import ImageMod from "@/components/ImageMod.astro";
+import { markdownify } from "@/lib/utils/textConverter";
+
+const { call_to_action } = Astro.props;
+const { enable, title, image, description, button } = call_to_action.data;
+---
+
+{
+  enable && (
+    <section class="mx-4 overflow-hidden section">
+      <div
+        data-aos="fade-up"
+        data-aos-delay="100"
+        class="container relative px-8 py-16 text-white bg-primary sm:p-24 lg:px-36 lg:py-44 rounded-xl"
+      >
+        <h2
+          class="pb-4 text-center text-white"
+          data-aos="fade-up-sm"
+          data-aos-delay="200"
+          set:html={markdownify(title)}
+        />
+
+        <div>
+          <p
+            data-aos="fade-up-sm"
+            data-aos-delay="300"
+            class="text-balance pb-8 text-center"
+          >
+            With a team of seasoned security experts and developers, we offer a
+            range of services including security assessments.
+          </p>
+          {button.enable && (
+            <div
+              data-aos="fade-up-sm"
+              data-aos-delay="400"
+              class="w-fit mx-auto block"
+            >
+              <a href={button.link} class="z-10 btn btn-secondary">
+                {button.label}
+              </a>
+            </div>
+          )}
+        </div>
+
+        {/* middle */}
+        <ImageMod
+          src="/images/cta/cta-img-1.png"
+          alt="Background Image"
+          class="absolute w-2/3 transform -translate-x-1/2 left-1/2 rotate-6"
+          width={0}
+          height={0}
+        />
+
+        {/* left */}
+        <ImageMod
+          src="/images/cta/cta-img-2.png"
+          alt="Background Image"
+          class="w-1/3 absolute top-[10%] -left-[10%]"
+          width={0}
+          height={0}
+        />
+
+        {/* right */}
+        <ImageMod
+          src="/images/cta/cta-img-2.png"
+          alt="Background Image"
+          class="w-1/3 absolute top-[10%] -right-[10%]"
+          width={0}
+          height={0}
+        />
+      </div>
+    </section>
+  )
+}

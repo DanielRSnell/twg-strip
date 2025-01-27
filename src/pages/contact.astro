@@ -1,0 +1,86 @@
+---
+import config from "@/config/config.json";
+import Base from "@/layouts/Base.astro";
+import CallToAction from "@/partials/CallToAction.astro";
+import { getEntry } from "astro:content";
+
+const contact = await getEntry("contact", "-index");
+const { contact_form_action }: { contact_form_action: string } = config.params;
+const { title, description, meta_title } = contact.data;
+const call_to_action = await getEntry("sections", "call-to-action");
+---
+
+<Base
+  title={title}
+  meta_title={meta_title}
+  description={description}
+  image={""}
+>
+  <section class="section bg-theme-light">
+    <div class="container">
+      <h1 class="text-center" data-aos="fade-up-sm" data-aos-delay="100">
+        Contact Us
+      </h1>
+    </div>
+  </section>
+
+  <section class="section pb-0">
+    <div class="container">
+      <div class="row justify-center">
+        <div class="lg:col-8">
+          <form action="#" method="POST">
+            <div class="sm:flex justify-between gap-10">
+              <div class="mb-6 w-full">
+                <label for="name" class="form-label"> Full Name </label>
+                <input
+                  id="name"
+                  name="name"
+                  class="form-input w-full bg-tertiary/5"
+                  placeholder="Name"
+                  type="text"
+                  required
+                />
+              </div>
+              <div class="mb-6 w-full">
+                <label for="mobileNumber" class="form-label">
+                  Mobile Number
+                </label>
+                <input
+                  id="mobileNumber"
+                  name="mobileNumber"
+                  class="form-input w-full bg-tertiary/5"
+                  placeholder="Phone Number"
+                  type="text"
+                  required
+                />
+              </div>
+            </div>
+            <div class="mb-6">
+              <label for="email" class="form-label"> Email Address </label>
+              <input
+                id="email"
+                name="email"
+                class="form-input bg-tertiary/5"
+                placeholder="Email"
+                type="email"
+                required
+              />
+            </div>
+            <div class="mb-6">
+              <label for="message" class="form-label"> Messages </label>
+              <textarea
+                id="message"
+                name="message"
+                class="form-input bg-tertiary/5"
+                placeholder="Type your message"
+                rows="3"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit Now</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CallToAction call_to_action={call_to_action} />
+</Base>

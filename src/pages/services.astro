@@ -1,0 +1,138 @@
+---
+import CustomAccordion from "@/helpers/CustomAccordion";
+import Base from "@/layouts/Base.astro";
+import { getSinglePage } from "@/lib/contentParser.astro";
+import { markdownify } from "@/lib/utils/textConverter";
+import CallToAction from "@/partials/CallToAction.astro";
+import Testimonial from "@/partials/Testimonial.astro";
+import { Icon } from "astro-icon/components";
+import type { CollectionEntry } from "astro:content";
+import { getEntry } from "astro:content";
+
+const serviceIndex = await getEntry("service", "-index");
+const { title, banner_title, description, meta_title, button } =
+  serviceIndex.data as CollectionEntry<"services">["data"];
+const testimonial = await getEntry("sections", "testimonial");
+const call_to_action = await getEntry("sections", "call-to-action");
+const services = await getSinglePage("service");
+const faqs = await getEntry("sections", "faq");
+---
+
+<Base title={title} meta_title={meta_title} description={description}>
+  <section class="section bg-theme-light">
+    <div class="container">
+      <div class="max-w-2xl mx-auto text-center">
+        <h1
+          class="pb-4"
+          data-aos="fade-up-sm"
+          data-aos-delay="100"
+          set:html={markdownify(banner_title)}
+        />
+        <div data-aos="fade-up-sm" data-aos-delay="200">
+          <p class="pb-8" set:html={markdownify(description)} />
+        </div>
+        {
+          button.enable && (
+            <a href={button.link} class="btn btn-primary">
+              {button.label}
+            </a>
+          )
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div
+        class="flex flex-col gap-20 lg:gap-24 xl:gap-32 max-w-xl lg:max-w-full mx-auto"
+      >
+        {
+          services.map((s, i: number) => (
+            <div class="flex flex-col lg:flex-row justify-between items-center gap-10">
+              <div class={`lg:w-[60%] w-full ${i % 2 !== 0 && "lg:order-2"}`}>
+                <h3
+                  class="text-4xl pb-8"
+                  data-aos="fade-up-sm"
+                  data-aos-delay="100"
+                  set:html={s.data.title}
+                />
+                <p
+                  class="pb-6"
+                  data-aos="fade-up-sm"
+                  data-aos-delay="200"
+                  set:html={s.data.contact_1}
+                />
+                <p
+                  class="pb-8"
+                  data-aos="fade-up-sm"
+                  data-aos-delay="300"
+                  set:html={s.data.contact_2}
+                />
+                {s.data.button.enable && (
+                  <a
+                    href={s.data.button.link}
+                    class="btn btn-primary"
+                    data-aos="fade-up-sm"
+                    data-aos-delay="400"
+                  >
+                    {s.data.button.label}
+                  </a>
+                )}
+              </div>
+              <div class={`lg:w-[40%] w-full`}>
+                <div class="border border-border rounded-xl p-20">
+                  <Icon
+                    name={s.data.image}
+                    class={`h-auto w-full mx-auto ${
+                      i !== services.length - 1 ? "spin-animation" : ""
+                    }`}
+                    data-aos="zoom-in"
+                    data-aos-delay="100"
+                    data-aos-duration="1000"
+                  />
+                </div>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section bg-primary">
+    <div class="container text-white">
+      <div class="pb-24 lg:pb-28">
+        <div class="flex flex-col gap-10 justify-center">
+          <div>
+            <h2
+              class="text-white text-center pb-4"
+              data-aos="fade-up-sm"
+              data-aos-delay="100"
+              set:html={markdownify(testimonial.data.homepage_title)}
+            />
+            <p
+              class="max-w-xl mx-auto text-center text-theme-light/80"
+              data-aos="fade-up-sm"
+              data-aos-delay="200"
+              set:html={markdownify(testimonial.data.content)}
+            />
+          </div>
+
+          <Testimonial
+            testimonials={testimonial.data.testimonials.slice(0, 3)}
+          />
+
+          <div class="inline-block text-center">
+            <a href="/reviews" class="btn btn-outline-secondary">
+              Read All Reviews
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CustomAccordion faqs={faqs.data} client:only="react" />
+  <CallToAction call_to_action={call_to_action} />
+</Base>

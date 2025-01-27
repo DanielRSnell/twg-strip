@@ -1,0 +1,38 @@
+---
+import CustomAccordion from "@/helpers/CustomAccordion";
+import Base from "@/layouts/Base.astro";
+import { markdownify } from "@/lib/utils/textConverter";
+import CallToAction from "@/partials/CallToAction.astro";
+import type { CollectionEntry } from "astro:content";
+import { getEntry } from "astro:content";
+const call_to_action = await getEntry("sections", "call-to-action");
+
+const faqs = await getEntry("sections", "faq");
+
+const { header, title } = faqs.data as CollectionEntry<"faq">["data"];
+---
+
+<Base title={title} meta_title={""} description={""}>
+  <section class="section bg-theme-light">
+    <div class="container">
+      <div class="max-w-2xl mx-auto text-center">
+        <h1
+          class="pb-4"
+          data-aos="fade-up-sm"
+          data-aos-delay="100"
+          set:html={markdownify(header.title)}
+        />
+        <p
+          class="pb-8"
+          data-aos="fade-up-sm"
+          data-aos-delay="200"
+          class="text-balance"
+          set:html={markdownify(header.content)}
+        />
+      </div>
+    </div>
+  </section>
+
+  <CustomAccordion faqs={faqs.data} client:only="react" />
+  <CallToAction call_to_action={call_to_action} />
+</Base>
