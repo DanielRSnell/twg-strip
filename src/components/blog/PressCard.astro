@@ -1,0 +1,25 @@
+---
+interface Props {
+  source: string;
+  image: string;
+  class?: string;
+}
+
+const { source, image, class: className } = Astro.props;
+---
+
+<div class={`relative ${className}`}>
+  <div class="overflow-hidden rounded-lg">
+    <ImageMod
+      format="webp"
+      width={333}
+      height={225}
+      src={image}
+      alt="Press Coverage"
+      class="transition duration-300 group-hover:scale-110"
+    />
+  </div>
+  <div class="absolute top-2 left-2 bg-primary text-white px-3 py-1 text-sm rounded-full">
+    {source}
+  </div>
+</div>

@@ -1,0 +1,118 @@
+---
+import config from "@/config/config.json";
+import dateFormat from "@/lib/utils/dateFormat";
+import { markdownify } from "@/lib/utils/textConverter";
+import ImageMod from "./ImageMod.astro";
+
+const {
+  summary_length,
+  blog_folder,
+}: { summary_length: number; blog_folder: string } = config.settings;
+
+const { post } = Astro.props;
+const {
+  title,
+  image,
+  description,
+  date,
+  author,
+  author_image,
+  type,
+  video_url,
+  audio_url,
+  press_source,
+  duration,
+} = post.data;
+
+const TypeBadge = () => {
+  switch (type) {
+    case 'video':
+      return (
+        <div class="absolute top-8 right-8 bg-primary text-white px-3 py-1 rounded-full z-10">
+          Video
+        </div>
+      );
+    case 'audio':
+      return (
+        <div class="absolute top-8 right-8 bg-secondary text-white px-3 py-1 rounded-full z-10">
+          Podcast
+        </div>
+      );
+    case 'press':
+      return (
+        <div class="absolute top-8 right-8 bg-tertiary text-white px-3 py-1 rounded-full z-10">
+          Press
+        </div>
+      );
+    default:
+      return null;
+  }
+};
+---
+
+<div class="flex flex-col h-full justify-between p-6 border rounded-xl relative">
+  <TypeBadge />
+  <div>
+    <div class="overflow-hidden rounded-lg mb-5">
+      <div class="relative">
+        <ImageMod
+          format="webp"
+          width={333}
+          height={225}
+          src={image}
+          alt={title}
+          class="transition duration-300 group-hover:scale-110 rounded-inherit"
+        />
+        {type === 'video' && (
+          <div class="absolute inset-0 flex items-center justify-center">
+            <div class="w-16 h-16 bg-primary/90 rounded-full flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white">
+                <path d="M8 5v14l11-7z"/>
+              </svg>
+            </div>
+            {duration && (
+              <div class="absolute bottom-2 right-2 bg-black/70 text-white px-2 py-1 text-sm rounded">
+                {duration}
+              </div>
+            )}
+          </div>
+        )}
+        {type === 'audio' && (
+          <div class="absolute bottom-2 left-2 right-2 bg-black/70 text-white px-3 py-2 rounded flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="white">
+              <path d="M12 2c1.103 0 2 .897 2 2v7c0 1.103-.897 2-2 2s-2-.897-2-2V4c0-1.103.897-2 2-2z"/>
+              <path d="M19 10v2c0 3.859-3.141 7-7 7s-7-3.141-7-7v-2h2v2c0 2.757 2.243 5 5 5s5-2.243 5-5v-2h2z"/>
+            </svg>
+            <span class="text-sm">{duration}</span>
+          </div>
+        )}
+        {type === 'press' && press_source && (
+          <div class="absolute top-2 left-2 bg-primary text-white px-3 py-1 text-sm rounded-full">
+            {press_source}
+          </div>
+        )}
+      </div>
+    </div>
+
+    <a
+      href={`/${blog_folder}/${post.slug}`}
+      class="h5 font-medium after:absolute after:inset-0"
+      set:html={markdownify(title)}
+    />
+    <p class="my-5" set:html={markdownify(description)} />
+  </div>
+  <div class="flex items-center justify-between text-sm">
+    <div class="flex items-center gap-2">
+      <ImageMod
+        format="webp"
+        width={32}
+        height={32}
+        src={author_image}
+        alt={author}
+        class="w-8 h-8 rounded-full"
+      />
+      <p set:html={markdownify(author)} />
+    </div>
+    <p>{dateFormat(date)}</p>
+  </div>
+</div>

@@ -4,14 +4,14 @@ import Base from "@/layouts/Base.astro";
 import { getSinglePage } from "@/lib/contentParser.astro";
 import { markdownify } from "@/lib/utils/textConverter";
 import CallToAction from "@/partials/CallToAction.astro";
+import ContentNav from "@/components/blog/ContentNav.astro";
 import { getEntry } from "astro:content";
-const call_to_action = await getEntry("sections", "call-to-action");
 
 const BLOG_FOLDER = "blog";
-
 const postIndex = await getEntry(BLOG_FOLDER, "-index");
 const { title, header_title, description } = postIndex.data;
 const posts = await getSinglePage(BLOG_FOLDER);
+const call_to_action = await getEntry("sections", "call-to-action");
 ---
 
 <Base title={title} meta_title={""} image={""} description={description}>
@@ -33,8 +33,11 @@ const posts = await getSinglePage(BLOG_FOLDER);
       </div>
     </div>
   </section>
-  <section class="section pb-0">
+
+  <section class="section">
     <div class="container">
+      <ContentNav currentPath={Astro.url.pathname} />
+      
       <div class="row g-4">
         {
           posts.map((post, i) => (

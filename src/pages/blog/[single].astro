@@ -1,6 +1,9 @@
 ---
 import Base from "@/layouts/Base.astro";
 import PostSingle from "@/layouts/PostSingle.astro";
+import VideoSingle from "@/layouts/VideoSingle.astro";
+import AudioSingle from "@/layouts/AudioSingle.astro";
+import PressSingle from "@/layouts/PressSingle.astro";
 import { getSinglePage } from "@/lib/contentParser.astro";
 
 export async function getStaticPaths() {
@@ -17,7 +20,16 @@ export async function getStaticPaths() {
 }
 
 const { post } = Astro.props;
-const { title, meta_title, description, image } = post.data;
+const { title, meta_title, description, image, type } = post.data;
+
+const layouts = {
+  post: PostSingle,
+  video: VideoSingle,
+  audio: AudioSingle,
+  press: PressSingle,
+};
+
+const ContentLayout = layouts[type];
 ---
 
 <Base
@@ -26,5 +38,5 @@ const { title, meta_title, description, image } = post.data;
   description={description}
   image={image}
 >
-  <PostSingle post={post} />
+  <ContentLayout post={post} />
 </Base>

@@ -1,0 +1,20 @@
+---
+interface Props {
+  domain: string;
+  name: string;
+  height?: number;
+  width?: number;
+  class?: string;
+}
+
+const { domain, name, height = 60, width = 180, class: className } = Astro.props;
+const TOKEN = "pk_Hxlg889vQvqt4sdTFKgbSw";
+---
+
+<img
+  src={`https://img.logo.dev/${domain}?token=${TOKEN}`}
+  alt={`${name} Logo`}
+  height={height}
+  width={width}
+  class={className}
+/>

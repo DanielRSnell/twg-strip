@@ -31,7 +31,7 @@ const careers = await getSinglePage("career");
 >
   <section class="section bg-theme-light">
     <div class="container">
-      <div class="items-center justify-between row g-4 gy-5 xl:gy-0">
+      <div class="justify-between items-center row g-4 gy-5 xl:gy-0">
         <div class="lg:col-5">
           <h1
             class="pb-4"
@@ -67,7 +67,7 @@ const careers = await getSinglePage("career");
               data-aos="fade-right-sm"
               data-aos-delay={100 + i * 100}
             >
-              <div class="h-full p-8 border rounded-lg">
+              <div class="p-8 h-full rounded-lg border">
                 <h2
                   class="pb-3 text-4xl text-center"
                   set:html={markdownify(s.value)}
@@ -86,7 +86,7 @@ const careers = await getSinglePage("career");
 
   <section class="section">
     <div class="container">
-      <div class="flex flex-col lg:flex-row items-start justify-between">
+      <div class="flex flex-col justify-between items-start lg:flex-row">
         <div
           class="w-[100%] lg:w-[40%] max-lg:mb-11"
           data-aos="fade-up-sm"
@@ -156,7 +156,7 @@ const careers = await getSinglePage("career");
     </div>
   </section>
 
-  <section class="pb-0 section">
+  <!-- <section class="pb-0 section">
     <div class="container">
       <div class="mb-10 xl:mb-14">
         <h2
@@ -180,7 +180,7 @@ const careers = await getSinglePage("career");
               data-aos="fade-up-sm"
               data-aos-delay={100 + i * 100}
             >
-              <div class="p-4 pb-6 border rounded-xl">
+              <div class="p-4 pb-6 rounded-xl border">
                 <ImageMod
                   src={m.image}
                   alt="Team Member"
@@ -197,7 +197,7 @@ const careers = await getSinglePage("career");
         }
       </div>
     </div>
-  </section>
+  </section> -->
 
   <section class="pb-0 mx-5 section">
     <div class="container">
@@ -209,26 +209,26 @@ const careers = await getSinglePage("career");
           set:html={markdownify(career.title)}
         />
         <p
-          class="max-w-xl mx-auto text-center"
+          class="mx-auto max-w-xl text-center"
           data-aos="fade-up-sm"
           data-aos-delay="200"
           set:html={markdownify(career.content)}
         />
       </div>
-      <div class="row justify-center">
+      <div class="justify-center row">
         <div class="lg:col-8">
           {
             careers.map((career, i: number) => (
               <div class="flex flex-col gap-5 [&:not(:last-child)]:mb-5">
                 <div
-                  class="row lg:gx-4 items-center border sm:px-4 py-3 rounded-lg"
+                  class="items-center py-3 rounded-lg border row lg:gx-4 sm:px-4"
                   data-aos="fade-up-sm"
                   data-aos-delay={200 + i * 100}
                 >
                   <div class="md:col-6">
-                    <div class="flex items-center gap-5">
-                      <div class="bg-secondary/15 w-10 h-10 rounded-full flex justify-center items-center">
-                        <p class="text-secondary font-bold text-lg">{i + 1}</p>
+                    <div class="flex gap-5 items-center">
+                      <div class="flex justify-center items-center w-10 h-10 rounded-full bg-secondary/15">
+                        <p class="text-lg font-bold text-secondary">{i + 1}</p>
                       </div>
                       <p
                         class="font-semibold"
@@ -248,7 +248,7 @@ const careers = await getSinglePage("career");
                       />
                       <a
                         href={`/career/${career.slug}`}
-                        class="btn border border-secondary text-secondary hover:opacity-80"
+                        class="border btn border-secondary text-secondary hover:opacity-80"
                       >
                         Apply Now
                       </a>

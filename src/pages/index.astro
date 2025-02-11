@@ -20,6 +20,8 @@ const BLOG_FOLDER = "blog";
 const postIndex = await getEntry(BLOG_FOLDER, "-index");
 const { homepage_title, homepage_description } = postIndex.data;
 const posts = await getSinglePage(BLOG_FOLDER);
+
+console.log(testimonial.data);
 ---
 
 <Base>
@@ -159,7 +161,7 @@ const posts = await getSinglePage(BLOG_FOLDER);
         </div>
       </div>
       <div
-        class="flex flex-col gap-10 md:flex-row justify-center lg:justify-between md:items-stretch"
+        class="flex flex-col justify-center gap-10 md:flex-row lg:justify-between md:items-stretch"
       >
         <ServiceSlider feature={feature.features} client:idle />
       </div>
@@ -171,10 +173,10 @@ const posts = await getSinglePage(BLOG_FOLDER);
   <section class="section bg-primary">
     <div class="container text-white">
       <div class="pb-24 lg:pb-28">
-        <div class="flex flex-col gap-10 justify-center">
+        <div class="flex flex-col justify-center gap-10">
           <div>
             <h2
-              class="text-white text-center pb-4"
+              class="pb-4 text-center text-white"
               data-aos="fade-up-sm"
               data-aos-delay="100"
               set:html={markdownify(testimonial.data.homepage_title)}
@@ -202,7 +204,7 @@ const posts = await getSinglePage(BLOG_FOLDER);
         <div
           class="items-center justify-center row md:justify-between gy-5 gx-4 xl:gx-5"
         >
-          <div class="col-12 md:col-5 order-2 md:order-1">
+          <div class="order-2 col-12 md:col-5 md:order-1">
             <div class="flex flex-col gap-6">
               <h2
                 class="text-white"
@@ -240,7 +242,7 @@ const posts = await getSinglePage(BLOG_FOLDER);
             </div>
           </div>
           <div
-            class="col-12 md:col-6 order-1 md:order-2"
+            class="order-1 col-12 md:col-6 md:order-2"
             data-aos="fade-up-sm"
             data-aos-delay="200"
           >

@@ -11,7 +11,7 @@ faqs:
   - question: "How does Sully's Sandbox benefit my organization?"
     answer: "Sully's Sandbox is our AI model marketplace that provides immediate access to specialized models and LLMs. It allows organizations to quickly implement AI solutions without extensive development time, accelerating innovation and productivity."
   - question: "What makes WorkThisWay different from traditional recruitment tools?"
-    answer: "WorkThisWay uses advanced AI algorithms to identify and match passive candidates with opportunities. It goes beyond traditional keyword matching to understand the true potential fit between candidates and positions, significantly improving hiring outcomes."
+    answer: "WorkThisWay uses advanced AI algorithms to identify and match passive candidates with opportunities. It goes beyond traditional keyword matching to understand the true potential fit between candidates and positions, significantly improving hiring outcomes. The candidate information is hidden to prevent bias decision making, and only highlights their skills."
   - question: "How do you ensure data security across your platforms?"
     answer: "We implement enterprise-grade security measures across all our platforms, including encryption, access controls, and regular security audits. Our systems comply with industry standards and regulations for data protection."
   - question: "What kind of support do you provide for implementation?"

@@ -1,0 +1,35 @@
+---
+interface Props {
+  types: string[];
+  currentType: string;
+}
+
+const { types, currentType } = Astro.props;
+---
+
+<div class="flex justify-center gap-4 mb-10">
+  <a
+    href="/blog"
+    class={`px-4 py-2 rounded-lg transition ${
+      currentType === 'all'
+        ? 'bg-primary text-white'
+        : 'bg-theme-light hover:bg-primary/10'
+    }`}
+  >
+    All
+  </a>
+  {
+    types.map((type) => (
+      <a
+        href={`/blog?type=${type}`}
+        class={`px-4 py-2 rounded-lg capitalize transition ${
+          currentType === type
+            ? 'bg-primary text-white'
+            : 'bg-theme-light hover:bg-primary/10'
+        }`}
+      >
+        {type}
+      </a>
+    ))
+  }
+</div>

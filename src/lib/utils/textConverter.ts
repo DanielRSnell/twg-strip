@@ -2,17 +2,20 @@ import { slug } from "github-slugger";
 import { marked } from "marked";
 
 // slugify
-export const slugify = (content: string) => {
+export const slugify = (content: string): string => {
+  if (!content) return "";
   return slug(content);
 };
 
 // markdownify
-export const markdownify = (content: string, div?: boolean) => {
+export const markdownify = (content: string | undefined | null, div?: boolean): string => {
+  if (!content) return "";
   return div ? marked.parse(content) : marked.parseInline(content);
 };
 
 // humanize
-export const humanize = (content: string) => {
+export const humanize = (content: string): string => {
+  if (!content) return "";
   return content
     .replace(/^[\s_]+|[\s_]+$/g, "")
     .replace(/[_\s]+/g, " ")
@@ -23,7 +26,8 @@ export const humanize = (content: string) => {
 };
 
 // titleify
-export const titleify = (content: string) => {
+export const titleify = (content: string): string => {
+  if (!content) return "";
   const humanized = humanize(content);
   return humanized
     .split(" ")
@@ -32,8 +36,9 @@ export const titleify = (content: string) => {
 };
 
 // plainify
-export const plainify = (content: string) => {
-  const parseMarkdown: any = marked.parse(content);
+export const plainify = (content: string): string => {
+  if (!content) return "";
+  const parseMarkdown = marked.parse(content);
   const filterBrackets = parseMarkdown.replace(/<\/?[^>]+(>|$)/gm, "");
   const filterSpaces = filterBrackets.replace(/[\r\n]\s*[\r\n]/gm, "");
   const stripHTML = htmlEntityDecoder(filterSpaces);
@@ -41,20 +46,21 @@ export const plainify = (content: string) => {
 };
 
 // strip entities for plainify
-const htmlEntityDecoder = (htmlWithEntities: string) => {
-  let entityList: { [key: string]: string } = {
+const htmlEntityDecoder = (htmlWithEntities: string): string => {
+  if (!htmlWithEntities) return "";
+  const entityList: { [key: string]: string } = {
     "&nbsp;": " ",
-    "&lt;": "<",
-    "&gt;": ">",
+    "<": "<",
+    ">": ">",
     "&amp;": "&",
     "&quot;": '"',
     "&#39;": "'",
   };
-  let htmlWithoutEntities: string = htmlWithEntities.replace(
-    /(&amp;|&lt;|&gt;|&quot;|&#39;)/g,
+  const htmlWithoutEntities: string = htmlWithEntities.replace(
+    /(&amp;|<|>|&quot;|&#39;)/g,
     (entity: string): string => {
       return entityList[entity];
-    },
+    }
   );
   return htmlWithoutEntities;
 };

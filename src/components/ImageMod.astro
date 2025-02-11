@@ -1,0 +1,82 @@
+---
+import type { ImageMetadata } from "astro";
+import { Image } from "astro:assets";
+
+interface Props {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+  loading?: "eager" | "lazy" | null | undefined;
+  decoding?: "async" | "auto" | "sync" | null | undefined;
+  format?: "auto" | "avif" | "jpeg" | "png" | "svg" | "webp";
+  class?: string;
+  style?: any;
+}
+
+let {
+  src,
+  alt,
+  width,
+  height,
+  loading,
+  decoding,
+  class: className,
+  format,
+  style,
+} = Astro.props;
+
+// If src starts with http, it's already an external URL
+const isExternalUrl = src.startsWith("http");
+if (!isExternalUrl) {
+  src = `/public${src}`;
+}
+
+// Glob pattern to load images from the /public/images folder
+const images = import.meta.glob("/public/images/**/*.{jpeg,jpg,png,gif,svg,webp}");
+
+// Check if the source path is valid for local images
+const isValidPath = isExternalUrl ? true : images[src] ? true : false;
+
+// Extract domain from partner website URL for fallback
+function getDomainFromAlt(alt: string): string {
+  // Remove common terms from alt text and convert to lowercase
+  const cleanAlt = alt.toLowerCase()
+    .replace(" logo", "")
+    .replace(" ", "");
+  return `${cleanAlt}.com`;
+}
+
+// Fallback URL using logo.dev
+const fallbackUrl = `https://img.logo.dev/${getDomainFromAlt(alt)}`;
+
+// If local image not found, use fallback
+const imgSrc = isValidPath ? (isExternalUrl ? src : images[src]) : fallbackUrl;
+---
+
+{
+  isValidPath && !isExternalUrl ? (
+    <Image
+      src={imgSrc() as Promise<{ default: ImageMetadata }>}
+      alt={alt}
+      width={width}
+      height={height}
+      loading={loading}
+      decoding={decoding}
+      class={className}
+      format={format}
+      style={style}
+    />
+  ) : (
+    <img
+      src={imgSrc}
+      alt={alt}
+      width={width}
+      height={height}
+      loading={loading}
+      decoding={decoding}
+      class={className}
+      style={style}
+    />
+  )
+}

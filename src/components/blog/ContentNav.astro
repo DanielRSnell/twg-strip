@@ -1,0 +1,46 @@
+---
+const { currentPath } = Astro.props;
+
+const navItems = [
+  { path: "/blog", label: "All Content", count: 0 },
+  { path: "/blog/articles", label: "Articles", count: 0 },
+  { path: "/blog/video", label: "Videos", count: 0 },
+  { path: "/blog/audio", label: "Audio", count: 0 },
+  { path: "/blog/press", label: "Press", count: 0 },
+];
+
+// Get post counts
+import { getSinglePage } from "@/lib/contentParser.astro";
+const posts = await getSinglePage("blog");
+
+// Update counts
+navItems[0].count = posts.length;
+navItems[1].count = posts.filter(post => post.data.type === "post").length;
+navItems[2].count = posts.filter(post => post.data.type === "video").length;
+navItems[3].count = posts.filter(post => post.data.type === "audio").length;
+navItems[4].count = posts.filter(post => post.data.type === "press").length;
+---
+
+<div class="flex flex-wrap justify-center gap-4 mb-10">
+  {
+    navItems.map((item) => (
+      <a
+        href={item.path}
+        class={`px-4 py-2 rounded-lg transition flex items-center gap-2 ${
+          currentPath === item.path
+            ? "bg-primary text-white"
+            : "bg-theme-light hover:bg-primary/10"
+        }`}
+      >
+        {item.label}
+        <span class={`text-sm ${
+          currentPath === item.path
+            ? "bg-white/20"
+            : "bg-dark/10"
+        } px-2 py-0.5 rounded-full`}>
+          {item.count}
+        </span>
+      </a>
+    ))
+  }
+</div>

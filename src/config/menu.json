@@ -22,6 +22,10 @@
           "url": "/reviews"
         },
         {
+          "name": "Partners",
+          "url": "/partners"
+        },
+        {
           "name": "About",
           "url": "/about"
         },
@@ -56,6 +60,10 @@
       "url": "/services"
     },
     {
+      "name": "Partners",
+      "url": "/partners"
+    },
+    {
       "name": "Resources",
       "url": "/blog"
     }
@@ -75,6 +83,10 @@
         {
           "name": "Services",
           "url": "/services"
+        },
+        {
+          "name": "Partners",
+          "url": "/partners"
         },
         {
           "name": "Blog",

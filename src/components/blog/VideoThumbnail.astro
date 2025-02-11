@@ -1,0 +1,42 @@
+---
+interface Props {
+  url: string;
+  thumbnail: string;
+  duration: string;
+  class?: string;
+}
+
+const { url, thumbnail, duration, class: className } = Astro.props;
+---
+
+<div class={`relative ${className}`}>
+  <ImageMod
+    src={thumbnail}
+    alt="Video Thumbnail"
+    width={333}
+    height={225}
+    class="rounded-lg"
+  />
+  <div class="absolute inset-0 flex items-center justify-center">
+    <button
+      class="w-16 h-16 bg-primary/90 rounded-full flex items-center justify-center hover:bg-primary transition"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="white"
+      >
+        <path d="M8 5v14l11-7z"/>
+      </svg>
+    </button>
+  </div>
+  {
+    duration && (
+      <div class="absolute bottom-2 right-2 bg-black/70 text-white px-2 py-1 text-sm rounded">
+        {duration}
+      </div>
+    )
+  }
+</div>

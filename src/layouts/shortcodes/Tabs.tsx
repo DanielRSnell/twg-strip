@@ -1,5 +1,3 @@
-// @ts-nocheck
-
 import { marked } from "marked";
 import React, { useEffect, useRef, useState } from "react";
 
@@ -23,7 +21,7 @@ const Tabs = ({ children }: { children: React.ReactElement }) => {
   }, [active]);
 
   const tabLinks = Array.from(
-    children.props.value.matchAll(
+    (children.props.value || "").matchAll(
       /<div\s+data-name="([^"]+)"[^>]*>(.*?)<\/div>/gs
     ),
     (match: RegExpMatchArray) => ({ name: match[1], children: match[0] })
@@ -67,7 +65,7 @@ const Tabs = ({ children }: { children: React.ReactElement }) => {
           className={active === i ? "tab-content block px-5" : "hidden"}
           key={i}
           dangerouslySetInnerHTML={{
-            __html: marked.parse(item.children),
+            __html: marked.parse(item.children || ""),
           }}
         />
       ))}

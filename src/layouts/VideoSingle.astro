@@ -1,0 +1,68 @@
+---
+import dateFormat from "@/lib/utils/dateFormat";
+import { markdownify } from "@/lib/utils/textConverter";
+import type { CollectionEntry } from "astro:content";
+import ImageMod from "@/components/ImageMod.astro";
+
+interface Props {
+  post: CollectionEntry<"blog">;
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+const { title, author, author_image, image, date, video_url, duration, transcript } = post.data;
+---
+
+<section class="section bg-theme-light pb-0">
+  <div class="container">
+    <h1 class="text-center pb-7 text-balance" set:html={title} />
+    <div class="flex items-center justify-center gap-10 pb-8">
+      <div class="flex items-center gap-2">
+        <ImageMod
+          src={author_image}
+          alt="Author Image"
+          class="w-10 h-10 rounded-full"
+          height={40}
+          width={40}
+          format="webp"
+        />
+        <p class="text-black font-medium" set:html={author} />
+      </div>
+      <p class="text-light">{dateFormat(date)}</p>
+      {duration && <p class="text-light">Duration: {duration}</p>}
+    </div>
+
+    <div class="row justify-center">
+      <div class="lg:col-10">
+        <div class="relative aspect-video w-full rounded-lg overflow-hidden">
+          <iframe
+            src={video_url}
+            class="absolute inset-0 w-full h-full"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section pb-0">
+  <div class="container">
+    <div class="row justify-center">
+      <div class="lg:col-9">
+        <article>
+          <div class="content">
+            <Content />
+          </div>
+          {transcript && (
+            <div class="mt-8">
+              <h3>Transcript</h3>
+              <div class="content mt-4" set:html={markdownify(transcript)} />
+            </div>
+          )}
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
