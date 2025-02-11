@@ -6,5 +6,5 @@ description: "Transform your business operations with our suite of AI-powered so
 button:
   enable: true
   label: "Get Started Now"
-  link: "contact"
+  link: "/contact"
 ---

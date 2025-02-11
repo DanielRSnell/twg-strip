@@ -5,7 +5,7 @@ description: ""
 content: "Join a team of innovators working at the intersection of AI, HR technology, and enterprise solutions."
 button:
   enable: true
-  link: "/contact"
+  link: "#jobs"
   label: "See Job Openings"
 
 about:
