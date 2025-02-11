@@ -66,7 +66,7 @@ console.log(testimonial.data);
   <!-- /Banner -->
 
   <!-- brand -->
-  <section class="relative pb-0 overflow-hidden section">
+  <section class="hidden overflow-hidden relative pb-0 section">
     <div class="swiper clientlogo-slider">
       <div class="swiper-wrapper">
         {
@@ -99,17 +99,17 @@ console.log(testimonial.data);
         {
           service.services.map((s, i: number) => (
             <div
-              class="p-8 border rounded-xl"
+              class="p-8 rounded-xl border"
               data-aos="fade-right-sm"
               data-aos-delay={i * 100}
             >
-              <Icon name={s.image} class="w-16 h-16 mb-24" />
+              <Icon name={s.image} class="mb-24 w-16 h-16" />
               <h3 class="mb-4 text-2xl" set:html={markdownify(s.title)} />
               <p class="mb-4" set:html={markdownify(s.content)} />
               {s.button.enable && (
                 <a
                   href={s.button.link}
-                  class="flex items-center gap-1 transition duration-300 text-secondary hover:opacity-80"
+                  class="flex gap-1 items-center transition duration-300 text-secondary hover:opacity-80"
                 >
                   Learn More <span class="sr-only">Details</span>
                   <svg
@@ -161,7 +161,7 @@ console.log(testimonial.data);
         </div>
       </div>
       <div
-        class="flex flex-col justify-center gap-10 md:flex-row lg:justify-between md:items-stretch"
+        class="flex flex-col gap-10 justify-center md:flex-row lg:justify-between md:items-stretch"
       >
         <ServiceSlider feature={feature.features} client:idle />
       </div>
@@ -170,10 +170,10 @@ console.log(testimonial.data);
   <!-- feature -->
 
   <!-- review -->
-  <section class="section bg-primary">
+  <section class="hidden section bg-primary">
     <div class="container text-white">
       <div class="pb-24 lg:pb-28">
-        <div class="flex flex-col justify-center gap-10">
+        <div class="flex flex-col gap-10 justify-center">
           <div>
             <h2
               class="pb-4 text-center text-white"
@@ -182,7 +182,7 @@ console.log(testimonial.data);
               set:html={markdownify(testimonial.data.homepage_title)}
             />
             <p
-              class="max-w-xl mx-auto text-center text-theme-light/80"
+              class="mx-auto max-w-xl text-center text-theme-light/80"
               data-aos="fade-up-sm"
               data-aos-delay="200"
               set:html={markdownify(testimonial.data.content)}
@@ -202,7 +202,7 @@ console.log(testimonial.data);
       </div>
       <div class="pt-24 border-t lg:pt-28 border-border/20">
         <div
-          class="items-center justify-center row md:justify-between gy-5 gx-4 xl:gx-5"
+          class="justify-center items-center row md:justify-between gy-5 gx-4 xl:gx-5"
         >
           <div class="order-2 col-12 md:col-5 md:order-1">
             <div class="flex flex-col gap-6">
@@ -247,7 +247,7 @@ console.log(testimonial.data);
             data-aos-delay="200"
           >
             <div
-              class="p-8 border bg-tertiary/20 border-border/20 rounded-xl md:px-24 md:py-14"
+              class="p-8 rounded-xl border bg-tertiary/20 border-border/20 md:px-24 md:py-14"
             >
               <ImageMod
                 class="mx-auto"
@@ -266,7 +266,7 @@ console.log(testimonial.data);
   <!-- review -->
 
   <!-- blog -->
-  <section class="pb-0 section">
+  <section class="hidden pb-0 section">
     <div class="container">
       <div class="flex flex-col gap-14">
         <div class="justify-center row">

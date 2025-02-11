@@ -1,56 +1,6 @@
 {
   "main": [
-    {
-      "name": "All Pages",
-      "url": "",
-      "hasChildren": true,
-      "children": [
-        {
-          "name": "Home",
-          "url": "/"
-        },
-        {
-          "name": "Career",
-          "url": "/career"
-        },
-        {
-          "name": "Blog",
-          "url": "/blog"
-        },
-        {
-          "name": "Reviews",
-          "url": "/reviews"
-        },
-        {
-          "name": "Partners",
-          "url": "/partners"
-        },
-        {
-          "name": "About",
-          "url": "/about"
-        },
-        {
-          "name": "FAQ",
-          "url": "/faq"
-        },
-        {
-          "name": "Contact",
-          "url": "/contact"
-        },
-        {
-          "name": "Privacy policy",
-          "url": "/privacy-policy"
-        },
-        {
-          "name": "Terms of Service",
-          "url": "/terms-of-service"
-        },
-        {
-          "name": "404",
-          "url": "/404"
-        }
-      ]
-    },
+
     {
       "name": "Company",
       "url": "/about"
@@ -62,11 +12,7 @@
     {
       "name": "Partners",
       "url": "/partners"
-    },
-    {
-      "name": "Resources",
-      "url": "/blog"
-    }
+    }                              
   ],
   "footer": [
     {
@@ -88,10 +34,7 @@
           "name": "Partners",
           "url": "/partners"
         },
-        {
-          "name": "Blog",
-          "url": "/blog"
-        },
+
         {
           "name": "Contact",
           "url": "/contact"
@@ -101,10 +44,7 @@
     {
       "title": "links",
       "items": [
-        {
-          "name": "Company",
-          "url": "/about"
-        },
+
         {
           "name": "FAQ",
           "url": "/faq"

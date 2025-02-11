@@ -21,7 +21,7 @@ const faqs = await getEntry("sections", "faq");
 <Base title={title} meta_title={meta_title} description={description}>
   <section class="section bg-theme-light">
     <div class="container">
-      <div class="max-w-2xl mx-auto text-center">
+      <div class="mx-auto max-w-2xl text-center">
         <h1
           class="pb-4"
           data-aos="fade-up-sm"
@@ -45,14 +45,14 @@ const faqs = await getEntry("sections", "faq");
   <section class="section">
     <div class="container">
       <div
-        class="flex flex-col gap-20 lg:gap-24 xl:gap-32 max-w-xl lg:max-w-full mx-auto"
+        class="flex flex-col gap-20 mx-auto max-w-xl lg:gap-24 xl:gap-32 lg:max-w-full"
       >
         {
           services.map((s, i: number) => (
-            <div class="flex flex-col lg:flex-row justify-between items-center gap-10">
+            <div class="flex flex-col gap-10 justify-between items-center lg:flex-row">
               <div class={`lg:w-[60%] w-full ${i % 2 !== 0 && "lg:order-2"}`}>
                 <h3
-                  class="text-4xl pb-8"
+                  class="pb-8 text-4xl"
                   data-aos="fade-up-sm"
                   data-aos-delay="100"
                   set:html={s.data.title}
@@ -72,7 +72,7 @@ const faqs = await getEntry("sections", "faq");
                 {s.data.button.enable && (
                   <a
                     href={s.data.button.link}
-                    class="btn btn-primary"
+                    class="hidden btn btn-primary"
                     data-aos="fade-up-sm"
                     data-aos-delay="400"
                   >
@@ -81,7 +81,7 @@ const faqs = await getEntry("sections", "faq");
                 )}
               </div>
               <div class={`lg:w-[40%] w-full`}>
-                <div class="border border-border rounded-xl p-20">
+                <div class="p-20 rounded-xl border border-border">
                   <Icon
                     name={s.data.image}
                     class={`h-auto w-full mx-auto ${
@@ -100,19 +100,19 @@ const faqs = await getEntry("sections", "faq");
     </div>
   </section>
 
-  <section class="section bg-primary">
+  <section class="section bg-primary" hidden>
     <div class="container text-white">
       <div class="pb-24 lg:pb-28">
         <div class="flex flex-col gap-10 justify-center">
           <div>
             <h2
-              class="text-white text-center pb-4"
+              class="pb-4 text-center text-white"
               data-aos="fade-up-sm"
               data-aos-delay="100"
               set:html={markdownify(testimonial.data.homepage_title)}
             />
             <p
-              class="max-w-xl mx-auto text-center text-theme-light/80"
+              class="mx-auto max-w-xl text-center text-theme-light/80"
               data-aos="fade-up-sm"
               data-aos-delay="200"
               set:html={markdownify(testimonial.data.content)}
