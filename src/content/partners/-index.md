@@ -59,10 +59,10 @@ partners:
     website: "https://stepsconsulting.com"
     featured: false
 
-  - name: "FloCareer"
-    logo: "/images/partners/flocareer.svg"
-    description: "FloCareer partners with ThisWay Global to provide AI4Jobs and AI-driven solutions, enhancing their recruitment streamlining services for enterprises."
+  - name: "Alliance Virtual Office"
+    logo: "/images/partners/alliance.svg"
+    description: "Alliance Virtual Office partners with ThisWay Global to provide AI-driven solutions for virtual office management and remote workforce optimization."
     partnership_type: "Solution Partner"
-    website: "https://flocareer.com"
+    website: "https://alliancevirtualoffices.com"
     featured: false
 ---
