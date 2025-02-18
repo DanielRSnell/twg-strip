@@ -1,0 +1,129 @@
+_schema: _schema
+paths:
+  uploads: static/uploads
+  static: static
+collections_config:
+  config:
+    path: src/config
+    name: Config
+    icon: coffee
+    disable_url: false
+    description: ''
+    _enabled_editors:
+    disable_add: false
+    disable_add_folder: false
+    disable_file_actions: false
+  content_about:
+    path: src/content/about
+    name: Content About
+    icon: content_cut
+    disable_url: false
+    description: ''
+    _enabled_editors:
+    disable_add: false
+    disable_add_folder: false
+    disable_file_actions: false
+  content_blog:
+    path: src/content/blog
+    name: Content Blog
+    icon: content_copy
+    disable_url: false
+    description: ''
+    _enabled_editors:
+    disable_add: false
+    disable_add_folder: false
+    disable_file_actions: false
+  content_career:
+    path: src/content/career
+    name: Content Career
+    icon: content_paste
+    disable_url: false
+    description: ''
+    _enabled_editors:
+    disable_add: false
+    disable_add_folder: false
+    disable_file_actions: false
+  content_contact:
+    path: src/content/contact
+    name: Content Contact
+    icon: content_copy
+    disable_url: false
+    description: ''
+    _enabled_editors:
+    disable_add: false
+    disable_add_folder: false
+    disable_file_actions: false
+  content_homepage:
+    path: src/content/homepage
+    name: Content Homepage
+    icon: contact_page
+    disable_url: false
+    description: ''
+    _enabled_editors:
+    disable_add: false
+    disable_add_folder: false
+    disable_file_actions: false
+  content_pages:
+    path: src/content/pages
+    name: Content Pages
+    icon: contact_page
+    disable_url: false
+    description: ''
+    _enabled_editors:
+    disable_add: false
+    disable_add_folder: false
+    disable_file_actions: false
+  content_partners:
+    path: src/content/partners
+    name: Content Partners
+    icon: content_paste
+    disable_url: false
+    description: ''
+    _enabled_editors:
+    disable_add: false
+    disable_add_folder: false
+    disable_file_actions: false
+  content_sections:
+    path: src/content/sections
+    name: Content Sections
+    icon: collections
+    disable_url: false
+    description: ''
+    _enabled_editors:
+    disable_add: false
+    disable_add_folder: false
+    disable_file_actions: false
+  content_service:
+    path: src/content/service
+    name: Content Service
+    icon: content_paste
+    disable_url: false
+    description: ''
+    _enabled_editors:
+    disable_add: false
+    disable_add_folder: false
+    disable_file_actions: false
+_snippets_imports:
+  hugo:
+    exclude:
+      - hugo_instagram
+timezone: America/New_York
+markdown:
+  engine: commonmark
+  options:
+    xhtml: false
+    breaks: false
+    linkify: false
+    typographer: false
+    spaced_lists: false
+    sentence_per_line: false
+    gfm: true
+    code_block_fences: '```'
+    escape_snippets_in_code_blocks: false
+    treat_indentation_as_code: true
+    table: false
+    strikethrough: false
+    subscript: false
+    superscript: false
+    heading_ids: false
+    attributes: false
