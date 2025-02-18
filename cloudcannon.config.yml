@@ -1,6 +1,6 @@
 _schema: _schema
 paths:
-  uploads: public/
+  uploads: public
   static: public
 collections_config:
   config:
