@@ -1,0 +1,60 @@
+<button 
+  onclick="toggleChat()"
+  style="
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 12px 24px;
+    background: #000;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: system-ui;
+    z-index: 998;
+  "
+>
+  Chat
+</button>
+
+<iframe 
+  id="chat-frame"
+  src="/chatbot"
+  style="
+    position: fixed;
+    bottom: 100px;
+    right: 20px;
+    width: 400px;
+    height: 600px;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    z-index: 999;
+    background: white;
+    display: none;
+    opacity: 0;
+    transform: scale(0.95);
+    transition: all 0.2s ease-in-out;
+  "
+></iframe>
+
+<script>
+  function toggleChat() {
+    const frame = document.getElementById('chat-frame');
+    if (frame.style.display === 'none') {
+      frame.style.display = 'block';
+      // Small delay to allow display change before animation
+      setTimeout(() => {
+        frame.style.opacity = '1';
+        frame.style.transform = 'scale(1)';
+      }, 10);
+    } else {
+      frame.style.opacity = '0';
+      frame.style.transform = 'scale(0.95)';
+      // Wait for animation before hiding
+      setTimeout(() => {
+        frame.style.display = 'none';
+      }, 200);
+    }
+  }
+</script>
