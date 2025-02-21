@@ -1,8 +1,8 @@
-
-  // thisway-chat.js
-  const template = document.createElement("template");
-  template.innerHTML = `
+// thisway-chat.js
+const template = document.createElement("template");
+template.innerHTML = `
   <style>
+    /* All existing styles remain unchanged */
     :host {
       --chat-font: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
       --chat-primary: #000;
@@ -285,131 +285,135 @@
   </button>
 `;
 
-  class ThisWayChat extends HTMLElement {
-    constructor() {
-      super();
-      this.attachShadow({ mode: "open" });
-      this.shadowRoot.appendChild(template.content.cloneNode(true));
+class ThisWayChat extends HTMLElement {
+  constructor() {
+    super();
+    this.attachShadow({ mode: "open" });
+    this.shadowRoot.appendChild(template.content.cloneNode(true));
 
-      // Bind methods
-      this.handleSubmit = this.handleSubmit.bind(this);
-      this.toggleChat = this.toggleChat.bind(this);
-      this.addMessage = this.addMessage.bind(this);
-      this.setLoading = this.setLoading.bind(this);
+    // Bind methods
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.toggleChat = this.toggleChat.bind(this);
+    this.addMessage = this.addMessage.bind(this);
+    this.setLoading = this.setLoading.bind(this);
 
-      // Initialize state
-      this.state = {
-        messages: [],
-        isLoading: false,
-        isOpen: false,
-      };
-    }
+    // Initialize state
+    this.state = {
+      messages: [],
+      isLoading: false,
+      isOpen: false,
+    };
+  }
 
-    connectedCallback() {
-      // Set up event listeners
-      const form = this.shadowRoot.querySelector(".input-form");
-      const toggleBtn = this.shadowRoot.querySelector(".toggle-btn");
-      const closeBtn = this.shadowRoot.querySelector(".close-btn");
+  connectedCallback() {
+    // Set up event listeners
+    const form = this.shadowRoot.querySelector(".input-form");
+    const toggleBtn = this.shadowRoot.querySelector(".toggle-btn");
+    const closeBtn = this.shadowRoot.querySelector(".close-btn");
 
-      form.addEventListener("submit", this.handleSubmit);
-      toggleBtn.addEventListener("click", this.toggleChat);
-      closeBtn.addEventListener("click", this.toggleChat);
+    form.addEventListener("submit", this.handleSubmit);
+    toggleBtn.addEventListener("click", this.toggleChat);
+    closeBtn.addEventListener("click", this.toggleChat);
 
-      // Add initial message
-      this.addMessage("Have questions about ThisWay? I'm here to help", "bot");
-    }
+    // Add initial message
+    this.addMessage("Have questions about ThisWay? I'm here to help", "bot");
+  }
 
-    disconnectedCallback() {
-      const form = this.shadowRoot.querySelector(".input-form");
-      const toggleBtn = this.shadowRoot.querySelector(".toggle-btn");
-      const closeBtn = this.shadowRoot.querySelector(".close-btn");
+  disconnectedCallback() {
+    const form = this.shadowRoot.querySelector(".input-form");
+    const toggleBtn = this.shadowRoot.querySelector(".toggle-btn");
+    const closeBtn = this.shadowRoot.querySelector(".close-btn");
 
-      form.removeEventListener("submit", this.handleSubmit);
-      toggleBtn.removeEventListener("click", this.toggleChat);
-      closeBtn.removeEventListener("click", this.toggleChat);
-    }
+    form.removeEventListener("submit", this.handleSubmit);
+    toggleBtn.removeEventListener("click", this.toggleChat);
+    closeBtn.removeEventListener("click", this.toggleChat);
+  }
 
-    toggleChat() {
-      this.state.isOpen = !this.state.isOpen;
-      const container = this.shadowRoot.querySelector(".chat-container");
-      container.classList.toggle("hidden");
-    }
+  toggleChat() {
+    this.state.isOpen = !this.state.isOpen;
+    const container = this.shadowRoot.querySelector(".chat-container");
+    container.classList.toggle("hidden");
+  }
 
-    setLoading(loading) {
-      this.state.isLoading = loading;
-      const send = this.shadowRoot.querySelector(".send");
-      const input = this.shadowRoot.querySelector(".input");
+  setLoading(loading) {
+    this.state.isLoading = loading;
+    const send = this.shadowRoot.querySelector(".send");
+    const input = this.shadowRoot.querySelector(".input");
 
-      send.disabled = loading;
-      input.disabled = loading;
+    send.disabled = loading;
+    input.disabled = loading;
 
-      if (loading) {
-        const loadingEl = document.createElement("div");
-        loadingEl.className = "loading";
-        loadingEl.innerHTML = `
+    if (loading) {
+      const loadingEl = document.createElement("div");
+      loadingEl.className = "loading";
+      loadingEl.innerHTML = `
         <div class="dot"></div>
         <div class="dot"></div>
         <div class="dot"></div>
       `;
-        this.shadowRoot.querySelector(".messages").appendChild(loadingEl);
-      } else {
-        const loading = this.shadowRoot.querySelector(".loading");
-        if (loading) loading.remove();
-      }
-    }
-
-    addMessage(content, type) {
-      const message = document.createElement("div");
-      message.className = `message ${type}`;
-      message.innerHTML = `<div class="bubble">${content}</div>`;
-
-      this.shadowRoot.querySelector(".messages").appendChild(message);
-      message.scrollIntoView({ behavior: "smooth", block: "end" });
-
-      this.state.messages.push({ content, type });
-    }
-
-    async handleSubmit(e) {
-      e.preventDefault();
-      const input = this.shadowRoot.querySelector(".input");
-      const message = input.value.trim();
-
-      if (!message || this.state.isLoading) return;
-
-      input.value = "";
-      this.addMessage(message, "user");
-      this.setLoading(true);
-
-      try {
-        const response = await fetch(
-          "https://ssbx.dev-ai4jobs.com/rag/api/v1/assistant",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Accept: "*/*",
-            },
-            body: JSON.stringify({ message }),
-          }
-        );
-
-        if (!response.ok) throw new Error("API request failed");
-
-        const data = await response.json();
-        this.addMessage(
-          data.message || "Sorry, I couldn't process that.",
-          "bot"
-        );
-      } catch (error) {
-        console.error("Error:", error);
-        this.addMessage("Sorry, something went wrong.", "bot");
-      } finally {
-        this.setLoading(false);
-      }
+      this.shadowRoot.querySelector(".messages").appendChild(loadingEl);
+    } else {
+      const loading = this.shadowRoot.querySelector(".loading");
+      if (loading) loading.remove();
     }
   }
 
-  customElements.define("thisway-chat", ThisWayChat);
+  addMessage(content, type) {
+    const message = document.createElement("div");
+    message.className = `message ${type}`;
+    message.innerHTML = `<div class="bubble">${content}</div>`;
+
+    this.shadowRoot.querySelector(".messages").appendChild(message);
+    message.scrollIntoView({ behavior: "smooth", block: "end" });
+
+    this.state.messages.push({ content, type });
+  }
+
+  async handleSubmit(e) {
+    e.preventDefault();
+    const input = this.shadowRoot.querySelector(".input");
+    const message = input.value.trim();
+
+    if (!message || this.state.isLoading) return;
+
+    input.value = "";
+    this.addMessage(message, "user");
+    this.setLoading(true);
+
+    // Create form-urlencoded data
+    const formData = new URLSearchParams();
+    formData.append('message', message);
+
+    try {
+      const response = await fetch(
+        "https://ssbx.dev-ai4jobs.com/rag/api/v1/assistant",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+            "Accept": "*/*"
+          },
+          body: formData.toString()
+        }
+      );
+
+      if (!response.ok) throw new Error("API request failed");
+
+      const data = await response.json();
+      this.addMessage(
+        data.message || "Sorry, I couldn't process that.",
+        "bot"
+      );
+    } catch (error) {
+      console.error("Error:", error);
+      this.addMessage("Sorry, something went wrong.", "bot");
+    } finally {
+      this.setLoading(false);
+    }
+  }
+}
+
+customElements.define("thisway-chat", ThisWayChat);
 
 // chat-loader.js
 (() => {

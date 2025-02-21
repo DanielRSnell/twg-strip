@@ -26,26 +26,28 @@ const Chatbot = ({ type = 'float', target = null }) => {
     setLoading(true);
     setMessages(prev => [...prev, { type: 'user', content: input }]);
     
+    // Create form-urlencoded data
+    const formData = new URLSearchParams();
+    formData.append('message', input);
+    
     try {
       const response = await fetch('https://ssbx.dev-ai4jobs.com/rag/api/v1/assistant', {
         method: 'POST',
-        mode: 'cors',
-        credentials: 'include',
         headers: {
-          'Content-Type': 'application/json',
-          'Accept': '*/*',
-          'Origin': window.location.origin
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'Accept': '*/*'
         },
-        body: JSON.stringify({ message: input })
+        body: formData.toString()
       }).catch(async () => {
-        return await fetch('https://ssbx.dev-ai4jobs.com/rag/api/v1/assistant', {
+        // Fallback request with no-cors
+        return await fetch('http://localhost:8060/rag/api/v1/assistant', {
           method: 'POST',
           mode: 'no-cors',
           headers: {
-            'Content-Type': 'application/json',
+            'Content-Type': 'application/x-www-form-urlencoded',
             'Accept': '*/*'
           },
-          body: JSON.stringify({ message: input })
+          body: formData.toString()
         });
       });
 
@@ -189,7 +191,50 @@ const Chatbot = ({ type = 'float', target = null }) => {
         className="flex flex-col h-[600px] bg-white rounded-xl overflow-hidden border shadow-lg"
       >
         {/* Same content as floating chat window but without close button */}
-        {/* ... */}
+        <div className="flex items-center px-4 py-3 bg-white border-b">
+          <div className="flex items-center space-x-2">
+            <div className="w-2 h-2 bg-green-500 rounded-full" />
+            <h3 className="text-sm font-semibold text-gray-900">ThisWay Assistant</h3>
+          </div>
+        </div>
+
+        <div className="flex-1 px-4 py-6 overflow-y-auto bg-white">
+          <AnimatePresence>
+            {messages.map(renderMessage)}
+          </AnimatePresence>
+          {loading && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="flex space-x-1.5 ml-4"
+            >
+              <div className="w-2 h-2 bg-gray-300 rounded-full animate-pulse" />
+              <div className="w-2 h-2 bg-gray-300 rounded-full animate-pulse" style={{ animationDelay: '0.2s' }} />
+              <div className="w-2 h-2 bg-gray-300 rounded-full animate-pulse" style={{ animationDelay: '0.4s' }} />
+            </motion.div>
+          )}
+          <div ref={messagesEndRef} />
+        </div>
+
+        <form onSubmit={handleSubmit} className="p-4 bg-white border-t">
+          <div className="flex items-center space-x-2">
+            <input
+              type="text"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              placeholder="Message ThisWay Assistant..."
+              className="flex-1 px-3 py-2 text-sm transition-shadow border rounded-lg focus:outline-none focus:ring-2 focus:ring-black focus:border-black"
+            />
+            <button
+              type="submit"
+              disabled={loading}
+              className="p-2 text-gray-600 transition-colors hover:text-black disabled:opacity-50"
+            >
+              <Send size={18} />
+            </button>
+          </div>
+        </form>
       </motion.div>
     </div>
   );
