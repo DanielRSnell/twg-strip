@@ -1,0 +1,12 @@
+---
+import Base from "@/layouts/Base.astro";
+import Chatbot from "../../components/chatbot.jsx";
+const endpoint = 'https://thiswayglobal.com/wp-json/relay/v1/forward';
+---
+
+<Base>
+    <Chatbot client:load 
+    endpoint={endpoint}         
+    messageModifier="You must rewrite the text using rich markdown"
+ />
+</Base>
