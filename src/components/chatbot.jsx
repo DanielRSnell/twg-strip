@@ -38,17 +38,9 @@ const Chatbot = ({ type = 'float', target = null }) => {
           'Accept': '*/*'
         },
         body: formData.toString()
-      }).catch(async () => {
+      }).catch(async (e) => {
         // Fallback request with no-cors
-        return await fetch('http://localhost:8060/rag/api/v1/assistant', {
-          method: 'POST',
-          mode: 'no-cors',
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-            'Accept': '*/*'
-          },
-          body: formData.toString()
-        });
+        console.log('Error:', e);
       });
 
       if (response.type === 'opaque') {
