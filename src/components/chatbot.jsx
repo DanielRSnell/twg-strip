@@ -28,13 +28,16 @@ const Chatbot = ({
     e.preventDefault();
     if (!input.trim()) return;
 
+    const currentInput = input.trim(); // Store current input
+    setInput(''); // Clear input field immediately
+    
     setLoading(true);
-    setMessages(prev => [...prev, { type: 'user', content: input }]);
+    setMessages(prev => [...prev, { type: 'user', content: currentInput }]);
     
     // Append instructions if messageModifier is provided
-    let messageToSend = input;
+    let messageToSend = currentInput;
     if (messageModifier) {
-      messageToSend = `${input}\n\nInstructions: ${messageModifier}`;
+      messageToSend = `${currentInput}\n\nInstructions: ${messageModifier}`;
     }
     
     // Create form-urlencoded data
@@ -87,7 +90,6 @@ const Chatbot = ({
     }
     
     setLoading(false);
-    setInput('');
   };
 
   const renderMessage = (message, index) => (
@@ -100,7 +102,7 @@ const Chatbot = ({
       className={`mb-4 flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}
     >
       <div 
-        className={`max-w-[80%] px-4 py-2.5 rounded-2xl text-sm leading-relaxed ${
+        className={`max-w-[80%] px-4 py-2.5 rounded-2xl prose text-xs leading-relaxed ${
           message.type === 'user' 
             ? 'bg-black text-white' 
             : 'bg-gray-100 text-gray-900'
@@ -216,7 +218,7 @@ const Chatbot = ({
           </div>
         </div>
 
-        <div className="flex-1 px-4 py-6 overflow-y-auto bg-white">
+        <div className="flex-1 px-4 py-6 overflow-y-auto prose bg-white">
           <AnimatePresence>
             {messages.map(renderMessage)}
           </AnimatePresence>
