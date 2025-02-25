@@ -1,0 +1,100 @@
+---
+import TwSizeIndicator from "@/components/TwSizeIndicator.astro";
+import config from "@/config/config.json";
+import theme from "@/config/theme.json";
+import { plainify } from "@/lib/utils/textConverter";
+import Footer from "@/partials/Footer.astro";
+import Header from "@/partials/Header.astro";
+import "@/styles/main.scss";
+import { AstroFont } from "astro-font";
+import { ViewTransitions } from "astro:transitions";
+import "aos/dist/aos.css";
+import "swiper/css";
+import WebChat from "@/components/WebChat.astro";
+// font families
+const pf = theme.fonts.font_family.primary;
+const sf = theme.fonts.font_family.secondary;
+
+let fontPrimary, fontSecondary;
+if (theme.fonts.font_family.primary) {
+  fontPrimary = theme.fonts.font_family.primary
+    .replace(/\+/g, " ")
+    .replace(/:[ital,]*[ital@]*[wght@]*[0-9,;.]+/gi, "");
+}
+if (theme.fonts.font_family.secondary) {
+  fontSecondary = theme.fonts.font_family.secondary
+    .replace(/\+/g, " ")
+    .replace(/:[ital,]*[ital@]*[wght@]*[0-9,;.]+/gi, "");
+}
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aggie Assistant</title>
+    <style>
+        :root {
+            --texas-maroon: #500100;
+            --texas-maroon-hover: #662434;
+        }
+        .text-texas-maroon {
+            color: var(--texas-maroon);
+        }
+        .text-texas-maroon:hover {
+            color: var(--texas-maroon);
+        }
+        .bg-texas-maroon {
+            background-color: var(--texas-maroon);
+        }
+        .bg-texas-maroon:hover {
+            background-color: var(--texas-maroon-hover);
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <main class="flex items-center justify-center h-screen p-4">
+    <div class="bg-white rounded-lg shadow-lg w-full max-w-4xl h-[800px] flex">
+        <!-- Left side of the split layout -->
+        <div class="flex flex-col w-1/2 p-8">
+            <!-- Logo area -->
+            <div class="mb-6">
+                <div class="flex items-center justify-center w-16 h-16 rounded-lg bg-texas-maroon">
+                   <img src="/images/client/tamu-logo.png" alt="Texas A&M University Logo" class="w-10 h-10">
+                </div>
+            </div>
+            
+            <!-- Invitation text -->
+            <div class="mb-6">
+                <h2 class="text-2xl font-bold text-gray-800">You've been invited to have a conversation with <span class="text-texas-maroon">Aggie Assist</span></h2>
+            </div>
+            
+            <!-- Create your own text -->
+            <div class="mb-8">
+                <p class="text-gray-600">Want to create your own? <a href="https://thiswayglobal.com" class="text-texas-maroon hover:underline">Get Started.</a></p>
+            </div>
+            
+            <!-- Start Conversation button -->
+            <div class="mb-8">
+                <button class="w-full px-4 py-3 text-white transition-colors rounded-lg bg-texas-maroon hover:bg-opacity-90">
+                    Start Conversation
+                </button>
+            </div>
+            
+            <!-- Footer -->
+            <div class="mt-auto text-sm text-gray-500">
+                Conversation ✨ by <a href="#" class="font-bold text-texas-maroon hover:underline">ThisWay</a>
+            </div>
+        </div>
+        
+        <!-- Right side of the split layout -->
+        <div class="relative flex flex-col w-1/2 prose border-l border-gray-200">
+           <chat-bot></chat-bot>
+        </div>
+    </div>
+    </main>
+
+<WebChat />
+</body>
+</html>
+<

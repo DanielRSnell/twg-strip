@@ -4,10 +4,15 @@
       "theme_color": {
         "primary": "#0A0A0A",
         "secondary": "#5969FC",
+        "brand": "#24ab9d",
         "tertiary": "#444446",
         "body": "#fff",
         "border": "#D5D5D5",
-        "theme_light": "#F6F7F9"
+        "theme_light": "#F6F7F9",
+        "texas": {
+          "maroon": "#500000",
+          "gray": "#8D8D8D"
+        }
       },
       "text_color": {
         "default": "#3b3b3b",
