@@ -1,0 +1,130 @@
+<script>
+ /**
+ * Responsive behavior for chat interface
+ * Handles screen size checking and mobile/tablet toggling between info and chat screens
+ */
+(function() {
+  document.addEventListener('DOMContentLoaded', function() {
+    // Get DOM elements
+    const chatContainer = document.getElementById('chat-container');
+    const infoScreen = document.getElementById('information-screen');
+    const chatScreen = document.getElementById('chat-screen');
+    const startChatButton = document.getElementById('chat-start');
+    const backButton = document.getElementById('back-to-info');
+    
+    // Define tablet breakpoint (match the SCSS breakpoint)
+    const tabletBreakpoint = 768;
+    
+    // Debounce function to limit rapid firing of resize events
+    function debounce(func, wait) {
+      let timeout;
+      return function() {
+        const context = this;
+        const args = arguments;
+        clearTimeout(timeout);
+        timeout = setTimeout(function() {
+          func.apply(context, args);
+        }, wait);
+      };
+    }
+    
+    // Function to check screen size and apply appropriate classes
+    function checkScreenSize() {
+      if (window.innerWidth <= tabletBreakpoint) {
+        // We're on tablet or smaller - check current state
+        // Only reset if not already in a specific state
+        if (!infoScreen.classList.contains('hidden') && !chatScreen.classList.contains('active')) {
+          chatScreen.style.display = 'none';
+          chatScreen.classList.remove('active');
+          infoScreen.classList.remove('hidden');
+        }
+      } else {
+        // We're on desktop - initially show both
+        // But if chat has been started, respect that state
+        if (!infoScreen.classList.contains('hidden') && !chatScreen.classList.contains('active')) {
+          chatScreen.style.display = 'flex';
+          infoScreen.style.display = 'flex';
+        }
+      }
+    }
+    
+    // Function to handle transition to chat screen
+    function showChatScreen() {
+      infoScreen.classList.add('hidden');
+      chatScreen.style.display = 'flex';
+      chatScreen.classList.add('active');
+      
+      // Scroll to top to ensure good UX
+      window.scrollTo(0, 0);
+      
+      // Focus on first interactive element in the chat
+      // This is for accessibility - you might need to adjust this selector
+      const firstInput = chatScreen.querySelector('input, button');
+      if (firstInput) {
+        setTimeout(() => {
+          firstInput.focus();
+        }, 100);
+      }
+    }
+    
+    // Function to handle transition back to info screen
+    function showInfoScreen() {
+      infoScreen.classList.remove('hidden');
+      chatScreen.classList.remove('active');
+      chatScreen.style.display = 'none';
+      
+      // Focus back on start button for accessibility
+      setTimeout(() => {
+        startChatButton.focus();
+      }, 100);
+    }
+    
+    // Initial check on page load
+    checkScreenSize();
+    
+    // Check on window resize with debounce for performance
+    window.addEventListener('resize', debounce(checkScreenSize, 250));
+    
+    // Start conversation button click event
+    if (startChatButton) {
+      startChatButton.addEventListener('click', function(event) {
+        event.preventDefault();
+        
+        // Always hide info screen and show chat screen regardless of viewport size
+        showChatScreen();
+        
+        // Trigger chat initialization here if needed
+        // For example: initializeChat();
+        
+        // Dispatch a custom event that other scripts might listen for
+        document.dispatchEvent(new CustomEvent('chatStarted'));
+      });
+    }
+    
+    // Back button functionality
+    if (backButton) {
+      backButton.addEventListener('click', function(event) {
+        event.preventDefault();
+        
+        if (window.innerWidth <= tabletBreakpoint) {
+          showInfoScreen();
+        }
+      });
+    }
+    
+    // Handle browser back button
+    window.addEventListener('popstate', function(event) {
+      if (window.innerWidth <= tabletBreakpoint) {
+        if (chatScreen.classList.contains('active')) {
+          showInfoScreen();
+          // Prevent default back behavior
+          history.pushState(null, '', window.location.href);
+        }
+      }
+    });
+    
+    // Push initial state for handling back button
+    history.pushState(null, '', window.location.href);
+  });
+})();
+</script>

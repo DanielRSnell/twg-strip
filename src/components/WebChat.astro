@@ -29,14 +29,21 @@
     }
 
     .chat {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      background: var(--chat-bg);
-      color: var(--chat-text);
-      max-height: 800px;
-      height: 100%;
-    }
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        background: var(--chat-bg);
+        color: var(--chat-text);
+        max-height: 800px;
+        height: 100%;
+        }
+
+        /* Tablet and mobile adjustments */
+        @media (max-width: 768px) {
+        .chat {
+            max-height: 100vh;
+        }
+        }
 
 
     .chat-header {
@@ -103,12 +110,17 @@
       border-radius: 16px;
       font-size: 14px;
       line-height: 1.5;
+      overflow-wrap: break-word;
     }
 
     .message.user .bubble {
       background: var(--texas-maroon);
       color: var(--chat-user-text);
       border-bottom-right-radius: 4px;
+    }
+
+    li {
+      margin-bottom: 0.5rem;
     }
 
     .message.bot .bubble {
@@ -239,13 +251,59 @@ class ChatBot extends HTMLElement {
   connectedCallback() {
     // Add initial message with HTML
     this.addMessage(`
-      <h3>Have questions about Aggie Assist?</h3>
-      <p>I'm here to help! Feel free to ask me anything about:</p>
-      <ul>
-        <li>Our services</li>
-        <li>How to get started</li>
-        <li>Technical support</li>
-      </ul>
+      <div class="welcome-card">
+        <div class="welcome-header">
+          <img src="/images/client/tamu-logo.png" alt="Texas A&M University Logo" class="welcome-logo">
+          <h3 class="welcome-title">Welcome to Aggie Assist</h3>
+          <div class="welcome-subtitle">I'm here to help! Feel free to ask me anything.</div>
+        </div>
+        <style>
+          .welcome-card {
+            background: var(--white);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+            border: 1px solid var(--gray-200);
+          }
+          .welcome-header {
+            margin-bottom: 1rem;
+          }
+          .welcome-title {
+            color: var(--gray-800);
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+          }
+
+          .welcome-logo {
+            width: 32px;
+            height: 32px;
+            overflow: hidden;
+          }
+          .welcome-subtitle {
+            color: var(--gray-600);
+            font-size: 0.75rem;
+          }
+          .welcome-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+          }
+          .welcome-list-item {
+            display: flex;
+            align-items: center;
+            padding: 0;
+            padding-bottom: 0.25rem;
+            color: var(--gray-600);
+          }
+          .welcome-icon {
+            margin-right: 0.75rem;
+          }
+          .welcome-text {
+            font-size: 0.875rem;
+          }
+        </style>
+      </div>
     `, "bot");
 
     // Set up event listeners
