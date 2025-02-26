@@ -74,6 +74,7 @@ main {
     padding: $spacing-4;
 }
 
+
 #chat-container {
     background-color: var(--white);
     border-radius: $rounded-lg;
@@ -83,11 +84,13 @@ main {
     height: 100%;
     max-height: $max-height-800;
     display: flex;
+    overflow: hidden;
 
     @include tablet {
         max-height: 100vh;
-        height: 100vh;
+        height: 95vh;
         flex-direction: column;
+        border-radius: 12px;
     }
 }
 
@@ -169,6 +172,12 @@ main {
             &:hover {
                 background-color: var(--texas-maroon-hover);
             }
+        }
+
+        /* Disable button when chat is active */
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
         }
     }
 

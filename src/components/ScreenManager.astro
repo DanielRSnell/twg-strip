@@ -30,6 +30,8 @@
     
     // Function to check screen size and apply appropriate classes
     function checkScreenSize() {
+      const startChatButton = document.getElementById('chat-start');
+      const startChatContainer = document.getElementById('start-button');
       if (window.innerWidth <= tabletBreakpoint) {
         // We're on tablet or smaller - check current state
         // Only reset if not already in a specific state
@@ -37,6 +39,7 @@
           chatScreen.style.display = 'none';
           chatScreen.classList.remove('active');
           infoScreen.classList.remove('hidden');
+          startChatButton.disabled = false; // Enable button on smaller screens
         }
       } else {
         // We're on desktop - initially show both
@@ -44,6 +47,8 @@
         if (!infoScreen.classList.contains('hidden') && !chatScreen.classList.contains('active')) {
           chatScreen.style.display = 'flex';
           infoScreen.style.display = 'flex';
+          // Disable start-button on desktop only
+          startChatButton.disabled = true;
         }
       }
     }
