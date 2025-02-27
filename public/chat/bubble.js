@@ -1,8 +1,17 @@
-// thisway-chat.js
+// orders-chat.js
+
+// Configuration - Easy to manage static pieces
+const CONFIG = {
+  chatTitle: "TMW Brain",
+  apiEndpoint: "https://umbralai.app.n8n.cloud/webhook/c9ac7867-c8b3-4b5a-8657-db90d6fa104c",
+  sessionIdPrefix: "orders-session-",
+  localStorageKey: "orders_session_id",
+  initialMessage: "How can I help you with your orders today?"
+};
+
 const template = document.createElement("template");
 template.innerHTML = `
   <style>
-    /* All existing styles remain unchanged */
     :host {
       --chat-font: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
       --chat-primary: #000;
@@ -17,73 +26,33 @@ template.innerHTML = `
       --chat-bot-bubble: #f1f5f9;
       --chat-bot-text: #1a1a1a;
       
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      z-index: 999;
+      display: block;
+      position: relative;
+      width: 100%;
+      height: 100%;
     }
 
     .chat-container {
       position: absolute;
-      bottom: 70px;
+      top: 0;
       right: 0;
-      width: 384px;
-      height: 600px;
-      background: var(--chat-bg);
-      border-radius: 16px;
-      box-shadow: var(--chat-shadow);
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       display: flex;
       flex-direction: column;
       font-family: var(--chat-font);
-      transform-origin: bottom right;
-      animation: scaleIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .chat-container.hidden {
-      display: none;
-    }
-
-    .toggle-btn {
-      position: absolute;
-      bottom: 0;
-      right: 0;
-      width: 56px;
-      height: 56px;
-      border-radius: 50%;
-      background: var(--chat-primary);
-      border: none;
-      color: white;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: var(--chat-shadow);
-      transition: transform 0.2s;
-    }
-
-    .toggle-btn:hover {
-      transform: scale(1.05);
-    }
-
-    .toggle-btn svg {
-      width: 24px;
-      height: 24px;
-      fill: none;
-      stroke: currentColor;
-      stroke-width: 2;
-      stroke-linecap: round;
-      stroke-linejoin: round;
+      background: var(--chat-bg);
     }
 
     .chat-header {
       display: flex;
       align-items: center;
-      gap: 8px;
-      padding: 16px;
+      gap: 12px;
+      padding: 16px 24px;
       border-bottom: 1px solid var(--chat-border);
       background: var(--chat-bg);
-      border-top-left-radius: 16px;
-      border-top-right-radius: 16px;
     }
 
     .status {
@@ -94,30 +63,14 @@ template.innerHTML = `
     }
 
     .title {
-      font-size: 14px;
+      font-size: 18px;
       font-weight: 600;
       flex: 1;
     }
 
-    .close-btn {
-      padding: 8px;
-      border: none;
-      background: none;
-      cursor: pointer;
-      color: var(--chat-text-light);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: color 0.2s;
-    }
-
-    .close-btn:hover {
-      color: var(--chat-text);
-    }
-
     .messages {
       flex: 1;
-      padding: 24px 16px;
+      padding: 24px;
       overflow-y: auto;
       display: flex;
       flex-direction: column;
@@ -143,7 +96,7 @@ template.innerHTML = `
     .bubble {
       padding: 12px 16px;
       border-radius: 16px;
-      font-size: 14px;
+      font-size: 15px;
       line-height: 1.5;
     }
 
@@ -160,24 +113,24 @@ template.innerHTML = `
     }
 
     .chat-input {
-      padding: 16px;
+      padding: 20px 24px;
       border-top: 1px solid var(--chat-border);
       background: var(--chat-bg);
-      border-bottom-left-radius: 16px;
-      border-bottom-right-radius: 16px;
     }
 
     .input-form {
       display: flex;
-      gap: 8px;
+      gap: 12px;
+      max-width: 960px;
+      margin: 0 auto;
     }
 
     .input {
       flex: 1;
-      padding: 12px 16px;
+      padding: 14px 18px;
       border: 1px solid var(--chat-border);
       border-radius: var(--chat-radius);
-      font-size: 14px;
+      font-size: 15px;
       line-height: 1.5;
       outline: none;
       transition: border-color 0.2s;
@@ -188,7 +141,7 @@ template.innerHTML = `
     }
 
     .send {
-      padding: 12px;
+      padding: 0 20px;
       background: var(--chat-primary);
       color: white;
       border: none;
@@ -198,11 +151,19 @@ template.innerHTML = `
       align-items: center;
       justify-content: center;
       transition: opacity 0.2s;
+      font-size: 15px;
+      font-weight: 500;
     }
 
     .send:disabled {
       opacity: 0.5;
       cursor: not-allowed;
+    }
+
+    .send svg {
+      width: 18px;
+      height: 18px;
+      margin-left: 8px;
     }
 
     .loading {
@@ -228,17 +189,6 @@ template.innerHTML = `
       50% { transform: translateY(-4px); }
     }
 
-    @keyframes scaleIn {
-      from {
-        opacity: 0;
-        transform: scale(0.95);
-      }
-      to {
-        opacity: 1;
-        transform: scale(1);
-      }
-    }
-
     @keyframes fadeIn {
       from {
         opacity: 0;
@@ -249,27 +199,37 @@ template.innerHTML = `
         transform: translateY(0);
       }
     }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .messages {
+        padding: 16px;
+      }
+      
+      .chat-input {
+        padding: 16px;
+      }
+      
+      .message {
+        max-width: 90%;
+      }
+    }
   </style>
 
-  <div class="hidden chat-container">
+  <div class="chat-container">
     <header class="chat-header">
       <div class="status"></div>
-      <div class="title">ThisWay Assistant</div>
-      <button class="close-btn">
-        <svg width="16" height="16" viewBox="0 0 24 24">
-          <line x1="18" y1="6" x2="6" y2="18"></line>
-          <line x1="6" y1="6" x2="18" y2="18"></line>
-        </svg>
-      </button>
+      <div class="title">${CONFIG.chatTitle}</div>
     </header>
 
     <div class="messages"></div>
 
     <div class="chat-input">
       <form class="input-form">
-        <input type="text" class="input" placeholder="Message ThisWay Assistant...">
+        <input type="text" class="input" placeholder="Ask a question about your orders...">
         <button type="submit" class="send">
-          <svg width="18" height="18" viewBox="0 0 24 24" style="stroke: white">
+          Send
+          <svg width="18" height="18" viewBox="0 0 24 24" style="stroke: white; fill: none">
             <line x1="22" y1="2" x2="11" y2="13"></line>
             <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
           </svg>
@@ -277,15 +237,9 @@ template.innerHTML = `
       </form>
     </div>
   </div>
-
-  <button class="toggle-btn">
-    <svg viewBox="0 0 24 24">
-      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-    </svg>
-  </button>
 `;
 
-class ThisWayChat extends HTMLElement {
+class OrdersChat extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
@@ -293,46 +247,48 @@ class ThisWayChat extends HTMLElement {
 
     // Bind methods
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.toggleChat = this.toggleChat.bind(this);
     this.addMessage = this.addMessage.bind(this);
     this.setLoading = this.setLoading.bind(this);
+    this.getSessionId = this.getSessionId.bind(this);
 
     // Initialize state
     this.state = {
       messages: [],
       isLoading: false,
-      isOpen: false,
+      sessionId: this.getSessionId(),
     };
+  }
+
+  // Generate or retrieve session ID from localStorage
+  getSessionId() {
+    const storedSessionId = localStorage.getItem(CONFIG.localStorageKey);
+    
+    if (storedSessionId) {
+      return storedSessionId;
+    }
+    
+    // Generate a new session ID
+    const newSessionId = CONFIG.sessionIdPrefix + Math.random().toString(36).substring(2, 15) + 
+                         Math.random().toString(36).substring(2, 15);
+    
+    // Store it in localStorage
+    localStorage.setItem(CONFIG.localStorageKey, newSessionId);
+    
+    return newSessionId;
   }
 
   connectedCallback() {
     // Set up event listeners
     const form = this.shadowRoot.querySelector(".input-form");
-    const toggleBtn = this.shadowRoot.querySelector(".toggle-btn");
-    const closeBtn = this.shadowRoot.querySelector(".close-btn");
-
     form.addEventListener("submit", this.handleSubmit);
-    toggleBtn.addEventListener("click", this.toggleChat);
-    closeBtn.addEventListener("click", this.toggleChat);
 
     // Add initial message
-    this.addMessage("Have questions about ThisWay? I'm here to help", "bot");
+    this.addMessage(CONFIG.initialMessage, "bot");
   }
 
   disconnectedCallback() {
     const form = this.shadowRoot.querySelector(".input-form");
-    const toggleBtn = this.shadowRoot.querySelector(".toggle-btn");
-    const closeBtn = this.shadowRoot.querySelector(".close-btn");
-
     form.removeEventListener("submit", this.handleSubmit);
-    toggleBtn.removeEventListener("click", this.toggleChat);
-    closeBtn.removeEventListener("click", this.toggleChat);
-  }
-
-  toggleChat() {
-    this.state.isOpen = !this.state.isOpen;
-    const container = this.shadowRoot.querySelector(".chat-container");
-    container.classList.toggle("hidden");
   }
 
   setLoading(loading) {
@@ -380,30 +336,34 @@ class ThisWayChat extends HTMLElement {
     this.addMessage(message, "user");
     this.setLoading(true);
 
-    // Create form-urlencoded data
-    const formData = new URLSearchParams();
-    formData.append('message', message);
-
     try {
+      // Prepare the payload according to your endpoint requirements
+      const payload = {
+        type: "messsage",
+        input: message,
+        session_id: this.state.sessionId,
+        action: "simple_messsage"
+      };
+
       const response = await fetch(
-        "https://ssbx.dev-ai4jobs.com/rag/api/v1/assistant",
+        CONFIG.apiEndpoint,
         {
           method: "POST",
           headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
+            "Content-Type": "application/json",
             "Accept": "*/*"
           },
-          body: formData.toString()
+          body: JSON.stringify(payload)
         }
       );
 
       if (!response.ok) throw new Error("API request failed");
 
       const data = await response.json();
-      this.addMessage(
-        data.message || "Sorry, I couldn't process that.",
-        "bot"
-      );
+      
+      // Extract the output content from the response
+      const botMessage = data.output || "Sorry, I couldn't process that.";
+      this.addMessage(botMessage, "bot");
     } catch (error) {
       console.error("Error:", error);
       this.addMessage("Sorry, something went wrong.", "bot");
@@ -413,43 +373,7 @@ class ThisWayChat extends HTMLElement {
   }
 }
 
-customElements.define("thisway-chat", ThisWayChat);
+customElements.define("orders-chat", OrdersChat);
 
-// chat-loader.js
-(() => {
-  // Only run once
-  if (window.__THISWAY_CHAT_LOADED__) return;
-  window.__THISWAY_CHAT_LOADED__ = true;
-
-  // Create script element
-  const script = document.createElement('script');
-  script.src = '/chat/bubble.js';
-  script.async = true;
-
-  // Create web component element
-  const chat = document.createElement('thisway-chat');
-
-  // Function to inject elements
-  const injectElements = () => {
-    // Check if elements already exist
-    if (!document.querySelector('script[src="/chat/bubble.js"]')) {
-      document.head.appendChild(script);
-    }
-    
-    if (!document.querySelector('thisway-chat')) {
-      document.body.appendChild(chat);
-    }
-  };
-
-  // Inject on DOMContentLoaded if not already loaded
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', injectElements);
-  } else {
-    injectElements();
-  }
-
-  // Handle script loading errors
-  script.onerror = () => {
-    console.error('Failed to load ThisWay chat component');
-  };
-})();
+// Usage example:
+// <orders-chat></orders-chat>
