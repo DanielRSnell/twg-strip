@@ -1,6 +1,5 @@
 // _variables.scss
-$texas-maroon: #500100;
-$texas-maroon-hover: #662434;
+
 $white: #ffffff;
 $gray-100: #f3f4f6;
 $gray-200: #e5e7eb;
@@ -54,8 +53,7 @@ $breakpoint-mobile: 480px;
 
 // main.scss
 :root {
-    --texas-maroon: #{$texas-maroon};
-    --texas-maroon-hover: #{$texas-maroon-hover};
+
     --white: #{$white};
     --gray-100: #{$gray-100};
     --gray-200: #{$gray-200};
@@ -119,8 +117,7 @@ main {
             width: $spacing-16;
             height: $spacing-16;
             border-radius: $rounded-lg;
-            background-color: var(--texas-maroon);
-
+            
             img {
                 width: $spacing-10;
                 height: $spacing-10;

@@ -1,0 +1,106 @@
+---
+import "@/styles/prototype.scss";
+import { AstroFont } from "astro-font";
+import { ViewTransitions } from "astro:transitions";
+import WebChat from "@/components/WebChat.astro";
+import ScreenManager from "@/components/ScreenManager.astro";
+
+export interface Props {
+    page: {
+        color: string;
+        hover: string;
+        logo: string;
+        title: string;
+        invitation: string;
+        highlight: string;
+        create_own: {
+            text: string;
+            link: string;
+            link_text: string;
+        };
+        start_button: string;
+        footer: {
+            text: string;
+            link: string;
+            link_text: string;
+        };
+    };
+}
+
+const { page } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{page.title}</title>
+    <style define:vars={{ 
+        brandColor: page.color, 
+        brandHover: page.hover, 
+        texasMaroon: page.color, 
+        texasMaroonHover: page.hover 
+    }}>
+        :root {
+            --brand-color: var(--brandColor);
+            --brand-hover: var(--brandHover);
+            --texas-maroon: var(--texasMaroon);
+            --texas-maroon-hover: var(--texasMaroonHover);
+        }
+    </style>
+    <slot name="head" />
+</head>
+<body>
+    <main>
+        <div id="chat-container">
+            <!-- Left side of the split layout -->
+            <div id="information-screen">
+                <!-- Logo area -->
+                <div class="logo-container">
+                    <div class="logo-box">
+                       <img src={page.logo} alt={page.title}>
+                    </div>
+                </div>
+                
+                <!-- Invitation text -->
+                <div class="title-section">
+                    <h2>{page.invitation} <span class="highlight">{page.highlight}</span></h2>
+                </div>
+                
+                <!-- Create your own text -->
+                <div class="create-own">
+                    <p>{page.create_own.text} <a href={page.create_own.link}>{page.create_own.link_text}</a></p>
+                </div>
+                
+                <!-- Start Conversation button -->
+                <div class="start-button">
+                    <button id="chat-start">
+                        {page.start_button}
+                    </button>
+                </div>
+                
+                <!-- Footer -->
+                <div class="footer">
+                    {page.footer.text} <a href={page.footer.link}>{page.footer.link_text}</a>
+                </div>
+            </div>
+            
+            <!-- Right side of the split layout -->
+            <div id="chat-screen">
+               <!-- Back button for mobile view -->
+               <div class="back-button-container">
+                   <button id="back-to-info" class="back-button">
+                       <span class="back-arrow">←</span> Back
+                   </button>
+               </div>
+               
+               <WebChat {...page} />
+            </div>
+        </div>
+    </main>
+
+    <ScreenManager />
+    <slot name="body" />
+</body>
+</html>
