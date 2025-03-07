@@ -2,6 +2,10 @@ html {
   @apply text-base-sm md:text-base;
 }
 
+@view-transition {
+  navigation: auto;
+}
+
 body {
   @apply bg-body overflow-x-hidden text-base font-primary font-normal leading-relaxed text-text;
 
