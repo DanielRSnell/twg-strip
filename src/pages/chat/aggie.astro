@@ -1,7 +1,6 @@
 ---
 import "@/styles/prototype.scss";
 import { AstroFont } from "astro-font";
-import { ViewTransitions } from "astro:transitions";
 import ChatLayout from "@/layouts/ChatLayout.astro";
 
 const page = {
@@ -9,7 +8,7 @@ const page = {
      hover: "#662434",
      logo: "/images/client/tamu-logo.png",
      title: "Aggie Assist",
-     endpoint: "https://thiswayglobal.com/wp-json/relay/v1/aggie",
+     endpoint: "https://api.thiswayglobal.com/wp-json/relay/v1/aggie",
      invitation: "You've been invited to have a conversation with",
      highlight: "Aggie Assist",
      create_own: {
