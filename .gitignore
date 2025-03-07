@@ -14,7 +14,7 @@ pnpm-debug.log*
 yarn.lock
 package-lock.json
 pnpm-lock.yaml
-
+test-directory-change
 # environment variables
 .env
 .env.production
