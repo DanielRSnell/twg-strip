@@ -1,0 +1,202 @@
+---
+import Base from "@/layouts/Base.astro";
+import { markdownify } from "@/lib/utils/textConverter";
+import CallToAction from "@/partials/CallToAction.astro";
+import ExternalLogo from "@/components/ExternalLogo.astro";
+import { getEntry } from "astro:content";
+import { readFileSync } from 'fs';
+import { fileURLToPath } from 'url';
+import { join, dirname } from 'path';
+import dateFormat from "@/lib/utils/dateFormat";
+
+// Get the current file's directory
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+// Read the CSV file
+const csvPath = join(__dirname, '../../content/blog/media.csv');
+const csvContent = readFileSync(csvPath, 'utf8');
+
+// Manually parse the CSV to avoid issues with the csv-parse library
+const lines = csvContent.split('\n').filter(line => line.trim() !== '');
+const headers = lines[3].split(',');
+
+// Create media items array
+const mediaItems = [];
+for (let i = 4; i < lines.length; i++) {
+  // Skip empty lines
+  if (!lines[i].trim()) continue;
+  
+  // Handle lines with quotes that might contain commas
+  let currentLine = lines[i];
+  let j = i;
+  while (
+    (currentLine.match(/"/g) || []).length % 2 !== 0 && 
+    j + 1 < lines.length
+  ) {
+    j++;
+    currentLine += '\n' + lines[j];
+  }
+  i = j;
+  
+  // Process the line into fields
+  const fields = [];
+  let inQuote = false;
+  let currentField = '';
+  
+  for (let k = 0; k < currentLine.length; k++) {
+    const char = currentLine[k];
+    
+    if (char === '"') {
+      inQuote = !inQuote;
+    } else if (char === ',' && !inQuote) {
+      fields.push(currentField.trim());
+      currentField = '';
+    } else {
+      currentField += char;
+    }
+  }
+  
+  // Add the last field
+  fields.push(currentField.trim());
+  
+  // Create an object with the headers as keys
+  const item = {};
+  for (let k = 0; k < headers.length && k < fields.length; k++) {
+    item[headers[k].trim()] = fields[k].replace(/^"|"$/g, '').trim();
+  }
+  
+  // Only add items that have a title
+  if (item['Episode Title'] && item['Episode Title'].trim() !== '') {
+    mediaItems.push(item);
+  }
+}
+
+// Sort by publication date if available
+mediaItems.sort((a, b) => {
+  const dateA = a['Publication Date'] ? new Date(a['Publication Date']) : new Date(0);
+  const dateB = b['Publication Date'] ? new Date(b['Publication Date']) : new Date(0);
+  return dateB.getTime() - dateA.getTime();
+});
+
+// Get call to action section
+const call_to_action = await getEntry("sections", "call-to-action");
+
+// Extract domain from URL for logo
+function extractDomain(url) {
+  if (!url) return "thiswayglobal.com";
+  
+  try {
+    const domain = new URL(url).hostname;
+    return domain;
+  } catch (e) {
+    return "thiswayglobal.com"; // Default domain if URL parsing fails
+  }
+}
+
+// For debugging
+console.log(`Found ${mediaItems.length} media items`);
+mediaItems.forEach((item, index) => {
+  console.log(`Item ${index + 1}: ${item['Episode Title']}`);
+});
+---
+
+<Base title="Media Appearances" meta_title="ThisWay Global Media Appearances" description="Podcasts, interviews, and media appearances featuring ThisWay Global">
+  <section class="section bg-theme-light">
+    <div class="container">
+      <div class="mx-auto max-w-2xl text-center">
+        <h1
+          class="pb-4"
+          data-aos="fade-up-sm"
+          data-aos-delay="100"
+          set:html={markdownify("Media Appearances")}
+        />
+        <p
+          class="pb-8"
+          data-aos="fade-up-sm"
+          data-aos-delay="200"
+          set:html={markdownify("Podcasts, interviews, and media appearances featuring ThisWay Global")}
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="row g-4">
+        {
+          mediaItems.map((media, i) => {
+            // Determine logo source
+            let logoSource = "thiswayglobal.com";
+            if (media['Podcast Asset Link']) {
+              logoSource = extractDomain(media['Podcast Asset Link']);
+            } else if (media['Posted On']) {
+              logoSource = media['Posted On'].toLowerCase().replace(/\s+/g, '');
+            } else if (media['Series Name']) {
+              logoSource = media['Series Name'].toLowerCase().replace(/\s+/g, '');
+            }
+            
+            return (
+              <div
+                data-aos="fade-up-sm"
+                data-aos-delay={(i + 1) * 100}
+                class="relative md:col-6"
+              >
+                <div class="p-8 h-full rounded-xl border transition duration-200 bg-theme-light/50 hover:bg-theme-light/80">
+                  <div class="flex gap-6 items-center pb-6">
+                    <div class="w-[180px] flex items-center">
+                      <ExternalLogo 
+                        domain={logoSource} 
+                        name={media['Series Name'] || logoSource.split('.')[0]} 
+                        class="h-[60px] w-auto object-contain"
+                      />
+                    </div>
+                    {media['Publication Date'] && (
+                      <div class="absolute top-0 right-0 -mt-2 rounded-xl border-gray-600 shadow-inner transition duration-200 border-1 bg-theme-light/50 hover:bg-theme-light/80">
+                        <span class="px-3 py-1 text-sm rounded-full text-light bg-dark/5">
+                          {media['Publication Date']}
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                  <h4 class="mb-4">{media['Episode Title']}</h4>
+                  {media['Series Name'] && <p class="pb-3 text-sm font-medium">Series: {media['Series Name']}</p>}
+                  {media['Guest'] && <p class="pb-6 text-sm">Featuring: {media['Guest']}</p>}
+                  
+                  {media['Podcast Asset Link'] ? (
+                    <a
+                      href={media['Podcast Asset Link']}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="inline-flex gap-1 items-center text-primary hover:opacity-80"
+                    >
+                      Listen or Watch
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <line x1="5" y1="12" x2="19" y2="12" />
+                        <polyline points="12 5 19 12 12 19" />
+                      </svg>
+                    </a>
+                  ) : (
+                    <p class="text-sm italic">Media link not available</p>
+                  )}
+                </div>
+              </div>
+            )
+          })
+        }
+      </div>
+    </div>
+  </section>
+
+  <CallToAction call_to_action={call_to_action} />
+</Base>

@@ -1,0 +1,138 @@
+---
+import Base from "@/layouts/Base.astro";
+import { markdownify } from "@/lib/utils/textConverter";
+import CallToAction from "@/partials/CallToAction.astro";
+import ExternalLogo from "@/components/ExternalLogo.astro";
+import { getEntry } from "astro:content";
+import { parse } from 'csv-parse/sync';
+import { readFileSync } from 'fs';
+import { fileURLToPath } from 'url';
+import { join, dirname } from 'path';
+import dateFormat from "@/lib/utils/dateFormat";
+
+// Define press release interface
+interface PressRelease {
+  Title: string;
+  Date: string;
+  Summary: string;
+  Link: string;
+  "Media Coverage": string;
+}
+
+// Get the current file's directory
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+// Read and parse the CSV file
+const csvPath = join(__dirname, '../../content/blog/press.csv');
+const csvContent = readFileSync(csvPath, 'utf8');
+
+// Parse the CSV content
+const pressReleases = parse(csvContent, {
+  columns: true,
+  skip_empty_lines: true
+}) as PressRelease[];
+
+// Sort press releases by date (newest first)
+pressReleases.sort((a: PressRelease, b: PressRelease) => {
+  const dateA = new Date(a.Date);
+  const dateB = new Date(b.Date);
+  return dateB.getTime() - dateA.getTime();
+});
+
+// Get call to action section
+const call_to_action = await getEntry("sections", "call-to-action");
+
+// Extract domain from URL for logo
+function extractDomain(url: string): string {
+  try {
+    const domain = new URL(url).hostname;
+    return domain;
+  } catch (e) {
+    return "thiswayglobal.com"; // Default domain if URL parsing fails
+  }
+}
+---
+
+<Base title="Press Releases" meta_title="ThisWay Global Press Releases" description="Latest press releases and media coverage from ThisWay Global">
+  <section class="section bg-theme-light">
+    <div class="container">
+      <div class="mx-auto max-w-2xl text-center">
+        <h1
+          class="pb-4"
+          data-aos="fade-up-sm"
+          data-aos-delay="100"
+          set:html={markdownify("Press Releases")}
+        />
+        <p
+          class="pb-8"
+          data-aos="fade-up-sm"
+          data-aos-delay="200"
+          set:html={markdownify("Latest press releases and media coverage from ThisWay Global")}
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="row g-4">
+        {
+          pressReleases.map((press: PressRelease, i: number) => {
+            const domain = extractDomain(press.Link);
+            return (
+              <div
+                data-aos="fade-up-sm"
+                data-aos-delay={(i + 1) * 100}
+                class="relative md:col-6"
+              >
+                <div class="p-8 h-full rounded-xl border transition duration-200 bg-theme-light/50 hover:bg-theme-light/80">
+                  <div class="flex gap-6 items-center pb-6">
+                    <div class="w-[180px] flex items-center">
+                      <ExternalLogo 
+                        domain={domain} 
+                        name={domain.split('.')[0]} 
+                        class="h-[60px] w-auto object-contain"
+                      />
+                    </div>
+                    <div class="absolute top-0 right-0 -mt-2 rounded-xl border-gray-600 shadow-inner transition duration-200 border-1 bg-theme-light/50 hover:bg-theme-light/80">
+                      <span class="px-3 py-1 text-sm rounded-full text-light bg-dark/5">
+                        {dateFormat(press.Date)}
+                      </span>
+                    </div>
+                  </div>
+                  <h4 class="mb-4" set:html={markdownify(press.Title)} />
+                  <p class="pb-6" set:html={markdownify(press.Summary)} />
+                  <a
+                    href={press.Link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-flex gap-1 items-center text-primary hover:opacity-80"
+                  >
+                    Read Full Article
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <line x1="5" y1="12" x2="19" y2="12" />
+                      <polyline points="12 5 19 12 12 19" />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            )
+          })
+        }
+      </div>
+    </div>
+  </section>
+
+  <CallToAction call_to_action={call_to_action} />
+</Base>
