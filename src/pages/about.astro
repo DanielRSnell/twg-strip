@@ -5,6 +5,35 @@ import { getSinglePage } from "@/lib/contentParser.astro";
 import { markdownify } from "@/lib/utils/textConverter";
 import CallToAction from "@/partials/CallToAction.astro";
 import { getEntry } from "astro:content";
+import { readFileSync } from 'fs';
+import { fileURLToPath } from 'url';
+import { join, dirname } from 'path';
+import TeamMembers from '../config/team.json';
+// Define team member interface
+interface TeamMember {
+  Name: string;
+  Role: string;
+  Department: string;
+  Email: string;
+  LinkedIn: string;
+  Bio: string;
+  Active: string;
+  path: string;
+}
+
+// Map the JSON data to our TeamMember interface
+const teamMembers: TeamMember[] = TeamMembers
+  .filter((member: any) => member.__6 && member.__6.toUpperCase() === 'TRUE')
+  .map((member: any) => ({
+    Name: member[""] || "",
+    Role: member.__1 || "",
+    Department: member.__2 || "",
+    Email: member.__3 || "",
+    LinkedIn: member.__4 || "",
+    Bio: member.__5 || "",
+    Active: member.__6 || "",
+    path: member.__7 || ""
+  }));
 
 const about = await getEntry("about", "-index");
 const {
@@ -61,7 +90,7 @@ const careers = await getSinglePage("career");
     <div class="container">
       <div class="row g-4">
         {
-          story.stats.map((s, i: number) => (
+          story.stats.map((s: { key: string; value: string }, i: number) => (
             <div
               class="sm:col-6 lg:col-4"
               data-aos="fade-right-sm"
@@ -174,7 +203,7 @@ const careers = await getSinglePage("career");
       </div>
       <div class="row g-4">
         {
-          team.members.map((m, i: number) => (
+          teamMembers.map((member, i) => (
             <div
               class="sm:col-6 md:col-4 lg:col-3"
               data-aos="fade-up-sm"
@@ -182,15 +211,15 @@ const careers = await getSinglePage("career");
             >
               <div class="p-4 pb-6 rounded-xl border">
                 <ImageMod
-                  src={m.image}
-                  alt="Team Member"
+                  src={member.path}
+                  alt={`${member.Name} - ${member.Role}`}
                   class="pb-3 rounded-inherit"
                   width={0}
                   height={0}
                   format="webp"
                 />
-                <h3 class="pb-1 text-xl" set:html={m.name} />
-                <p class="text-light" set:html={m.designation} />
+                <h3 class="pb-1 text-xl">{member.Name}</h3>
+                <p class="text-light">{member.Role}</p>
               </div>
             </div>
           ))

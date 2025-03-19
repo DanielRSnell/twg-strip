@@ -4,11 +4,8 @@ import { markdownify } from "@/lib/utils/textConverter";
 import CallToAction from "@/partials/CallToAction.astro";
 import ExternalLogo from "@/components/ExternalLogo.astro";
 import { getEntry } from "astro:content";
-import { parse } from 'csv-parse/sync';
-import { readFileSync } from 'fs';
-import { fileURLToPath } from 'url';
-import { join, dirname } from 'path';
 import dateFormat from "@/lib/utils/dateFormat";
+import PressReleases from "@/config/press.json";
 
 // Define press release interface
 interface PressRelease {
@@ -19,22 +16,8 @@ interface PressRelease {
   "Media Coverage": string;
 }
 
-// Get the current file's directory
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-// Read and parse the CSV file
-const csvPath = join(__dirname, '../../content/blog/press.csv');
-const csvContent = readFileSync(csvPath, 'utf8');
-
-// Parse the CSV content
-const pressReleases = parse(csvContent, {
-  columns: true,
-  skip_empty_lines: true
-}) as PressRelease[];
-
 // Sort press releases by date (newest first)
-pressReleases.sort((a: PressRelease, b: PressRelease) => {
+const pressReleases = PressReleases.sort((a: PressRelease, b: PressRelease) => {
   const dateA = new Date(a.Date);
   const dateB = new Date(b.Date);
   return dateB.getTime() - dateA.getTime();

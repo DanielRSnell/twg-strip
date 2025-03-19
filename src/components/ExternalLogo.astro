@@ -9,12 +9,57 @@ interface Props {
 
 const { domain, name, height = 60, width = 180, class: className } = Astro.props;
 const TOKEN = "pk_Hxlg889vQvqt4sdTFKgbSw";
+const logoUrl = `https://img.logo.dev/${domain}?token=${TOKEN}`;
 ---
 
-<img
-  src={`https://img.logo.dev/${domain}?token=${TOKEN}`}
-  alt={`${name} Logo`}
-  height={height}
-  width={width}
-  class={className}
-/>
+<div class="logo-container" data-logo-url={logoUrl} data-name={name}>
+  <img
+    src={logoUrl}
+    alt={`${name} Logo`}
+    height={height}
+    width={width}
+    class={`${className} logo-image`}
+    style="display: none;"
+    loading="lazy"
+    onerror="this.parentNode.innerHTML = this.getAttribute('data-fallback');"
+    data-fallback={`<div style="height: ${height}px; width: ${width}px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #666; background-color: #f5f5f5; border-radius: 4px;">${name}</div>`}
+  />
+  <div class="logo-placeholder" style={`height: ${height}px; width: ${width}px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #666; background-color: #f5f5f5; border-radius: 4px;`}>
+    {name}
+  </div>
+</div>
+
+<script>
+  // Find all logo containers on the page
+  const logoContainers = document.querySelectorAll('.logo-container');
+  
+  // Process each logo
+  logoContainers.forEach(container => {
+    const img = container.querySelector('.logo-image');
+    const placeholder = container.querySelector('.logo-placeholder');
+    
+    if (img && placeholder) {
+      // Function to check if image exists
+      const checkImage = (url) => {
+        return new Promise((resolve) => {
+          const testImg = new Image();
+          testImg.onload = () => resolve(true);
+          testImg.onerror = () => resolve(false);
+          testImg.src = url;
+        });
+      };
+      
+      // Check if the logo exists
+      checkImage(img.src).then(exists => {
+        if (exists) {
+          // Show the image and hide the placeholder
+          img.style.display = 'block';
+          placeholder.style.display = 'none';
+        } else {
+          // Keep the placeholder visible and remove the img
+          img.remove();
+        }
+      });
+    }
+  });
+</script>

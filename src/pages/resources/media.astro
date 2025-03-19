@@ -4,76 +4,21 @@ import { markdownify } from "@/lib/utils/textConverter";
 import CallToAction from "@/partials/CallToAction.astro";
 import ExternalLogo from "@/components/ExternalLogo.astro";
 import { getEntry } from "astro:content";
-import { readFileSync } from 'fs';
-import { fileURLToPath } from 'url';
-import { join, dirname } from 'path';
 import dateFormat from "@/lib/utils/dateFormat";
+import MediaItems from "@/config/media.json";
 
-// Get the current file's directory
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-// Read the CSV file
-const csvPath = join(__dirname, '../../content/blog/media.csv');
-const csvContent = readFileSync(csvPath, 'utf8');
-
-// Manually parse the CSV to avoid issues with the csv-parse library
-const lines = csvContent.split('\n').filter(line => line.trim() !== '');
-const headers = lines[3].split(',');
-
-// Create media items array
-const mediaItems = [];
-for (let i = 4; i < lines.length; i++) {
-  // Skip empty lines
-  if (!lines[i].trim()) continue;
-  
-  // Handle lines with quotes that might contain commas
-  let currentLine = lines[i];
-  let j = i;
-  while (
-    (currentLine.match(/"/g) || []).length % 2 !== 0 && 
-    j + 1 < lines.length
-  ) {
-    j++;
-    currentLine += '\n' + lines[j];
-  }
-  i = j;
-  
-  // Process the line into fields
-  const fields = [];
-  let inQuote = false;
-  let currentField = '';
-  
-  for (let k = 0; k < currentLine.length; k++) {
-    const char = currentLine[k];
-    
-    if (char === '"') {
-      inQuote = !inQuote;
-    } else if (char === ',' && !inQuote) {
-      fields.push(currentField.trim());
-      currentField = '';
-    } else {
-      currentField += char;
-    }
-  }
-  
-  // Add the last field
-  fields.push(currentField.trim());
-  
-  // Create an object with the headers as keys
-  const item = {};
-  for (let k = 0; k < headers.length && k < fields.length; k++) {
-    item[headers[k].trim()] = fields[k].replace(/^"|"$/g, '').trim();
-  }
-  
-  // Only add items that have a title
-  if (item['Episode Title'] && item['Episode Title'].trim() !== '') {
-    mediaItems.push(item);
-  }
+// Define media item interface
+interface MediaItem {
+  "Episode Title": string;
+  "Series Name"?: string;
+  "Guest"?: string;
+  "Podcast Asset Link"?: string;
+  "Posted On"?: string;
+  "Publication Date"?: string;
 }
 
 // Sort by publication date if available
-mediaItems.sort((a, b) => {
+const mediaItems = MediaItems.sort((a: MediaItem, b: MediaItem) => {
   const dateA = a['Publication Date'] ? new Date(a['Publication Date']) : new Date(0);
   const dateB = b['Publication Date'] ? new Date(b['Publication Date']) : new Date(0);
   return dateB.getTime() - dateA.getTime();
@@ -83,7 +28,7 @@ mediaItems.sort((a, b) => {
 const call_to_action = await getEntry("sections", "call-to-action");
 
 // Extract domain from URL for logo
-function extractDomain(url) {
+function extractDomain(url: string): string {
   if (!url) return "thiswayglobal.com";
   
   try {
@@ -93,12 +38,6 @@ function extractDomain(url) {
     return "thiswayglobal.com"; // Default domain if URL parsing fails
   }
 }
-
-// For debugging
-console.log(`Found ${mediaItems.length} media items`);
-mediaItems.forEach((item, index) => {
-  console.log(`Item ${index + 1}: ${item['Episode Title']}`);
-});
 ---
 
 <Base title="Media Appearances" meta_title="ThisWay Global Media Appearances" description="Podcasts, interviews, and media appearances featuring ThisWay Global">
