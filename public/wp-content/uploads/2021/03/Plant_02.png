@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Error><Code>NoSuchBucket</Code><Message>The specified bucket does not exist</Message><BucketName>thiswayglobal.com</BucketName><RequestId>6GHE7K24X9Y1BS0A</RequestId><HostId>wGK5UrHYI7qxdWgKdt8MA3l7XJ0lcVcVvqapOQkusV4dAjoDQwMgrnuAhaH+Inl9vmUQOBdDASc=</HostId></Error>
