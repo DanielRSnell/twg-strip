@@ -56,15 +56,5 @@ export default defineConfig({
       wrap: true,
     },
     extendDefaultPlugins: true,
-  },
-  redirects: {
-    "/doc/master-service-agreement": {
-      status: 302,
-      destination: "/wp-content/uploads/2021/03/ThisWay-Global-Master-Subscription-Agreement-FEB-2021.pdf"
-    },
-    "/doc/master-service-agreement.pdf": {
-      status: 302,
-      destination: "/wp-content/uploads/2021/03/ThisWay-Global-Master-Subscription-Agreement-FEB-2021.pdf"
-    }
   }
 });
