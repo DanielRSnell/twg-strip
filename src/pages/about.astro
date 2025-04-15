@@ -15,25 +15,15 @@ interface TeamMember {
   Role: string;
   Department: string;
   Email: string;
-  LinkedIn: string;
+  "Linked In": string;
   Bio: string;
   Active: string;
   path: string;
 }
 
-// Map the JSON data to our TeamMember interface
+// Filter active team members
 const teamMembers: TeamMember[] = TeamMembers
-  .filter((member: any) => member.__6 && member.__6.toUpperCase() === 'TRUE')
-  .map((member: any) => ({
-    Name: member[""] || "",
-    Role: member.__1 || "",
-    Department: member.__2 || "",
-    Email: member.__3 || "",
-    LinkedIn: member.__4 || "",
-    Bio: member.__5 || "",
-    Active: member.__6 || "",
-    path: member.__7 || ""
-  }));
+  .filter((member: any) => member.Active && member.Active.toUpperCase() === 'TRUE');
 
 const about = await getEntry("about", "-index");
 const {
@@ -160,7 +150,7 @@ const careers = await getSinglePage("career");
         <div class="text-white lg:col-6">
           <div class="flex flex-col gap-7">
             {
-              value.values.map((v, i: number) => (
+              value.values.map((v: { title: string; content: string }, i: number) => (
                 <div
                   class="flex flex-col gap-5 pb-5 border-b-2 border-border/20"
                   data-aos="fade-up-sm"
@@ -210,16 +200,47 @@ const careers = await getSinglePage("career");
               data-aos-delay={100 + i * 100}
             >
               <div class="p-4 pb-6 rounded-xl border">
-                <ImageMod
-                  src={member.path}
-                  alt={`${member.Name} - ${member.Role}`}
-                  class="pb-3 rounded-inherit"
-                  width={0}
-                  height={0}
-                  format="webp"
-                />
-                <h3 class="pb-1 text-xl">{member.Name}</h3>
-                <p class="text-light">{member.Role}</p>
+                <div class="aspect-ratio-box mb-3 relative overflow-hidden rounded-lg" style="padding-top: 100%;">
+                  <ImageMod
+                    src={member.path}
+                    alt={`${member.Name} - ${member.Role}`}
+                    class="rounded-inherit absolute top-0 left-0 w-full h-full object-cover"
+                    width={300}
+                    height={300}
+                    format="webp"
+                  />
+                </div>
+                <div>
+                  <h3 class="pb-1 text-xl">{member.Name}</h3>
+                  <p class="text-light">{member.Role}</p>
+                  <div class="flex space-x-2 mt-2">
+                    {member["Linked In"] && (
+                      <a href={member["Linked In"]} target="_blank" rel="noopener noreferrer" class="text-primary hover:text-secondary">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                        </svg>
+                      </a>
+                    )}
+                    {member.Bio && (
+                      <div class="relative group hidden sm:block">
+                        <button class="text-primary hover:text-secondary focus:outline-none" title="View Bio">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8z"/>
+                            <path d="M11 11h2v6h-2zm0-4h2v2h-2z"/>
+                          </svg>
+                          <span class="absolute -top-1 -right-1 flex h-3 w-3">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-3 w-3 bg-primary"></span>
+                          </span>
+                        </button>
+                        <div class="absolute z-10 left-0 w-72 md:w-80 p-4 mt-2 bg-white rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 text-sm max-h-[300px] overflow-y-auto border border-gray-200">
+                          <h4 class="font-bold mb-2">{member.Name}</h4>
+                          <p class="whitespace-pre-line">{member.Bio}</p>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
               </div>
             </div>
           ))
