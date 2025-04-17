@@ -19,11 +19,13 @@ interface TeamMember {
   Bio: string;
   Active: string;
   path: string;
+  order?: number; // Make order optional to handle any team members without this property
 }
 
-// Filter active team members
+// Filter active team members and sort by order
 const teamMembers: TeamMember[] = TeamMembers
-  .filter((member: any) => member.Active && member.Active.toUpperCase() === 'TRUE');
+  .filter((member: any) => member.Active && member.Active.toUpperCase() === 'TRUE')
+  .sort((a: any, b: any) => a.order - b.order);
 
 const about = await getEntry("about", "-index");
 const {
@@ -200,13 +202,13 @@ const careers = await getSinglePage("career");
               data-aos-delay={100 + i * 100}
             >
               <div class="p-4 pb-6 rounded-xl border">
-                <div class="aspect-ratio-box mb-3 relative overflow-hidden rounded-lg" style="padding-top: 100%;">
+                <div class="aspect-ratio-box mb-3 relative overflow-hidden rounded-lg" style="padding-top: 120%;">
                   <ImageMod
                     src={member.path}
                     alt={`${member.Name} - ${member.Role}`}
                     class="rounded-inherit absolute top-0 left-0 w-full h-full object-cover"
                     width={300}
-                    height={300}
+                    height={360}
                     format="webp"
                   />
                 </div>

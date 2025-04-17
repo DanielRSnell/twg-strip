@@ -1,6 +1,7 @@
 [
   {
     "Name": "Justin Hood",
+    "order": 4,
     "Role": "Chief Operating Officer",
     "Department": "Operations",
     "Email": "justin@thiswayglobal.com",
@@ -11,6 +12,7 @@
   },
   {
     "Name": "Angela Hood",
+    "order": 1,
     "Role": "Founder & CEO",
     "Department": "Executive",
     "Email": "angela@thiswayglobal.com",
@@ -21,6 +23,7 @@
   },
   {
     "Name": "Alex Shmelev",
+    "order": 2,
     "Role": "Cheif Innovations Officer",
     "Department": "Technology",
     "Email": "alex@thiswayglobal.com",
@@ -31,6 +34,7 @@
   },
   {
     "Name": "Christian Kennedy",
+    "order": 3,
     "Role": "Chief Technology Officer",
     "Department": "Technology",
     "Email": "chris.kennedy@thiswayglobal.com",
@@ -41,6 +45,7 @@
   },
   {
     "Name": "Courtney Gwynn",
+    "order": 6,
     "Role": "Product Manager",
     "Department": "Product Management",
     "Email": "courtney.gwynn@thiswayglobal.com",
@@ -51,6 +56,7 @@
   },
   {
     "Name": "Lisa Rawls",
+    "order": 5,
     "Role": "Chief Financial Officer",
     "Department": "Finance",
     "Email": "lisa.rawls@thiswayglobal.com",
@@ -61,6 +67,7 @@
   },
   {
     "Name": "Daniel Snell",
+    "order": 7,
     "Role": "Director of Marketing",
     "Department": "Revenue",
     "Email": "daniel.snell@thiswayglobal.com",
@@ -71,6 +78,7 @@
   },
   {
     "Name": "Danielle Bodalski",
+    "order": 8,
     "Role": "Chief HR Officer",
     "Department": "Human Resources",
     "Email": "danielle.bodalski@thiswayglobal.com",
@@ -81,16 +89,18 @@
   },
   {
     "Name": "Marcelo Silva",
+    "order": 9,
     "Role": "Principal Engineer",
     "Department": "Technology",
     "Email": "marcelo.silva@thiswayglobal.com",
     "Linked In": "https://www.linkedin.com/in/marcelo-ven%C3%A2ncio-silva-9b380513/",
     "Bio": "Marcelo Venancio da Silva is a Software Engineer at ThisWay Global, where he develops and maintains AI-driven platforms, including AI4Jobs and Sully’s Sandbox. Since joining in 2023, he has played a key role in integrating IBM Watsonx into AI4Jobs and expanding his contributions to Sully’s Sandbox in 2024.\n\nWith over 20 years of experience in software development, Marcelo specializes in building high-performance financial systems, particularly stock exchange trading and risk management platforms. Holding a degree in Control and Automation Engineering, he has developed trading systems and risk calculation tools for major financial institutions, including C6 Bank, Bank of America Merrill Lynch, and Barclays Investment Bank. His expertise in financial technology, combined with his background in developing complex, high-speed computing solutions, allows him to bring a deep technical perspective to his work at ThisWay Global.",
     "Active": "TRUE",
-    "path": "/images/team-members/male.png"
+    "path": "/images/team-members/marc.jpeg"
   },
   {
     "Name": "Berta Turner",
+    "order": 10,
     "Role": "Lead Engineering Support",
     "Department": "Technology",
     "Email": "berta.turner@thiswayglobal.com",
@@ -101,6 +111,7 @@
   },
   {
     "Name": "Chelsea May",
+    "order": 11,
     "Role": "Customer Support Executive",
     "Department": "Operations",
     "Email": "chelsea.bauer@thiswayglobal.com",
@@ -111,16 +122,18 @@
   },
   {
     "Name": "Daniel Keller",
+    "order": 12,
     "Role": "Principal Engineer",
     "Department": "Technology",
     "Email": "daniel.keller@thiswayglobal.com",
     "Linked In": "https://www.linkedin.com/in/notnotdaniel?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app",
     "Bio": "Daniel Keller is a Senior Software Engineer at ThisWay Global, leading the development of LaunchHPC, a next-generation platform optimizing compute resources for AI and HPC applications. \n\nWith over 25 years of experience in software development, he specializes in building cloud-scale distributed systems for AI, HPC, IoT, precision agriculture, and finance. Throughout his career, Daniel has primarily focused on bootstrapping early-stage startups, though he has also contributed to major software companies, recognized within the field of technology. His deep expertise in scalable computing solutions makes him a key innovator in high-performance and AI-driven technologies. \n\nDaniel graduated top in his engineering class, Summa Cum Laude, with a degree in Computer Science from the Baskin School of Engineering at the University of California, Santa Cruz.",
     "Active": "TRUE",
-    "path": "/images/team-members/male.png"
+    "path": "/images/team-members/daniel-k.jpeg"
   },
   {
     "Name": "Michael Coats",
+    "order": 13,
     "Role": "Executive Assistant to CEO",
     "Department": "Operations",
     "Email": "michael.coats@thiswayglobal.com",
@@ -131,6 +144,7 @@
   },
   {
     "Name": "Tom Sikler",
+    "order": 14,
     "Role": "Customer Success Manager",
     "Department": "Revenue",
     "Email": "tom.sikler@thiswayglobal.com",
