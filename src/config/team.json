@@ -242,17 +242,6 @@
     "path": "/images/team-members/female.png"
   },
   {
-    "Name": "Chris Ramirez",
-    "order": 20,
-    "Role": "Sales Director",
-    "Department": "Sales",
-    "Email": "chris.ramirez@thiswayglobal.com",
-    "Linked In": "",
-    "Bio": "Chris Ramirez, Sales Director for ThisWay Global, is a results-driven sales leader with over a decade of experience in SaaS, strategic field sales, and enterprise solutions. He has a proven track record of driving recurring revenue growth, securing enterprise-level accounts across industries and implementing scalable sales processes that enhance team performance. Ramirez specializes in building and leading high-performing sales teams, developing lead generation strategies, and executing new market entry plans that drive consistent revenue growth. Chris has successfully launched and marketed AI-driven solutions to improve operational efficiency and customer retention. With expertise in cross-functional leadership, he aligns sales, marketing, and product development to drive business success. Recognized as a “20 Under 40” honoree for exceptional leadership and community involvement, Chris was also awarded Volunteer of the Year by Los Hermanos Familia for his contributions to nonprofit initiatives. Known for his ability to transform underperforming teams, he has been named Top Sales Performer multiple times for exceeding revenue and customer acquisition goals. Passionate about mentorship, Chris is dedicated to developing the next generation of sales leaders while continuously optimizing sales strategies to fuel long-term growth and innovation for ThisWay Global.",
-    "Active": "TRUE",
-    "path": "/images/team-members/male.png"
-  },
-  {
     "Name": "Vic",
     "order": 20,
     "Role": "Systems Administrator",
