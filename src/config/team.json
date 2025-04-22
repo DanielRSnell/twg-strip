@@ -189,11 +189,11 @@
   {
     "Name": "Ross Thomas",
     "order": 20,
-    "Role": "Senior Software Engineer",
+    "Role": "Principal Software Engineer",
     "Department": "Engineering",
     "Email": "ross.thomas@thiswayglobal.com",
     "Linked In": "",
-    "Bio": "Ross Thomas is a Senior Software Engineer at ThisWay Global with over 30 years of experience building mission-critical distributed systems for finance, bioinformatics, and AI-driven utilities. Specializing in network security, relational and NoSQL databases, and DevOps, he has a strong background in designing secure and scalable infrastructures. Currently, Ross focuses on enhancing Tinker functionality to standardize workflow descriptions and developing API specifications for integrating TWG-hosted LaunchHPC components with target environments. His expertise ensures seamless, efficient, and secure system integration.",
+    "Bio": "Ross Thomas is a Principal Software Engineer at ThisWay Global with over 30 years of experience building mission-critical distributed systems for finance, bioinformatics, and AI-driven utilities. Specializing in network security, relational and NoSQL databases, and DevOps, he has a strong background in designing secure and scalable infrastructures. Currently, Ross focuses on enhancing Tinker functionality to standardize workflow descriptions and developing API specifications for integrating TWG-hosted LaunchHPC components with target environments. His expertise ensures seamless, efficient, and secure system integration.",
     "Active": "TRUE",
     "path": "/images/team-members/male.png"
   },
