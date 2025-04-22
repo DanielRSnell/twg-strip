@@ -144,7 +144,7 @@
   },
   {
     "Name": "Michael Coats",
-    "order": 13,
+    "order": 10,
     "Role": "Executive Assistant to CEO",
     "Department": "Operations",
     "Email": "michael.coats@thiswayglobal.com",
@@ -253,15 +253,15 @@
     "path": "/images/team-members/female.png"
   },
   {
-    "Name": "Vic",
-    "order": 20,
+    "Name": "Vic Leigh",
+    "order": 11,
     "Role": "Systems Administrator",
     "Department": "IT/Operations",
     "Email": "vic@thiswayglobal.com",
     "Linked In": "",
     "Bio": "Vic has been with ThisWay Global for over 7 years. During their tenure at the company, they gained invaluable experience by working in nearly every department. This diverse background has provided them with a comprehensive understanding of company operations and has ultimately led them to their current role as the Systems Administrator, where they manage a majority of our tech stack. They have been a Certified Salesforce Administrator for over four years and are actively pursuing a certification in Salesforce Architecture. While they may not hold a college degree, they are committed to delivering exceptional value and are relentless in their pursuit of finding ideal solutions to company challenges, including spearheading the build and launch of the company Salesforce App to the AppExchange, extensive data analytics and cleanup, and overall management of a multi-level tech stack to optimize team efforts.",
     "Active": "TRUE",
-    "path": "/images/team-members/female.png"
+    "path": "/images/team-members/vic-l.jpg"
   },
   {
     "Name": "Conner Burton",
