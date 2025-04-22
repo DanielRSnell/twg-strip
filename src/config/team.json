@@ -24,7 +24,7 @@
   {
     "Name": "Alex Shmelev",
     "order": 2,
-    "Role": "Cheif Innovations Officer",
+    "Role": "Chief Innovations Officer",
     "Department": "Technology",
     "Email": "alex@thiswayglobal.com",
     "Linked In": "https://www.linkedin.com/in/alex-shmelev-770b7a7?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app",
@@ -273,16 +273,5 @@
     "Bio": "Conner Burton is a digital strategist who blends creative content with smart automation to help brands and professionals thrive online. With expertise in LinkedIn content writing, YouTube content creation, audience building, AI development, and workflow automation, he combines storytelling with technical solutions to drive real-world results. On LinkedIn, Conner crafts compelling narratives that engage professional audiences, boost brand visibility, and foster meaningful connections. As a YouTuber, he transforms complex ideas into clear, engaging content, using practical examples and effective audience retention strategies. His ability to educate and entertain has helped him build a loyal following. In the technical space, Conner specializes in developing AI chatbots, virtual agents, and automation workflows that streamline processes and improve productivity. By integrating AI solutions into business operations, he helps organizations reduce manual work, minimize errors, and accelerate growth. Passionate about innovation, Conner is dedicated to making technology more accessible and impactful.",
     "Active": "TRUE",
     "path": "/images/team-members/male.png"
-  },
-  {
-    "Name": "Zoe Weisberg Coady",
-    "order": 20,
-    "Role": "CEO, Brandstyle",
-    "Department": "External / Public Relations",
-    "Email": "",
-    "Linked In": "",
-    "Bio": "Zoe Weisberg Coady is the Founder and CEO of Brandstyle Communications, an award-winning PR agency specializing in transformative campaigns and innovative media strategies. With over 25 years of experience in public relations, she amplifies the voices of industry disruptors and changemakers across technology, wellness, finance, real estate, design, and social responsibility. Zoe began her career at leading New York City PR firms, including Porter Novelli, Harrison & Shriftman, and Rubenstein PR, where she built strong media relationships and a reputation for delivering high-impact press coverage. A graduate of Syracuse University’s S.I. Newhouse School of Public Communications, she gained early experience through internships with global communications agency Burson and biopharmaceutical leader Bristol Myers Squibb. Renowned for her expertise in media relations, crisis communications, and brand positioning, Zoe develops strategies that drive press coverage while fostering meaningful connections between brands and their audiences. Beyond PR, she serves on the Board of Directors for Shop Repurpose and We Are The Board, advancing sustainability, mentorship, and social impact initiatives.",
-    "Active": "TRUE",
-    "path": "/images/team-members/female.png"
   }
 ]
