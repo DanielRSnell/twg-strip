@@ -1,5 +1,5 @@
 ---
-title: "Sales Development Representative (SDR)"
+title: "Sales Development (SDR)"
 meta_title: "Sales Development Representative - ThisWay Global"
 description: ""
 location: "Remote"
