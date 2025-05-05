@@ -1,14 +1,14 @@
 ---
-title: "ML Engineer"
-meta_title: "Machine Learning Engineer - ThisWay Global"
-description: "Build and deploy production-ready ML models"
-location: "Remote"
+title: "Sales Technical Engineer"
+meta_title: "Sales Technical Engineer - ThisWay Global"
+description: ""
+location: "Remote - United States"
 duration: "Full-time"
-vacant: "3 Positions"
-salary: "$135,000 - $175,000/Year"
+vacant: "1 Position"
+salary: ""
 date: 2025-05-05
 ---
 
-ThisWay Global is seeking skilled Machine Learning Engineers to join our engineering team. In this role, you'll be responsible for developing, optimizing, and deploying machine learning models that power our AI-driven enterprise solutions.
+ThisWay Global is seeking a Sales Technical Engineer to provide technical expertise during the sales process and support customer implementations.
 
 **You can view the full job description and apply for this position through our Workable portal: [Apply for Sales Technical Engineer](https://apply.workable.com/thisway/j/7746668263/)**
