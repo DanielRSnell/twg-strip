@@ -2,7 +2,7 @@
 title: "Enterprise AI Solutions Architect"
 meta_title: "Enterprise AI Solutions Architect - ThisWay Global"
 description: "Design and implement AI solutions for enterprise clients"
-location: "Remote (US-based)"
+location: "Remote"
 duration: "Full-time"
 vacant: "3 Positions"
 salary: "$140,000 - $180,000/Year"

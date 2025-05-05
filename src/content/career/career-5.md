@@ -2,7 +2,7 @@
 title: "ML Engineer"
 meta_title: "Machine Learning Engineer - ThisWay Global"
 description: "Build and deploy production-ready ML models"
-location: "Remote (US/EU timezones)"
+location: "Remote"
 duration: "Full-time"
 vacant: "3 Positions"
 salary: "$135,000 - $175,000/Year"

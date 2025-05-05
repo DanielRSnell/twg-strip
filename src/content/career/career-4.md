@@ -2,7 +2,7 @@
 title: "AI Product Manager"
 meta_title: "AI Product Manager - ThisWay Global"
 description: "Lead the development of our AI-powered products"
-location: "Austin, TX or Remote"
+location: "Remote"
 duration: "Full-time"
 vacant: "2 Positions"
 salary: "$130,000 - $170,000/Year"

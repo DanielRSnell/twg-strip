@@ -2,7 +2,7 @@
 title: "Senior Full-Stack Developer"
 meta_title: "Senior Full-Stack Developer - ThisWay Global"
 description: "Build innovative web applications for our AI platform"
-location: "Remote (Global)"
+location: "Remote"
 duration: "Full-time"
 vacant: "4 Positions"
 salary: "$120,000 - $160,000/Year"
