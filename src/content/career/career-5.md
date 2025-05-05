@@ -11,4 +11,4 @@ date: 2025-05-05
 
 ThisWay Global is seeking skilled Machine Learning Engineers to join our engineering team. In this role, you'll be responsible for developing, optimizing, and deploying machine learning models that power our AI-driven enterprise solutions.
 
-**You can view the full job description and apply for this position through our Workable portal: [Apply for Machine Learning Engineer](https://apply.workable.com/thiswayglobal/j/Machine-Learning-Engineer/)**
+**You can view the full job description and apply for this position through our Workable portal: [Apply for Sales Technical Engineer](https://apply.workable.com/thisway/j/7746668263/)**

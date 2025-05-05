@@ -11,4 +11,4 @@ date: 2025-05-05
 
 ThisWay Global is seeking innovative AI Research Scientists to join our R&D team. In this role, you'll push the boundaries of AI technology, developing novel approaches for our enterprise AI solutions and contributing to our industry-leading research initiatives.
 
-**You can view the full job description and apply for this position through our Workable portal: [Apply for AI Research Scientist](https://apply.workable.com/thiswayglobal/j/AI-Research-Scientist/)**
+**You can view the full job description and apply for this position through our Workable portal: [Apply for Chief Revenue Officer](https://apply.workable.com/thisway/j/54DDB2CE6B/)**

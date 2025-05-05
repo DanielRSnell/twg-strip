@@ -11,4 +11,4 @@ date: 2025-05-05
 
 ThisWay Global is looking for experienced Enterprise AI Solutions Architects to help our clients implement and optimize our AI technologies. In this role, you'll bridge the gap between business needs and technical implementation, designing scalable AI solutions for Fortune 500 companies.
 
-**You can view the full job description and apply for this position through our Workable portal: [Apply for Enterprise AI Solutions Architect](https://apply.workable.com/thiswayglobal/j/Enterprise-AI-Solutions-Architect/)**
+**You can view the full job description and apply for this position through our Workable portal: [Apply for Senior Software Engineer](https://apply.workable.com/thisway/j/6FA3C442D1/)**

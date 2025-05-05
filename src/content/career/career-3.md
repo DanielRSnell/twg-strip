@@ -11,4 +11,4 @@ date: 2025-05-05
 
 ThisWay Global is seeking experienced Full-Stack Developers to join our engineering team. You'll be responsible for building and maintaining our web applications that power our AI solutions, working across the entire stack from database to frontend.
 
-**You can view the full job description and apply for this position through our Workable portal: [Apply for Senior Full-Stack Developer](https://apply.workable.com/thiswayglobal/j/Senior-Full-Stack-Developer/)**
+**You can view the full job description and apply for this position through our Workable portal: [Apply for Sales Account Executive](https://apply.workable.com/thisway/j/1F7FE3B09F/)**
