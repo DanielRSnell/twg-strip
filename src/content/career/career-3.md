@@ -1,41 +1,14 @@
 ---
-title: "AI Research Scientist"
-meta_title: "AI Research Scientist - ThisWay Global"
-description: "Drive innovation in AI recruitment technology"
-location: "Remote"
+title: "Senior Full-Stack Developer"
+meta_title: "Senior Full-Stack Developer - ThisWay Global"
+description: "Build innovative web applications for our AI platform"
+location: "Remote (Global)"
 duration: "Full-time"
-vacant: "2 Positions"
-salary: "£80,000 - £120,000/Year"
+vacant: "4 Positions"
+salary: "$120,000 - $160,000/Year"
+date: 2025-05-05
 ---
 
-Join our research team developing next-generation AI solutions for recruitment and talent matching. You'll work on advancing our WorkThisWay platform and contribute to our AI model marketplace.
+ThisWay Global is seeking experienced Full-Stack Developers to join our engineering team. You'll be responsible for building and maintaining our web applications that power our AI solutions, working across the entire stack from database to frontend.
 
-#### Responsibilities:
-
-- Research and develop novel AI algorithms for recruitment
-- Improve candidate matching and assessment models
-- Contribute to our AI model marketplace architecture
-- Publish research findings and file patents
-- Collaborate with engineering on implementation
-- Advance our AI capabilities across all products
-- Lead research initiatives and proof-of-concepts
-
-#### Requirements:
-
-- Ph.D. in Computer Science, AI, or related field
-- Strong publication record in AI/ML
-- Experience with modern AI frameworks
-- Expertise in NLP and matching algorithms
-- Background in recruitment technology a plus
-- Strong mathematical and analytical skills
-- Excellent research and documentation abilities
-
-#### What We Offer:
-
-- Competitive salary package
-- Research budget
-- Conference attendance
-- Publication opportunities
-- Flexible work location
-- Health benefits
-- Collaborative research environment
+**You can view the full job description and apply for this position through our Workable portal: [Apply for Senior Full-Stack Developer](https://apply.workable.com/thiswayglobal/j/Senior-Full-Stack-Developer/)**

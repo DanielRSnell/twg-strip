@@ -1,41 +1,14 @@
 ---
-title: "Technical Solutions Engineer"
-meta_title: "Technical Solutions Engineer - ThisWay Global"
-description: "Help clients succeed with our AI platforms"
-location: "Remote"
+title: "AI Product Manager"
+meta_title: "AI Product Manager - ThisWay Global"
+description: "Lead the development of our AI-powered products"
+location: "Austin, TX or Remote"
 duration: "Full-time"
-vacant: "3 Positions"
-salary: "$100,000 - $140,000/Year"
+vacant: "2 Positions"
+salary: "$130,000 - $170,000/Year"
+date: 2025-05-05
 ---
 
-We're seeking Technical Solutions Engineers to help our enterprise clients successfully implement and optimize our AI solutions. You'll work across our product suite, ensuring successful deployment and adoption.
+ThisWay Global is looking for experienced AI Product Managers to drive the vision, strategy, and execution of our AI-powered products. You'll work at the intersection of business, technology, and user experience to deliver innovative solutions that solve real-world problems.
 
-#### Responsibilities:
-
-- Guide clients in implementing Launch HPC solutions
-- Support integration of Sully's Sandbox models
-- Assist with WorkThisWay platform deployment
-- Provide technical consultation and best practices
-- Create implementation documentation
-- Collaborate with product and engineering teams
-- Drive customer success and satisfaction
-
-#### Requirements:
-
-- Bachelor's degree in Computer Science or related field
-- 3+ years in technical consulting or solutions engineering
-- Experience with AI/ML technologies
-- Strong understanding of cloud infrastructure
-- Excellent communication and problem-solving skills
-- Knowledge of enterprise software integration
-- Customer-facing experience
-
-#### What We Offer:
-
-- Competitive base salary plus bonus
-- Comprehensive benefits package
-- Professional development
-- Remote work options
-- Travel opportunities
-- Health and wellness programs
-- Career advancement paths
+**You can view the full job description and apply for this position through our Workable portal: [Apply for AI Product Manager](https://apply.workable.com/thiswayglobal/j/AI-Product-Manager/)**
