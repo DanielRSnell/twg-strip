@@ -2,7 +2,7 @@
 title: "Sales Development Representative (SDR)"
 meta_title: "Sales Development Representative - ThisWay Global"
 description: ""
-location: "Remote - United States"
+location: "Remote"
 duration: "Full-time"
 vacant: "1 Position"
 salary: ""

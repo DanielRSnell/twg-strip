@@ -2,7 +2,7 @@
 title: "Sales Technical Engineer"
 meta_title: "Sales Technical Engineer - ThisWay Global"
 description: ""
-location: "Remote - United States"
+location: "Remote"
 duration: "Full-time"
 vacant: "1 Position"
 salary: ""

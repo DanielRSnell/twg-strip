@@ -2,7 +2,7 @@
 title: "Chief Revenue Officer"
 meta_title: "Chief Revenue Officer - ThisWay Global"
 description: ""
-location: "Remote - United States"
+location: "Remote"
 duration: "Full-time"
 vacant: "1 Position"
 salary: ""

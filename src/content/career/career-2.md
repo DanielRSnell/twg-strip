@@ -2,7 +2,7 @@
 title: "Senior Software Engineer"
 meta_title: "Senior Software Engineer - ThisWay Global"
 description: ""
-location: "Remote - United States"
+location: "Remote"
 duration: "Full-time"
 vacant: "1 Position"
 salary: ""

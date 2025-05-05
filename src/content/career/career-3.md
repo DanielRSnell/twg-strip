@@ -2,7 +2,7 @@
 title: "Sales Account Executive"
 meta_title: "Sales Account Executive - ThisWay Global"
 description: ""
-location: "Remote - United States"
+location: "Remote"
 duration: "Full-time"
 vacant: "1 Position"
 salary: ""
