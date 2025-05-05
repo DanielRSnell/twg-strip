@@ -1,4 +1,5 @@
 export * from './about';
+export * from './awards';
 export * from './blog';
 export * from './career';
 export * from './contact';

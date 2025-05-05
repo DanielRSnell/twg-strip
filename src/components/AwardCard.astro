@@ -1,0 +1,63 @@
+---
+import config from "@/config/config.json";
+import dateFormat from "@/lib/utils/dateFormat";
+import { markdownify } from "@/lib/utils/textConverter";
+import ImageMod from "./ImageMod.astro";
+
+const {
+  summary_length,
+  awards_folder = "awards",
+}: { summary_length: number; awards_folder: string } = config.settings;
+
+const { award } = Astro.props;
+const {
+  title,
+  image,
+  description,
+  date,
+  organization,
+  organization_logo,
+  award_url,
+} = award.data;
+---
+
+<div class="flex flex-col h-full justify-between p-6 border rounded-xl relative">
+  <div>
+    <div class="overflow-hidden rounded-lg mb-5">
+      <div class="relative">
+        <ImageMod
+          format="webp"
+          width={333}
+          height={225}
+          src={image}
+          alt={title}
+          class="transition duration-300 group-hover:scale-110 rounded-inherit"
+        />
+        <div class="absolute top-2 left-2 bg-primary text-white px-3 py-1 text-sm rounded-full">
+          Award
+        </div>
+      </div>
+    </div>
+
+    <a
+      href={`/${awards_folder}/${award.slug}`}
+      class="h5 font-medium after:absolute after:inset-0"
+      set:html={markdownify(title)}
+    />
+    <p class="my-5" set:html={markdownify(description)} />
+  </div>
+  <div class="flex items-center justify-between text-sm">
+    <div class="flex items-center gap-2">
+      <ImageMod
+        format="webp"
+        width={32}
+        height={32}
+        src={organization_logo}
+        alt={organization}
+        class="w-8 h-8 rounded-full"
+      />
+      <p set:html={markdownify(organization)} />
+    </div>
+    <p>{dateFormat(date)}</p>
+  </div>
+</div>

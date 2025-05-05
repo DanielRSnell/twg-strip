@@ -1,0 +1,239 @@
+---
+import Base from "@/layouts/Base.astro";
+import { markdownify } from "@/lib/utils/textConverter";
+import CallToAction from "@/partials/CallToAction.astro";
+import ExternalLogo from "@/base/ExternalLogo.astro";
+import { getEntry } from "astro:content";
+import awardsData from "@/config/awards.json";
+
+const postIndex = await getEntry("awards", "-index");
+const { title, header_title, description } = postIndex?.data || {
+  title: "ThisWay Global Awards",
+  header_title: "Our **Recognition & Achievements**",
+  description: "Explore the awards and recognition received by ThisWay Global for our innovative AI technology and enterprise solutions."
+};
+const call_to_action = await getEntry("sections", "call-to-action");
+
+// Filter awards by type
+const featuredAwards = awardsData.filter(award => award.Type === "Award");
+const certifications = awardsData.filter(award => award.Type === "Certification");
+const accelerators = awardsData.filter(award => award.Type === "Accelerator");
+
+// Function to extract domain from URL if available
+const getDomain = (url: string | null): string | null => {
+  if (!url) return null;
+  try {
+    return new URL(url).hostname;
+  } catch (e) {
+    return null;
+  }
+};
+---
+
+<Base title={title} meta_title={title} image={""} description={description}>
+  <section class="section bg-theme-light">
+    <div class="container">
+      <div class="max-w-2xl mx-auto text-center">
+        <h1
+          class="pb-4"
+          data-aos="fade-up-sm"
+          data-aos-delay="100"
+          set:html={markdownify(header_title!)}
+        />
+        <p
+          class="pb-8"
+          data-aos="fade-up-sm"
+          data-aos-delay="200"
+          set:html={markdownify(description)}
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="mb-8 text-center" data-aos="fade-up-sm">Awards & Recognition</h2>
+      <div class="row g-4">
+        {
+          featuredAwards.map((award, i) => (
+            <div
+              class="relative md:col-6"
+              data-aos="fade-up-sm"
+              data-aos-delay={i * 100}
+            >
+              <div class="p-8 h-full rounded-xl border transition duration-200 bg-theme-light/50 hover:bg-theme-light/80">
+                <div class="flex gap-6 items-center pb-6">
+                  <div class="w-[180px] flex items-center">
+                    {award["Public Link"] && getDomain(award["Public Link"]) ? (
+                      <ExternalLogo
+                        domain={getDomain(award["Public Link"]) || award["Public Link"]}
+                        name={award.Name}
+                        class="h-[60px] w-auto object-contain"
+                      />
+                    ) : (
+                      <div class="h-[60px] w-full flex items-center justify-center font-bold text-lg">
+                        {award.Name}
+                      </div>
+                    )}
+                  </div>
+                  <div class="absolute top-0 right-0 -mt-2 rounded-xl border-gray-600 shadow-inner transition duration-200 border-1 bg-theme-light/50 hover:bg-theme-light/80">
+                    <span class="px-3 py-1 text-sm rounded-full text-light bg-dark/5">
+                      {award.Type}
+                    </span>
+                  </div>
+                </div>
+                <p class="pb-6" set:html={markdownify(award.Description)} />
+                {award["Public Link"] && (
+                  <a
+                    href={award["Public Link"]}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-flex gap-1 items-center text-primary hover:opacity-80"
+                  >
+                    Learn More
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <line x1="5" y1="12" x2="19" y2="12" />
+                      <polyline points="12 5 19 12 12 19" />
+                    </svg>
+                  </a>
+                )}
+              </div>
+            </div>
+          ))
+        }
+      </div>
+
+      {certifications.length > 0 && (
+        <>
+          <h2 class="mt-16 mb-8 text-center" data-aos="fade-up-sm">Certifications</h2>
+          <div class="row g-4">
+            {
+              certifications.map((cert, i) => (
+                <div
+                  class="md:col-6"
+                  data-aos="fade-up-sm"
+                  data-aos-delay={i * 100}
+                >
+                  <div class="p-8 h-full rounded-xl border transition duration-200 bg-theme-light/50 hover:bg-theme-light/80">
+                    <div class="flex gap-6 items-center pb-6">
+                      <div class="w-[180px] flex items-center">
+                        {cert["Public Link"] && getDomain(cert["Public Link"]) ? (
+                          <ExternalLogo
+                            domain={getDomain(cert["Public Link"]) || cert["Public Link"]}
+                            name={cert.Name}
+                            class="h-[60px] w-auto object-contain"
+                          />
+                        ) : (
+                          <div class="h-[60px] w-full flex items-center justify-center font-bold text-lg">
+                            {cert.Name}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                    <p class="pb-6" set:html={markdownify(cert.Description)} />
+                    {cert["Public Link"] && (
+                      <a
+                        href={cert["Public Link"]}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="inline-flex gap-1 items-center text-primary hover:opacity-80"
+                      >
+                        Learn More
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16"
+                          height="16"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2.5"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <line x1="5" y1="12" x2="19" y2="12" />
+                          <polyline points="12 5 19 12 12 19" />
+                        </svg>
+                      </a>
+                    )}
+                  </div>
+                </div>
+              ))
+            }
+          </div>
+        </>
+      )}
+
+      {accelerators.length > 0 && (
+        <>
+          <h2 class="mt-16 mb-8 text-center" data-aos="fade-up-sm">Accelerator Programs</h2>
+          <div class="row g-4">
+            {
+              accelerators.map((accel, i) => (
+                <div
+                  class="md:col-6"
+                  data-aos="fade-up-sm"
+                  data-aos-delay={i * 100}
+                >
+                  <div class="p-8 h-full rounded-xl border transition duration-200 bg-theme-light/50 hover:bg-theme-light/80">
+                    <div class="flex gap-6 items-center pb-6">
+                      <div class="w-[180px] flex items-center">
+                        {accel["Public Link"] && getDomain(accel["Public Link"]) ? (
+                          <ExternalLogo
+                            domain={getDomain(accel["Public Link"]) || accel["Public Link"]}
+                            name={accel.Name}
+                            class="h-[60px] w-auto object-contain"
+                          />
+                        ) : (
+                          <div class="h-[60px] w-full flex items-center justify-center font-bold text-lg">
+                            {accel.Name}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                    <p class="pb-6" set:html={markdownify(accel.Description)} />
+                    {accel["Public Link"] && (
+                      <a
+                        href={accel["Public Link"]}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="inline-flex gap-1 items-center text-primary hover:opacity-80"
+                      >
+                        Learn More
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16"
+                          height="16"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2.5"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <line x1="5" y1="12" x2="19" y2="12" />
+                          <polyline points="12 5 19 12 12 19" />
+                        </svg>
+                      </a>
+                    )}
+                  </div>
+                </div>
+              ))
+            }
+          </div>
+        </>
+      )}
+    </div>
+  </section>
+
+  <CallToAction call_to_action={call_to_action} />
+</Base>

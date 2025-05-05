@@ -1,0 +1,179 @@
+---
+import ImageMod from "@/components/ImageMod.astro";
+import Share from "@/components/Share.astro";
+import config from "@/config/config.json";
+import dateFormat from "@/lib/utils/dateFormat";
+import { markdownify } from "@/lib/utils/textConverter";
+import { getSinglePage } from "@/lib/contentParser.astro";
+import CallToAction from "@/partials/CallToAction.astro";
+import { getEntry } from "astro:content";
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+const { title, description, image, date, organization, organization_logo, award_url, tags } = post.data;
+const awards = await getSinglePage("awards");
+const call_to_action = await getEntry("sections", "call-to-action");
+---
+
+<section class="section pt-7">
+  <div class="container">
+    <div class="row justify-center">
+      <div class="lg:col-10">
+        <div class="mb-10 text-center">
+          <h1
+            class="mb-4"
+            data-aos="fade-up-sm"
+            data-aos-delay="100"
+            set:html={markdownify(title)}
+          />
+          <ul class="flex flex-wrap items-center justify-center">
+            <li
+              class="mx-3 flex items-center font-secondary text-sm"
+              data-aos="fade-up-sm"
+              data-aos-delay="150"
+            >
+              <ImageMod
+                format="webp"
+                src={organization_logo}
+                alt={organization}
+                height={50}
+                width={50}
+                class="mr-2 h-6 w-6 rounded-full"
+              />
+              <span set:html={markdownify(organization)} />
+            </li>
+            <li
+              class="mx-3 flex items-center font-secondary text-sm"
+              data-aos="fade-up-sm"
+              data-aos-delay="200"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="14"
+                width="14"
+                viewBox="0 0 448 512"
+                class="mr-1 inline"
+                ><path
+                  fill="currentColor"
+                  d="M152 24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H64C28.7 64 0 92.7 0 128v320c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V128c0-35.3-28.7-64-64-64H344V24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H152V24zM48 192h352v256c0 8.8-7.2 16-16 16H64c-8.8 0-16-7.2-16-16V192zm64-96h224c8.8 0 16 7.2 16 16v32H96v-32c0-8.8 7.2-16 16-16z"
+                ></path></svg
+              >
+              <span>{dateFormat(date)}</span>
+            </li>
+          </ul>
+        </div>
+        <div class="relative mb-10">
+          <ImageMod
+            format="webp"
+            src={image}
+            height={500}
+            width={1000}
+            alt={title}
+            class="rounded-lg"
+          />
+        </div>
+        <div class="content mb-10">
+          <Content />
+          {award_url && (
+            <div class="mt-6 text-center">
+              <a 
+                href={award_url} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                class="btn btn-primary"
+              >
+                View Award Details
+              </a>
+            </div>
+          )}
+        </div>
+        <div class="flex flex-wrap items-center justify-between">
+          <ul class="mb-4 mr-4 flex flex-wrap items-center">
+            <li class="mb-2 mr-4 inline-block">Tags:</li>
+            {
+              tags?.map((tag: string) => (
+                <li class="mb-2 mr-4 inline-block">
+                  <a
+                    href={`/tags/${tag}`}
+                    class="block rounded bg-theme-light px-3 py-1 hover:bg-primary hover:text-white"
+                  >
+                    #{tag}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+          <Share
+            className="social-share mb-4"
+            title={title}
+            description={description}
+            slug={post.slug}
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2 class="mb-8 text-center" data-aos="fade-up-sm">More Awards</h2>
+    <div class="row justify-center">
+      {
+        awards
+          .filter((award) => award.slug !== post.slug)
+          .slice(0, 2)
+          .map((award, i) => (
+            <div
+              data-aos="fade-up-sm"
+              data-aos-delay={(i + 1) * 100}
+              class="mb-8 md:col-6"
+            >
+              <div class="flex flex-col h-full justify-between p-6 border rounded-xl relative">
+                <div>
+                  <div class="overflow-hidden rounded-lg mb-5">
+                    <div class="relative">
+                      <ImageMod
+                        format="webp"
+                        width={333}
+                        height={225}
+                        src={award.data.image}
+                        alt={award.data.title}
+                        class="transition duration-300 group-hover:scale-110 rounded-inherit"
+                      />
+                      <div class="absolute top-2 left-2 bg-primary text-white px-3 py-1 text-sm rounded-full">
+                        Award
+                      </div>
+                    </div>
+                  </div>
+
+                  <a
+                    href={`/awards/${award.slug}`}
+                    class="h5 font-medium after:absolute after:inset-0"
+                    set:html={markdownify(award.data.title)}
+                  />
+                  <p class="my-5" set:html={markdownify(award.data.description)} />
+                </div>
+                <div class="flex items-center justify-between text-sm">
+                  <div class="flex items-center gap-2">
+                    <ImageMod
+                      format="webp"
+                      width={32}
+                      height={32}
+                      src={award.data.organization_logo}
+                      alt={award.data.organization}
+                      class="w-8 h-8 rounded-full"
+                    />
+                    <p set:html={markdownify(award.data.organization)} />
+                  </div>
+                  <p>{dateFormat(award.data.date)}</p>
+                </div>
+              </div>
+            </div>
+          ))
+      }
+    </div>
+  </div>
+</section>
+
+<CallToAction call_to_action={call_to_action} />

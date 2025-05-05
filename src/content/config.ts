@@ -1,4 +1,5 @@
 import { aboutCollection } from "./collections/about";
+import { awardsCollection } from "./collections/awards";
 import { blogCollection } from "./collections/blog";
 import { careerCollection } from "./collections/career";
 import { contactCollection } from "./collections/contact";
@@ -12,6 +13,7 @@ import { internalCollection } from "./collections/internal";
 
 export const collections = {
   about: aboutCollection,
+  awards: awardsCollection,
   blog: blogCollection,
   career: careerCollection,
   contact: contactCollection,

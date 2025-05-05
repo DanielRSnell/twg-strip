@@ -1,0 +1,162 @@
+---
+import Base from "@/layouts/Base.astro";
+import { markdownify } from "@/lib/utils/textConverter";
+import CallToAction from "@/partials/CallToAction.astro";
+import ExternalLogo from "@/base/ExternalLogo.astro";
+import { getEntry } from "astro:content";
+import awardsData from "@/config/awards.json";
+
+export async function getStaticPaths() {
+  const paths = awardsData.map((award) => ({
+    params: {
+      single: award.slug,
+    },
+    props: { award },
+  }));
+  return paths;
+}
+
+const { award } = Astro.props;
+const call_to_action = await getEntry("sections", "call-to-action");
+
+// Function to extract domain from URL if available
+const getDomain = (url: string | null): string | null => {
+  if (!url) return null;
+  try {
+    return new URL(url).hostname;
+  } catch (e) {
+    return null;
+  }
+};
+
+// Get related awards of the same type
+const relatedAwards = awardsData
+  .filter(item => item.Type === award.Type && item.slug !== award.slug)
+  .slice(0, 2);
+---
+
+<Base title={award.Name} meta_title={`${award.Name} | ThisWay Global`} description={award.Description}>
+  <section class="section pt-7">
+    <div class="container">
+      <div class="row justify-center">
+        <div class="lg:col-10">
+          <div class="mb-10 text-center">
+            <h1
+              class="mb-4"
+              data-aos="fade-up-sm"
+              data-aos-delay="100"
+              set:html={markdownify(award.Name)}
+            />
+            <div class="flex justify-center items-center mb-4">
+              <span class="px-3 py-1 text-sm rounded-full text-light bg-dark/10">
+                {award.Type}
+              </span>
+            </div>
+          </div>
+          
+          <div class="content mb-10">
+            <div class="flex justify-center mb-10">
+              {award["Public Link"] && getDomain(award["Public Link"]) ? (
+                <div class="w-[300px] h-[150px] flex items-center justify-center">
+                  <ExternalLogo
+                    domain={getDomain(award["Public Link"]) || award["Public Link"]}
+                    name={award.Name}
+                    height={120}
+                    width={300}
+                    class="h-[120px] w-auto object-contain"
+                  />
+                </div>
+              ) : (
+                <div class="w-[300px] h-[150px] flex items-center justify-center bg-theme-light/50 rounded-lg">
+                  <h2 class="text-2xl font-bold">{award.Name}</h2>
+                </div>
+              )}
+            </div>
+            
+            <div class="prose max-w-none">
+              <p set:html={markdownify(award.Description)} />
+            </div>
+            
+            {award["Public Link"] && (
+              <div class="mt-8 text-center">
+                <a
+                  href={award["Public Link"]}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="btn btn-primary"
+                >
+                  Learn More
+                </a>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {relatedAwards.length > 0 && (
+    <section class="section">
+      <div class="container">
+        <h2 class="mb-8 text-center" data-aos="fade-up-sm">Related {award.Type}s</h2>
+        <div class="row justify-center">
+          {
+            relatedAwards.map((relatedAward, i) => (
+              <div
+                data-aos="fade-up-sm"
+                data-aos-delay={(i + 1) * 100}
+                class="mb-8 md:col-6"
+              >
+                <div class="p-8 h-full rounded-xl border transition duration-200 bg-theme-light/50 hover:bg-theme-light/80">
+                  <div class="flex gap-6 items-center pb-6">
+                    <div class="w-[180px] flex items-center">
+                      {relatedAward["Public Link"] && getDomain(relatedAward["Public Link"]) ? (
+                        <ExternalLogo
+                          domain={getDomain(relatedAward["Public Link"]) || relatedAward["Public Link"]}
+                          name={relatedAward.Name}
+                          class="h-[60px] w-auto object-contain"
+                        />
+                      ) : (
+                        <div class="h-[60px] w-full flex items-center justify-center font-bold text-lg">
+                          {relatedAward.Name}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                  <h3 class="h5 mb-4">
+                    <a href={`/awards/${relatedAward.slug}`}>
+                      {relatedAward.Name}
+                    </a>
+                  </h3>
+                  <p class="pb-6" set:html={markdownify(relatedAward.Description)} />
+                  <a
+                    href={`/awards/${relatedAward.slug}`}
+                    class="inline-flex gap-1 items-center text-primary hover:opacity-80"
+                  >
+                    View Details
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <line x1="5" y1="12" x2="19" y2="12" />
+                      <polyline points="12 5 19 12 12 19" />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+  )}
+
+  <CallToAction call_to_action={call_to_action} />
+</Base>
