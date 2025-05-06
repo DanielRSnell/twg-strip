@@ -38,6 +38,7 @@ export interface Career {
   duration?: string;
   vacant?: string;
   salary?: string;
+  apply?: string;
   content?: string;
   button?: CareerButton;
   about?: CareerAbout;

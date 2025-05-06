@@ -9,6 +9,7 @@ export const careerCollection = defineCollection({
     duration: z.string().optional(),
     vacant: z.string().optional(),
     salary: z.string().optional(),
+    apply: z.string().optional(),
     content: z.string().optional(),
     button: z
       .object({
