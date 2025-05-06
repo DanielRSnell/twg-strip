@@ -7,6 +7,7 @@ duration: "Full-time"
 vacant: "1 Position"
 salary: ""
 date: 2025-05-05
+apply: "https://apply.workable.com/thisway/j/1F7FE3B09F/"
 ---
 
 ThisWay Global is seeking a motivated Sales Account Executive to drive new business and expand our client base.

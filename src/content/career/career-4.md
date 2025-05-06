@@ -7,6 +7,7 @@ duration: "Full-time"
 vacant: "1 Position"
 salary: ""
 date: 2025-05-05
+apply: "https://apply.workable.com/thisway/j/39805FD5E7/"
 ---
 
 ThisWay Global is seeking a proactive Sales Development Representative to identify and qualify new business opportunities.

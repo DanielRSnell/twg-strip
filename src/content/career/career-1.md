@@ -7,6 +7,7 @@ duration: "Full-time"
 vacant: "1 Position"
 salary: ""
 date: 2025-05-05
+apply: "https://apply.workable.com/thisway/j/54DDB2CE6B/"
 ---
 
 ThisWay Global is seeking an experienced Chief Revenue Officer to lead our sales and revenue growth strategies.

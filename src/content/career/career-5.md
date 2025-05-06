@@ -7,6 +7,7 @@ duration: "Full-time"
 vacant: "1 Position"
 salary: ""
 date: 2025-05-05
+apply: "https://apply.workable.com/thisway/j/7746668263/"
 ---
 
 ThisWay Global is seeking a Sales Technical Engineer to provide technical expertise during the sales process and support customer implementations.
