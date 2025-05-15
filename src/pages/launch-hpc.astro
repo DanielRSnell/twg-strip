@@ -1,0 +1,591 @@
+ ---
+import Base from "@/layouts/Base.astro";
+import ExternalLogo from "../components/ExternalLogo.astro";
+import CallToAction from "@/partials/CallToAction.astro";
+
+// Custom call to action for Launch HPC page
+const call_to_action = {
+  data: {
+    enable: true,
+    title: "Power Your AI Infrastructure",
+    image: "/images/call-to-action.png",
+    description: "Get started with Launch HPC to transform your high-performance computing capabilities and unlock the full potential of your AI workloads.",
+    button: {
+      enable: true,
+      label: "Schedule a Demo",
+      link: "/contact"
+    }
+  }
+};
+---
+ 
+<Base>
+ <section>
+  <div class="px-8 py-24 pt-12 mx-auto w-full max-w-7xl md:px-12 lg:px-20">
+    <div class="grid grid-cols-1 gap-12 items-end lg:grid-cols-3">
+      <div class="lg:col-span-2">
+        <p class="relative text-sm text-light">
+          Enterprise AI & HPC Infrastructure —
+          <a href="/contact" class="relative font-semibold text-light">
+            <span class="absolute inset-0" aria-hidden="true"></span> Schedule a Demo
+          </a>
+        </p>
+        <h1
+          class="mt-12 text-2xl font-semibold tracking-tight md:text-3xl lg:text-4xl text-dark lg:text-balance"
+        >
+          Launch: Accelerating Enterprise AI & HPC Performance
+        </h1>
+        <div class="flex flex-wrap gap-4 mt-8 sm:items-center">
+          <button
+            class="btn btn-primary"
+          >
+            Get Technical Assessment
+          </button>
+          <div class="text-xs text-light lg:items-center">
+            <span class="block">Comprehensive infrastructure solutions</span>
+            <span class="block">for AI and high-performance computing</span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="flex flex-wrap gap-2 items-center">
+          <div class="flex -space-x-2">
+            <div class="inline-block overflow-hidden rounded-full outline-white size-8 outline-2">
+              <ExternalLogo domain="nvidia.com" name="NVIDIA" height={32} width={32} class="object-cover object-center" />
+            </div>
+            <div class="inline-block overflow-hidden rounded-full outline-white size-8 outline-2">
+              <ExternalLogo domain="intel.com" name="Intel" height={32} width={32} class="object-cover object-center" />
+            </div>
+            <div class="inline-block overflow-hidden rounded-full outline-white size-8 outline-2">
+              <ExternalLogo domain="amd.com" name="AMD" height={32} width={32} class="object-cover object-center" />
+            </div>
+            <div class="inline-block overflow-hidden rounded-full outline-white size-8 outline-2">
+              <ExternalLogo domain="aws.amazon.com" name="AWS" height={32} width={32} class="object-cover object-center" />
+            </div>
+          </div>
+          <div class="text-xs text-light lg:items-center">
+            <span class="block">Trusted by enterprises</span>
+            <span class="block">worldwide</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mx-auto mt-12">
+      <img
+        loading="eager"
+        decoding="async"
+        alt="Launch HPC Dashboard"
+        width="1200"
+        height="1200"
+        class="object-cover h-full rounded-lg border shadow border-border"
+        src="/images/launch-dashboard.webp"
+      />
+    </div>
+    <div
+      class="grid grid-cols-1 gap-x-2 gap-y-14 mt-12 lg:gap-12 sm:grid-cols-2 lg:grid-cols-3"
+    >
+      <div class="flex flex-col justify-between h-full">
+        <div>
+          <h3 class="text-base font-medium text-dark">
+            Simplified Deployment & Management
+          </h3>
+          <p class="mt-2 text-sm text-light">
+            Deploy and manage high-performance computing resources with ease, reducing operational complexity and accelerating time-to-value.
+          </p>
+        </div>
+        <ul role="list" class="mt-6 space-y-1 font-medium text-light">
+          <li>
+            <div class="flex gap-2 items-center">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="text-light icon icon-tabler-circle-check size-5"
+                slot="icon"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M5 12l5 5l10 -10"></path>
+              </svg>
+              <span class="text-sm"> One-click cluster deployment </span>
+            </div>
+          </li>
+          <li>
+            <div class="flex gap-2 items-center">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="text-light icon icon-tabler-circle-check size-5"
+                slot="icon"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M5 12l5 5l10 -10"></path>
+              </svg>
+              <span class="text-sm"> Automated infrastructure scaling </span>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="flex flex-col justify-between h-full">
+        <div>
+          <h3 class="text-base font-medium text-dark">
+            Advanced Workload Optimization
+          </h3>
+          <p class="mt-2 text-sm text-light">
+            Intelligently optimize resource allocation and workload scheduling to maximize performance and minimize costs.
+          </p>
+        </div>
+        <ul role="list" class="mt-6 space-y-1 font-medium text-light">
+          <li>
+            <div class="flex gap-2 items-center">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="text-light icon icon-tabler-circle-check size-5"
+                slot="icon"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M5 12l5 5l10 -10"></path>
+              </svg>
+              <span class="text-sm"> AI-driven resource allocation </span>
+            </div>
+          </li>
+          <li>
+            <div class="flex gap-2 items-center">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="text-light icon icon-tabler-circle-check size-5"
+                slot="icon"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M5 12l5 5l10 -10"></path>
+              </svg>
+              <span class="text-sm"> Dynamic workload scheduling </span>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="flex flex-col justify-between h-full">
+        <div>
+          <h3 class="text-base font-medium text-dark">
+            Comprehensive Observability
+          </h3>
+          <p class="mt-2 text-sm text-light">
+            Gain deep insights into your HPC and AI infrastructure with advanced monitoring, logging, and analytics capabilities.
+          </p>
+        </div>
+        <ul role="list" class="mt-6 space-y-1 font-medium text-light">
+          <li>
+            <div class="flex gap-2 items-center">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="text-light icon icon-tabler-circle-check size-5"
+                slot="icon"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M5 12l5 5l10 -10"></path>
+              </svg>
+              <span class="text-sm"> Real-time performance metrics </span>
+            </div>
+          </li>
+          <li>
+            <div class="flex gap-2 items-center">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="text-light icon icon-tabler-circle-check size-5"
+                slot="icon"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M5 12l5 5l10 -10"></path>
+              </svg>
+              <span class="text-sm"> Cost optimization insights </span>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section> 
+
+ <section>
+  <div class="px-8 py-32 mx-auto max-w-7xl md:px-12 lg:px-24">
+    <div>
+      <p class="text-sm font-bold uppercase text-tertiary">Enterprise Solutions</p>
+      <h2
+        class="mt-4 text-4xl font-semibold sm:text-4xl md:text-5xl lg:text-6xl text-dark lg:text-balance"
+      >
+        Accelerating AI & HPC Workloads at Scale
+      </h2>
+      <p class="mt-4 max-w-xl text-base font-medium text-light">
+        Launch provides a comprehensive platform for managing high-performance computing and AI infrastructure with seamless scaling between on-premise and cloud environments.
+      </p>
+    </div>
+    <div class="grid grid-cols-1 gap-2 mt-12 lg:grid-cols-2">
+      <div class="grid grid-cols-1 gap-2 h-full lg:grid-cols-2">
+        <div
+          class="grid grid-cols-1 gap-2 h-full sm:grid-cols-2 lg:grid-cols-1"
+        >
+          <div class="p-8 rounded-2xl bg-theme-light">
+            <p class="text-xs font-bold uppercase text-tertiary">Hybrid Architecture</p>
+            <h3 class="mt-4 text-lg font-medium md:text-xl text-dark">
+              Seamless On-Premise & Cloud Integration
+            </h3>
+            <p class="mt-2 text-sm font-medium text-light">
+              Bridge the gap between on-premise HPC clusters and cloud resources with our unified management platform, enabling burst capacity and workload portability.
+            </p>
+          </div>
+          <div class="overflow-hidden items-center p-8 rounded-2xl bg-theme-light">
+            <div
+              class="[-webkit-mask-image:radial-gradient(56.81%_53.42%_at_50%_46.58%,_rgba(217,217,217,0.9)_24.36%,rgba(217,217,217,0)_100%)]"
+            >
+              <div class="flex flex-wrap gap-2 justify-evenly">
+                <ExternalLogo domain="nvidia.com" name="NVIDIA" height={40} width={40} />
+                <ExternalLogo domain="intel.com" name="Intel" height={40} width={40} />
+                <ExternalLogo domain="amd.com" name="AMD" height={40} width={40} />
+                <ExternalLogo domain="aws.amazon.com" name="AWS" height={40} width={40} />
+                <ExternalLogo domain="azure.microsoft.com" name="Azure" height={40} width={40} />
+                <ExternalLogo domain="cloud.google.com" name="Google Cloud" height={40} width={40} />
+                <ExternalLogo domain="kubernetes.io" name="Kubernetes" height={40} width={40} />
+                <ExternalLogo domain="docker.com" name="Docker" height={40} width={40} />
+                <ExternalLogo domain="tensorflow.org" name="TensorFlow" height={40} width={40} />
+                <ExternalLogo domain="pytorch.org" name="PyTorch" height={40} width={40} />
+                <ExternalLogo domain="developer.nvidia.com" name="CUDA" height={40} width={40} />
+                <ExternalLogo domain="openai.com" name="OpenAI" height={40} width={40} />
+                <ExternalLogo domain="slurm.schedmd.com" name="Slurm" height={40} width={40} />
+                <ExternalLogo domain="prometheus.io" name="Prometheus" height={40} width={40} />
+                <ExternalLogo domain="ray.io" name="Ray" height={40} width={40} />
+                <ExternalLogo domain="dask.org" name="Dask" height={40} width={40} />
+                <ExternalLogo domain="spark.apache.org" name="Spark" height={40} width={40} />
+                <ExternalLogo domain="horovod.ai" name="Horovod" height={40} width={40} />
+                <ExternalLogo domain="istio.io" name="Istio" height={40} width={40} />
+                <ExternalLogo domain="helm.sh" name="Helm" height={40} width={40} />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="flex relative flex-col justify-center items-center">
+            <img
+            class="object-cover relative h-full rounded-2xl"
+            src="/images/about-hero.webp"
+            alt="HPC Cluster"
+          />
+          <div class="absolute bottom-0 p-4 w-full">
+            <button
+              class="w-full btn btn-secondary"
+            >
+              Schedule a Demo
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 gap-2 h-full lg:grid-cols-2">
+        <div
+          class="flex overflow-hidden relative flex-col justify-between h-full rounded-2xl bg-theme-light"
+        >
+          <div class="relative p-8 mt-auto">
+            <p class="text-xs font-bold uppercase text-tertiary">AI Workload Management</p>
+            <h3 class="mt-4 text-lg font-medium md:text-xl text-dark">
+              Optimized for AI & ML Workflows
+            </h3>
+            <p class="mt-2 text-sm font-medium text-light">
+              Purpose-built tools for managing AI and machine learning workloads, with specialized support for GPU acceleration and distributed training.
+            </p>
+          </div>
+        </div>
+        <div
+          class="flex overflow-hidden relative flex-col justify-between h-full rounded-2xl bg-theme-light"
+        >
+          <div class="relative p-8">
+            <p class="text-xs font-bold uppercase text-tertiary">Resource Management</p>
+            <h3 class="mt-4 text-lg font-medium md:text-xl text-dark">
+              Intelligent Scheduling & Scaling
+            </h3>
+            <p class="mt-2 text-sm font-medium text-light">
+              Automatically optimize resource allocation and workload scheduling to maximize performance and minimize costs across your entire infrastructure.
+            </p>
+          </div>
+        </div>
+        <div class="p-8 rounded-2xl bg-theme-light">
+          <p class="text-xs font-bold uppercase text-tertiary">Multi-Framework Support</p>
+          <h3 class="mt-4 text-lg font-medium md:text-xl text-dark">
+            Flexible AI Development Environment
+          </h3>
+          <p class="mt-2 text-sm font-medium text-light">
+            Support for all major AI frameworks including TensorFlow, PyTorch, and JAX with optimized containers and pre-configured environments for immediate productivity.
+          </p>
+        </div>
+        <div class="p-8 rounded-2xl bg-theme-light">
+          <p class="text-xs font-bold uppercase text-tertiary">Enterprise Security</p>
+          <h3 class="mt-4 text-lg font-medium md:text-xl text-dark">
+            Comprehensive Security Controls
+          </h3>
+          <p class="mt-2 text-sm font-medium text-light">
+            Enterprise-grade security with role-based access control, encryption at rest and in transit, and compliance with industry standards to protect your most valuable AI assets.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> 
+
+ <section>
+  <div class="relative px-8 py-32 mx-auto max-w-7xl md:px-12 lg:px-24">
+    <div class="grid grid-cols-1 gap-12 md:grid-cols-3 md:items-end">
+      <div class="lg:col-span-2">
+        <p class="text-sm font-bold uppercase text-tertiary">Getting Started</p>
+        <h2
+          class="mt-4 text-2xl font-semibold md:text-3xl lg:text-4xl text-dark lg:text-balance"
+        >
+          Three Simple Steps to Launch Your HPC Environment
+        </h2>
+      </div>
+      <p class="text-base font-medium text-light">
+        Quickly deploy and optimize your high-performance computing infrastructure with our streamlined implementation process.
+      </p>
+    </div>
+    <dl class="grid grid-cols-1 gap-6 mt-12 lg:grid-cols-3 md:grid-cols-2">
+      <div class="rounded-3xl shadow bg-theme-light">
+        <dt class="p-8">
+          <h3 class="text-lg font-medium md:text-xl text-dark">
+            1. Assessment & Planning
+          </h3>
+        </dt>
+        <dd class="p-8 border-t border-border">
+          <p class="text-base font-medium text-light">
+            Our team works with you to assess your current infrastructure, workload requirements, and business objectives to create a tailored deployment plan.
+          </p>
+        </dd>
+      </div>
+      <div class="rounded-3xl shadow bg-secondary">
+        <dt class="p-8">
+          <h3 class="text-lg font-medium text-white md:text-xl">
+            2. Deployment & Integration
+          </h3>
+        </dt>
+        <dd class="p-8 border-t border-white/20">
+          <p class="text-base font-medium text-white">
+            We deploy the Launch HPC platform in your environment, integrating with your existing systems and configuring it to meet your specific performance requirements.
+          </p>
+        </dd>
+      </div>
+      <div class="rounded-3xl shadow bg-primary">
+        <dt class="p-8">
+          <h3 class="text-lg font-medium text-white md:text-xl">
+            3. Optimization & Training
+          </h3>
+        </dt>
+        <dd class="p-8 border-t border-white/20">
+          <p class="text-base font-medium text-white">
+            Our experts optimize your environment for peak performance, provide comprehensive training for your team, and establish ongoing support to ensure long-term success.
+          </p>
+        </dd>
+      </div>
+    </dl>
+  </div>
+</section> 
+
+ <section>
+  <div class="relative px-8 py-24 mx-auto max-w-7xl md:px-12 lg:px-24">
+    <div class="text-center">
+      <p class="text-sm font-bold uppercase text-tertiary">License</p>
+      <h2
+        class="mt-4 text-2xl font-semibold md:text-3xl lg:text-4xl text-dark lg:text-balance"
+      >
+        Frequently Asked Questions
+      </h2>
+      <p class="mt-4 text-base font-medium text-light">
+        Common questions about Launch HPC and enterprise AI infrastructure solutions.
+      </p>
+    </div>
+    <div class="mt-12 space-y-24">
+      <div>
+        <div
+          class="flex flex-col justify-between pb-5 border-b lg:flex-row lg:items-center border-border"
+        >
+          <h2
+            class="text-lg font-semibold md:text-xl text-dark lg:text-balance"
+          >
+            Platform & Technology
+          </h2>
+          <div class="flex"></div>
+        </div>
+        <div>
+          <details class="cursor-pointer group">
+            <summary
+              class="flex justify-between items-center py-4 w-full text-base font-medium text-left select-none text-light hover:text-light focus:text-accent-500"
+            >
+              What hardware platforms does Launch HPC support?<svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="duration-300 ease-out transform icon icon-tabler-plus size-4 group-open:-rotate-45"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M12 5l0 14"></path>
+                <path d="M5 12l14 0"></path>
+              </svg>
+            </summary>
+            <div class="py-4 pt-2 text-sm text-light">
+              <p class="text-base font-medium text-light">
+                Launch HPC supports a wide range of hardware platforms including NVIDIA, AMD, and Intel GPUs and CPUs. Our platform is designed to work with both on-premise infrastructure and major cloud providers including AWS, Azure, and Google Cloud.
+              </p>
+            </div>
+          </details>
+          <details class="cursor-pointer group">
+            <summary
+              class="flex justify-between items-center py-4 w-full text-base font-medium text-left select-none text-light hover:text-light focus:text-accent-500"
+            >
+              How does Launch HPC handle scaling for AI workloads?<svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="duration-300 ease-out transform icon icon-tabler-plus size-4 group-open:-rotate-45"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M12 5l0 14"></path>
+                <path d="M5 12l14 0"></path>
+              </svg>
+            </summary>
+            <div class="py-4 pt-2 text-sm text-light">
+              <p class="text-base font-medium text-light">
+                Launch HPC features intelligent auto-scaling capabilities that dynamically allocate resources based on workload demands. The platform can automatically scale up during intensive training phases and scale down during less demanding periods to optimize both performance and cost.
+              </p>
+            </div>
+          </details>
+          <details class="cursor-pointer group">
+            <summary
+              class="flex justify-between items-center py-4 w-full text-base font-medium text-left select-none text-light hover:text-light focus:text-accent-500"
+            >
+              What security features does Launch HPC provide for enterprise environments?<svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="duration-300 ease-out transform icon icon-tabler-plus size-4 group-open:-rotate-45"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M12 5l0 14"></path>
+                <path d="M5 12l14 0"></path>
+              </svg>
+            </summary>
+            <div class="py-4 pt-2 text-sm text-light">
+              <p class="text-base font-medium text-light">
+                Launch HPC includes comprehensive security features such as role-based access control, end-to-end encryption, secure multi-tenancy, compliance reporting, and audit logging. The platform meets enterprise security requirements and can be configured to comply with industry-specific regulations.
+              </p>
+            </div>
+          </details>
+        </div>
+      </div>
+
+      <div>
+        <div
+          class="flex flex-col justify-between pb-5 border-b lg:flex-row lg:items-center border-border"
+        >
+          <h2
+            class="text-lg font-semibold md:text-xl text-dark lg:text-balance"
+          >
+            License
+          </h2>
+          <div class="flex"></div>
+        </div>
+        <div>
+          <details class="cursor-pointer group">
+            <summary
+              class="flex justify-between items-center py-4 w-full text-base font-medium text-left select-none text-light hover:text-light focus:text-accent-500"
+            >
+              What licensing options are available for Launch HPC?<svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="duration-300 ease-out transform icon icon-tabler-plus size-4 group-open:-rotate-45"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M12 5l0 14"></path>
+                <path d="M5 12l14 0"></path>
+              </svg>
+            </summary>
+            <div class="py-4 pt-2 text-sm text-light">
+              <p class="text-base font-medium text-light">
+                Launch HPC offers flexible licensing options including subscription-based models and enterprise agreements. Our licensing is designed to scale with your needs, allowing you to start with what you need and expand as your requirements grow. Contact our sales team for customized licensing options for your organization.
+              </p>
+            </div>
+          </details>
+          <details class="cursor-pointer group">
+            <summary
+              class="flex justify-between items-center py-4 w-full text-base font-medium text-left select-none text-light hover:text-light focus:text-accent-500"
+            >
+              Does Launch HPC offer trial licenses for evaluation?<svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="duration-300 ease-out transform icon icon-tabler-plus size-4 group-open:-rotate-45"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M12 5l0 14"></path>
+                <path d="M5 12l14 0"></path>
+              </svg>
+            </summary>
+            <div class="py-4 pt-2 text-sm text-light">
+              <p class="text-base font-medium text-light">
+                Yes, we offer evaluation licenses that allow you to test the full capabilities of Launch HPC in your environment before making a commitment. Our evaluation period typically lasts 30 days and includes access to our support team to help you get the most out of your trial experience.
+              </p>
+            </div>
+          </details>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<CallToAction call_to_action={call_to_action} />
+</Base>
