@@ -3,13 +3,13 @@ import Base from "@/layouts/Base.astro";
 import ExternalLogo from "../components/ExternalLogo.astro";
 import CallToAction from "@/partials/CallToAction.astro";
 
-// Custom call to action for Launch HPC page
+// Custom call to action for AI4Jobs page
 const call_to_action = {
   data: {
     enable: true,
-    title: "Power Your AI Infrastructure",
+    title: "Transform Your Talent Acquisition",
     image: "/images/call-to-action.png",
-    description: "Get started with Launch HPC to transform your high-performance computing capabilities and unlock the full potential of your AI workloads.",
+    description: "Get started with AI4Jobs to revolutionize your recruitment process with AI-driven technology and unlock the full potential of diverse talent acquisition.",
     button: {
       enable: true,
       label: "Schedule a Demo",
@@ -25,7 +25,7 @@ const call_to_action = {
     <div class="grid grid-cols-1 gap-12 items-end lg:grid-cols-3">
       <div class="lg:col-span-2">
         <p class="relative text-sm text-light">
-          Enterprise AI & HPC Infrastructure —
+          Ethical AI for Recruitment —
           <a href="/contact" class="relative font-semibold text-light">
             <span class="absolute inset-0" aria-hidden="true"></span> Schedule a Demo
           </a>
@@ -33,17 +33,17 @@ const call_to_action = {
         <h1
           class="mt-12 text-2xl font-semibold tracking-tight md:text-3xl lg:text-4xl text-dark lg:text-balance"
         >
-          Launch: Accelerating Enterprise AI & HPC Performance
+          AI4Jobs: Revolutionizing Talent Acquisition with Ethical AI
         </h1>
         <div class="flex flex-wrap gap-4 mt-8 sm:items-center">
           <button
             class="btn btn-primary"
           >
-            Get Technical Assessment
+            Get Recruitment Assessment
           </button>
           <div class="text-xs text-light lg:items-center">
-            <span class="block">Comprehensive infrastructure solutions</span>
-            <span class="block">for AI and high-performance computing</span>
+            <span class="block">Comprehensive recruitment automation</span>
+            <span class="block">for unbiased talent acquisition</span>
           </div>
         </div>
       </div>
@@ -51,16 +51,16 @@ const call_to_action = {
         <div class="flex flex-wrap gap-2 items-center">
           <div class="flex -space-x-2">
             <div class="inline-block overflow-hidden rounded-full outline-white size-8 outline-2">
+              <ExternalLogo domain="ibm.com" name="IBM" height={32} width={32} class="object-cover object-center" />
+            </div>
+            <div class="inline-block overflow-hidden rounded-full outline-white size-8 outline-2">
+              <ExternalLogo domain="google.com" name="Google" height={32} width={32} class="object-cover object-center" />
+            </div>
+            <div class="inline-block overflow-hidden rounded-full outline-white size-8 outline-2">
+              <ExternalLogo domain="deloitte.com" name="Deloitte" height={32} width={32} class="object-cover object-center" />
+            </div>
+            <div class="inline-block overflow-hidden rounded-full outline-white size-8 outline-2">
               <ExternalLogo domain="nvidia.com" name="NVIDIA" height={32} width={32} class="object-cover object-center" />
-            </div>
-            <div class="inline-block overflow-hidden rounded-full outline-white size-8 outline-2">
-              <ExternalLogo domain="intel.com" name="Intel" height={32} width={32} class="object-cover object-center" />
-            </div>
-            <div class="inline-block overflow-hidden rounded-full outline-white size-8 outline-2">
-              <ExternalLogo domain="amd.com" name="AMD" height={32} width={32} class="object-cover object-center" />
-            </div>
-            <div class="inline-block overflow-hidden rounded-full outline-white size-8 outline-2">
-              <ExternalLogo domain="aws.amazon.com" name="AWS" height={32} width={32} class="object-cover object-center" />
             </div>
           </div>
           <div class="text-xs text-light lg:items-center">
@@ -74,11 +74,11 @@ const call_to_action = {
       <img
         loading="eager"
         decoding="async"
-        alt="Launch HPC Dashboard"
+        alt="AI4Jobs Dashboard"
         width="1200"
         height="1200"
         class="object-cover h-full rounded-lg border shadow border-border"
-        src="/images/launch-dashboard.webp"
+        src="/images/thisway-search.png"
       />
     </div>
     <div
@@ -87,10 +87,10 @@ const call_to_action = {
       <div class="flex flex-col justify-between h-full">
         <div>
           <h3 class="text-base font-medium text-dark">
-            Simplified Deployment & Management
+            Recruitment Automation
           </h3>
           <p class="mt-2 text-sm text-light">
-            Deploy and manage high-performance computing resources with ease, reducing operational complexity and accelerating time-to-value.
+            Streamline the hiring process by automating repetitive tasks, providing quicker responses to applicants, and keeping them engaged throughout the hiring process.
           </p>
         </div>
         <ul role="list" class="mt-6 space-y-1 font-medium text-light">
@@ -110,7 +110,7 @@ const call_to_action = {
                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                 <path d="M5 12l5 5l10 -10"></path>
               </svg>
-              <span class="text-sm"> One-click cluster deployment </span>
+              <span class="text-sm"> 30-minute integration </span>
             </div>
           </li>
           <li>
@@ -129,7 +129,7 @@ const call_to_action = {
                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                 <path d="M5 12l5 5l10 -10"></path>
               </svg>
-              <span class="text-sm"> Automated infrastructure scaling </span>
+              <span class="text-sm"> Improved candidate experience </span>
             </div>
           </li>
         </ul>
@@ -137,10 +137,10 @@ const call_to_action = {
       <div class="flex flex-col justify-between h-full">
         <div>
           <h3 class="text-base font-medium text-dark">
-            Advanced Workload Optimization
+            Unbiased Sourcing & Matching
           </h3>
           <p class="mt-2 text-sm text-light">
-            Intelligently optimize resource allocation and workload scheduling to maximize performance and minimize costs.
+            Find diverse talent quickly with smart matching that analyzes candidates' entire work history and identifies how their diverse experience and skillset can be a great match.
           </p>
         </div>
         <ul role="list" class="mt-6 space-y-1 font-medium text-light">
@@ -160,7 +160,7 @@ const call_to_action = {
                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                 <path d="M5 12l5 5l10 -10"></path>
               </svg>
-              <span class="text-sm"> AI-driven resource allocation </span>
+              <span class="text-sm"> Access to 169M+ diverse candidates </span>
             </div>
           </li>
           <li>
@@ -179,7 +179,7 @@ const call_to_action = {
                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                 <path d="M5 12l5 5l10 -10"></path>
               </svg>
-              <span class="text-sm"> Dynamic workload scheduling </span>
+              <span class="text-sm"> Transferable skills analysis </span>
             </div>
           </li>
         </ul>
@@ -187,10 +187,10 @@ const call_to_action = {
       <div class="flex flex-col justify-between h-full">
         <div>
           <h3 class="text-base font-medium text-dark">
-            Comprehensive Observability
+            Compliant & Ethical AI
           </h3>
           <p class="mt-2 text-sm text-light">
-            Gain deep insights into your HPC and AI infrastructure with advanced monitoring, logging, and analytics capabilities.
+            Minimize legal, financial, and reputational risks while building trust with users, customers, and stakeholders by demonstrating a commitment to compliance and ethical behavior.
           </p>
         </div>
         <ul role="list" class="mt-6 space-y-1 font-medium text-light">
@@ -241,14 +241,14 @@ const call_to_action = {
  <section class="section">
   <div class="container">
     <div>
-      <p class="text-sm font-bold uppercase text-tertiary">Enterprise Solutions</p>
+      <p class="text-sm font-bold uppercase text-tertiary">Recruitment Solutions</p>
       <h2
         class="mt-4 text-4xl font-semibold sm:text-4xl md:text-5xl lg:text-6xl text-dark lg:text-balance"
       >
-        Accelerating AI & HPC Workloads at Scale
+        Transforming Talent Acquisition with Ethical AI
       </h2>
       <p class="mt-4 max-w-xl text-base font-medium text-light">
-        Launch provides a comprehensive platform for managing high-performance computing and AI infrastructure with seamless scaling between on-premise and cloud environments.
+        ThisWay Global's AI4Jobs platform revolutionizes recruitment by combining ethical AI, automation, and unbiased matching to connect organizations with diverse, qualified talent.
       </p>
     </div>
     <div class="grid grid-cols-1 gap-2 mt-12 lg:grid-cols-2">
@@ -257,12 +257,12 @@ const call_to_action = {
           class="grid grid-cols-1 gap-2 h-full sm:grid-cols-2 lg:grid-cols-1"
         >
           <div class="p-8 rounded-2xl bg-theme-light">
-            <p class="text-xs font-bold uppercase text-tertiary">Hybrid Architecture</p>
+            <p class="text-xs font-bold uppercase text-tertiary">Attract Feature</p>
             <h3 class="mt-4 text-lg font-medium md:text-xl text-dark">
-              Seamless On-Premise & Cloud Integration
+              Optimize & Debias Job Postings
             </h3>
             <p class="mt-2 text-sm font-medium text-light">
-              Bridge the gap between on-premise HPC clusters and cloud resources with our unified management platform, enabling burst capacity and workload portability.
+              Optimize and debias your job postings before sharing them with our network of 8,500+ diversity partners, ensuring they reach qualified candidates regardless of background.
             </p>
           </div>
           <div class="overflow-hidden items-center p-8 rounded-2xl bg-theme-light">
@@ -270,26 +270,26 @@ const call_to_action = {
               class="[-webkit-mask-image:radial-gradient(56.81%_53.42%_at_50%_46.58%,_rgba(217,217,217,0.9)_24.36%,rgba(217,217,217,0)_100%)]"
             >
               <div class="flex flex-wrap gap-2 justify-evenly">
+                <ExternalLogo domain="ibm.com" name="IBM" height={40} width={40} />
+                <ExternalLogo domain="google.com" name="Google" height={40} width={40} />
+                <ExternalLogo domain="deloitte.com" name="Deloitte" height={40} width={40} />
                 <ExternalLogo domain="nvidia.com" name="NVIDIA" height={40} width={40} />
-                <ExternalLogo domain="intel.com" name="Intel" height={40} width={40} />
-                <ExternalLogo domain="amd.com" name="AMD" height={40} width={40} />
-                <ExternalLogo domain="aws.amazon.com" name="AWS" height={40} width={40} />
-                <ExternalLogo domain="azure.microsoft.com" name="Azure" height={40} width={40} />
-                <ExternalLogo domain="cloud.google.com" name="Google Cloud" height={40} width={40} />
-                <ExternalLogo domain="kubernetes.io" name="Kubernetes" height={40} width={40} />
-                <ExternalLogo domain="docker.com" name="Docker" height={40} width={40} />
-                <ExternalLogo domain="tensorflow.org" name="TensorFlow" height={40} width={40} />
-                <ExternalLogo domain="pytorch.org" name="PyTorch" height={40} width={40} />
-                <ExternalLogo domain="developer.nvidia.com" name="CUDA" height={40} width={40} />
-                <ExternalLogo domain="openai.com" name="OpenAI" height={40} width={40} />
-                <ExternalLogo domain="slurm.schedmd.com" name="Slurm" height={40} width={40} />
-                <ExternalLogo domain="prometheus.io" name="Prometheus" height={40} width={40} />
-                <ExternalLogo domain="ray.io" name="Ray" height={40} width={40} />
-                <ExternalLogo domain="dask.org" name="Dask" height={40} width={40} />
-                <ExternalLogo domain="spark.apache.org" name="Spark" height={40} width={40} />
-                <ExternalLogo domain="horovod.ai" name="Horovod" height={40} width={40} />
-                <ExternalLogo domain="istio.io" name="Istio" height={40} width={40} />
-                <ExternalLogo domain="helm.sh" name="Helm" height={40} width={40} />
+                <ExternalLogo domain="linkedin.com" name="LinkedIn" height={40} width={40} />
+                <ExternalLogo domain="workday.com" name="Workday" height={40} width={40} />
+                <ExternalLogo domain="oracle.com" name="Oracle" height={40} width={40} />
+                <ExternalLogo domain="sap.com" name="SAP" height={40} width={40} />
+                <ExternalLogo domain="salesforce.com" name="Salesforce" height={40} width={40} />
+                <ExternalLogo domain="microsoft.com" name="Microsoft" height={40} width={40} />
+                <ExternalLogo domain="adp.com" name="ADP" height={40} width={40} />
+                <ExternalLogo domain="bamboohr.com" name="BambooHR" height={40} width={40} />
+                <ExternalLogo domain="greenhouse.io" name="Greenhouse" height={40} width={40} />
+                <ExternalLogo domain="lever.co" name="Lever" height={40} width={40} />
+                <ExternalLogo domain="jobvite.com" name="Jobvite" height={40} width={40} />
+                <ExternalLogo domain="smartrecruiters.com" name="SmartRecruiters" height={40} width={40} />
+                <ExternalLogo domain="indeed.com" name="Indeed" height={40} width={40} />
+                <ExternalLogo domain="ziprecruiter.com" name="ZipRecruiter" height={40} width={40} />
+                <ExternalLogo domain="dice.com" name="Dice" height={40} width={40} />
+                <ExternalLogo domain="monster.com" name="Monster" height={40} width={40} />
               </div>
             </div>
           </div>
@@ -298,7 +298,7 @@ const call_to_action = {
             <img
             class="object-cover relative h-full rounded-2xl"
             src="/images/about-hero.webp"
-            alt="HPC Cluster"
+            alt="AI4Jobs Team"
           />
           <div class="absolute bottom-0 p-4 w-full">
             <button
@@ -314,12 +314,12 @@ const call_to_action = {
           class="flex overflow-hidden relative flex-col justify-between h-full rounded-2xl bg-theme-light"
         >
           <div class="relative p-8 mt-auto">
-            <p class="text-xs font-bold uppercase text-tertiary">AI Workload Management</p>
+            <p class="text-xs font-bold uppercase text-tertiary">Discover Feature</p>
             <h3 class="mt-4 text-lg font-medium md:text-xl text-dark">
-              Optimized for AI & ML Workflows
+              Find Perfect-Fit Candidates
             </h3>
             <p class="mt-2 text-sm font-medium text-light">
-              Purpose-built tools for managing AI and machine learning workloads, with specialized support for GPU acceleration and distributed training.
+              Actively search for qualified candidates who are a good fit for your organization, accessing a diverse talent pool of 169 million candidates with our powerful matching engine.
             </p>
           </div>
         </div>
@@ -327,105 +327,100 @@ const call_to_action = {
           class="flex overflow-hidden relative flex-col justify-between h-full rounded-2xl bg-theme-light"
         >
           <div class="relative p-8">
-            <p class="text-xs font-bold uppercase text-tertiary">Resource Management</p>
+            <p class="text-xs font-bold uppercase text-tertiary">Reveal Feature</p>
             <h3 class="mt-4 text-lg font-medium md:text-xl text-dark">
-              Intelligent Scheduling & Scaling
+              Leverage Your Existing Database
             </h3>
             <p class="mt-2 text-sm font-medium text-light">
-              Automatically optimize resource allocation and workload scheduling to maximize performance and minimize costs across your entire infrastructure.
+              Connect AI4Jobs with your existing applicant database to filter and rediscover qualified candidates you already have, maximizing your ROI on past recruitment efforts.
             </p>
           </div>
         </div>
         <div class="p-8 rounded-2xl bg-theme-light">
-          <p class="text-xs font-bold uppercase text-tertiary">Multi-Framework Support</p>
+          <p class="text-xs font-bold uppercase text-tertiary">Score Feature</p>
           <h3 class="mt-4 text-lg font-medium md:text-xl text-dark">
-            Flexible AI Development Environment
+            Unbiased Candidate Screening
           </h3>
           <p class="mt-2 text-sm font-medium text-light">
-            Support for all major AI frameworks including TensorFlow, PyTorch, and JAX with optimized containers and pre-configured environments for immediate productivity.
+            Screen applicants with redacted background information that might bias the process, focusing exclusively on the skills that qualify them for your open position with our 100-point scoring system.
           </p>
         </div>
         <div class="p-8 rounded-2xl bg-theme-light">
-          <p class="text-xs font-bold uppercase text-tertiary">Enterprise Security</p>
+          <p class="text-xs font-bold uppercase text-tertiary">IBM Integration</p>
           <h3 class="mt-4 text-lg font-medium md:text-xl text-dark">
-            Comprehensive Security Controls
+            Enterprise-Grade Technology
           </h3>
           <p class="mt-2 text-sm font-medium text-light">
-            Enterprise-grade security with role-based access control, encryption at rest and in transit, and compliance with industry standards to protect your most valuable AI assets.
+            Powered by IBM's AI-powered automation software, AI4Jobs provides seamless integration with your existing HRIS and CRM systems, with enterprise-grade security and compliance features.
           </p>
         </div>
       </div>
     </div>
   </div>
-</section> 
-
- <section class="section">
-  <div class="container relative">
+  <div class="container relative mt-24">
     <div class="grid grid-cols-1 gap-12 md:grid-cols-3 md:items-end">
-      <div class="lg:col-span-2">
-        <p class="text-sm font-bold uppercase text-tertiary">Getting Started</p>
-        <h2
-          class="mt-4 text-2xl font-semibold md:text-3xl lg:text-4xl text-dark lg:text-balance"
-        >
-          Three Simple Steps to Launch Your HPC Environment
+      <div class="md:col-span-2">
+        <h2 class="text-3xl font-semibold tracking-tight text-dark md:text-4xl">
+          AI-Powered Recruitment Platform
         </h2>
+        <p class="mt-4 text-light">
+          AI4Jobs is a powerful recruitment process automation (RPA) platform that enables organizations to connect with diverse applicants and candidates from 8,500+ online diversity communities. Our platform combines cutting-edge AI technology, ethical matching algorithms, and seamless integration to deliver exceptional recruitment results.
+        </p>
       </div>
-      <p class="text-base font-medium text-light">
-        Quickly deploy and optimize your high-performance computing infrastructure with our streamlined implementation process.
-      </p>
     </div>
-    <dl class="grid grid-cols-1 gap-6 mt-12 lg:grid-cols-3 md:grid-cols-2">
-      <div class="rounded-3xl shadow bg-theme-light">
-        <dt class="p-8">
-          <h3 class="text-lg font-medium md:text-xl text-dark">
-            1. Assessment & Planning
-          </h3>
-        </dt>
-        <dd class="p-8 border-t border-border">
-          <p class="text-base font-medium text-light">
-            Our team works with you to assess your current infrastructure, workload requirements, and business objectives to create a tailored deployment plan.
-          </p>
-        </dd>
+
+    <div class="grid grid-cols-1 gap-8 mt-12 md:grid-cols-2 lg:grid-cols-3">
+      <div class="p-8 rounded-lg border bg-theme-light border-border">
+        <h3 class="text-xl font-semibold text-dark">Scalable for Any Team</h3>
+        <p class="mt-4 text-light">
+          AI4Jobs meets the needs of large enterprises, mid-sized companies, and small businesses. Our platform delivers diverse, qualified results within seconds, whether 10 applicants or 10,000!
+        </p>
       </div>
-      <div class="rounded-3xl shadow bg-secondary">
-        <dt class="p-8">
-          <h3 class="text-lg font-medium text-white md:text-xl">
-            2. Deployment & Integration
-          </h3>
-        </dt>
-        <dd class="p-8 border-t border-white/20">
-          <p class="text-base font-medium text-white">
-            We deploy the Launch HPC platform in your environment, integrating with your existing systems and configuring it to meet your specific performance requirements.
-          </p>
-        </dd>
+      <div class="p-8 rounded-lg border bg-theme-light border-border">
+        <h3 class="text-xl font-semibold text-dark">Transferable Skills Analysis</h3>
+        <p class="mt-4 text-light">
+          Traditional recruiting processes rely heavily on candidates' prior job titles. We analyze candidates' entire work history and identify how their diverse experience and skillset can be a great match.
+        </p>
       </div>
-      <div class="rounded-3xl shadow bg-primary">
-        <dt class="p-8">
-          <h3 class="text-lg font-medium text-white md:text-xl">
-            3. Optimization & Training
-          </h3>
-        </dt>
-        <dd class="p-8 border-t border-white/20">
-          <p class="text-base font-medium text-white">
-            Our experts optimize your environment for peak performance, provide comprehensive training for your team, and establish ongoing support to ensure long-term success.
-          </p>
-        </dd>
+      <div class="p-8 rounded-lg border bg-theme-light border-border">
+        <h3 class="text-xl font-semibold text-dark">Prioritize Qualified Candidates</h3>
+        <p class="mt-4 text-light">
+          Whether in our easy-to-use interface or directly integrated with your ATS or CRM system, candidates are scored out of 100, so you can quickly identify who to contact first.
+        </p>
       </div>
-    </dl>
+      <div class="p-8 rounded-lg border bg-theme-light border-border">
+        <h3 class="text-xl font-semibold text-dark">Minimize Job Board Reliance</h3>
+        <p class="mt-4 text-light">
+          Reduce dependency on expensive job boards. With AI4Jobs, you can actively or passively find candidates who might be a good fit for your organization through our Attract and Discover features.
+        </p>
+      </div>
+      <div class="p-8 rounded-lg border bg-theme-light border-border">
+        <h3 class="text-xl font-semibold text-dark">Leverage Existing Applicant Data</h3>
+        <p class="mt-4 text-light">
+          Our Reveal feature easily connects AI4Jobs with your database, letting you filter existing candidates. Score allows you to screen applicants with redacted background information to focus exclusively on qualifying skills.
+        </p>
+      </div>
+      <div class="p-8 rounded-lg border bg-theme-light border-border">
+        <h3 class="text-xl font-semibold text-dark">IBM Technology Integration</h3>
+        <p class="mt-4 text-light">
+          Powered by IBM's AI-powered automation software, AI4Jobs provides seamless integration with your existing HRIS and CRM platforms, opening doors to millions of candidates with scalable enterprise solutions.
+        </p>
+      </div>
+    </div>
   </div>
 </section> 
 
  <section class="section">
   <div class="container relative">
     <div class="text-center">
-      <p class="text-sm font-bold uppercase text-tertiary">License</p>
+      <p class="text-sm font-bold uppercase text-tertiary">FAQ</p>
       <h2
         class="mt-4 text-2xl font-semibold md:text-3xl lg:text-4xl text-dark lg:text-balance"
       >
         Frequently Asked Questions
       </h2>
       <p class="mt-4 text-base font-medium text-light">
-        Common questions about Launch HPC and enterprise AI infrastructure solutions.
+        Common questions about AI4Jobs and ethical AI recruitment solutions.
       </p>
     </div>
     <div class="mt-12 space-y-24">
@@ -445,7 +440,7 @@ const call_to_action = {
             <summary
               class="flex justify-between items-center py-4 w-full text-base font-medium text-left select-none text-light hover:text-light focus:text-accent-500"
             >
-              What hardware platforms does Launch HPC support?<svg
+              How does AI4Jobs reduce bias in the recruitment process?<svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
                 fill="none"
@@ -462,7 +457,7 @@ const call_to_action = {
             </summary>
             <div class="py-4 pt-2 text-sm text-light">
               <p class="text-base font-medium text-light">
-                Launch HPC supports a wide range of hardware platforms including NVIDIA, AMD, and Intel GPUs and CPUs. Our platform is designed to work with both on-premise infrastructure and major cloud providers including AWS, Azure, and Google Cloud.
+                AI4Jobs uses advanced algorithms that focus solely on candidates' skills and experience, not on background information that might introduce bias. Our platform redacts potentially biasing information during the screening process and uses ethical AI to match candidates based on more than 1000 data points related to their qualifications and transferable skills, ensuring a fair and inclusive recruitment process.
               </p>
             </div>
           </details>
@@ -470,7 +465,7 @@ const call_to_action = {
             <summary
               class="flex justify-between items-center py-4 w-full text-base font-medium text-left select-none text-light hover:text-light focus:text-accent-500"
             >
-              How does Launch HPC handle scaling for AI workloads?<svg
+              How quickly can AI4Jobs be integrated with our existing systems?<svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
                 fill="none"
@@ -487,7 +482,7 @@ const call_to_action = {
             </summary>
             <div class="py-4 pt-2 text-sm text-light">
               <p class="text-base font-medium text-light">
-                Launch HPC features intelligent auto-scaling capabilities that dynamically allocate resources based on workload demands. The platform can automatically scale up during intensive training phases and scale down during less demanding periods to optimize both performance and cost.
+                AI4Jobs can be integrated with your existing HRIS and CRM systems in as little as 30 minutes. Powered by IBM's App Connect Enterprise, our platform provides seamless integration capabilities that allow for quick deployment and immediate access to our diverse talent pool of over 169 million candidates, without disrupting your current workflows.
               </p>
             </div>
           </details>
@@ -495,7 +490,7 @@ const call_to_action = {
             <summary
               class="flex justify-between items-center py-4 w-full text-base font-medium text-left select-none text-light hover:text-light focus:text-accent-500"
             >
-              What security features does Launch HPC provide for enterprise environments?<svg
+              What security and compliance features does AI4Jobs provide?<svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
                 fill="none"
@@ -512,7 +507,7 @@ const call_to_action = {
             </summary>
             <div class="py-4 pt-2 text-sm text-light">
               <p class="text-base font-medium text-light">
-                Launch HPC includes comprehensive security features such as role-based access control, end-to-end encryption, secure multi-tenancy, compliance reporting, and audit logging. The platform meets enterprise security requirements and can be configured to comply with industry-specific regulations.
+                AI4Jobs is built with security and compliance at its core. Our platform incorporates data security measures, ensures GDPR and EEOC compliance, and provides audit trails for all recruitment activities. The ethical AI framework we've developed helps organizations meet regulatory requirements while protecting candidate data and ensuring fair hiring practices.
               </p>
             </div>
           </details>
@@ -526,7 +521,7 @@ const call_to_action = {
           <h2
             class="text-lg font-semibold md:text-xl text-dark lg:text-balance"
           >
-            License
+            Implementation & Results
           </h2>
           <div class="flex"></div>
         </div>
@@ -535,7 +530,7 @@ const call_to_action = {
             <summary
               class="flex justify-between items-center py-4 w-full text-base font-medium text-left select-none text-light hover:text-light focus:text-accent-500"
             >
-              What licensing options are available for Launch HPC?<svg
+              How does AI4Jobs help leverage our existing applicant database?<svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
                 fill="none"
@@ -552,7 +547,7 @@ const call_to_action = {
             </summary>
             <div class="py-4 pt-2 text-sm text-light">
               <p class="text-base font-medium text-light">
-                Launch HPC offers flexible licensing options including subscription-based models and enterprise agreements. Our licensing is designed to scale with your needs, allowing you to start with what you need and expand as your requirements grow. Contact our sales team for customized licensing options for your organization.
+                AI4Jobs' Reveal feature connects with your existing applicant database to help you rediscover qualified candidates you already have. Our platform analyzes candidates based on their skills and experience, not just job titles, identifying transferable skills that might make them perfect for positions you hadn't considered them for previously. This maximizes your ROI on past recruitment efforts and reduces dependency on expensive job boards.
               </p>
             </div>
           </details>
@@ -560,7 +555,7 @@ const call_to_action = {
             <summary
               class="flex justify-between items-center py-4 w-full text-base font-medium text-left select-none text-light hover:text-light focus:text-accent-500"
             >
-              Does Launch HPC offer trial licenses for evaluation?<svg
+              What kind of results can we expect after implementing AI4Jobs?<svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
                 fill="none"
@@ -577,7 +572,32 @@ const call_to_action = {
             </summary>
             <div class="py-4 pt-2 text-sm text-light">
               <p class="text-base font-medium text-light">
-                Yes, we offer evaluation licenses that allow you to test the full capabilities of Launch HPC in your environment before making a commitment. Our evaluation period typically lasts 30 days and includes access to our support team to help you get the most out of your trial experience.
+                Organizations using AI4Jobs typically see significant improvements in recruitment efficiency and diversity outcomes. Our clients report up to 29% increased efficiency in their recruitment processes, substantial reductions in time-to-hire, improved quality of candidates, and meaningful increases in workforce diversity. The platform's ability to score candidates on a scale of 100 helps recruiters quickly identify the most qualified individuals, saving time and improving hiring outcomes.
+              </p>
+            </div>
+          </details>
+          <details class="cursor-pointer group">
+            <summary
+              class="flex justify-between items-center py-4 w-full text-base font-medium text-left select-none text-light hover:text-light focus:text-accent-500"
+            >
+              Does AI4Jobs offer pricing options for different organization sizes?<svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="duration-300 ease-out transform icon icon-tabler-plus size-4 group-open:-rotate-45"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M12 5l0 14"></path>
+                <path d="M5 12l14 0"></path>
+              </svg>
+            </summary>
+            <div class="py-4 pt-2 text-sm text-light">
+              <p class="text-base font-medium text-light">
+                Yes, AI4Jobs offers flexible pricing models designed to accommodate organizations of all sizes, from small businesses to large enterprises. Our platform is scalable and can handle anywhere from 10 to 10,000+ applicants with equal efficiency. We offer subscription-based pricing with options to scale as your needs grow, as well as enterprise agreements for larger organizations. Contact our sales team for a customized quote based on your specific requirements.
               </p>
             </div>
           </details>
