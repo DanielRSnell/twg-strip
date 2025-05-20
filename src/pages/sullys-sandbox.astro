@@ -1,0 +1,611 @@
+ ---
+import Base from "@/layouts/Base.astro";
+import ExternalLogo from "../components/ExternalLogo.astro";
+import CallToAction from "@/partials/CallToAction.astro";
+
+// Custom call to action for Sully's Sandbox page
+const call_to_action = {
+  data: {
+    enable: true,
+    title: "Transform Your Business with AI & Data",
+    image: "/images/call-to-action.png",
+    description: "Join the growing list of organizations using Sully's Sandbox to accelerate AI development, access high-quality datasets, and implement powerful solutions that drive business growth.",
+    button: {
+      enable: true,
+      label: "Apply for Early Access",
+      link: "/contact"
+    }
+  }
+};
+---
+ 
+<Base>
+ <section class="py-24 section bg-theme-light">
+  <div class="container relative">
+    <div class="grid grid-cols-1 gap-12 items-end lg:grid-cols-3">
+      <div class="lg:col-span-2">
+        <p class="relative text-sm text-light">
+          AI & Data Marketplace —
+          <a href="/contact" class="relative font-semibold text-light">
+            <span class="absolute inset-0" aria-hidden="true"></span> Apply for Early Access
+          </a>
+        </p>
+        <h1
+          class="mt-12 text-2xl font-semibold tracking-tight md:text-3xl lg:text-4xl text-dark lg:text-balance"
+        >
+          Sully's Sandbox: AI & Data Marketplace Like No Other
+        </h1>
+        <div class="flex flex-wrap gap-4 mt-8 sm:items-center">
+          <button
+            class="btn btn-primary"
+          >
+            Get Started
+          </button>
+          <div class="text-xs text-light lg:items-center">
+            <span class="block">Access extraordinary quality & quantity</span>
+            <span class="block">of AI, data, and LLMs</span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="flex flex-wrap gap-2 items-center">
+          <div class="flex -space-x-2">
+            <div class="inline-block overflow-hidden rounded-full outline-white size-8 outline-2">
+              <ExternalLogo domain="openai.com" name="OpenAI" height={32} width={32} class="object-cover object-center" />
+            </div>
+            <div class="inline-block overflow-hidden rounded-full outline-white size-8 outline-2">
+              <ExternalLogo domain="google.com" name="Google" height={32} width={32} class="object-cover object-center" />
+            </div>
+            <div class="inline-block overflow-hidden rounded-full outline-white size-8 outline-2">
+              <ExternalLogo domain="aws.amazon.com" name="AWS" height={32} width={32} class="object-cover object-center" />
+            </div>
+            <div class="inline-block overflow-hidden rounded-full outline-white size-8 outline-2">
+              <ExternalLogo domain="azure.microsoft.com" name="Azure" height={32} width={32} class="object-cover object-center" />
+            </div>
+          </div>
+          <div class="text-xs text-light lg:items-center">
+            <span class="block">Trusted AI & data</span>
+            <span class="block">solutions</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mx-auto mt-12">
+      <img
+        loading="eager"
+        decoding="async"
+        alt="Sully's Sandbox Dashboard"
+        width="1200"
+        height="1200"
+        class="object-cover h-full rounded-lg border shadow border-border"
+        src="/images/sullys-sandbox.jpeg"
+      />
+    </div>
+    <div
+      class="grid grid-cols-1 gap-x-2 gap-y-14 mt-12 lg:gap-12 sm:grid-cols-2 lg:grid-cols-3"
+    >
+      <div class="flex flex-col justify-between h-full">
+        <div>
+          <h3 class="text-base font-medium text-dark">
+            Vast Marketplace for AI & Data Sets
+          </h3>
+          <p class="mt-2 text-sm text-light">
+            Sully's Sandbox provides a user-friendly interface to search and discover valuable data & AI solutions for your business needs, all in one centralized platform.
+          </p>
+        </div>
+        <ul role="list" class="mt-6 space-y-1 font-medium text-light">
+          <li>
+            <div class="flex gap-2 items-center">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="text-light icon icon-tabler-circle-check size-5"
+                slot="icon"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M5 12l5 5l10 -10"></path>
+              </svg>
+              <span class="text-sm"> Curated data ecosystem </span>
+            </div>
+          </li>
+          <li>
+            <div class="flex gap-2 items-center">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="text-light icon icon-tabler-circle-check size-5"
+                slot="icon"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M5 12l5 5l10 -10"></path>
+              </svg>
+              <span class="text-sm"> Easy-to-navigate platform </span>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="flex flex-col justify-between h-full">
+        <div>
+          <h3 class="text-base font-medium text-dark">
+            Access to Diverse AI Solutions
+          </h3>
+          <p class="mt-2 text-sm text-light">
+            From automation to machine learning, our marketplace accelerates your projects with innovation at your fingertips, providing instant access to specialized AI models and LLMs.
+          </p>
+        </div>
+        <ul role="list" class="mt-6 space-y-1 font-medium text-light">
+          <li>
+            <div class="flex gap-2 items-center">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="text-light icon icon-tabler-circle-check size-5"
+                slot="icon"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M5 12l5 5l10 -10"></path>
+              </svg>
+              <span class="text-sm"> Ready-to-use AI models </span>
+            </div>
+          </li>
+          <li>
+            <div class="flex gap-2 items-center">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="text-light icon icon-tabler-circle-check size-5"
+                slot="icon"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M5 12l5 5l10 -10"></path>
+              </svg>
+              <span class="text-sm"> Accelerated AI development </span>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="flex flex-col justify-between h-full">
+        <div>
+          <h3 class="text-base font-medium text-dark">
+            High-quality Data Sets
+          </h3>
+          <p class="mt-2 text-sm text-light">
+            Configure the data model, resource types, permissions and much more to make it suit your needs, with secure and compliant solutions that meet industry standards.
+          </p>
+        </div>
+        <ul role="list" class="mt-6 space-y-1 font-medium text-light">
+          <li>
+            <div class="flex gap-2 items-center">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="text-light icon icon-tabler-circle-check size-5"
+                slot="icon"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M5 12l5 5l10 -10"></path>
+              </svg>
+              <span class="text-sm"> Secure & compliant </span>
+            </div>
+          </li>
+          <li>
+            <div class="flex gap-2 items-center">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="text-light icon icon-tabler-circle-check size-5"
+                slot="icon"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M5 12l5 5l10 -10"></path>
+              </svg>
+              <span class="text-sm"> Scalability & flexibility </span>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section> 
+
+ <section class="section">
+  <div class="container">
+    <div>
+      <p class="text-sm font-bold uppercase text-tertiary">AI & Data Marketplace</p>
+      <h2
+        class="mt-4 text-4xl font-semibold sm:text-4xl md:text-5xl lg:text-6xl text-dark lg:text-balance"
+      >
+        AI & Data is Only Valuable When You Can Use It
+      </h2>
+      <p class="mt-4 max-w-xl text-base font-medium text-light">
+        Sully's Sandbox is a catalyst for business growth. Our members access important AI, Data & LLMs that give organizations greater opportunity and insights for meaningful results.
+      </p>
+    </div>
+    <div class="grid grid-cols-1 gap-2 mt-12 lg:grid-cols-2">
+      <div class="grid grid-cols-1 gap-2 h-full lg:grid-cols-2">
+        <div
+          class="grid grid-cols-1 gap-2 h-full sm:grid-cols-2 lg:grid-cols-1"
+        >
+          <div class="p-8 rounded-2xl bg-theme-light">
+            <p class="text-xs font-bold uppercase text-tertiary">Curated Data Ecosystem</p>
+            <h3 class="mt-4 text-lg font-medium md:text-xl text-dark">
+              High-Quality Datasets
+            </h3>
+            <p class="mt-2 text-sm font-medium text-light">
+              Access high-quality datasets with Sully's Sandbox. Tap into trusted and secure data and AI solutions that meet your specific business requirements and industry standards.
+            </p>
+          </div>
+          <div class="overflow-hidden items-center p-8 rounded-2xl bg-theme-light">
+            <div
+              class="[-webkit-mask-image:radial-gradient(56.81%_53.42%_at_50%_46.58%,_rgba(217,217,217,0.9)_24.36%,rgba(217,217,217,0)_100%)]"
+            >
+              <div class="flex flex-wrap gap-2 justify-evenly">
+                <ExternalLogo domain="openai.com" name="OpenAI" height={40} width={40} />
+                <ExternalLogo domain="google.com" name="Google" height={40} width={40} />
+                <ExternalLogo domain="aws.amazon.com" name="AWS" height={40} width={40} />
+                <ExternalLogo domain="azure.microsoft.com" name="Azure" height={40} width={40} />
+                <ExternalLogo domain="nvidia.com" name="NVIDIA" height={40} width={40} />
+                <ExternalLogo domain="huggingface.co" name="Hugging Face" height={40} width={40} />
+                <ExternalLogo domain="databricks.com" name="Databricks" height={40} width={40} />
+                <ExternalLogo domain="snowflake.com" name="Snowflake" height={40} width={40} />
+                <ExternalLogo domain="mongodb.com" name="MongoDB" height={40} width={40} />
+                <ExternalLogo domain="microsoft.com" name="Microsoft" height={40} width={40} />
+                <ExternalLogo domain="tableau.com" name="Tableau" height={40} width={40} />
+                <ExternalLogo domain="tensorflow.org" name="TensorFlow" height={40} width={40} />
+                <ExternalLogo domain="pytorch.org" name="PyTorch" height={40} width={40} />
+                <ExternalLogo domain="kaggle.com" name="Kaggle" height={40} width={40} />
+                <ExternalLogo domain="datarobot.com" name="DataRobot" height={40} width={40} />
+                <ExternalLogo domain="alteryx.com" name="Alteryx" height={40} width={40} />
+                <ExternalLogo domain="ibm.com" name="IBM" height={40} width={40} />
+                <ExternalLogo domain="sas.com" name="SAS" height={40} width={40} />
+                <ExternalLogo domain="splunk.com" name="Splunk" height={40} width={40} />
+                <ExternalLogo domain="oracle.com" name="Oracle" height={40} width={40} />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="flex relative flex-col justify-center items-center">
+            <img
+            class="object-cover relative h-full rounded-2xl"
+            src="/images/about-hero.webp"
+            alt="Sully's Sandbox Data Marketplace"
+          />
+          <div class="absolute bottom-0 p-4 w-full">
+            <button
+              class="w-full btn btn-primary"
+            >
+              Apply for Early Access
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 gap-2 h-full lg:grid-cols-2">
+        <div
+          class="flex overflow-hidden relative flex-col justify-between h-full rounded-2xl bg-theme-light"
+        >
+          <div class="relative p-8 mt-auto">
+            <p class="text-xs font-bold uppercase text-tertiary">User-Friendly Interface</p>
+            <h3 class="mt-4 text-lg font-medium md:text-xl text-dark">
+              Easy Discovery of AI Solutions
+            </h3>
+            <p class="mt-2 text-sm font-medium text-light">
+              Our user-friendly interface makes it simple to search and discover valuable data and AI solutions that match your specific business requirements and use cases.
+            </p>
+          </div>
+        </div>
+        <div
+          class="flex overflow-hidden relative flex-col justify-between h-full rounded-2xl bg-theme-light"
+        >
+          <div class="relative p-8">
+            <p class="text-xs font-bold uppercase text-tertiary">Secure & Compliant</p>
+            <h3 class="mt-4 text-lg font-medium md:text-xl text-dark">
+              Privacy & Regulatory Standards
+            </h3>
+            <p class="mt-2 text-sm font-medium text-light">
+              Sully's Sandbox ensures compliance with privacy and regulatory standards, providing secure access to data and AI solutions that protect your business and customer information.
+            </p>
+          </div>
+        </div>
+        <div class="p-8 rounded-2xl bg-theme-light">
+          <p class="text-xs font-bold uppercase text-tertiary">Scalability & Flexibility</p>
+          <h3 class="mt-4 text-lg font-medium md:text-xl text-dark">
+            Adapt to Evolving Business Needs
+          </h3>
+          <p class="mt-2 text-sm font-medium text-light">
+            Easily adapt to evolving business needs and technological advancements with our scalable platform that grows with your organization and supports your changing data and AI requirements.
+          </p>
+        </div>
+        <div class="p-8 rounded-2xl bg-theme-light">
+          <p class="text-xs font-bold uppercase text-tertiary">Business Growth</p>
+          <h3 class="mt-4 text-lg font-medium md:text-xl text-dark">
+            Catalyst for Innovation
+          </h3>
+          <p class="mt-2 text-sm font-medium text-light">
+            Sully's Sandbox serves as a catalyst for business growth by providing access to important AI, data, and LLMs that give organizations greater opportunity and insights for meaningful results.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container relative mt-24">
+    <div class="grid grid-cols-1 gap-12 md:grid-cols-3 md:items-end">
+      <div class="md:col-span-2">
+        <h2 class="text-3xl font-semibold tracking-tight text-dark md:text-4xl">
+          Get Early Access Now
+        </h2>
+        <p class="mt-4 text-light">
+          Browse a vast array of solutions tailored to meet your business needs. Access Sully's Sandbox now and elevate your data and AI initiatives with a marketplace designed for efficiency and business growth. Our early access program gives you priority access to our platform's features and benefits.
+        </p>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 gap-8 mt-12 md:grid-cols-2 lg:grid-cols-3">
+      <div class="p-8 rounded-lg border bg-theme-light border-border">
+        <h3 class="text-xl font-semibold text-dark">User-friendly Interface</h3>
+        <p class="mt-4 text-light">
+          An easy-to-navigate platform to search and discover data for your business needs. Our intuitive design makes finding and implementing AI and data solutions simple and efficient.
+        </p>
+      </div>
+      <div class="p-8 rounded-lg border bg-theme-light border-border">
+        <h3 class="text-xl font-semibold text-dark">Secure & Compliant</h3>
+        <p class="mt-4 text-light">
+          Ensured compliance with privacy and regulatory standards. We prioritize security in all aspects of our platform, protecting your valuable data and ensuring compliance with industry regulations.
+        </p>
+      </div>
+      <div class="p-8 rounded-lg border bg-theme-light border-border">
+        <h3 class="text-xl font-semibold text-dark">Scalability & Flexibility</h3>
+        <p class="mt-4 text-light">
+          Easily adapt to evolving business needs and technological advancements. Our platform grows with your organization, supporting your changing data and AI requirements as your business evolves.
+        </p>
+      </div>
+      <div class="p-8 rounded-lg border bg-theme-light border-border">
+        <h3 class="text-xl font-semibold text-dark">Vast AI Model Selection</h3>
+        <p class="mt-4 text-light">
+          Access a marketplace platform that provides instant access to specialized AI models and large language models (LLMs). Find the perfect AI solution for your specific business challenges.
+        </p>
+      </div>
+      <div class="p-8 rounded-lg border bg-theme-light border-border">
+        <h3 class="text-xl font-semibold text-dark">Accelerated AI Development</h3>
+        <p class="mt-4 text-light">
+          Leverage a curated selection of ready-to-use models to accelerate AI development and deployment. Reduce time-to-market and implementation costs with our pre-configured solutions.
+        </p>
+      </div>
+      <div class="p-8 rounded-lg border bg-theme-light border-border">
+        <h3 class="text-xl font-semibold text-dark">Business Growth Catalyst</h3>
+        <p class="mt-4 text-light">
+          Sully's Sandbox is a catalyst for business growth, providing organizations with greater opportunities and insights through access to important AI, data, and LLMs that deliver meaningful results.
+        </p>
+      </div>
+    </div>
+  </div>
+</section> 
+
+ <section class="section">
+  <div class="container relative">
+    <div class="text-center">
+      <p class="text-sm font-bold uppercase text-tertiary">FAQ</p>
+      <h2
+        class="mt-4 text-2xl font-semibold md:text-3xl lg:text-4xl text-dark lg:text-balance"
+      >
+        Frequently Asked Questions
+      </h2>
+      <p class="mt-4 text-base font-medium text-light">
+        Common questions about Sully's Sandbox and our AI & Data Marketplace.
+      </p>
+    </div>
+    <div class="mt-12 space-y-24">
+      <div>
+        <div
+          class="flex flex-col justify-between pb-5 border-b lg:flex-row lg:items-center border-border"
+        >
+          <h2
+            class="text-lg font-semibold md:text-xl text-dark lg:text-balance"
+          >
+            Platform & Technology
+          </h2>
+          <div class="flex"></div>
+        </div>
+        <div>
+          <details class="cursor-pointer group">
+            <summary
+              class="flex justify-between items-center py-4 w-full text-base font-medium text-left select-none text-light hover:text-light focus:text-accent-500"
+            >
+              What is Sully's Sandbox and how does it work?<svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="duration-300 ease-out transform icon icon-tabler-plus size-4 group-open:-rotate-45"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M12 5l0 14"></path>
+                <path d="M5 12l14 0"></path>
+              </svg>
+            </summary>
+            <div class="py-4 pt-2 text-sm text-light">
+              <p class="text-base font-medium text-light">
+                Sully's Sandbox is a marketplace platform that provides instant access to specialized AI models and large language models (LLMs). It is designed for businesses seeking to quickly implement AI solutions by leveraging a curated selection of ready-to-use models, accelerating AI development and deployment. Our user-friendly interface allows you to search and discover valuable data and AI solutions for your specific business needs.
+              </p>
+            </div>
+          </details>
+          <details class="cursor-pointer group">
+            <summary
+              class="flex justify-between items-center py-4 w-full text-base font-medium text-left select-none text-light hover:text-light focus:text-accent-500"
+            >
+              What types of AI models and data are available on Sully's Sandbox?<svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="duration-300 ease-out transform icon icon-tabler-plus size-4 group-open:-rotate-45"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M12 5l0 14"></path>
+                <path d="M5 12l14 0"></path>
+              </svg>
+            </summary>
+            <div class="py-4 pt-2 text-sm text-light">
+              <p class="text-base font-medium text-light">
+                Sully's Sandbox offers a wide range of AI models and high-quality datasets across various domains. From automation to machine learning, our marketplace includes specialized AI models, large language models (LLMs), and curated datasets that can be configured to suit your specific needs. All our offerings are vetted for quality, security, and compliance with industry standards.
+              </p>
+            </div>
+          </details>
+          <details class="cursor-pointer group">
+            <summary
+              class="flex justify-between items-center py-4 w-full text-base font-medium text-left select-none text-light hover:text-light focus:text-accent-500"
+            >
+              How does Sully's Sandbox ensure data security and compliance?<svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="duration-300 ease-out transform icon icon-tabler-plus size-4 group-open:-rotate-45"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M12 5l0 14"></path>
+                <path d="M5 12l14 0"></path>
+              </svg>
+            </summary>
+            <div class="py-4 pt-2 text-sm text-light">
+              <p class="text-base font-medium text-light">
+                Sully's Sandbox is built with security and compliance at its core. Our platform ensures compliance with privacy and regulatory standards, providing secure access to data and AI solutions that protect your business and customer information. We implement robust data protection measures, encryption, and regular security audits to maintain the highest level of security for all users.
+              </p>
+            </div>
+          </details>
+        </div>
+      </div>
+
+      <div>
+        <div
+          class="flex flex-col justify-between pb-5 border-b lg:flex-row lg:items-center border-border"
+        >
+          <h2
+            class="text-lg font-semibold md:text-xl text-dark lg:text-balance"
+          >
+            Implementation & Benefits
+          </h2>
+          <div class="flex"></div>
+        </div>
+        <div>
+          <details class="cursor-pointer group">
+            <summary
+              class="flex justify-between items-center py-4 w-full text-base font-medium text-left select-none text-light hover:text-light focus:text-accent-500"
+            >
+              How can Sully's Sandbox help accelerate our AI development?<svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="duration-300 ease-out transform icon icon-tabler-plus size-4 group-open:-rotate-45"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M12 5l0 14"></path>
+                <path d="M5 12l14 0"></path>
+              </svg>
+            </summary>
+            <div class="py-4 pt-2 text-sm text-light">
+              <p class="text-base font-medium text-light">
+                Sully's Sandbox accelerates AI development by providing instant access to ready-to-use AI models and datasets, eliminating the need to build solutions from scratch. This significantly reduces development time, costs, and technical complexity. Our curated selection of specialized models allows you to quickly implement AI solutions that address your specific business challenges, enabling faster time-to-market and competitive advantage.
+              </p>
+            </div>
+          </details>
+          <details class="cursor-pointer group">
+            <summary
+              class="flex justify-between items-center py-4 w-full text-base font-medium text-left select-none text-light hover:text-light focus:text-accent-500"
+            >
+              What business benefits can we expect from using Sully's Sandbox?<svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="duration-300 ease-out transform icon icon-tabler-plus size-4 group-open:-rotate-45"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M12 5l0 14"></path>
+                <path d="M5 12l14 0"></path>
+              </svg>
+            </summary>
+            <div class="py-4 pt-2 text-sm text-light">
+              <p class="text-base font-medium text-light">
+                Organizations using Sully's Sandbox typically experience significant business benefits, including reduced development costs, faster implementation of AI solutions, access to high-quality data and models, and improved decision-making capabilities. Our platform serves as a catalyst for business growth by providing greater opportunities and insights through access to important AI, data, and LLMs that deliver meaningful results for your specific business challenges.
+              </p>
+            </div>
+          </details>
+          <details class="cursor-pointer group">
+            <summary
+              class="flex justify-between items-center py-4 w-full text-base font-medium text-left select-none text-light hover:text-light focus:text-accent-500"
+            >
+              How do I get early access to Sully's Sandbox?<svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="duration-300 ease-out transform icon icon-tabler-plus size-4 group-open:-rotate-45"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M12 5l0 14"></path>
+                <path d="M5 12l14 0"></path>
+              </svg>
+            </summary>
+            <div class="py-4 pt-2 text-sm text-light">
+              <p class="text-base font-medium text-light">
+                Getting early access to Sully's Sandbox is simple. Just click on the "Apply for Early Access" button on our website and fill out the registration form. Our early access program gives you priority access to our platform's features and benefits. Once approved, you'll receive login credentials and can immediately start exploring our vast marketplace of AI models and datasets tailored to meet your business needs.
+              </p>
+            </div>
+          </details>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<CallToAction call_to_action={call_to_action} />
+</Base>
