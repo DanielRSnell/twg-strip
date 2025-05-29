@@ -1,0 +1,666 @@
+---
+import Base from "@/layouts/Base.astro";
+import ExternalLogo from "../components/ExternalLogo.astro";
+import CallToAction from "@/partials/CallToAction.astro";
+
+// Custom call to action for AI Experts page
+const call_to_action = {
+  data: {
+    enable: true,
+    title: "Ready to Partner with AI Experts?",
+    image: "/images/call-to-action.png",
+    description: "Transform your business with ThisWay's proven AI expertise. From strategy to implementation, we deliver results that matter.",
+    button: {
+      enable: true,
+      label: "Schedule Consultation",
+      link: "/contact"
+    }
+  }
+};
+---
+
+<Base>
+  <!-- Hero Section -->
+  <section class="py-24 section bg-theme-light">
+    <div class="container relative">
+      <div class="justify-center row gy-3">
+        <div class="lg:col-8">
+          <h1
+            class="text-2xl font-semibold tracking-tight text-center md:text-3xl lg:text-4xl text-dark lg:text-balance"
+            data-aos="fade-up-sm"
+            data-aos-delay="100"
+          >
+            Why ThisWay Global: Proven AI Experts Driving Real Results
+          </h1>
+        </div>
+        <div
+          class="inline-block text-center"
+          data-aos="fade-up-sm"
+          data-aos-delay="200"
+        >
+          <button class="btn btn-primary">
+            Explore Our AI Solutions
+          </button>
+        </div>
+        <div class="lg:col-10" data-aos="fade-up-sm" data-aos-delay="300">
+          <div class="flex flex-wrap gap-2 justify-center items-center mb-6">
+            <div class="flex -space-x-2">
+              <div class="inline-block overflow-hidden rounded-full outline-white size-8 outline-2">
+                <ExternalLogo domain="openai.com" name="OpenAI" height={32} width={32} class="object-cover object-center" />
+              </div>
+              <div class="inline-block overflow-hidden rounded-full outline-white size-8 outline-2">
+                <ExternalLogo domain="microsoft.com" name="Microsoft" height={32} width={32} class="object-cover object-center" />
+              </div>
+              <div class="inline-block overflow-hidden rounded-full outline-white size-8 outline-2">
+                <ExternalLogo domain="google.com" name="Google" height={32} width={32} class="object-cover object-center" />
+              </div>
+              <div class="inline-block overflow-hidden rounded-full outline-white size-8 outline-2">
+                <ExternalLogo domain="anthropic.com" name="Anthropic" height={32} width={32} class="object-cover object-center" />
+              </div>
+            </div>
+            <div class="text-xs text-center text-light">
+              <span class="block">Trusted AI technology partners</span>
+              <span class="block">15+ years of innovation excellence</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mx-auto mt-12 relative h-[400px] md:h-[500px] lg:h-[600px]" data-aos="fade-up-sm" data-aos-delay="300">
+        <div class="stack-container relative w-full h-full">
+          <!-- Launch HPC Dashboard - Back card -->
+          <div class="stack-card absolute inset-0 w-full h-full" style="z-index: 1; transform: rotate(-2deg) translateY(10px) translateX(-15px);">
+            <img
+              loading="eager"
+              decoding="async"
+              alt="Launch HPC Performance Dashboard"
+              class="object-cover w-full h-full rounded-lg border shadow-lg border-border"
+              src="/images/launch-dashboard.webp"
+            />
+            <div class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-medium text-dark">
+              Launch HPC
+            </div>
+          </div>
+          
+          <!-- AI4Jobs - Middle card -->
+          <div class="stack-card absolute inset-0 w-full h-full" style="z-index: 2; transform: rotate(1deg) translateY(5px) translateX(8px);">
+            <img
+              loading="eager"
+              decoding="async"
+              alt="AI4Jobs Platform Interface"
+              class="object-cover w-full h-full rounded-lg border shadow-lg border-border"
+              src="/images/sullys-sandbox.jpeg"
+            />
+            <div class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-medium text-dark">
+              AI Research
+            </div>
+          </div>
+          
+          <!-- Sully's Sandbox - Front card -->
+          <div class="stack-card absolute inset-0 w-full h-full" style="z-index: 3; transform: rotate(-1deg) translateY(0px) translateX(5px);">
+            <img
+              loading="eager"
+              decoding="async"
+              alt="Sully's Sandbox AI Assistant Platform"
+              class="object-cover w-full h-full rounded-lg border shadow-lg border-border"
+              src="/images/sullys-dash.png"
+            />
+            <div class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-medium text-dark">
+              Sully's Sandbox
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Core Expertise Section -->
+  <section class="section">
+    <div class="container">
+      <div>
+        <p class="text-sm font-bold uppercase text-tertiary" data-aos="fade-right-sm" data-aos-delay="100">Core Expertise</p>
+        <h2
+          class="mt-4 text-4xl font-semibold sm:text-4xl md:text-5xl lg:text-6xl text-dark lg:text-balance"
+          data-aos="fade-right-sm"
+          data-aos-delay="200"
+        >
+          Deep AI Expertise Across Industries
+        </h2>
+        <p class="mt-4 max-w-xl text-base font-medium text-light" data-aos="fade-right-sm" data-aos-delay="300">
+          From machine learning algorithms to enterprise AI deployments, our team combines cutting-edge research with practical implementation experience to deliver transformative solutions.
+        </p>
+      </div>
+      <div 
+        class="grid grid-cols-1 gap-x-2 gap-y-14 mt-12 lg:gap-12 sm:grid-cols-2 lg:grid-cols-3"
+      >
+        <div class="flex flex-col justify-between h-full" data-aos="fade-up-sm" data-aos-delay="100">
+          <div>
+            <h3 class="text-base font-medium text-dark">
+              Machine Learning & Deep Learning
+            </h3>
+            <p class="mt-2 text-sm text-light">
+              Advanced neural networks, computer vision, and natural language processing solutions that push the boundaries of what's possible.
+            </p>
+          </div>
+          <ul role="list" class="mt-6 space-y-1 font-medium text-light">
+            <li>
+              <div class="flex gap-2 items-center">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="text-light icon icon-tabler-circle-check size-5"
+                  slot="icon"
+                >
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M5 12l5 5l10 -10"></path>
+                </svg>
+                <span class="text-sm">Custom neural architectures</span>
+              </div>
+            </li>
+            <li>
+              <div class="flex gap-2 items-center">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="text-light icon icon-tabler-circle-check size-5"
+                  slot="icon"
+                >
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M5 12l5 5l10 -10"></path>
+                </svg>
+                <span class="text-sm">Multi-modal AI systems</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+        
+        <div class="flex flex-col justify-between h-full" data-aos="fade-up-sm" data-aos-delay="200">
+          <div>
+            <h3 class="text-base font-medium text-dark">
+              Enterprise AI Strategy & Implementation
+            </h3>
+            <p class="mt-2 text-sm text-light">
+              Comprehensive AI transformation strategies that align with business objectives and deliver measurable ROI.
+            </p>
+          </div>
+          <ul role="list" class="mt-6 space-y-1 font-medium text-light">
+            <li>
+              <div class="flex gap-2 items-center">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="text-light icon icon-tabler-circle-check size-5"
+                  slot="icon"
+                >
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M5 12l5 5l10 -10"></path>
+                </svg>
+                <span class="text-sm">AI readiness assessments</span>
+              </div>
+            </li>
+            <li>
+              <div class="flex gap-2 items-center">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="text-light icon icon-tabler-circle-check size-5"
+                  slot="icon"
+                >
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M5 12l5 5l10 -10"></path>
+                </svg>
+                <span class="text-sm">Scalable deployment frameworks</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="flex flex-col justify-between h-full" data-aos="fade-up-sm" data-aos-delay="300">
+          <div>
+            <h3 class="text-base font-medium text-dark">
+              AI Ethics & Responsible Innovation
+            </h3>
+            <p class="mt-2 text-sm text-light">
+              Ensuring AI solutions are fair, transparent, and aligned with ethical principles while maintaining competitive advantage.
+            </p>
+          </div>
+          <ul role="list" class="mt-6 space-y-1 font-medium text-light">
+            <li>
+              <div class="flex gap-2 items-center">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="text-light icon icon-tabler-circle-check size-5"
+                  slot="icon"
+                >
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M5 12l5 5l10 -10"></path>
+                </svg>
+                <span class="text-sm">Bias detection & mitigation</span>
+              </div>
+            </li>
+            <li>
+              <div class="flex gap-2 items-center">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="text-light icon icon-tabler-circle-check size-5"
+                  slot="icon"
+                >
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M5 12l5 5l10 -10"></path>
+                </svg>
+                <span class="text-sm">Explainable AI frameworks</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Track Record Section -->
+  <section class="section">
+    <div class="container">
+      <div class="grid grid-cols-1 gap-2 lg:grid-cols-2">
+        <div class="grid grid-cols-1 gap-2 h-full lg:grid-cols-2">
+          <div
+            class="grid grid-cols-1 gap-2 h-full sm:grid-cols-2 lg:grid-cols-1"
+          >
+            <div class="p-8 rounded-2xl bg-theme-light" data-aos="fade-right-sm" data-aos-delay="100">
+              <p class="text-xs font-bold uppercase text-tertiary">Innovation Leadership</p>
+              <h3 class="mt-4 text-lg font-medium md:text-xl text-dark">
+                15+ Years of AI Breakthroughs
+              </h3>
+              <p class="mt-2 text-sm font-medium text-light">
+                From early machine learning implementations to cutting-edge generative AI solutions, we've been at the forefront of AI innovation since 2008.
+              </p>
+            </div>
+            <div class="overflow-hidden items-center p-8 rounded-2xl bg-theme-light" data-aos="fade-right-sm" data-aos-delay="200">
+              <div
+                class="[-webkit-mask-image:radial-gradient(56.81%_53.42%_at_50%_46.58%,_rgba(217,217,217,0.9)_24.36%,rgba(217,217,217,0)_100%)]"
+              >
+                <div class="flex flex-wrap gap-2 justify-evenly">
+                  <ExternalLogo domain="tensorflow.org" name="TensorFlow" height={32} width={32} />
+                  <ExternalLogo domain="pytorch.org" name="PyTorch" height={32} width={32} />
+                  <ExternalLogo domain="huggingface.co" name="Hugging Face" height={32} width={32} />
+                  <ExternalLogo domain="openai.com" name="OpenAI" height={32} width={32} />
+                  <ExternalLogo domain="anthropic.com" name="Anthropic" height={32} width={32} />
+                  <ExternalLogo domain="langchain.com" name="LangChain" height={32} width={32} />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="flex relative flex-col justify-center items-center" data-aos="fade-up-sm" data-aos-delay="300">
+            <img
+              class="object-cover relative h-full rounded-2xl"
+              src="/images/sullys-sandbox.jpeg"
+              alt="AI Research Lab"
+            />
+            <div class="absolute bottom-0 p-4 w-full">
+              <button
+                class="w-full btn btn-primary"
+              >
+                Explore Sully's Sandbox
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="grid grid-cols-1 gap-2 h-full lg:grid-cols-2">
+          <div
+            class="flex overflow-hidden relative flex-col justify-between h-full rounded-2xl bg-theme-light"
+            data-aos="fade-left-sm"
+            data-aos-delay="100"
+          >
+            <div class="relative p-8 mt-auto">
+              <p class="text-xs font-bold uppercase text-tertiary">Research Excellence</p>
+              <h3 class="mt-4 text-lg font-medium md:text-xl text-dark">
+                Published AI Research & Patents
+              </h3>
+              <p class="mt-2 text-sm font-medium text-light">
+                Our team has published numerous peer-reviewed papers and holds multiple patents in AI, contributing to the advancement of the field.
+              </p>
+            </div>
+          </div>
+          <div
+            class="flex overflow-hidden relative flex-col justify-between h-full rounded-2xl bg-theme-light"
+            data-aos="fade-left-sm"
+            data-aos-delay="200"
+          >
+            <div class="relative p-8">
+              <p class="text-xs font-bold uppercase text-tertiary">Enterprise Scale</p>
+              <h3 class="mt-4 text-lg font-medium md:text-xl text-dark">
+                Fortune 500 AI Deployments
+              </h3>
+              <p class="mt-2 text-sm font-medium text-light">
+                Successfully deployed AI solutions for global enterprises, processing billions of data points and delivering measurable business impact.
+              </p>
+            </div>
+          </div>
+          <div class="p-8 rounded-2xl bg-theme-light" data-aos="fade-left-sm" data-aos-delay="300">
+            <p class="text-xs font-bold uppercase text-tertiary">Technical Leadership</p>
+            <h3 class="mt-4 text-lg font-medium md:text-xl text-dark">
+              AI Architecture & Infrastructure
+            </h3>
+            <p class="mt-2 text-sm font-medium text-light">
+              Designing and implementing scalable AI infrastructure that powers mission-critical applications with 99.9% uptime and enterprise-grade security.
+            </p>
+          </div>
+          <div class="p-8 rounded-2xl bg-theme-light" data-aos="fade-left-sm" data-aos-delay="400">
+            <p class="text-xs font-bold uppercase text-tertiary">Industry Recognition</p>
+            <h3 class="mt-4 text-lg font-medium md:text-xl text-dark">
+              Award-Winning AI Solutions
+            </h3>
+            <p class="mt-2 text-sm font-medium text-light">
+              Recognized by industry leaders for innovation in AI ethics, bias reduction, and responsible AI deployment across diverse sectors.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Our AI Products Section -->
+  <section class="section">
+    <div class="container relative">
+      <div class="grid grid-cols-1 gap-12 md:grid-cols-3 md:items-end">
+        <div class="lg:col-span-2">
+          <p class="text-sm font-bold uppercase text-tertiary" data-aos="fade-up-sm" data-aos-delay="100">Our AI Products</p>
+          <h2
+            class="mt-4 text-2xl font-semibold md:text-3xl lg:text-4xl text-dark lg:text-balance"
+            data-aos="fade-up-sm"
+            data-aos-delay="200"
+          >
+            Three Flagship AI Solutions Proving Our Expertise
+          </h2>
+        </div>
+        <p class="text-base font-medium text-light" data-aos="fade-up-sm" data-aos-delay="300">
+          Real AI products in production, serving thousands of users and processing millions of queries daily.
+        </p>
+      </div>
+      <dl class="grid grid-cols-1 gap-6 mt-12 lg:grid-cols-3 md:grid-cols-2">
+        <div class="rounded-3xl shadow bg-theme-light" data-aos="fade-up-sm" data-aos-delay="100">
+          <dt class="p-8">
+            <h3 class="text-lg font-medium md:text-xl text-dark">
+              WorkThisWay: AI-Powered Recruitment
+            </h3>
+          </dt>
+          <dd class="p-8 border-t border-border">
+            <p class="text-base font-medium text-light">
+              Revolutionary recruitment technology that eliminates bias and matches candidates based on skills and potential, not demographics. Used by Fortune 500 companies to improve hiring diversity by 40%.
+            </p>
+          </dd>
+        </div>
+        <div class="rounded-3xl shadow bg-secondary" data-aos="fade-up-sm" data-aos-delay="200">
+          <dt class="p-8">
+            <h3 class="text-lg font-medium text-white md:text-xl">
+              Sully's Sandbox: AI Model Marketplace
+            </h3>
+          </dt>
+          <dd class="p-8 border-t border-white/20">
+            <p class="text-base font-medium text-white">
+              A comprehensive platform for discovering, testing, and deploying AI models. Our curated marketplace features vetted models with performance benchmarks, safety ratings, and deployment guides.
+            </p>
+          </dd>
+        </div>
+        <div class="rounded-3xl shadow bg-primary" data-aos="fade-up-sm" data-aos-delay="300">
+          <dt class="p-8">
+            <h3 class="text-lg font-medium text-white md:text-xl">
+              Launch HPC: AI Infrastructure Platform
+            </h3>
+          </dt>
+          <dd class="p-8 border-t border-white/20">
+            <p class="text-base font-medium text-white">
+              Enterprise-grade high-performance computing platform optimized for AI workloads. Seamlessly scale from development to production with intelligent resource management and cost optimization.
+            </p>
+          </dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- Why Choose ThisWay Section -->
+  <section class="section">
+    <div class="container relative">
+      <div class="text-center">
+        <p class="text-sm font-bold uppercase text-tertiary" data-aos="fade-up-sm" data-aos-delay="100">Why Choose ThisWay</p>
+        <h2
+          class="mt-4 text-2xl font-semibold md:text-3xl lg:text-4xl text-dark lg:text-balance"
+          data-aos="fade-up-sm"
+          data-aos-delay="200"
+        >
+          What Sets Our AI Expertise Apart
+        </h2>
+        <p class="mt-4 text-base font-medium text-light" data-aos="fade-up-sm" data-aos-delay="300">
+          Proven results, ethical approach, and deep technical expertise that transforms businesses.
+        </p>
+      </div>
+      <div class="mt-12 space-y-24">
+        <div>
+          <div
+            class="flex flex-col justify-between pb-5 border-b lg:flex-row lg:items-center border-border"
+          >
+            <h2
+              class="text-lg font-semibold md:text-xl text-dark lg:text-balance"
+              data-aos="fade-right-sm"
+              data-aos-delay="100"
+            >
+              Technical Excellence
+            </h2>
+          </div>
+          <div>
+            <details class="cursor-pointer group" data-aos="fade-up-sm" data-aos-delay="200">
+              <summary
+                class="flex justify-between items-center py-4 w-full text-base font-medium text-left select-none text-light hover:text-light focus:text-accent-500"
+              >
+                How does ThisWay ensure AI model accuracy and reliability?
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="duration-300 ease-out transform icon icon-tabler-plus size-4 group-open:-rotate-45"
+                >
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M12 5l0 14"></path>
+                  <path d="M5 12l14 0"></path>
+                </svg>
+              </summary>
+              <div class="py-4 pt-2 text-sm text-light">
+                <p class="text-base font-medium text-light">
+                  We implement rigorous testing frameworks including cross-validation, A/B testing, and continuous monitoring. Our models undergo extensive validation on diverse datasets and real-world scenarios before deployment, with ongoing performance tracking and automatic retraining capabilities.
+                </p>
+              </div>
+            </details>
+            <details class="cursor-pointer group" data-aos="fade-up-sm" data-aos-delay="300">
+              <summary
+                class="flex justify-between items-center py-4 w-full text-base font-medium text-left select-none text-light hover:text-light focus:text-accent-500"
+              >
+                What makes ThisWay's approach to AI ethics unique?
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="duration-300 ease-out transform icon icon-tabler-plus size-4 group-open:-rotate-45"
+                >
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M12 5l0 14"></path>
+                  <path d="M5 12l14 0"></path>
+                </svg>
+              </summary>
+              <div class="py-4 pt-2 text-sm text-light">
+                <p class="text-base font-medium text-light">
+                  We've built ethics into our AI development process from day one, not as an afterthought. Our proprietary bias detection algorithms, transparent decision-making frameworks, and commitment to fairness have been validated through real-world applications like WorkThisWay, which has measurably improved hiring diversity.
+                </p>
+              </div>
+            </details>
+          </div>
+        </div>
+
+        <div>
+          <div
+            class="flex flex-col justify-between pb-5 border-b lg:flex-row lg:items-center border-border"
+          >
+            <h2
+              class="text-lg font-semibold md:text-xl text-dark lg:text-balance"
+              data-aos="fade-right-sm"
+              data-aos-delay="100"
+            >
+              Business Impact
+            </h2>
+          </div>
+          <div>
+            <details class="cursor-pointer group" data-aos="fade-up-sm" data-aos-delay="200">
+              <summary
+                class="flex justify-between items-center py-4 w-full text-base font-medium text-left select-none text-light hover:text-light focus:text-accent-500"
+              >
+                Can you provide specific examples of ROI from ThisWay's AI implementations?
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="duration-300 ease-out transform icon icon-tabler-plus size-4 group-open:-rotate-45"
+                >
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M12 5l0 14"></path>
+                  <path d="M5 12l14 0"></path>
+                </svg>
+              </summary>
+              <div class="py-4 pt-2 text-sm text-light">
+                <p class="text-base font-medium text-light">
+                  Our clients have seen measurable results: 40% improvement in hiring diversity, 60% reduction in time-to-hire, 35% cost savings on compute infrastructure, and 25% increase in model accuracy. We provide detailed analytics and regular performance reports to track and optimize ROI throughout the engagement.
+                </p>
+              </div>
+            </details>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CallToAction call_to_action={call_to_action} />
+</Base>
+
+<style>
+  .stack-container {
+    perspective: 1000px;
+  }
+  
+  .stack-card {
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-origin: center center;
+  }
+  
+  .stack-card.active {
+    z-index: 10 !important;
+    transform: rotate(0deg) translateY(0px) translateX(0px) scale(1) !important;
+  }
+  
+  .stack-card.behind {
+    z-index: 5 !important;
+    transform: rotate(-2deg) translateY(8px) translateX(-10px) scale(0.96) !important;
+  }
+  
+  .stack-card.back {
+    z-index: 1 !important;
+    transform: rotate(1deg) translateY(16px) translateX(10px) scale(0.92) !important;
+  }
+</style>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const stackCards = document.querySelectorAll('.stack-card');
+    
+    if (!stackCards.length) return;
+    
+    let currentIndex = 0;
+    const rotationInterval = 3000; // 3 seconds
+    
+    function updateCardPositions() {
+      stackCards.forEach((card, index) => {
+        // Remove all position classes
+        card.classList.remove('active', 'behind', 'back');
+        
+        // Calculate position relative to current active card
+        const position = (index - currentIndex + stackCards.length) % stackCards.length;
+        
+        if (position === 0) {
+          card.classList.add('active');
+        } else if (position === 1) {
+          card.classList.add('behind');
+        } else {
+          card.classList.add('back');
+        }
+      });
+    }
+    
+    function rotateCards() {
+      currentIndex = (currentIndex + 1) % stackCards.length;
+      updateCardPositions();
+    }
+    
+    // Initialize positions
+    updateCardPositions();
+    
+    // Start rotation
+    const rotationTimer = setInterval(rotateCards, rotationInterval);
+    
+    // Pause rotation on hover
+    const stackContainer = document.querySelector('.stack-container');
+    if (stackContainer) {
+      stackContainer.addEventListener('mouseenter', () => {
+        clearInterval(rotationTimer);
+      });
+      
+      stackContainer.addEventListener('mouseleave', () => {
+        setInterval(rotateCards, rotationInterval);
+      });
+    }
+    
+    // Clean up on page unload
+    window.addEventListener('beforeunload', () => {
+      clearInterval(rotationTimer);
+    });
+  });
+</script>
