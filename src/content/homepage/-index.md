@@ -42,7 +42,7 @@ service:
         enable: true
         label: "learn more"
         link: "/services"
-    - title: "WorkThisWay"
+    - title: "AI4JOBS"
       image: "service-3"
       content: "Transform your recruitment process with AI-driven candidate identification and matching technology."
       button:

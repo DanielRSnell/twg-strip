@@ -19,7 +19,7 @@ testimonials:
   - name: "Emily Thompson"
     designation: "VP of Talent, Enterprise Co"
     avatar: "/images/client/client-img-3.png"
-    content: "WorkThisWay has transformed our recruitment process. The AI-driven candidate matching has not only saved us time but has also helped us find exceptional talent we might have missed otherwise."
+    content: "AI4JOBS has transformed our recruitment process. The AI-driven candidate matching has not only saved us time but has also helped us find exceptional talent we might have missed otherwise."
 
   - name: "James Wilson"
     designation: "Director of Innovation, Tech Solutions"
@@ -29,7 +29,7 @@ testimonials:
   - name: "Lisa Chang"
     designation: "Head of HR, Global Corp"
     avatar: "/images/client/client-img-3.png"
-    content: "The precision and efficiency of WorkThisWay's AI-driven recruitment have significantly improved our hiring outcomes while reducing time-to-hire."
+    content: "The precision and efficiency of AI4JOBS's AI-driven recruitment have significantly improved our hiring outcomes while reducing time-to-hire."
 
   - name: "David Park"
     designation: "CIO, AI Innovations"

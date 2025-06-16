@@ -28,7 +28,7 @@ contact_info:
     options:
       - "Launch HPC - High Performance Computing"
       - "Sully's Sandbox - AI Model Marketplace"
-      - "WorkThisWay - AI-Driven Recruitment"
+      - "AI4JOBS - AI-Driven Recruitment"
       - "Enterprise Solutions"
       - "Partnership Opportunities"
       - "Career Inquiries"

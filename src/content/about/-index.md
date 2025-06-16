@@ -11,7 +11,7 @@ button:
 story:
   title: "Innovation Through <br> Technology"
   content_1: "At ThisWay Global, we're revolutionizing how businesses leverage AI technology. Founded by Cambridge graduate Angela Hood, we combine deep expertise in AI, HR technology, and high-performance computing."
-  content_2: "Since our inception, we've been dedicated to developing solutions that address critical business challenges. Our suite of products - Launch HPC, Sully's Sandbox, and WorkThisWay - represents our commitment to innovation and practical application of advanced technology."
+  content_2: "Since our inception, we've been dedicated to developing solutions that address critical business challenges. Our suite of products - Launch HPC, Sully's Sandbox, and AI4JOBS - represents our commitment to innovation and practical application of advanced technology."
   stats:
     - key: "FOUNDED"
       value: "2015"

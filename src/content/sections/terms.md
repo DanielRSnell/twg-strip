@@ -13,7 +13,7 @@ header:
 ThisWay Global provides AI-powered enterprise solutions including:
 - Launch HPC: High-performance computing platform
 - Sully's Sandbox: AI model marketplace
-- WorkThisWay: AI-driven recruitment solution
+- AI4JOBS: AI-driven recruitment solution
 
 #### 2. Platform Usage
 

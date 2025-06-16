@@ -1,6 +1,6 @@
 ---
-title: "WorkThisWay"
-contact_1: "Transform your recruitment process with our AI-driven talent acquisition platform. WorkThisWay uses advanced algorithms to identify and match passive candidates with opportunities, going beyond traditional keyword matching to understand true potential and fit."
+title: "AI4JOBS"
+contact_1: "Transform your recruitment process with our AI-driven talent acquisition platform. AI4JOBS uses advanced algorithms to identify and match passive candidates with opportunities, going beyond traditional keyword matching to understand true potential and fit."
 contact_2: "Our solution integrates seamlessly with your existing HR systems, providing intelligent candidate sourcing, matching, and engagement tools that significantly improve hiring outcomes while reducing time-to-hire and recruitment costs."
 image: "service-3"
 button:
