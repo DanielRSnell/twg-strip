@@ -4,7 +4,7 @@ const {
   hover = "#333", 
   logo = "/images/client/tamu-logo.png", 
   title = "Prototype Online",
-  endpoint = "https://thiswayglobal.com/wp-json/relay/v1/forward"
+  endpoint = "https://ssbx.ai4jobs.com/ssbx/api/v1/ai/f1d18632-2e4e-4f71-9032-cb2357c40571/text"
 } = Astro.props;
 ---
 
@@ -93,7 +93,7 @@ const {
       overflow-y: scroll;
       display: flex;
       flex-direction: column;
-      max-height 800px;
+      max-height: 800px;
       height: 100%;
       gap: 16px;
     }
@@ -410,18 +410,19 @@ class ChatBot extends HTMLElement {
         method: "GET",
         headers: {
           Accept: "*/*",
-          Authorization: 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJnRDZFZld3bU1wTURud0ZZcVU0enBFcGs1Yi1uU2pwUE5GN2p0My1uci04In0.eyJleHAiOjE3NDg5NjY1NTQsImlhdCI6MTc0ODg4MDE1NCwianRpIjoiMzViZTA5ZjgtZjk4MS00MmM4LWExMDQtYjY1ODBhNGIzYTNhIiwiaXNzIjoiaHR0cHM6Ly9rZXljbG9hay5kZXYtYWk0am9icy5jb20vcmVhbG1zL3NzYngtdGYiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiNDZiMzU0ZDctODRhMy00MjhlLWJjMTUtNGEwOGJkYzk4NTRhIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoic3NieC13ZWIiLCJzZXNzaW9uX3N0YXRlIjoiNTlhOGQ3ZGYtNTUxYi00MmYxLWI4YzctN2QzOGU1MTVhMzYwIiwiYWxsb3dlZC1vcmlnaW5zIjpbImh0dHA6Ly9sb2NhbGhvc3Q6ODA4MCIsImh0dHBzOi8vc3NieC5kZXYtYWk0am9icy5jb20iXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIm9mZmxpbmVfYWNjZXNzIiwiZGVmYXVsdC1yb2xlcy1zc2J4LXRmIiwiYWRtaW4iLCJ1bWFfYXV0aG9yaXphdGlvbiIsInVzZXIiLCJyYWd0ZXN0MiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoib3BlbmlkIGVtYWlsIHByb2ZpbGUiLCJzaWQiOiI1OWE4ZDdkZi01NTFiLTQyZjEtYjhjNy03ZDM4ZTUxNWEzNjAiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwibmFtZSI6Ik1hcmNlbG8gVmVuYW5jaW8gU2lsdmEiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJtYXJjZWxvLnNpbHZhQHRoaXN3YXlnbG9iYWwuY29tIiwiZ2l2ZW5fbmFtZSI6Ik1hcmNlbG8gVmVuYW5jaW8iLCJmYW1pbHlfbmFtZSI6IlNpbHZhIiwiZW1haWwiOiJtYXJjZWxvLnNpbHZhQHRoaXN3YXlnbG9iYWwuY29tIn0.pKGsmuwbpYh5P0lhvIIp9fsOpJI3dmWvPu333Ta2UelnlrSCk4zcsYVPCgGq21EeO6eT0ao0_jdJiW2M6zFYG1NJ_t-__zqiZqaRZKMiManp_VE6nsXkavUNKSXOnTCANk_m0cXLUQKlQPnsD1SSmaGLFa3aF9orIBPeoChcJqg8O0_RtQeHTjYBy89LIpB5tF4aOqVfgXAc0lAUFLjt6i4w_Ly3uiwWI83Z0Bo8qHO2GHUEOsGrcMT6ZsZvtTPlK2ceVWlX7s96mvJJBHM9PN9i-DqHKEdKkCeCERoejnnu5nSQzwnziTTSTvw6jpbzmO3UyeHBWyTMDTqLwJzUnw'
+          Authorization: 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICIxcnAtMTJRYWY4VUNEZjRsWDRaYkJwYkV3c1NKVUhiV1U0dF9wS2lFTnVvIn0.eyJleHAiOjE3NTAxNzA2NTQsImlhdCI6MTc1MDA4NDI1NCwianRpIjoiMmExYmYyOTItMDE5NS00OTI3LWJhNzktYjAyNDc4Yzc0OGE3IiwiaXNzIjoiaHR0cHM6Ly9rZXljbG9hay5haTRqb2JzLmNvbS9yZWFsbXMvc3NieC10ZiIsImF1ZCI6WyJyZWFsbS1tYW5hZ2VtZW50IiwiYWNjb3VudCJdLCJzdWIiOiI1YzA0MGM5My05Y2ViLTQ2NTQtYWM2MC05YjM5N2UxYjBjNjQiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJzc2J4LXdlYiIsInNlc3Npb25fc3RhdGUiOiJmYjM4MDZiZi00ZGU5LTRlYTItYjgwZS00NGYzNjljMTRmNWEiLCJhbGxvd2VkLW9yaWdpbnMiOlsiaHR0cHM6Ly9zc2J4LmFpNGpvYnMuY29tIiwiaHR0cDovL2xvY2FsaG9zdDo4MDgwIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJvZmZsaW5lX2FjY2VzcyIsImRlZmF1bHQtcm9sZXMtc3NieC10ZiIsImFkbWluIiwidW1hX2F1dGhvcml6YXRpb24iLCJ1c2VyIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsicmVhbG0tbWFuYWdlbWVudCI6eyJyb2xlcyI6WyJ2aWV3LWlkZW50aXR5LXByb3ZpZGVycyIsInZpZXctcmVhbG0iLCJtYW5hZ2UtaWRlbnRpdHktcHJvdmlkZXJzIiwiaW1wZXJzb25hdGlvbiIsInJlYWxtLWFkbWluIiwiY3JlYXRlLWNsaWVudCIsIm1hbmFnZS11c2VycyIsInF1ZXJ5LXJlYWxtcyIsInZpZXctYXV0aG9yaXphdGlvbiIsInF1ZXJ5LWNsaWVudHMiLCJxdWVyeS11c2VycyIsIm1hbmFnZS1ldmVudHMiLCJtYW5hZ2UtcmVhbG0iLCJ2aWV3LWV2ZW50cyIsInZpZXctdXNlcnMiLCJ2aWV3LWNsaWVudHMiLCJtYW5hZ2UtYXV0aG9yaXphdGlvbiIsIm1hbmFnZS1jbGllbnRzIiwicXVlcnktZ3JvdXBzIl19LCJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6Im9wZW5pZCBwcm9maWxlIGVtYWlsIiwic2lkIjoiZmIzODA2YmYtNGRlOS00ZWEyLWI4MGUtNDRmMzY5YzE0ZjVhIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5hbWUiOiJNYXJjZWxvIFNpbHZhIiwicHJlZmVycmVkX3VzZXJuYW1lIjoibWFyY2Vsby5zaWx2YUB0aGlzd2F5Z2xvYmFsLmNvbSIsImdpdmVuX25hbWUiOiJNYXJjZWxvIiwiZmFtaWx5X25hbWUiOiJTaWx2YSIsImVtYWlsIjoibWFyY2Vsby5zaWx2YUB0aGlzd2F5Z2xvYmFsLmNvbSJ9.n7GFNh63JwMEiD_2R2oBqOJbMq3Vq-Fj2oiQWj_VjYBg-fZ7Ib3X5D4I_GwMlO63-kahWs91gpDhAI0TezZzVgctmWsHgV0XvDNcOR6-o0q_GHWPYBUPrzWLqtJ_zFwbR4LyCXcVNDdtMrgPBX9magbDKRmu6GpqT4ZqMPmzx532LL_I1OZ7NrYNsCJGO3xcx0xC-teHmHUkQKHgAH-kxUVIisyiJ2kHchbs6W9oWflGdrpx3scDptXn09BOR5Uwke6v1vgn_Mh8v2BT8plX1HJsO4XN8YsjP9IhiZTM6ZygvvuGKai1YgeGWna1Lk6xq1BQzj6d-0nGjtqqkoCHKQ'
         }
       });
 
       if (!response.ok) throw new Error("API request failed");
 
-      const responseText = await response.text();
+      const responseData = await response.json();
       
-      console.log(responseText);
+      console.log(responseData);
       
-      // Add the response HTML after decoding any HTML entities
-      this.addMessage(responseText || "Sorry, I couldn't process that.", "bot");
+      // Extract the message from the response
+      const botMessage = responseData["TWG ChatBot"] || responseData.message || "Sorry, I couldn't process that.";
+      this.addMessage(botMessage, "bot");
       
     } catch (error) {
       console.error("Error:", error);

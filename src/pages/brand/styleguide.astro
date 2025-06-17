@@ -1,0 +1,472 @@
+---
+import Base from "@/layouts/Base.astro";
+import config from "@/config/config.json";
+import theme from "@/config/theme.json";
+
+const { title } = config.site;
+---
+
+<Base title={`Brand Styleguide - ${title}`} meta_title="Brand Styleguide">
+  <section class="section">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <h1 class="mb-8">ThisWay Global Brand Styleguide</h1>
+          <p class="text-lg mb-12">
+            This comprehensive brand guide provides design teams with all necessary assets, 
+            colors, typography, and components for creating consistent branded materials.
+          </p>
+        </div>
+      </div>
+
+      <!-- Brand Identity -->
+      <div class="row mb-16">
+        <div class="col-12">
+          <h2 class="mb-8">Brand Identity</h2>
+          
+          <!-- Logos -->
+          <div class="mb-12">
+            <h3 class="mb-6">Logo Variations</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <!-- Primary Logo -->
+              <div class="bg-white border border-border rounded-lg p-8 text-center">
+                <img src="/images/logo.svg" alt="ThisWay Global Logo" class="h-16 mx-auto mb-4">
+                <h4 class="text-sm font-medium">Primary Logo (SVG)</h4>
+                <p class="text-xs text-light">Use on light backgrounds</p>
+              </div>
+              
+              <!-- PNG Version -->
+              <div class="bg-white border border-border rounded-lg p-8 text-center">
+                <img src="/images/logo.png" alt="ThisWay Global Logo PNG" class="h-16 mx-auto mb-4">
+                <h4 class="text-sm font-medium">Primary Logo (PNG)</h4>
+                <p class="text-xs text-light">Fallback format</p>
+              </div>
+              
+              <!-- Favicon -->
+              <div class="bg-white border border-border rounded-lg p-8 text-center">
+                <img src="/images/favicon.png" alt="ThisWay Favicon" class="h-16 mx-auto mb-4">
+                <h4 class="text-sm font-medium">Favicon</h4>
+                <p class="text-xs text-light">Icon version</p>
+              </div>
+            </div>
+            
+            <!-- Logo Usage Guidelines -->
+            <div class="mt-8 p-6 bg-theme-light rounded-lg">
+              <h4 class="mb-4">Logo Usage Guidelines</h4>
+              <ul class="list-disc list-inside space-y-2 text-sm">
+                <li>Minimum width: 120px (as specified in config)</li>
+                <li>Maintain aspect ratio of 120x31px</li>
+                <li>Ensure clear space around logo equal to logo height</li>
+                <li>Do not modify colors, proportions, or add effects</li>
+                <li>Use SVG format when possible for scalability</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Color Palette -->
+      <div class="row mb-16">
+        <div class="col-12">
+          <h2 class="mb-8">Color Palette</h2>
+          
+          <!-- Primary Colors -->
+          <div class="mb-8">
+            <h3 class="mb-6">Primary Colors</h3>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <div class="text-center">
+                <div class="w-full h-24 rounded-lg mb-3" style={`background-color: ${theme.colors.default.theme_color.primary}`}></div>
+                <h4 class="text-sm font-medium">Primary</h4>
+                <p class="text-xs font-mono">{theme.colors.default.theme_color.primary}</p>
+                <p class="text-xs text-light">Black</p>
+              </div>
+              
+              <div class="text-center">
+                <div class="w-full h-24 rounded-lg mb-3" style={`background-color: ${theme.colors.default.theme_color.secondary}`}></div>
+                <h4 class="text-sm font-medium">Secondary</h4>
+                <p class="text-xs font-mono">{theme.colors.default.theme_color.secondary}</p>
+                <p class="text-xs text-light">Blue</p>
+              </div>
+              
+              <div class="text-center">
+                <div class="w-full h-24 rounded-lg mb-3" style={`background-color: ${theme.colors.default.theme_color.brand}`}></div>
+                <h4 class="text-sm font-medium">Brand</h4>
+                <p class="text-xs font-mono">{theme.colors.default.theme_color.brand}</p>
+                <p class="text-xs text-light">Teal</p>
+              </div>
+              
+              <div class="text-center">
+                <div class="w-full h-24 rounded-lg mb-3" style={`background-color: ${theme.colors.default.theme_color.tertiary}`}></div>
+                <h4 class="text-sm font-medium">Tertiary</h4>
+                <p class="text-xs font-mono">{theme.colors.default.theme_color.tertiary}</p>
+                <p class="text-xs text-light">Dark Gray</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Supporting Colors -->
+          <div class="mb-8">
+            <h3 class="mb-6">Supporting Colors</h3>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <div class="text-center">
+                <div class="w-full h-24 rounded-lg mb-3 border" style={`background-color: ${theme.colors.default.theme_color.body}`}></div>
+                <h4 class="text-sm font-medium">Body</h4>
+                <p class="text-xs font-mono">{theme.colors.default.theme_color.body}</p>
+                <p class="text-xs text-light">White</p>
+              </div>
+              
+              <div class="text-center">
+                <div class="w-full h-24 rounded-lg mb-3" style={`background-color: ${theme.colors.default.theme_color.theme_light}`}></div>
+                <h4 class="text-sm font-medium">Theme Light</h4>
+                <p class="text-xs font-mono">{theme.colors.default.theme_color.theme_light}</p>
+                <p class="text-xs text-light">Light Gray</p>
+              </div>
+              
+              <div class="text-center">
+                <div class="w-full h-24 rounded-lg mb-3" style={`background-color: ${theme.colors.default.theme_color.border}`}></div>
+                <h4 class="text-sm font-medium">Border</h4>
+                <p class="text-xs font-mono">{theme.colors.default.theme_color.border}</p>
+                <p class="text-xs text-light">Gray</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Text Colors -->
+          <div class="mb-8">
+            <h3 class="mb-6">Text Colors</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div class="text-center">
+                <div class="w-full h-24 rounded-lg mb-3" style={`background-color: ${theme.colors.default.text_color.default}`}></div>
+                <h4 class="text-sm font-medium">Default Text</h4>
+                <p class="text-xs font-mono">{theme.colors.default.text_color.default}</p>
+              </div>
+              
+              <div class="text-center">
+                <div class="w-full h-24 rounded-lg mb-3" style={`background-color: ${theme.colors.default.text_color.dark}`}></div>
+                <h4 class="text-sm font-medium">Dark Text</h4>
+                <p class="text-xs font-mono">{theme.colors.default.text_color.dark}</p>
+              </div>
+              
+              <div class="text-center">
+                <div class="w-full h-24 rounded-lg mb-3" style={`background-color: ${theme.colors.default.text_color.light}`}></div>
+                <h4 class="text-sm font-medium">Light Text</h4>
+                <p class="text-xs font-mono">{theme.colors.default.text_color.light}</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Texas Colors -->
+          <div class="mb-8">
+            <h3 class="mb-6">Texas Brand Colors</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div class="text-center">
+                <div class="w-full h-24 rounded-lg mb-3" style={`background-color: ${theme.colors.default.theme_color.texas.maroon}`}></div>
+                <h4 class="text-sm font-medium">Texas Maroon</h4>
+                <p class="text-xs font-mono">{theme.colors.default.theme_color.texas.maroon}</p>
+              </div>
+              
+              <div class="text-center">
+                <div class="w-full h-24 rounded-lg mb-3" style={`background-color: ${theme.colors.default.theme_color.texas.gray}`}></div>
+                <h4 class="text-sm font-medium">Texas Gray</h4>
+                <p class="text-xs font-mono">{theme.colors.default.theme_color.texas.gray}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Typography -->
+      <div class="row mb-16">
+        <div class="col-12">
+          <h2 class="mb-8">Typography</h2>
+          
+          <!-- Font Information -->
+          <div class="mb-8 p-6 bg-theme-light rounded-lg">
+            <h3 class="mb-4">Font Family</h3>
+            <p class="mb-2"><strong>Primary:</strong> {theme.fonts.font_family.primary_type}</p>
+            <p class="mb-2"><strong>Secondary:</strong> {theme.fonts.font_family.secondary_type}</p>
+            <p class="mb-2"><strong>Base Size:</strong> {theme.fonts.font_size.base}px</p>
+            <p><strong>Scale Ratio:</strong> {theme.fonts.font_size.scale}</p>
+          </div>
+
+          <!-- Heading Hierarchy -->
+          <div class="mb-8">
+            <h3 class="mb-6">Heading Hierarchy</h3>
+            <div class="space-y-6">
+              <div>
+                <h1 class="mb-2">H1 Heading Example</h1>
+                <p class="text-sm text-light">Desktop: 4.24rem | Mobile: 3.82rem</p>
+              </div>
+              
+              <div>
+                <h2 class="mb-2">H2 Heading Example</h2>
+                <p class="text-sm text-light">Desktop: 3.58rem | Mobile: 3.22rem</p>
+              </div>
+              
+              <div>
+                <h3 class="mb-2">H3 Heading Example</h3>
+                <p class="text-sm text-light">Desktop: 3.02rem | Mobile: 2.72rem</p>
+              </div>
+              
+              <div>
+                <h4 class="mb-2">H4 Heading Example</h4>
+                <p class="text-sm text-light">2.55rem</p>
+              </div>
+              
+              <div>
+                <h5 class="mb-2">H5 Heading Example</h5>
+                <p class="text-sm text-light">2.15rem</p>
+              </div>
+              
+              <div>
+                <h6 class="mb-2">H6 Heading Example</h6>
+                <p class="text-sm text-light">1.81rem</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Body Text -->
+          <div class="mb-8">
+            <h3 class="mb-6">Body Text</h3>
+            <div class="space-y-4">
+              <div>
+                <p class="mb-2">Regular paragraph text example. This is how body text appears throughout the website with proper line height and spacing for optimal readability.</p>
+                <p class="text-sm text-light">Base: 16px | Small: 12.8px</p>
+              </div>
+              
+              <div>
+                <p class="text-sm mb-2">Small text example for captions and secondary information.</p>
+                <p class="text-xs text-light">Small text sizing</p>
+              </div>
+              
+              <div>
+                <p class="mb-2"><strong>Bold text example</strong> and <em>italic text example</em></p>
+                <p class="text-sm text-light">Font weights and styles</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Components -->
+      <div class="row mb-16">
+        <div class="col-12">
+          <h2 class="mb-8">UI Components</h2>
+          
+          <!-- Buttons -->
+          <div class="mb-8">
+            <h3 class="mb-6">Buttons</h3>
+            <div class="space-y-4">
+              <div class="flex flex-wrap gap-4">
+                <button class="btn btn-primary">Primary Button</button>
+                <button class="btn btn-outline-primary">Primary Outline</button>
+                <button class="btn btn-secondary">Secondary Button</button>
+                <button class="btn btn-outline-secondary">Secondary Outline</button>
+              </div>
+              
+              <div class="flex flex-wrap gap-4">
+                <button class="btn btn-sm btn-primary">Small Primary</button>
+                <button class="btn btn-sm btn-outline-primary">Small Outline</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Form Elements -->
+          <div class="mb-8">
+            <h3 class="mb-6">Form Elements</h3>
+            <div class="max-w-md space-y-4">
+              <div>
+                <label class="form-label">Input Label</label>
+                <input type="text" class="form-input" placeholder="Placeholder text">
+              </div>
+              
+              <div>
+                <label class="form-label">Textarea Label</label>
+                <textarea class="form-input" rows="3" placeholder="Textarea placeholder"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <!-- Cards & Containers -->
+          <div class="mb-8">
+            <h3 class="mb-6">Cards & Containers</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div class="border border-border rounded-lg p-6">
+                <h4 class="mb-3">Standard Card</h4>
+                <p class="text-sm">This is a standard card container with border and padding.</p>
+              </div>
+              
+              <div class="bg-theme-light rounded-lg p-6">
+                <h4 class="mb-3">Light Background Card</h4>
+                <p class="text-sm">This card uses the theme light background color.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Spacing & Layout -->
+      <div class="row mb-16">
+        <div class="col-12">
+          <h2 class="mb-8">Spacing & Layout</h2>
+          
+          <!-- Grid System -->
+          <div class="mb-8">
+            <h3 class="mb-6">Grid System</h3>
+            <div class="p-6 bg-theme-light rounded-lg">
+              <h4 class="mb-4">Breakpoints</h4>
+              <ul class="list-disc list-inside space-y-2 text-sm">
+                <li><strong>sm:</strong> 540px</li>
+                <li><strong>md:</strong> 768px</li>
+                <li><strong>lg:</strong> 1024px</li>
+                <li><strong>xl:</strong> 1280px</li>
+                <li><strong>2xl:</strong> 1536px</li>
+              </ul>
+              
+              <h4 class="mb-4 mt-6">Container</h4>
+              <ul class="list-disc list-inside space-y-2 text-sm">
+                <li><strong>Max Width:</strong> 1160px</li>
+                <li><strong>Padding:</strong> 20px (sm), 40px (md+)</li>
+                <li><strong>Section Padding:</strong> 96px (y-axis), 112px (xl+)</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Spacing Scale -->
+          <div class="mb-8">
+            <h3 class="mb-6">Spacing Scale</h3>
+            <div class="space-y-3">
+              <div class="flex items-center">
+                <div class="w-4 h-4 bg-primary mr-4"></div>
+                <span class="text-sm">1 = 0.25rem (4px)</span>
+              </div>
+              <div class="flex items-center">
+                <div class="w-8 h-4 bg-primary mr-4"></div>
+                <span class="text-sm">2 = 0.5rem (8px)</span>
+              </div>
+              <div class="flex items-center">
+                <div class="w-12 h-4 bg-primary mr-4"></div>
+                <span class="text-sm">3 = 0.75rem (12px)</span>
+              </div>
+              <div class="flex items-center">
+                <div class="w-16 h-4 bg-primary mr-4"></div>
+                <span class="text-sm">4 = 1rem (16px)</span>
+              </div>
+              <div class="flex items-center">
+                <div class="w-20 h-4 bg-primary mr-4"></div>
+                <span class="text-sm">5 = 1.25rem (20px)</span>
+              </div>
+              <div class="flex items-center">
+                <div class="w-24 h-4 bg-primary mr-4"></div>
+                <span class="text-sm">6 = 1.5rem (24px)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Brand Assets -->
+      <div class="row mb-16">
+        <div class="col-12">
+          <h2 class="mb-8">Brand Assets</h2>
+          
+          <!-- Certifications -->
+          <div class="mb-8">
+            <h3 class="mb-6">Certifications & Badges</h3>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+              <div class="text-center">
+                <img src="/images/certifications/iso/A-LIGN_ISO-27001.png" alt="ISO 27001 Certification" class="h-16 mx-auto mb-2">
+                <p class="text-xs">ISO 27001 (Light)</p>
+              </div>
+              
+              <div class="text-center bg-dark p-4 rounded-lg">
+                <img src="/images/certifications/iso/A-LIGN_ISO-27001_dark.png" alt="ISO 27001 Dark" class="h-16 mx-auto mb-2">
+                <p class="text-xs text-white">ISO 27001 (Dark)</p>
+              </div>
+              
+              <div class="text-center">
+                <img src="/images/certifications/wbe.webp" alt="WBE Certification" class="h-16 mx-auto mb-2">
+                <p class="text-xs">WBE Certified</p>
+              </div>
+              
+              <div class="text-center">
+                <img src="/images/certifications/wbenc.avif" alt="WBENC Certification" class="h-16 mx-auto mb-2">
+                <p class="text-xs">WBENC</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Partner Logos -->
+          <div class="mb-8">
+            <h3 class="mb-6">Partner Logos</h3>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
+              <div class="text-center">
+                <img src="/images/client/tamu-logo.png" alt="Texas A&M University" class="h-12 mx-auto mb-2">
+                <p class="text-xs">Texas A&M University</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Company Logos -->
+          <div class="mb-8">
+            <h3 class="mb-6">Company Portfolio Logos</h3>
+            <div class="grid grid-cols-3 md:grid-cols-6 gap-4">
+              {Array.from({length: 6}, (_, i) => (
+                <div class="text-center">
+                  <img src={`/images/company-logo/company-logo-${i + 1}.webp`} alt={`Company ${i + 1}`} class="h-8 mx-auto mb-2">
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Usage Guidelines -->
+      <div class="row">
+        <div class="col-12">
+          <h2 class="mb-8">Usage Guidelines</h2>
+          
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div class="p-6 bg-theme-light rounded-lg">
+              <h3 class="mb-4 text-green-600">✓ Do</h3>
+              <ul class="list-disc list-inside space-y-2 text-sm">
+                <li>Use the official logo files provided</li>
+                <li>Maintain proper contrast ratios (4.5:1 minimum)</li>
+                <li>Follow the established spacing system</li>
+                <li>Use Inter font family consistently</li>
+                <li>Maintain brand color consistency</li>
+                <li>Test designs across all breakpoints</li>
+                <li>Use SVG formats when possible</li>
+              </ul>
+            </div>
+            
+            <div class="p-6 bg-red-50 border border-red-200 rounded-lg">
+              <h3 class="mb-4 text-red-600">✗ Don't</h3>
+              <ul class="list-disc list-inside space-y-2 text-sm">
+                <li>Modify logo colors or proportions</li>
+                <li>Use unauthorized color combinations</li>
+                <li>Mix different font families</li>
+                <li>Break the grid system</li>
+                <li>Use low-resolution images</li>
+                <li>Ignore accessibility guidelines</li>
+                <li>Create new color variations</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Contact Information -->
+          <div class="mt-12 p-6 border border-border rounded-lg">
+            <h3 class="mb-4">Brand Guidelines Contact</h3>
+            <p class="text-sm">
+              For questions about brand usage, additional assets, or approval of new materials, 
+              please contact the design team or refer to the complete brand manual.
+            </p>
+            <p class="text-sm mt-2">
+              <strong>Last Updated:</strong> {new Date().toLocaleDateString()}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
