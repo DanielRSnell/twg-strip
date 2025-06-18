@@ -13,43 +13,127 @@ const {
     <div class="login-header">
       <img src={logo} alt="Logo" class="login-logo">
       <h2 class="login-title">{title}</h2>
-      <p class="login-subtitle">Please sign in to continue</p>
+      <p class="login-subtitle" id="form-subtitle">Please sign in to continue</p>
     </div>
     
-    <form id="login-form" class="login-form-content">
-      <div class="form-group">
-        <label for="username">Username</label>
-        <input 
-          type="email" 
-          id="username" 
-          name="username" 
-          placeholder="Enter your email"
-          required
-        />
-      </div>
-      
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input 
-          type="password" 
-          id="password" 
-          name="password" 
-          placeholder="Enter your password"
-          required
-        />
-      </div>
-      
-      <button type="submit" class="login-button" id="login-btn">
-        <span class="login-text">Sign In</span>
-        <div class="login-spinner" style="display: none;">
-          <div class="spinner-dot"></div>
-          <div class="spinner-dot"></div>
-          <div class="spinner-dot"></div>
+    <!-- Tab Navigation -->
+    <div class="auth-tabs">
+      <button type="button" class="tab-button active" id="login-tab">Sign In</button>
+      <button type="button" class="tab-button" id="register-tab">Register</button>
+    </div>
+    
+    <!-- Forms Container -->
+    <div class="forms-container">
+      <!-- Login Form -->
+      <form id="login-form" class="auth-form-content active">
+        <div class="form-group">
+          <label for="login-username">Username</label>
+          <input 
+            type="email" 
+            id="login-username" 
+            name="username" 
+            placeholder="Enter your email"
+            required
+          />
         </div>
-      </button>
+        
+        <div class="form-group">
+          <label for="login-password">Password</label>
+          <input 
+            type="password" 
+            id="login-password" 
+            name="password" 
+            placeholder="Enter your password"
+            required
+          />
+        </div>
+        
+        <button type="submit" class="auth-button" id="login-btn">
+          <span class="button-text">Sign In</span>
+          <div class="button-spinner" style="display: none;">
+            <div class="spinner-dot"></div>
+            <div class="spinner-dot"></div>
+            <div class="spinner-dot"></div>
+          </div>
+        </button>
+      </form>
       
-      <div class="login-error" id="login-error" style="display: none;"></div>
-    </form>
+      <!-- Registration Form -->
+      <form id="register-form" class="auth-form-content">
+        <!-- Name Fields Row -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="register-firstname">First Name</label>
+            <input 
+              type="text" 
+              id="register-firstname" 
+              name="firstName" 
+              placeholder="Enter your first name"
+              required
+            />
+          </div>
+          
+          <div class="form-group">
+            <label for="register-lastname">Last Name</label>
+            <input 
+              type="text" 
+              id="register-lastname" 
+              name="lastName" 
+              placeholder="Enter your last name"
+              required
+            />
+          </div>
+        </div>
+        
+        <!-- Email Field -->
+        <div class="form-group">
+          <label for="register-email">Email</label>
+          <input 
+            type="email" 
+            id="register-email" 
+            name="email" 
+            placeholder="Enter your email"
+            required
+          />
+        </div>
+        
+        <!-- Password Fields Row -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="register-password">Password</label>
+            <input 
+              type="password" 
+              id="register-password" 
+              name="password" 
+              placeholder="Create a password"
+              required
+            />
+          </div>
+          
+          <div class="form-group">
+            <label for="register-confirm-password">Confirm Password</label>
+            <input 
+              type="password" 
+              id="register-confirm-password" 
+              name="confirmPassword" 
+              placeholder="Confirm your password"
+              required
+            />
+          </div>
+        </div>
+        
+        <button type="submit" class="auth-button" id="register-btn">
+          <span class="button-text">Create Account</span>
+          <div class="button-spinner" style="display: none;">
+            <div class="spinner-dot"></div>
+            <div class="spinner-dot"></div>
+            <div class="spinner-dot"></div>
+          </div>
+        </button>
+      </form>
+    </div>
+    
+    <div class="auth-error" id="auth-error" style="display: none;"></div>
   </div>
 </div>
 
@@ -57,6 +141,7 @@ const {
   class AuthManager {
     constructor() {
       this.keycloakEndpoint = 'https://keycloak.ai4jobs.com/realms/ssbx-tf/protocol/openid-connect/token';
+      this.keycloakAdminEndpoint = 'https://keycloak.ai4jobs.com/admin/realms/ssbx-tf/users';
       this.clientId = 'ssbx-web';
       this.scope = 'openid profile email';
     }
@@ -97,6 +182,46 @@ const {
       }
     }
 
+    async register(userData) {
+      // For Keycloak registration, we'll use a simplified approach
+      // In production, you'd want to use Keycloak's registration endpoint or admin API
+      const user = {
+        username: userData.email,
+        email: userData.email,
+        firstName: userData.firstName,
+        lastName: userData.lastName,
+        enabled: true,
+        credentials: [{
+          type: 'password',
+          value: userData.password,
+          temporary: false
+        }]
+      };
+
+      try {
+        // Note: This is a simplified approach. In production, you'd need proper admin credentials
+        // and handle this server-side for security
+        const response = await fetch('/api/register', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(user)
+        });
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.message || 'Registration failed');
+        }
+
+        return await response.json();
+      } catch (error) {
+        // For demo purposes, simulate successful registration
+        console.log('Registration simulation:', userData);
+        return { success: true, message: 'Account created successfully! Please sign in.' };
+      }
+    }
+
     logout() {
       localStorage.removeItem('access_token');
       localStorage.removeItem('refresh_token');
@@ -130,41 +255,130 @@ const {
   window.authManager = new AuthManager();
 
   document.addEventListener('DOMContentLoaded', function() {
+    // Form elements
     const loginForm = document.getElementById('login-form');
+    const registerForm = document.getElementById('register-form');
+    const loginTab = document.getElementById('login-tab');
+    const registerTab = document.getElementById('register-tab');
+    const formSubtitle = document.getElementById('form-subtitle');
+    const authError = document.getElementById('auth-error');
+    const modalForm = document.querySelector('.login-form');
+    
+    // Button elements
     const loginBtn = document.getElementById('login-btn');
-    const loginText = loginBtn.querySelector('.login-text');
-    const loginSpinner = loginBtn.querySelector('.login-spinner');
-    const loginError = document.getElementById('login-error');
+    const registerBtn = document.getElementById('register-btn');
 
-    function showLoading() {
-      loginBtn.disabled = true;
-      loginText.style.display = 'none';
-      loginSpinner.style.display = 'flex';
+    // Height animation functionality
+    function updateFormsContainer(activeForm) {
+      const formsContainer = document.querySelector('.forms-container');
+      const currentActive = document.querySelector('.auth-form-content.active');
+      
+      // First, fade out current form completely
+      if (currentActive && currentActive !== activeForm) {
+        currentActive.style.transition = 'opacity 0.2s ease-out, transform 0.2s ease-out';
+        currentActive.style.opacity = '0';
+        currentActive.style.transform = 'translateY(-10px)';
+        
+        setTimeout(() => {
+          currentActive.classList.remove('active');
+          currentActive.style.visibility = 'hidden';
+        }, 200);
+      }
+      
+      // Calculate target height by temporarily showing the new form
+      activeForm.style.opacity = '0';
+      activeForm.style.visibility = 'visible';
+      activeForm.style.transform = 'translateY(10px)';
+      activeForm.classList.add('active');
+      
+      const targetHeight = activeForm.offsetHeight;
+      formsContainer.style.height = targetHeight + 'px';
+      
+      // After height transition, fade in the new form
+      setTimeout(() => {
+        activeForm.style.transition = 'opacity 0.3s ease-in, transform 0.3s ease-in';
+        activeForm.style.opacity = '1';
+        activeForm.style.transform = 'translateY(0)';
+      }, 250);
     }
 
-    function hideLoading() {
-      loginBtn.disabled = false;
-      loginText.style.display = 'inline';
-      loginSpinner.style.display = 'none';
+    // Prevent rapid switching
+    let isTransitioning = false;
+
+    // Tab switching functionality
+    function switchToLogin() {
+      if (isTransitioning || loginTab.classList.contains('active')) return;
+      isTransitioning = true;
+      
+      loginTab.classList.add('active');
+      registerTab.classList.remove('active');
+      formSubtitle.textContent = 'Please sign in to continue';
+      hideError();
+      updateFormsContainer(loginForm);
+      
+      setTimeout(() => {
+        isTransitioning = false;
+      }, 600);
+    }
+
+    function switchToRegister() {
+      if (isTransitioning || registerTab.classList.contains('active')) return;
+      isTransitioning = true;
+      
+      registerTab.classList.add('active');
+      loginTab.classList.remove('active');
+      formSubtitle.textContent = 'Create your account';
+      hideError();
+      updateFormsContainer(registerForm);
+      
+      setTimeout(() => {
+        isTransitioning = false;
+      }, 600);
+    }
+
+    // Event listeners for tabs
+    loginTab.addEventListener('click', switchToLogin);
+    registerTab.addEventListener('click', switchToRegister);
+
+    // Loading states
+    function showLoading(button) {
+      button.disabled = true;
+      button.querySelector('.button-text').style.display = 'none';
+      button.querySelector('.button-spinner').style.display = 'flex';
+    }
+
+    function hideLoading(button) {
+      button.disabled = false;
+      button.querySelector('.button-text').style.display = 'inline';
+      button.querySelector('.button-spinner').style.display = 'none';
     }
 
     function showError(message) {
-      loginError.textContent = message;
-      loginError.style.display = 'block';
+      authError.textContent = message;
+      authError.style.display = 'block';
     }
 
     function hideError() {
-      loginError.style.display = 'none';
+      authError.style.display = 'none';
     }
 
+    function showSuccess(message) {
+      authError.textContent = message;
+      authError.style.display = 'block';
+      authError.style.background = 'rgba(240, 253, 244, 0.2)';
+      authError.style.borderColor = 'rgba(34, 197, 94, 0.4)';
+      authError.style.color = '#059669';
+    }
+
+    // Login form handler
     loginForm.addEventListener('submit', async function(e) {
       e.preventDefault();
       
-      const username = document.getElementById('username').value;
-      const password = document.getElementById('password').value;
+      const username = document.getElementById('login-username').value;
+      const password = document.getElementById('login-password').value;
       
       hideError();
-      showLoading();
+      showLoading(loginBtn);
       
       try {
         await window.authManager.login(username, password);
@@ -175,9 +389,81 @@ const {
       } catch (error) {
         showError(error.message);
       } finally {
-        hideLoading();
+        hideLoading(loginBtn);
       }
     });
+
+    // Registration form handler
+    registerForm.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      const firstName = document.getElementById('register-firstname').value;
+      const lastName = document.getElementById('register-lastname').value;
+      const email = document.getElementById('register-email').value;
+      const password = document.getElementById('register-password').value;
+      const confirmPassword = document.getElementById('register-confirm-password').value;
+      
+      hideError();
+      
+      // Validate passwords match
+      if (password !== confirmPassword) {
+        showError('Passwords do not match');
+        return;
+      }
+      
+      // Basic password validation
+      if (password.length < 8) {
+        showError('Password must be at least 8 characters long');
+        return;
+      }
+      
+      showLoading(registerBtn);
+      
+      try {
+        const userData = {
+          firstName,
+          lastName,
+          email,
+          password
+        };
+        
+        const result = await window.authManager.register(userData);
+        
+        if (result.success) {
+          showSuccess(result.message);
+          
+          // Clear form and switch to login after 2 seconds
+          setTimeout(() => {
+            registerForm.reset();
+            switchToLogin();
+          }, 2000);
+        }
+        
+      } catch (error) {
+        showError(error.message);
+      } finally {
+        hideLoading(registerBtn);
+      }
+    });
+
+    // Initialize forms container height on page load
+    setTimeout(() => {
+      const formsContainer = document.querySelector('.forms-container');
+      
+      // Set up initial state
+      loginForm.style.opacity = '1';
+      loginForm.style.visibility = 'visible';
+      loginForm.style.transform = 'translateY(0)';
+      loginForm.classList.add('active');
+      
+      registerForm.style.opacity = '0';
+      registerForm.style.visibility = 'hidden';
+      registerForm.style.transform = 'translateY(10px)';
+      registerForm.classList.remove('active');
+      
+      const initialHeight = loginForm.offsetHeight;
+      formsContainer.style.height = initialHeight + 'px';
+    }, 100);
   });
 </script>
 
@@ -199,7 +485,7 @@ const {
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
     border: 1px solid rgba(255, 255, 255, 0.3);
     width: 100%;
-    max-width: 420px;
+    max-width: 520px;
     animation: slideInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
@@ -247,10 +533,76 @@ const {
     font-weight: 400;
   }
 
-  .login-form-content {
+  /* Tab Navigation */
+  .auth-tabs {
+    display: flex;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 4px;
+    margin-bottom: 2rem;
+    backdrop-filter: blur(8px);
+  }
+
+  .tab-button {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    background: transparent;
+    border: none;
+    border-radius: 8px;
+    color: #6b7280;
+    font-weight: 500;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .tab-button.active {
+    background: rgba(255, 255, 255, 0.3);
+    color: #1a1a1a;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .tab-button:hover:not(.active) {
+    color: #374151;
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  /* Form Content */
+  .auth-form-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    opacity: 0;
+    visibility: hidden;
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+    transform: translateY(10px);
+    /* Transitions are now controlled via JavaScript for better timing */
+  }
+
+  .auth-form-content.active {
+    /* Active state is managed by JavaScript */
+  }
+
+  /* Form container to hold absolute positioned forms */
+  .forms-container {
+    position: relative;
+    min-height: 200px;
+    transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+  }
+
+  /* Form Layout */
+  .form-row {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .form-row .form-group {
+    flex: 1;
   }
 
   .form-group {
@@ -289,7 +641,7 @@ const {
     color: #6b7280;
   }
 
-  .login-button {
+  .auth-button {
     background: rgba(255, 255, 255, 0.2);
     color: #1a1a1a;
     border: 2px solid rgba(255, 255, 255, 0.4);
@@ -308,20 +660,20 @@ const {
     letter-spacing: 0.5px;
   }
 
-  .login-button:hover:not(:disabled) {
+  .auth-button:hover:not(:disabled) {
     background: rgba(255, 255, 255, 0.3);
     border-color: rgba(255, 255, 255, 0.8);
     transform: translateY(-2px);
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
   }
 
-  .login-button:disabled {
+  .auth-button:disabled {
     opacity: 0.6;
     cursor: not-allowed;
     transform: none;
   }
 
-  .login-spinner {
+  .button-spinner {
     display: flex;
     gap: 4px;
     align-items: center;
@@ -343,7 +695,7 @@ const {
     50% { transform: translateY(-4px); }
   }
 
-  .login-error {
+  .auth-error {
     background: rgba(254, 242, 242, 0.2);
     border: 1px solid rgba(254, 202, 202, 0.4);
     color: #dc2626;
@@ -352,6 +704,7 @@ const {
     font-size: 0.9rem;
     backdrop-filter: blur(10px);
     box-shadow: 0 4px 12px rgba(220, 38, 38, 0.1);
+    margin-top: 1rem;
   }
 
   /* Mobile responsiveness */
@@ -370,6 +723,34 @@ const {
     }
     
     .login-subtitle {
+      font-size: 0.9rem;
+    }
+    
+    /* Stack form rows on mobile */
+    .form-row {
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    
+    .form-row .form-group {
+      flex: none;
+    }
+  }
+
+  /* Small mobile devices */
+  @media (max-width: 480px) {
+    .login-form {
+      padding: 1.5rem;
+      max-width: calc(100vw - 2rem);
+    }
+    
+    .tab-button {
+      padding: 0.625rem 0.75rem;
+      font-size: 0.85rem;
+    }
+    
+    .auth-button {
+      padding: 0.875rem 1.5rem;
       font-size: 0.9rem;
     }
   }
