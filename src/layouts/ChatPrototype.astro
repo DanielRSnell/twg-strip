@@ -1,7 +1,7 @@
 ---
 import "@/styles/prototype.scss";
 import { AstroFont } from "astro-font";
-import WebChat from "@/components/WebPrototype.astro";
+import AuthenticatedChat from "@/components/AuthenticatedChat.astro";
 import ScreenManager from "@/components/ScreenManager.astro";
 
 export interface Props {
@@ -95,7 +95,10 @@ const { page } = Astro.props;
                    </button>
                </div>
                
-               <WebChat {...page} />
+               <!-- Chat with authentication overlay -->
+               <div class="chat-wrapper">
+                   <AuthenticatedChat {...page} />
+               </div>
             </div>
         </div>
     </main>

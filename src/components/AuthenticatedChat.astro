@@ -1,0 +1,296 @@
+---
+import LoginForm from "./LoginForm.astro";
+import WebPrototype from "./WebPrototype.astro";
+
+const { 
+  color = "#000", 
+  hover = "#333", 
+  logo = "/images/client/tamu-logo.png", 
+  title = "Prototype Online",
+  endpoint = "https://ssbx.ai4jobs.com/ssbx/api/v1/ai/f1d18632-2e4e-4f71-9032-cb2357c40571/text"
+} = Astro.props;
+---
+
+<div class="auth-chat-container">
+  <!-- Full Screen Login Overlay -->
+  <div id="login-screen" class="login-overlay">
+    <LoginForm color={color} hover={hover} logo={logo} title="Sign in to continue" />
+  </div>
+  
+  <!-- Chat Interface - Hidden initially, positioned behind login -->
+  <div id="chat-screen" class="chat-interface">
+    <WebPrototype color={color} hover={hover} logo={logo} title={title} endpoint={endpoint} />
+    
+    <!-- User info and logout in chat header -->
+    <div id="chat-user-info" class="chat-user-info">
+      <div class="user-details">
+        <span id="user-name"></span>
+        <span id="user-email"></span>
+      </div>
+      <button id="chat-logout-btn" class="chat-logout-btn">
+        Sign Out
+      </button>
+    </div>
+  </div>
+</div>
+
+<script define:vars={{ color, hover }}>
+  document.addEventListener('DOMContentLoaded', function() {
+    console.log('AuthenticatedChat script loaded'); // Debug log
+    const loginScreen = document.getElementById('login-screen');
+    const chatScreen = document.getElementById('chat-screen');
+    const logoutContainer = document.getElementById('logout-container');
+    const userNameEl = document.getElementById('user-name');
+    const userEmailEl = document.getElementById('user-email');
+    const logoutBtn = document.getElementById('logout-btn');
+    const chatLogoutBtn = document.getElementById('chat-logout-btn');
+    
+    console.log('Login screen element:', loginScreen); // Debug log
+    console.log('Chat screen element:', chatScreen); // Debug log
+
+    function parseJWT(token) {
+      try {
+        const base64Url = token.split('.')[1];
+        const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+          return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+        }).join(''));
+        return JSON.parse(jsonPayload);
+      } catch (error) {
+        return null;
+      }
+    }
+
+    function updateUserInfo() {
+      const token = window.authManager?.getToken();
+      if (token) {
+        const payload = parseJWT(token);
+        if (payload) {
+          userNameEl.textContent = payload.name || payload.preferred_username || 'User';
+          userEmailEl.textContent = payload.email || '';
+        }
+      }
+    }
+
+    function showLoginScreen() {
+      console.log('Showing login screen'); // Debug log
+      // Reset states and ensure login screen is visible
+      loginScreen.classList.remove('fade-out');
+      loginScreen.classList.add('visible');
+      loginScreen.style.opacity = '1';
+      loginScreen.style.visibility = 'visible';
+      chatScreen.classList.remove('visible');
+    }
+
+    function showChatScreen() {
+      updateUserInfo();
+      
+      // Start fade out animation for login screen
+      loginScreen.classList.add('fade-out');
+      
+      // After fade out completes, show chat with fade in
+      setTimeout(() => {
+        loginScreen.classList.remove('visible');
+        chatScreen.classList.add('visible');
+      }, 800); // Match the CSS animation duration
+    }
+
+    function checkAuthState() {
+      // Add a small delay to ensure authManager is available
+      setTimeout(() => {
+        if (window.authManager?.isAuthenticated()) {
+          showChatScreen();
+        } else {
+          showLoginScreen();
+        }
+      }, 100);
+    }
+
+    function logout() {
+      window.authManager?.logout();
+      showLoginScreen();
+    }
+
+    // Event listeners
+    logoutBtn.addEventListener('click', logout);
+    chatLogoutBtn.addEventListener('click', logout);
+
+    // Listen for auth events
+    window.addEventListener('authLogin', function() {
+      showChatScreen();
+    });
+
+    window.addEventListener('authLogout', function() {
+      showLoginScreen();
+    });
+
+    // Show login screen immediately by default
+    showLoginScreen();
+    
+    // Then check auth state after a brief delay
+    setTimeout(() => {
+      checkAuthState();
+    }, 500);
+
+    // Check auth state periodically (every minute)
+    setInterval(checkAuthState, 60000);
+  });
+</script>
+
+<style define:vars={{ brandColor: color, brandHover: hover }}>
+  .auth-chat-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  /* Full Screen Login Overlay */
+  .login-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(135deg, var(--brandColor) 0%, var(--brandHover) 100%);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), 
+                visibility 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .login-overlay.visible {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .login-overlay.fade-out {
+    opacity: 0;
+    transform: scale(0.95);
+    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), 
+                transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Chat Interface */
+  .chat-interface {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1) 0.2s, 
+                transform 1s cubic-bezier(0.4, 0, 0.2, 1) 0.2s,
+                visibility 1s cubic-bezier(0.4, 0, 0.2, 1) 0.2s;
+  }
+
+  .chat-interface.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  /* User info in chat */
+  .chat-user-info {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(12px);
+    padding: 0.75rem 1rem;
+    border-bottom-left-radius: 12px;
+    border-left: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    z-index: 1000;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  .user-details {
+    display: flex;
+    flex-direction: column;
+    font-size: 0.75rem;
+    color: #64748b;
+  }
+
+  .user-details span:first-child {
+    font-weight: 600;
+    color: #1a1a1a;
+    font-size: 0.8rem;
+  }
+
+  .chat-logout-btn {
+    background: var(--brandColor);
+    color: white;
+    border: none;
+    padding: 0.5rem 0.875rem;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  .chat-logout-btn:hover {
+    background: var(--brandHover);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Loading animation for smooth transitions */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .chat-interface.visible {
+    animation: fadeInUp 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  /* Mobile responsiveness */
+  @media (max-width: 768px) {
+    .login-overlay {
+      padding: 1rem;
+    }
+    
+    .chat-user-info {
+      position: relative;
+      border-radius: 0;
+      border: none;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      justify-content: space-between;
+      backdrop-filter: blur(8px);
+    }
+    
+    .user-details {
+      font-size: 0.8rem;
+    }
+    
+    .user-details span:first-child {
+      font-size: 0.85rem;
+    }
+  }
+
+  /* Smooth hardware acceleration */
+  .login-overlay,
+  .chat-interface {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    will-change: opacity, transform;
+  }
+</style>
