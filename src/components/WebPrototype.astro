@@ -402,7 +402,7 @@ class ChatBot extends HTMLElement {
     this.setLoading(true);
 
     // Create URL with prompt parameter
-    const url = new URL(endpoint);
+    const url = new URL('https://ssbx.ai4jobs.com/ssbx/api/v1/ai/f1d18632-2e4e-4f71-9032-cb2357c40571/text');
     url.searchParams.set("prompt", message);
 
     try {
