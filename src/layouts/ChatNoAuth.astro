@@ -1,0 +1,202 @@
+---
+import "@/styles/prototype.scss";
+import { AstroFont } from "astro-font";
+
+export interface Props {
+    page: {
+        color: string;
+        hover: string;
+        logo: string;
+        title: string;
+        invitation: string;
+        highlight: string;
+        create_own: {
+            text: string;
+            link: string;
+            link_text: string;
+        };
+        start_button: string;
+        footer: {
+            text: string;
+            link: string;
+            link_text: string;
+        };
+        api: {
+            endpoint: string;
+            headers: {
+                'Content-Type': string;
+                'Accept': string;
+                'X-Request-ID': string;
+                'X-API-Key': string;
+                'Cookie': string;
+            };
+            modelSetExtId: string;
+        };
+    };
+}
+
+const { page } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- UTF-8 -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{page.title}</title>
+    <style define:vars={{ 
+        brandColor: page.color, 
+        brandHover: page.hover, 
+        texasMaroon: page.color, 
+        texasMaroonHover: page.hover 
+    }}>
+        :root {
+            --brand-color: var(--brandColor);
+            --brand-hover: var(--brandHover);
+            --texas-maroon: var(--texasMaroon);
+            --texas-maroon-hover: var(--texasMaroonHover);
+        }
+    </style>
+    <slot name="head" />
+</head>
+<body>
+    <main>
+        <div id="chat-container">
+            <!-- Left side of the split layout -->
+            <div id="information-screen">
+                <!-- Logo area -->
+                <div class="logo-container">
+                    <div class="logo-box">
+                       <img src={page.logo} alt={page.title}>
+                    </div>
+                </div>
+                
+                <!-- Invitation text -->
+                <div class="title-section">
+                    <h2>{page.invitation} <span class="highlight">{page.highlight}</span></h2>
+                </div>
+                
+                <!-- Create your own text -->
+                <div class="create-own">
+                    <p>{page.create_own.text} <a href={page.create_own.link}>{page.create_own.link_text}</a></p>
+                </div>
+                
+                <!-- Start Conversation button -->
+                <div class="start-button">
+                    <button id="chat-start">
+                        {page.start_button}
+                    </button>
+                </div>
+                
+                <!-- Footer -->
+                <div class="footer">
+                    {page.footer.text} <a href={page.footer.link}>{page.footer.link_text}</a>
+                </div>
+            </div>
+            
+            <!-- Right side of the split layout -->
+            <div id="chat-screen">
+               <!-- Back button for mobile view -->
+               <div class="back-button-container">
+                   <button id="back-to-info" class="back-button">
+                       <span class="back-arrow">←</span> Back
+                   </button>
+               </div>
+               
+               <!-- Chat interface -->
+               <div class="chat-wrapper">
+                   <div id="chat-messages"></div>
+                   <div class="chat-input-container">
+                       <input type="text" id="chat-input" placeholder="Type your message...">
+                       <button id="send-button">Send</button>
+                   </div>
+               </div>
+            </div>
+        </div>
+    </main>
+
+    <slot name="body" />
+    <script> (function(){ var s = document.createElement('script'); var h = document.querySelector('head') || document.body; s.src = 'https://acsbapp.com/apps/app/dist/js/app.js'; s.async = true; s.onload = function(){ acsbJS.init(); }; h.appendChild(s); })(); </script> 
+    <script>
+        document.addEventListener("astro:page-load", () => {
+            window.acsbJS.restart()
+        })
+    </script>
+
+    <script define:vars={{ apiConfig: page.api }}>
+        document.addEventListener('DOMContentLoaded', function() {
+            const chatStart = document.getElementById('chat-start');
+            const backToInfo = document.getElementById('back-to-info');
+            const informationScreen = document.getElementById('information-screen');
+            const chatScreen = document.getElementById('chat-screen');
+            const chatMessages = document.getElementById('chat-messages');
+            const chatInput = document.getElementById('chat-input');
+            const sendButton = document.getElementById('send-button');
+
+            // Add welcome message on page load
+            addMessage('Hello! I\'m here to help you learn about ThisWay Global. Feel free to ask me any questions!');
+
+            chatStart.addEventListener('click', function() {
+                informationScreen.classList.add('hidden');
+                chatScreen.classList.add('active');
+            });
+
+            backToInfo.addEventListener('click', function() {
+                informationScreen.classList.remove('hidden');
+                chatScreen.classList.remove('active');
+            });
+
+            function addMessage(content, isUser = false) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `message ${isUser ? 'user-message' : 'bot-message'}`;
+                messageDiv.textContent = content;
+                chatMessages.appendChild(messageDiv);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+
+            async function sendMessage() {
+                const message = chatInput.value.trim();
+                if (!message) return;
+
+                addMessage(message, true);
+                chatInput.value = '';
+                sendButton.disabled = true;
+                sendButton.textContent = 'Sending...';
+
+                try {
+                    const response = await fetch(apiConfig.endpoint, {
+                        method: 'POST',
+                        headers: apiConfig.headers,
+                        body: JSON.stringify({
+                            prompt: message,
+                            modelSetExtId: apiConfig.modelSetExtId
+                        })
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+
+                    const data = await response.json();
+                    addMessage(data.response || data.message || 'No response received');
+                } catch (error) {
+                    console.error('Error sending message:', error);
+                    addMessage('Sorry, there was an error processing your message. Please try again.');
+                }
+
+                sendButton.disabled = false;
+                sendButton.textContent = 'Send';
+            }
+
+            sendButton.addEventListener('click', sendMessage);
+            chatInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    sendMessage();
+                }
+            });
+        });
+    </script>
+
+    </body>
+</html>

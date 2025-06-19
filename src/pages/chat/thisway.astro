@@ -1,0 +1,43 @@
+---
+import "@/styles/prototype.scss";
+import { AstroFont } from "astro-font";
+import ChatNoAuth from "@/layouts/ChatNoAuth.astro";
+
+const page = {
+    color: "#24ab9d",
+    hover: "#2072b9",
+    logo: "https://api.thiswayglobal.com/wp-content/uploads/2024/10/cropped-favicon.png",
+    title: "ThisWay Global",
+    invitation: "You've been invited to have a conversation with",
+    highlight: "ThisWay Global",
+    create_own: {
+        text: "Want to create your own?",
+        link: "https://thiswayglobal.com",
+        link_text: "Get Started."
+    },
+    start_button: "Start Conversation",
+    footer: {
+        text: "Conversation ✨ by",
+        link: "https://thiswayglobal.com",
+        link_text: "ThisWay"
+    },
+    api: {
+        endpoint: "https://ssbx.ai4jobs.com/ssbx/api/v1/intx/text",
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'X-Request-ID': '36984baf-1310-4baa-a683-bcb7a012f623',
+            'X-API-Key': 'eyJ0eXAiOiJKV1MiLCJraWQiOiJhcm46YXdzOmttczp1cy1lYXN0LTI6OTIwMzQwMDIzOTg2OmFsaWFzL3NzYngtMjAyNDA3MTgwMTU3MDg3NjQ0MDAwMDAwMDEiLCJhbGciOiJub25lIn0.eyJuYmYiOjE3NTAzNDI4NDEsImlhdCI6MTc1MDM0Mjg0MSwidHlwIjoiQmVhcmVyIiwibXNpZCI6IjM2OTg0YmFmLTEzMTAtNGJhYS1hNjgzLWJjYjdhMDEyZjYyMyIsIm1za2lkIjoiNDkzZDViMGItNTJhOS00NWJmLWFmYjMtZWQ5ZmZhYzc4M2Y2IiwiaXNzIjoiVGhpc1dheSBHbG9iYWwiLCJzdWIiOiI0OTNkNWIwYi01MmE5LTQ1YmYtYWZiMy1lZDlmZmFjNzgzZjYiLCJhdWQiOlsibWFyY2Vsby5zaWx2YUB0aGlzd2F5Z2xvYmFsLmNvbSJdfQ.MEUCIQChKSnO0ynLulU9KGnFVm+lZTTe8qJNDFROAUEmLy65nAIgY8ql39k1D6zMLS/b9lKT+dPWfkF4CCi7LoZ+8LP0CgQ=',
+            'Cookie': 'ssbx=64be9d63-0573-48da-93d3-83a63cb83be0'
+        },
+        modelSetExtId: "36984baf-1310-4baa-a683-bcb7a012f623"
+    }
+}
+
+---
+
+<ChatNoAuth page={page}>
+    <script slot="body">
+        // Add any page-specific JavaScript here
+    </script>
+</ChatNoAuth>
