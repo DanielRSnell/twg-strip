@@ -264,25 +264,33 @@ main {
     background-color: var(--white);
 }
 
+#chat-messages::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
 .message {
     margin-bottom: $spacing-3;
     padding: $spacing-3;
     border-radius: $rounded-lg;
     max-width: 80%;
     word-wrap: break-word;
+    display: inline-block;
 }
 
 .user-message {
     background-color: var(--texas-maroon);
     color: var(--white);
-    margin-left: auto;
-    text-align: right;
+    float: right;
+    clear: both;
 }
 
 .bot-message {
     background-color: var(--gray-100);
     color: var(--gray-800);
-    margin-right: auto;
+    float: left;
+    clear: both;
 }
 
 .chat-input-container {
