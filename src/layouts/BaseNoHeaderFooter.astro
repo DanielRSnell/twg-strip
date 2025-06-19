@@ -1,0 +1,116 @@
+---
+import config from "@/config/config.json";
+import { plainify } from "@/lib/utils/textConverter";
+
+export interface Props {
+  title?: string;
+  meta_title?: string;
+  description?: string;
+  image?: string;
+  noindex?: boolean;
+  canonical?: string;
+}
+
+const {
+  title,
+  meta_title,
+  description,
+  image,
+  noindex,
+  canonical,
+} = Astro.props;
+
+const { metadata } = config;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- favicon -->
+    <link rel="shortcut icon" href={metadata.favicon} />
+    <!-- theme meta -->
+    <meta name="theme-name" content="nextjs" />
+    <meta name="msapplication-TileColor" content="#000000" />
+    <meta name="theme-color" content="#FFFFFF" />
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- title -->
+    <title>
+      {plainify(meta_title ? meta_title : title ? title : metadata.title)}
+    </title>
+
+    <!-- canonical url -->
+    {canonical && <link rel="canonical" href={canonical} item-prop="url" />}
+
+    <!-- noindex robots -->
+    {noindex && <meta name="robots" content="noindex,nofollow" />}
+
+    <!-- meta-description -->
+    <meta
+      name="description"
+      content={plainify(
+        description ? description : metadata.meta_description,
+      )}
+    />
+
+    <!-- author from config.json -->
+    <meta name="author" content={metadata.meta_author} />
+
+    <!-- og-title -->
+    <meta
+      property="og:title"
+      content={plainify(
+        meta_title ? meta_title : title ? title : metadata.title,
+      )}
+    />
+
+    <!-- og-description -->
+    <meta
+      property="og:description"
+      content={plainify(
+        description ? description : metadata.meta_description,
+      )}
+    />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:url"
+      content={`${metadata.base_url}/${Astro.url.pathname.replace("/", "")}`}
+    />
+
+    <!-- twitter-title -->
+    <meta
+      name="twitter:title"
+      content={plainify(
+        meta_title ? meta_title : title ? title : metadata.title,
+      )}
+    />
+
+    <!-- twitter-description -->
+    <meta
+      name="twitter:description"
+      content={plainify(
+        description ? description : metadata.meta_description,
+      )}
+    />
+
+    <!-- og-image -->
+    <meta
+      property="og:image"
+      content={`${metadata.base_url}${image ? image : metadata.meta_image}`}
+    />
+
+    <!-- twitter-image -->
+    <meta
+      name="twitter:image"
+      content={`${metadata.base_url}${image ? image : metadata.meta_image}`}
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <slot name="head" />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

@@ -1,6 +1,7 @@
 ---
 import "@/styles/prototype.scss";
 import { AstroFont } from "astro-font";
+import BaseNoHeaderFooter from "@/layouts/BaseNoHeaderFooter.astro";
 
 export interface Props {
     page: {
@@ -38,29 +39,15 @@ export interface Props {
 const { page } = Astro.props;
 ---
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <!-- UTF-8 -->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{page.title}</title>
-    <style define:vars={{ 
-        brandColor: page.color, 
-        brandHover: page.hover, 
-        texasMaroon: page.color, 
-        texasMaroonHover: page.hover 
-    }}>
+<BaseNoHeaderFooter title={page.title}>
+    <style slot="head" set:html={`
         :root {
-            --brand-color: var(--brandColor);
-            --brand-hover: var(--brandHover);
-            --texas-maroon: var(--texasMaroon);
-            --texas-maroon-hover: var(--texasMaroonHover);
+            --brand-color: ${page.color};
+            --brand-hover: ${page.hover};
+            --texas-maroon: ${page.color};
+            --texas-maroon-hover: ${page.hover};
         }
-    </style>
-    <slot name="head" />
-</head>
-<body>
+    `}></style>
     <main>
         <div id="chat-container">
             <!-- Left side of the split layout -->
@@ -197,6 +184,4 @@ const { page } = Astro.props;
             });
         });
     </script>
-
-    </body>
-</html>
+</BaseNoHeaderFooter>

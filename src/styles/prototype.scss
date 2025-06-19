@@ -163,8 +163,11 @@ main {
             padding: $spacing-3 $spacing-4;
             color: var(--white);
             background-color: var(--texas-maroon);
+            border: none;
             border-radius: $rounded-lg;
             transition: $transition-colors;
+            cursor: pointer;
+            font-size: 1rem;
 
             &:hover {
                 background-color: var(--texas-maroon-hover);
@@ -262,12 +265,8 @@ main {
     padding: $spacing-4;
     overflow-y: auto;
     background-color: var(--white);
-}
-
-#chat-messages::after {
-    content: "";
-    display: table;
-    clear: both;
+    display: flex;
+    flex-direction: column;
 }
 
 .message {
@@ -282,15 +281,13 @@ main {
 .user-message {
     background-color: var(--texas-maroon);
     color: var(--white);
-    float: right;
-    clear: both;
+    align-self: flex-end;
 }
 
 .bot-message {
     background-color: var(--gray-100);
     color: var(--gray-800);
-    float: left;
-    clear: both;
+    align-self: flex-start;
 }
 
 .chat-input-container {
