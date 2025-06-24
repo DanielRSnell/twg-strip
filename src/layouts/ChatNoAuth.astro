@@ -287,17 +287,7 @@ const { page } = Astro.props;
                     if (data.response && Array.isArray(data.response) && data.response.length > 0) {
                         const responseText = data.response[0].text;
                         if (responseText) {
-                            // Check if response contains HTML tags
-                            if (responseText.includes('<') && responseText.includes('>')) {
-                                // Create a temporary div to convert HTML to plain text
-                                const tempDiv = document.createElement('div');
-                                tempDiv.innerHTML = responseText;
-                                const plainText = tempDiv.textContent || tempDiv.innerText || '';
-                                addMessage(plainText);
-                            } else {
-                                // Plain text response
-                                addMessage(responseText);
-                            }
+                            addMessage(responseText);
                         } else {
                             addMessage('Empty response received');
                         }
