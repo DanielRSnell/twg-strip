@@ -421,7 +421,7 @@ class ChatBot extends HTMLElement {
       console.log(responseData);
       
       // Extract the message from the response
-      const botMessage = responseData["TWG ChatBot"] || responseData.message || "Sorry, I couldn't process that.";
+      const botMessage = responseData.response?.[0]?.text || responseData["TWG ChatBot"] || responseData.message || "Sorry, I couldn't process that.";
       this.addMessage(botMessage, "bot");
       
     } catch (error) {
