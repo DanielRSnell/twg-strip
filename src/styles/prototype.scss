@@ -78,7 +78,6 @@ main {
     border-radius: $rounded-lg;
     box-shadow: $shadow-lg;
     width: 100%;
-    max-width: $max-width-4xl;
     height: 100%;
     max-height: $max-height-800;
     display: flex;
@@ -94,7 +93,8 @@ main {
 
 #information-screen {
     @include flex-column;
-    width: 50%;
+    width: 100%;
+    max-width: 32rem;
     padding: $spacing-8;
 
     @include tablet {
@@ -204,7 +204,7 @@ main {
 #chat-screen {
     position: relative;
     @include flex-column;
-    width: 50%;
+    flex: 1;
     border-left: 1px solid var(--gray-200);
 
     @include tablet {

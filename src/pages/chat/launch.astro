@@ -1,0 +1,39 @@
+---
+import "@/styles/prototype.scss";
+import { AstroFont } from "astro-font";
+import ChatNoAuth from "@/layouts/ChatLaunchLayout.astro";
+
+const page = {
+    color: "#24ab9d",
+    hover: "#2072b9",
+    logo: "https://api.thiswayglobal.com/wp-content/uploads/2024/10/cropped-favicon.png",
+    title: "ThisWay Global",
+    invitation: "You've been invited to have a conversation with",
+    highlight: "ThisWay Global",
+    create_own: {
+        text: "Want to create your own?",
+        link: "https://thiswayglobal.com",
+        link_text: "Get Started."
+    },
+    start_button: "Start Conversation",
+    footer: {
+        text: "Conversation ✨ by",
+        link: "https://thiswayglobal.com",
+        link_text: "ThisWay"
+    },
+    api: {
+        endpoint: "https://hpc.dev-ai4jobs.com/sph/api/v1/assistant",
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Accept': 'text/html'
+        },
+    }
+}
+
+---
+
+<ChatNoAuth page={page}>
+    <script slot="body">
+        // Add any page-specific JavaScript here
+    </script>
+</ChatNoAuth>

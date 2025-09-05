@@ -267,31 +267,27 @@ const { page } = Astro.props;
                 sendButton.textContent = 'Sending...';
 
                 try {
+                    // Create form data for the request
+                    const formData = new URLSearchParams();
+                    formData.append('message', message);
+
                     const response = await fetch(apiConfig.endpoint, {
                         method: 'POST',
                         headers: apiConfig.headers,
-                        body: JSON.stringify({
-                            prompt: message,
-                        })
+                        body: formData
                     });
 
                     if (!response.ok) {
                         throw new Error(`HTTP error! status: ${response.status}`);
                     }
 
-                    const data = await response.json();
-                    console.log('API Response:', data); // Debug log
+                    const responseText = await response.text();
+                    console.log('API Response:', responseText); // Debug log
                     
-                    // Handle the specific API response structure
-                    if (data.response && Array.isArray(data.response) && data.response.length > 0) {
-                        const responseText = data.response[0].text;
-                        if (responseText) {
-                            addMessage(responseText);
-                        } else {
-                            addMessage('Empty response received');
-                        }
+                    if (responseText && responseText.trim()) {
+                        addMessage(responseText);
                     } else {
-                        addMessage('Invalid response format received');
+                        addMessage('Empty response received');
                     }
                 } catch (error) {
                     console.error('Error sending message:', error);
