@@ -2,6 +2,7 @@
 import "@/styles/prototype.scss";
 import { AstroFont } from "astro-font";
 import ChatLayout from "@/layouts/ChatLayout.astro";
+import WebChat from "@/components/WebChat.astro";
 
 const page = {
      color: "#500100",
@@ -27,7 +28,11 @@ const page = {
 ---
 
 <ChatLayout page={page}>
-    <script slot="body">
-        // Add any page-specific JavaScript here
-    </script>
+  <WebChat
+    color={page.color}
+    hover={page.hover}
+    logo={page.logo}
+    title={page.title}
+    endpoint={page.endpoint}
+  />
 </ChatLayout>
