@@ -272,6 +272,7 @@ const { page } = Astro.props;
                         headers: apiConfig.headers,
                         body: JSON.stringify({
                             prompt: message,
+                            modelSetExtId: apiConfig.modelSetExtId
                         })
                     });
 
