@@ -9,7 +9,7 @@ testimonials:
   - name: "Sarah Chen"
     designation: "CTO, TechCorp"
     avatar: "/images/client/client-img-1.png"
-    content: "Launch HPC has revolutionized how we handle our AI workloads. The platform's scalability and performance have exceeded our expectations, allowing us to focus on innovation rather than infrastructure."
+    content: "<a href=\"https://amalgamy.ai\" target=\"_blank\" rel=\"noopener noreferrer\">Amalgamy.ai</a> has revolutionized how we handle our AI workloads. The platform's scalability and performance have exceeded our expectations, allowing us to focus on innovation rather than infrastructure."
 
   - name: "Michael Rodriguez"
     designation: "Head of AI, DataTech"

@@ -28,7 +28,7 @@ banner:
 service:
   title: "Innovative Solutions for **Enterprise Excellence**"
   services:
-    - title: "Launch HPC"
+    - title: "<a href=\"https://amalgamy.ai\" target=\"_blank\" rel=\"noopener noreferrer\">Amalgamy.ai</a>"
       image: "service-1"
       content: "Scale your computational power with our GPU-powered HPC platform, perfect for LLMs and complex simulations."
       button:

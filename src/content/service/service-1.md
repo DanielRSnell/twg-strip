@@ -1,6 +1,6 @@
 ---
-title: "Launch HPC"
-contact_1: "Scale your AI and machine learning capabilities with our high-performance computing platform. Launch HPC provides instant access to NVIDIA GPU resources, enabling you to run large language models, complex simulations, and demanding AI workloads without infrastructure investment."
+title: "Amalgamy.ai"
+contact_1: "Scale your AI and machine learning capabilities with our high-performance computing platform. <a href=\"https://amalgamy.ai\" target=\"_blank\" rel=\"noopener noreferrer\">Amalgamy.ai</a> provides instant access to NVIDIA GPU resources, enabling you to run large language models, complex simulations, and demanding AI workloads without infrastructure investment."
 contact_2: "Our platform offers flexible scaling, cost-efficient resource management, and enterprise-grade security, ensuring your computational needs are met while maintaining operational efficiency and data protection."
 image: "service-1"
 button:

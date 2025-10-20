@@ -11,7 +11,7 @@ header:
 #### 1. Services
 
 ThisWay Global provides AI-powered enterprise solutions including:
-- Launch HPC: High-performance computing platform
+- <a href="https://amalgamy.ai" target="_blank" rel="noopener noreferrer">Amalgamy.ai</a>: High-performance computing platform
 - Sully's Sandbox: AI model marketplace
 - AI4JOBS: AI-driven recruitment solution
 

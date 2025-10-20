@@ -26,7 +26,7 @@ contact_info:
     title: "Explore Our Solutions"
     description: "Tell us about your interests:"
     options:
-      - "Launch HPC - High Performance Computing"
+      - "<a href=\"https://amalgamy.ai\" target=\"_blank\" rel=\"noopener noreferrer\">Amalgamy.ai</a> - High Performance Computing"
       - "Sully's Sandbox - AI Model Marketplace"
       - "AI4JOBS - AI-Driven Recruitment"
       - "Enterprise Solutions"
