@@ -379,12 +379,26 @@ class ChatBot extends HTMLElement {
     content = content.replace(/^<p>(.*?)<\/p>/, '$1');
 
     if (type === "bot") {
-      // Detect and wrap URLs in anchor tags
-      const urlRegex = /(https?:\/\/[^\s<]+)/g;
-      content = content.replace(urlRegex, '<a href="$1" target="_blank" rel="noopener noreferrer">$1</a>');
-
-      // For bot messages, set the HTML content directly
+      // For bot messages, set the HTML content first
       bubble.innerHTML = content;
+
+      // Then find and wrap URLs in text nodes
+      const urlRegex = /(https?:\/\/[^\s<]+)/g;
+      const walkTextNodes = (node) => {
+        if (node.nodeType === 3) { // Text node
+          const text = node.textContent;
+          if (urlRegex.test(text)) {
+            const span = document.createElement('span');
+            span.innerHTML = text.replace(urlRegex, '<a href="$1" target="_blank" rel="noopener noreferrer">$1</a>');
+            node.parentNode.replaceChild(span, node);
+          }
+        } else {
+          for (let child of Array.from(node.childNodes)) {
+            walkTextNodes(child);
+          }
+        }
+      };
+      walkTextNodes(bubble);
     } else {
       // For user messages, escape the content
       bubble.textContent = content;
