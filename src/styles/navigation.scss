@@ -32,7 +32,7 @@ input#nav-toggle:checked ~ #nav-menu {
 }
 
 .nav-link {
-  @apply text-dark/80 hover:text-dark text-[14px] block p-3 font-medium transition lg:px-2 lg:py-3;
+  @apply text-dark/80 hover:text-dark text-[14px] block p-3 font-medium transition lg:px-3 lg:py-3;
 
   &.active {
     @apply underline decoration-primary decoration-1 underline-offset-4 text-dark;

@@ -5,8 +5,8 @@ contact_2: "Our platform offers flexible scaling, cost-efficient resource manage
 image: "service-1"
 button:
   enable: true
-  label: "Get Started"
-  link: "contact"
+  label: "Visit Amalgamy.ai"
+  link: "https://amalgamy.ai"
 ---
 
 #### Platform Features

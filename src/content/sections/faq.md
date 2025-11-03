@@ -6,8 +6,8 @@ header:
 title: "Frequently Asked Questions"
 content: "Learn more about how ThisWay Global's solutions can transform your business operations."
 faqs:
-  - question: "What is <a href=\"https://amalgamy.ai\" target=\"_blank\" rel=\"noopener noreferrer\">Amalgamy.ai</a> and how does it work?"
-    answer: "<a href=\"https://amalgamy.ai\" target=\"_blank\" rel=\"noopener noreferrer\">Amalgamy.ai</a> is our high-performance computing platform designed for GPU-intensive workloads. It provides scalable access to NVIDIA GPUs for running large language models, complex simulations, and other computational tasks without requiring hardware investment."
+  - question: "What is Amalgamy.ai and how does it work?"
+    answer: "Amalgamy.ai is our high-performance computing platform designed for GPU-intensive workloads. It provides scalable access to NVIDIA GPUs for running large language models, complex simulations, and other computational tasks without requiring hardware investment. <a href=\"https://amalgamy.ai\" target=\"_blank\" rel=\"noopener noreferrer\">Learn more at Amalgamy.ai</a>"
   - question: "How does Sully's Sandbox benefit my organization?"
     answer: "Sully's Sandbox is our AI model marketplace that provides immediate access to specialized models and LLMs. It allows organizations to quickly implement AI solutions without extensive development time, accelerating innovation and productivity."
   - question: "What makes AI4JOBS different from traditional recruitment tools?"

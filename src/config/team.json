@@ -66,6 +66,28 @@
     "path": "/images/team-members/lisa.jpeg"
   },
   {
+    "Name": "Craig Peters",
+    "order": 5.1,
+    "Role": "Chief Product Officer",
+    "Department": "Product",
+    "Email": "craig.peters@thiswayglobal.com",
+    "Linked In": "https://www.linkedin.com/in/craiglpeters/",
+    "Bio": "Craig Peters is a passionate Product Manager at ThisWay Global who is energized by finding and building connections in technology. With extensive experience in cloud computing, open source software, and product development, Craig specializes in bringing innovative solutions to market. His expertise in product management and technology strategy helps drive <a href=\"https://amalgamy.ai\" target=\"_blank\" rel=\"noopener noreferrer\">Amalgamy.ai</a>'s product vision and market success. Craig's ability to bridge technical capabilities with customer needs makes him a valuable leader in shaping the future of AI/HPC orchestration.",
+    "Active": "TRUE",
+    "path": "/images/team-members/craig.png"
+  },
+  {
+    "Name": "Joel Mjolsness",
+    "order": 5.2,
+    "Role": "Chief Revenue Officer",
+    "Department": "Revenue",
+    "Email": "joel.mjolsness@thiswayglobal.com",
+    "Linked In": "https://www.linkedin.com/in/joelmjolsness/",
+    "Bio": "Joel Mjolsness leads the market introduction of <a href=\"https://amalgamy.ai\" target=\"_blank\" rel=\"noopener noreferrer\">Amalgamy.ai</a>, ThisWay Global's next-generation AI-driven orchestration platform. With a distinguished background that includes military service and numerous accolades including the Bronze Star and Luther College Distinguished Service Award, Joel brings strategic leadership and extensive experience to driving market adoption. His expertise in business development, technology strategy, and go-to-market execution helps position Amalgamy.ai as the leading AI/HPC orchestration platform. Joel's commitment to excellence and innovation drives business growth and customer success.",
+    "Active": "TRUE",
+    "path": "/images/team-members/joel.png"
+  },
+  {
     "Name": "Daniel Snell",
     "order": 7,
     "Role": "Director of Marketing",

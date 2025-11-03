@@ -34,21 +34,21 @@ service:
       button:
         enable: true
         label: "learn more"
-        link: "/services"
+        link: "https://amalgamy.ai"
     - title: "Sully's Sandbox"
       image: "service-2"
       content: "Access our curated marketplace of specialized models and LLMs, ready for immediate implementation."
       button:
         enable: true
         label: "learn more"
-        link: "/services"
+        link: "/products"
     - title: "AI4JOBS"
       image: "service-3"
       content: "Transform your recruitment process with AI-driven candidate identification and matching technology."
       button:
         enable: true
         label: "learn more"
-        link: "/services"
+        link: "/products"
 
 feature:
   title: "Empowering Your Business <br> **with Advanced AI Solutions**"

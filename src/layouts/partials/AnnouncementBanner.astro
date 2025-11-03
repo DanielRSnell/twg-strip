@@ -1,0 +1,53 @@
+---
+// Announcement banner for site-wide notifications
+---
+
+<div class="announcement-banner">
+  <div class="container">
+    <div class="announcement-content">
+      <a
+        href="https://amalgamy.ai"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="announcement-link"
+      >
+        🚀 Introducing Amalgamy.ai - Next-Generation AI/HPC Orchestration Platform
+      </a>
+    </div>
+  </div>
+</div>
+
+<style>
+  .announcement-banner {
+    background: linear-gradient(135deg, #24ab9d 0%, #5969FC 100%);
+    color: white;
+    padding: 0.75rem 0;
+    position: relative;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .announcement-content {
+    text-align: center;
+  }
+
+  .announcement-link {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    display: inline-block;
+    transition: all 0.3s ease;
+  }
+
+  .announcement-link:hover {
+    text-decoration: underline;
+    transform: translateY(-1px);
+  }
+
+  @media (max-width: 768px) {
+    .announcement-link {
+      font-size: 0.85rem;
+    }
+  }
+</style>

@@ -157,6 +157,23 @@
   @apply content-[""] bg-[url('/images/svg/globe.svg')] bg-cover bg-no-repeat absolute w-full h-full top-[85%] md:top-[72%] left-[46%] scale-[1.2] transform translate-x-[-50%] translate-y-[-50%];
 }
 
+// CTA rotation animation with spring effect
+@keyframes cta-rotate {
+  0% {
+    transform: translateX(-50%) rotate(-8deg);
+  }
+  50% {
+    transform: translateX(-50%) rotate(8deg);
+  }
+  100% {
+    transform: translateX(-50%) rotate(-8deg);
+  }
+}
+
+.cta-rotate-animation {
+  animation: cta-rotate 6s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+}
+
 // content style
 .content {
   @apply prose max-w-none;

@@ -72,9 +72,13 @@ const faqs = await getEntry("sections", "faq");
                 {product.data.button.enable && (
                   <a
                     href={product.data.button.link}
-                    class="hidden btn btn-primary"
+                    class="btn btn-primary"
                     data-aos="fade-up-sm"
                     data-aos-delay="400"
+                    {...(product.data.button.link.startsWith('http') && {
+                      target: '_blank',
+                      rel: 'noopener noreferrer'
+                    })}
                   >
                     {product.data.button.label}
                   </a>
