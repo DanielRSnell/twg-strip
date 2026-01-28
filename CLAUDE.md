@@ -103,3 +103,13 @@ When working with blog content, use the `content_type` field:
 - ESLint and Prettier configured for code quality
 - Uses Yarn 1.22.22 as package manager
 - RSS feed and sitemap automatically generated on build
+
+## Project Management
+
+**STRICT RULE**: All projects, plans, and progress updates MUST be communicated to the Octocat agent for GitHub issue/project tracking. This includes:
+- New feature plans and implementation steps
+- Progress updates on active tasks
+- Completion status of milestones
+- Any blockers or changes to scope
+
+Always use the Octocat agent to create issues, update project boards, and track work.

@@ -1,0 +1,244 @@
+{
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "group-interview",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "78698f92-7f82-4472-8771-70aff9875634",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1.1,
+      "position": [
+        -480,
+        -144
+      ],
+      "webhookId": "group-interview"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": false,
+                  "leftValue": "",
+                  "typeValidation": "loose"
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.body.action }}",
+                    "rightValue": "check",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": false,
+                  "leftValue": "",
+                  "typeValidation": "loose"
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.body.action }}",
+                    "rightValue": "save",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "a1ea884d-1674-410c-bb3e-03708f788d0f",
+      "name": "Route Action",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3,
+      "position": [
+        -256,
+        -144
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT COUNT(*)::int as count FROM group_interview_registrations WHERE interview_date = '{{ $json.body.interview_date }}'",
+        "options": {}
+      },
+      "id": "204f830e-d5c1-4876-a20a-7c471abf5ae1",
+      "name": "Count Registrations",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.3,
+      "position": [
+        -32,
+        -240
+      ],
+      "credentials": {
+        "postgres": {
+          "id": "qYLP1qqStnwaPbh4",
+          "name": "TWG | PG"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({ available: (100 - $json.count), total: 100, registered: $json.count, is_available: $json.count < 100 }) }}",
+        "options": {}
+      },
+      "id": "949dd4b0-6c60-42fe-99eb-71f495a55149",
+      "name": "Respond Availability",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        192,
+        -240
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "INSERT INTO group_interview_registrations (first_name, last_name, email, phone, interview_date, interview_label) VALUES ('{{ $json.body.first_name }}', '{{ $json.body.last_name }}', '{{ $json.body.email }}', '{{ $json.body.phone }}', '{{ $json.body.interview_date }}', '{{ $json.body.interview_label }}') ON CONFLICT (email, interview_date) DO NOTHING RETURNING id",
+        "options": {}
+      },
+      "id": "e63dec61-cdbb-4b2d-9192-b2f45bd40d4d",
+      "name": "Save Registration",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.3,
+      "position": [
+        -32,
+        -48
+      ],
+      "credentials": {
+        "postgres": {
+          "id": "qYLP1qqStnwaPbh4",
+          "name": "TWG | PG"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({ success: true, message: 'Registration saved successfully' }) }}",
+        "options": {}
+      },
+      "id": "edbd4d54-4aa6-4e1d-a75c-2fbe8a723a45",
+      "name": "Respond Success",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        624,
+        -48
+      ]
+    },
+    {
+      "parameters": {
+        "fromEmail": "hr@amalgamy.ai",
+        "toEmail": "wattstoworkers@thiswayglobal.com",
+        "ccEmail": "daniel.snell@thiswayglobal.com",
+        "subject": "=New Group Interview Sign-up: {{ $('Webhook').item.json.body.first_name }} {{ $('Webhook').item.json.body.last_name }}",
+        "html": "=<!DOCTYPE html><html><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1.0\"><title>New Registration</title></head><body style=\"margin:0;padding:0;background-color:#f6f7f9;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif\"><table role=\"presentation\" width=\"100%\" cellspacing=\"0\" cellpadding=\"0\" style=\"background-color:#f6f7f9;padding:32px 16px\"><tr><td align=\"center\"><table role=\"presentation\" width=\"100%\" cellspacing=\"0\" cellpadding=\"0\" style=\"max-width:560px;background-color:#ffffff;border-radius:16px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.06)\"><tr><td style=\"background-color:#0a0a0a;padding:28px 32px;text-align:center\"><h1 style=\"margin:0;color:#ffffff;font-size:20px;font-weight:600\">New Group Interview Registration</h1></td></tr><tr><td style=\"padding:32px\"><p style=\"margin:0 0 24px;color:#3b3b3b;font-size:15px;line-height:1.6\">A new candidate has registered for a group interview session.</p><table role=\"presentation\" width=\"100%\" cellspacing=\"0\" cellpadding=\"0\" style=\"background-color:#f6f7f9;border-radius:12px;margin-bottom:16px\"><tr><td style=\"padding:20px\"><div style=\"font-size:11px;color:#0a0a0a99;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px\">Interview Slot</div><div style=\"display:inline-block;background-color:#5969fc;color:#ffffff;padding:8px 18px;border-radius:24px;font-size:14px;font-weight:500\">{{ $('Webhook').item.json.body.interview_label }}</div></td></tr></table><table role=\"presentation\" width=\"100%\" cellspacing=\"0\" cellpadding=\"0\" style=\"background-color:#f6f7f9;border-radius:12px;margin-bottom:16px\"><tr><td style=\"padding:20px\"><div style=\"font-size:11px;color:#0a0a0a99;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px\">Candidate Name</div><div style=\"font-size:16px;color:#0a0a0a;font-weight:500\">{{ $('Webhook').item.json.body.first_name }} {{ $('Webhook').item.json.body.last_name }}</div></td></tr></table><table role=\"presentation\" width=\"100%\" cellspacing=\"0\" cellpadding=\"0\" style=\"background-color:#f6f7f9;border-radius:12px;margin-bottom:16px\"><tr><td style=\"padding:20px\"><div style=\"font-size:11px;color:#0a0a0a99;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px\">Email Address</div><a href=\"mailto:{{ $('Webhook').item.json.body.email }}\" style=\"font-size:16px;color:#5969fc;font-weight:500;text-decoration:none\">{{ $('Webhook').item.json.body.email }}</a></td></tr></table><table role=\"presentation\" width=\"100%\" cellspacing=\"0\" cellpadding=\"0\" style=\"background-color:#f6f7f9;border-radius:12px\"><tr><td style=\"padding:20px\"><div style=\"font-size:11px;color:#0a0a0a99;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px\">Phone Number</div><a href=\"tel:{{ $('Webhook').item.json.body.phone }}\" style=\"font-size:16px;color:#5969fc;font-weight:500;text-decoration:none\">{{ $('Webhook').item.json.body.phone }}</a></td></tr></table></td></tr><tr><td style=\"padding:24px 32px;text-align:center;border-top:1px solid #e5e5e5\"><p style=\"margin:0;color:#0a0a0a99;font-size:13px\">ThisWay Global - Group Interview System</p></td></tr></table></td></tr></table></body></html>"
+      },
+      "type": "n8n-nodes-base.mailgun",
+      "typeVersion": 1,
+      "position": [
+        240,
+        -48
+      ],
+      "id": "76b76bfa-4f0c-423c-a977-a8b518a88c3e",
+      "name": "Mailgun",
+      "credentials": {
+        "mailgunApi": {
+          "id": "lHQnhWsSULcKXB4f",
+          "name": "Amalgamy.ai"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Route Action",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Route Action": {
+      "main": [
+        [
+          {
+            "node": "Count Registrations",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Save Registration",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Count Registrations": {
+      "main": [
+        [
+          {
+            "node": "Respond Availability",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Save Registration": {
+      "main": [
+        [
+          {
+            "node": "Mailgun",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mailgun": {
+      "main": [
+        [
+          {
+            "node": "Respond Success",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "6abfb47bea51a6f610a03c2f772741bc5d6bf3fa9900a4ec5d91227cefde6c68"
+  }
+}

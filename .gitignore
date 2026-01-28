@@ -25,3 +25,6 @@ pnpm-lock.yaml
 .astro
 
 tsconfig.tsbuildinfo
+
+# credentials
+**/creds.md

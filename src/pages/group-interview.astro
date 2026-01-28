@@ -1,0 +1,30 @@
+---
+import Base from "@/layouts/Base.astro";
+import GroupInterviewForm from "@/components/GroupInterviewForm";
+---
+
+<Base
+  title="Group Interview Registration"
+  meta_title="Group Interview Registration | ThisWay Global"
+  description="Register for a ThisWay Global group interview session. Select your preferred date and time slot."
+>
+  <section class="section bg-theme-light">
+    <div class="container">
+      <div class="text-center" data-aos="fade-up-sm" data-aos-delay="100">
+        <h1 class="mb-4">Group Interview</h1>
+        <p class="mx-auto max-w-2xl text-lg text-light">
+          Join us for a 30-minute group interview session. Select an available
+          date below and complete your registration.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div data-aos="fade-up-sm" data-aos-delay="200">
+        <GroupInterviewForm client:load />
+      </div>
+    </div>
+  </section>
+</Base>
