@@ -561,9 +561,10 @@ export default function GroupInterviewForm() {
     if (!selectedSlot) return { google: "", outlook: "" };
 
     const title = "ThisWay Global Group Interview";
-    const description =
-      "Group Interview Link: [ZOOM LINK]\\n\\nThisWay Global Group Interview Session\\n\\nPlease join a few minutes early to ensure your audio and video are working properly.";
-    const location = "Zoom (link will be provided)";
+    const zoomLink =
+      "https://us02web.zoom.us/j/88151751115?pwd=k1wvAbCpQ3fN5FHarOgY0W1dtd5Agb.1";
+    const description = `Interview Link: ${zoomLink}\\n\\nThisWay Global Group Interview Session\\n\\nDuration: ~30 minutes\\n\\nPlease join a few minutes early to ensure your audio and video are working properly.\\n\\nQuestions? Contact wattstoworkers@thiswayglobal.com`;
+    const location = zoomLink;
 
     // Parse the ISO date and create end time (30 min later)
     const startDate = new Date(selectedSlot.iso);
