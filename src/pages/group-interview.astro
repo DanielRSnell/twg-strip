@@ -1,63 +1,141 @@
 ---
-import Base from "@/layouts/Base.astro";
+import config from "@/config/config.json";
+import theme from "@/config/theme.json";
+import { plainify } from "@/lib/utils/textConverter";
+import "@/styles/main.scss";
+import { AstroFont } from "astro-font";
+import "aos/dist/aos.css";
 import GroupInterviewForm from "@/components/GroupInterviewForm";
+
+const pf = theme.fonts.font_family.primary;
+const sf = theme.fonts.font_family.secondary;
+
+let fontPrimary, fontSecondary;
+if (theme.fonts.font_family.primary) {
+  fontPrimary = theme.fonts.font_family.primary
+    .replace(/\+/g, " ")
+    .replace(/:[ital,]*[ital@]*[wght@]*[0-9,;.]+/gi, "");
+}
+if (theme.fonts.font_family.secondary) {
+  fontSecondary = theme.fonts.font_family.secondary
+    .replace(/\+/g, " ")
+    .replace(/:[ital,]*[ital@]*[wght@]*[0-9,;.]+/gi, "");
+}
+
+const title = "Group Interview Registration";
+const meta_title = "Group Interview Registration | ThisWay Global";
+const description =
+  "Register for a ThisWay Global group interview session. Select your preferred date and time slot.";
 ---
 
-<Base
-  title="Group Interview Registration"
-  meta_title="Group Interview Registration | ThisWay Global"
-  description="Register for a ThisWay Global group interview session. Select your preferred date and time slot."
->
-  <section class="section bg-theme-light">
-    <div class="container">
-      <div class="text-center" data-aos="fade-up-sm" data-aos-delay="100">
-        <h1 class="mb-4">Group Interview</h1>
-        <p class="mx-auto max-w-2xl text-lg text-light mb-6">
-          We're excited to learn more about you! Based on your application, we
-          would like to invite you to a formal interview with our team. Please
-          use the calendar below to select a date and time that works best for
-          your schedule.
-        </p>
-        <div
-          class="mx-auto max-w-xl text-left text-sm text-light space-y-2"
-          data-aos="fade-up-sm"
-          data-aos-delay="200"
-        >
-          <p>
-            <strong class="text-dark">Timezone:</strong> Please ensure the calendar
-            is set to your local timezone before booking.
+<!doctype html>
+<html lang="en">
+  <head>
+    <link rel="shortcut icon" href={config.site.favicon} />
+    <meta name="theme-color" content="#fff" />
+    <meta name="generator" content={Astro.generator} />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <AstroFont
+      config={[
+        {
+          src: [],
+          preload: false,
+          display: "swap",
+          name: fontPrimary!,
+          fallback: "sans-serif",
+          cssVariable: "font-primary",
+          googleFontsURL: `https://fonts.googleapis.com/css2?family=${pf}&display=swap`,
+        },
+        {
+          src: [],
+          preload: false,
+          display: "swap",
+          name: fontSecondary!,
+          fallback: "sans-serif",
+          cssVariable: "font-secondary",
+          googleFontsURL: `https://fonts.googleapis.com/css2?family=${sf}&display=swap`,
+        },
+      ]}
+    />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=5"
+    />
+    <title>{plainify(meta_title)}</title>
+    <meta name="description" content={plainify(description)} />
+    <meta property="og:title" content={plainify(meta_title)} />
+    <meta property="og:description" content={plainify(description)} />
+    <meta property="og:type" content="website" />
+  </head>
+  <body class="min-h-screen bg-theme-light">
+    <header class="py-8 text-center">
+      <a href="/" class="inline-block">
+        <img
+          src="/images/logo.svg"
+          alt="ThisWay Global"
+          class="mx-auto h-10"
+        />
+      </a>
+    </header>
+
+    <main class="px-4 pb-16">
+      <div class="mx-auto max-w-2xl">
+        <div class="mb-10 text-center" data-aos="fade-up-sm" data-aos-delay="100">
+          <h1 class="mb-4 text-3xl font-semibold text-dark sm:text-4xl">
+            Group Interview
+          </h1>
+          <p class="mx-auto max-w-xl text-base text-light mb-6">
+            We're excited to learn more about you! Based on your application, we
+            would like to invite you to a formal interview with our team. Please
+            select a date and time that works best for your schedule.
           </p>
-          <p>
-            <strong class="text-dark">Duration:</strong> Expect the conversation to
-            last approximately 30 minutes.
-          </p>
-          <p>
-            <strong class="text-dark">Location:</strong> Once confirmed, you will
-            receive a calendar invitation with the meeting link.
+          <div
+            class="mx-auto max-w-lg text-left text-sm text-light space-y-2"
+            data-aos="fade-up-sm"
+            data-aos-delay="200"
+          >
+            <p>
+              <strong class="text-dark">Timezone:</strong> Please ensure the calendar
+              is set to your local timezone before booking.
+            </p>
+            <p>
+              <strong class="text-dark">Duration:</strong> Expect the conversation
+              to last approximately 30 minutes.
+            </p>
+            <p>
+              <strong class="text-dark">Location:</strong> Once confirmed, you will
+              receive a calendar invitation with the meeting link.
+            </p>
+          </div>
+          <p
+            class="mx-auto mt-6 max-w-lg text-sm text-light"
+            data-aos="fade-up-sm"
+            data-aos-delay="300"
+          >
+            <strong class="text-dark">Need a hand?</strong> If you have any
+            questions, need to request a time outside of these slots, or have a
+            change of plans, please reach out to us at
+            <a
+              href="mailto:wattstoworkers@thiswayglobal.com"
+              class="text-secondary hover:underline"
+              >wattstoworkers@thiswayglobal.com</a
+            >.
           </p>
         </div>
-        <p
-          class="mx-auto mt-6 max-w-xl text-sm text-light"
-          data-aos="fade-up-sm"
-          data-aos-delay="300"
-        >
-          <strong class="text-dark">Need a hand?</strong> If you have any questions,
-          need to request a time outside of these slots, or have a change of plans,
-          please reach out to us at
-          <a
-            href="mailto:wattstoworkers@thiswayglobal.com"
-            class="text-secondary hover:underline">wattstoworkers@thiswayglobal.com</a
-          >.
-        </p>
-      </div>
-    </div>
-  </section>
 
-  <section class="section">
-    <div class="container">
-      <div data-aos="fade-up-sm" data-aos-delay="200">
-        <GroupInterviewForm client:load />
+        <div data-aos="fade-up-sm" data-aos-delay="400">
+          <GroupInterviewForm client:load />
+        </div>
       </div>
-    </div>
-  </section>
-</Base>
+    </main>
+
+    <script>
+      import AOS from "aos";
+      function aosInit() {
+        AOS.init({ duration: 600, once: true });
+      }
+      aosInit();
+      document.addEventListener("astro:after-swap", aosInit);
+    </script>
+  </body>
+</html>
