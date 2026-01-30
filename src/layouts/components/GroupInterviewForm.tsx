@@ -56,6 +56,19 @@ interface Availability {
   is_available: boolean;
 }
 
+const ROLES = [
+  "AI Hardware Installer",
+  "AI Software Installer",
+  "Construction Site Admin",
+  "Electrician Technical Assistant",
+  "Fiber Optic Electrical Assistant",
+  "Fiber Optic Field Assistant",
+  "Fiber Trenching & Worksite Assistant",
+  "Forklift Operator: Advanced Technology",
+  "Mechanical Technical Assistant",
+  "Plumbing Technical Assistant",
+];
+
 type Step = "select" | "info" | "confirm";
 
 export default function GroupInterviewForm() {
@@ -69,6 +82,7 @@ export default function GroupInterviewForm() {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+  const [role, setRole] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
@@ -80,6 +94,7 @@ export default function GroupInterviewForm() {
     if (params.get("lastName")) setLastName(params.get("lastName")!);
     if (params.get("email")) setEmail(params.get("email")!);
     if (params.get("phone")) setPhone(params.get("phone")!);
+    if (params.get("role")) setRole(params.get("role")!);
   }, []);
 
   // Fetch availability for all slots
@@ -142,6 +157,7 @@ export default function GroupInterviewForm() {
     } else if (!/^[\d\s\-+().]{7,}$/.test(phone)) {
       errors.phone = "Please enter a valid phone number";
     }
+    if (!role) errors.role = "Please select a role";
     setFieldErrors(errors);
     return Object.keys(errors).length === 0;
   };
@@ -163,6 +179,7 @@ export default function GroupInterviewForm() {
           phone: phone.trim(),
           interview_date: selectedSlot.iso,
           interview_label: selectedSlot.label,
+          role: role,
         }),
       });
 
@@ -471,6 +488,31 @@ export default function GroupInterviewForm() {
           />
           {fieldErrors.phone && (
             <p className="mt-1.5 text-xs text-red-500">{fieldErrors.phone}</p>
+          )}
+        </div>
+        <div className="mb-5">
+          <label htmlFor="role" className="form-label">
+            Which role are you interviewing for?
+          </label>
+          <select
+            id="role"
+            value={role}
+            onChange={(e) => {
+              setRole(e.target.value);
+              if (fieldErrors.role)
+                setFieldErrors((p) => ({ ...p, role: "" }));
+            }}
+            className={`form-input w-full bg-tertiary/5 ${fieldErrors.role ? "!border-red-400" : ""}`}
+          >
+            <option value="">Select a role</option>
+            {ROLES.map((r) => (
+              <option key={r} value={r}>
+                {r}
+              </option>
+            ))}
+          </select>
+          {fieldErrors.role && (
+            <p className="mt-1.5 text-xs text-red-500">{fieldErrors.role}</p>
           )}
         </div>
 

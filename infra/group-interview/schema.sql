@@ -10,6 +10,7 @@ CREATE TABLE IF NOT EXISTS group_interview_registrations (
     phone VARCHAR(50) NOT NULL,
     interview_date TIMESTAMPTZ NOT NULL,
     interview_label VARCHAR(255) NOT NULL,
+    role VARCHAR(255) NOT NULL DEFAULT '',
     created_at TIMESTAMPTZ DEFAULT NOW(),
 
     -- Prevent duplicate registrations for the same person on the same date
