@@ -237,7 +237,7 @@ const careers = await getSinglePage("career");
                         </button>
                         <div class="absolute z-10 left-0 w-72 md:w-80 p-4 mt-2 bg-white rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 text-sm max-h-[300px] overflow-y-auto border border-gray-200">
                           <h4 class="font-bold mb-2">{member.Name}</h4>
-                          <p class="whitespace-pre-line">{member.Bio}</p>
+                          <p class="whitespace-pre-line" set:html={member.Bio}></p>
                         </div>
                       </div>
                     )}
