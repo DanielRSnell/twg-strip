@@ -176,17 +176,6 @@
     "path": "/images/team-members/michael.jpeg"
   },
   {
-    "Name": "Tom Sikler",
-    "order": 14,
-    "Role": "Customer Success Manager",
-    "Department": "Revenue",
-    "Email": "tom.sikler@thiswayglobal.com",
-    "Linked In": "https://www.linkedin.com/in/tsikler?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app",
-    "Bio": "Tom Sikler is a customer success leader with experience in HR, IT, Finance, and Retail, specializing in enhancing customer support, onboarding, and long-term success. As Manager of Customer Experience at ThisWay Global, he leads initiatives to improve customer support, implementation, and onboarding processes.\n\nPreviously, Tom held key roles at Gloat, Moody's, and IBM, where he focused on strengthening customer relationships and streamlining operations. He studied Communications at Kent State University and holds certifications in Agile, Change Management, and Talent Solutions. With a passion for optimizing customer experiences, Tom helps businesses drive engagement and operational efficiency.",
-    "Active": "TRUE",
-    "path": "/images/team-members/tom.jpeg"
-  },
-  {
     "order": 8,
     "Name": "Chris Ramirez",
     "Role": "Director of Sales",
