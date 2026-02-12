@@ -1,0 +1,370 @@
+{
+  "name": "Backfill - Group Interview Reminders",
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "tags": [],
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "bf000000-0000-0000-0000-000000000001",
+      "name": "Manual Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -192,
+        1040
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT first_name, last_name, email, phone, interview_date, interview_label, role FROM group_interview_registrations WHERE interview_date >= NOW() - interval '30 minutes' ORDER BY interview_date, email",
+        "options": {}
+      },
+      "id": "bf000000-0000-0000-0000-000000000002",
+      "name": "Get Upcoming Registrants",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.3,
+      "position": [
+        32,
+        1040
+      ],
+      "credentials": {
+        "postgres": {
+          "id": "qYLP1qqStnwaPbh4",
+          "name": "TWG | PG"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "bf",
+              "leftValue": "={{ DateTime.fromISO($('Get Upcoming Registrants').item.json.interview_date).minus({days: 1}).toMillis() }}",
+              "rightValue": "={{ DateTime.now().toMillis() }}",
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "bf000000-0000-0000-0000-000000000010",
+      "name": "If >1 Day Away",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        280,
+        840
+      ]
+    },
+    {
+      "parameters": {
+        "resume": "specificTime",
+        "dateTime": "={{ DateTime.fromISO($('Get Upcoming Registrants').item.json.interview_date).minus({days: 1}).toISO() }}"
+      },
+      "id": "bf000000-0000-0000-0000-000000000011",
+      "name": "Wait 1 Day Before",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        520,
+        800
+      ]
+    },
+    {
+      "parameters": {
+        "fromEmail": "notifications@m.thiswayglobal.com",
+        "toEmail": "={{ $('Get Upcoming Registrants').item.json.email }}",
+        "bccEmail": "wattstoworkers@thiswayglobal.com",
+        "subject": "=Tomorrow: Your Group Interview with ThisWay Global",
+        "html": "=<!doctype html><html lang=\"und\" dir=\"auto\" xmlns=\"http://www.w3.org/1999/xhtml\" xmlns:v=\"urn:schemas-microsoft-com:vml\" xmlns:o=\"urn:schemas-microsoft-com:office:office\"><head>  <title></title>  <!--[if !mso]><!-->  <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">  <!--<![endif]-->  <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">  <style type=\"text/css\">    #outlook a {      padding: 0;    }    body {      margin: 0;      padding: 0;      -webkit-text-size-adjust: 100%;      -ms-text-size-adjust: 100%;    }    table,    td {      border-collapse: collapse;      mso-table-lspace: 0pt;      mso-table-rspace: 0pt;    }    img {      border: 0;      height: auto;      line-height: 100%;      outline: none;      text-decoration: none;      -ms-interpolation-mode: bicubic;    }    p {      display: block;      margin: 13px 0;    }  </style>  <!--[if mso]>    <noscript>    <xml>    <o:OfficeDocumentSettings>      <o:AllowPNG/>      <o:PixelsPerInch>96</o:PixelsPerInch>    </o:OfficeDocumentSettings>    </xml>    </noscript>    <![endif]-->  <!--[if lte mso 11]>    <style type=\"text/css\">      .mj-outlook-group-fix { width:100% !important; }    </style>    <![endif]-->  <!--[if !mso]><!-->  <link href=\"https://fonts.googleapis.com/css?family=Roboto:300,400,500,700\" rel=\"stylesheet\" type=\"text/css\">  <style type=\"text/css\">    @import url(https://fonts.googleapis.com/css?family=Roboto:300,400,500,700);  </style>  <!--<![endif]-->  <style type=\"text/css\">    @media only screen and (min-width:480px) {      .mj-column-per-100 {        width: 100% !important;        max-width: 100%;      }    }  </style>  <style media=\"screen and (min-width:480px)\">    .moz-text-html .mj-column-per-100 {      width: 100% !important;      max-width: 100%;    }  </style>  <style type=\"text/css\">    @media only screen and (max-width:479px) {      table.mj-full-width-mobile {        width: 100% !important;      }      td.mj-full-width-mobile {        width: auto !important;      }    }  </style></head><body style=\"word-spacing:normal;background-color:#f4f4f5;\">  <div aria-roledescription=\"email\" style=\"background-color:#f4f4f5;\" role=\"article\" lang=\"und\" dir=\"auto\">    <!--[if mso | IE]><table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"\" role=\"presentation\" style=\"width:600px;\" width=\"600\" ><tr><td style=\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\"><![endif]-->    <div style=\"margin:0px auto;max-width:600px;\">      <table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"width:100%;\">        <tbody>          <tr>            <td style=\"direction:ltr;font-size:0px;padding:32px 16px 0;text-align:center;\">              <!--[if mso | IE]><table role=\"presentation\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\"><tr><td class=\"\" style=\"vertical-align:top;width:568px;\" ><![endif]-->              <div class=\"mj-column-per-100 mj-outlook-group-fix\" style=\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\">                <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"vertical-align:top;\" width=\"100%\">                  <tbody>                    <tr>                      <td align=\"center\" style=\"font-size:0px;padding:10px 25px;padding-bottom:24px;word-break:break-word;\">                        <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"border-collapse:collapse;border-spacing:0px;\">                          <tbody>                            <tr>                              <td style=\"width:140px;\">                                <img alt=\"ThisWay Global\" src=\"https://thiswayglobal.com/images/logo.png\" style=\"border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;font-size:13px;\" width=\"140\" height=\"auto\" />                              </td>                            </tr>                          </tbody>                        </table>                      </td>                    </tr>                  </tbody>                </table>              </div>              <!--[if mso | IE]></td></tr></table><![endif]-->            </td>          </tr>        </tbody>      </table>    </div>    <!--[if mso | IE]></td></tr></table><table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"\" role=\"presentation\" style=\"width:600px;\" width=\"600\" bgcolor=\"#f4f4f5\" ><tr><td style=\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\"><![endif]-->    <div style=\"background:#f4f4f5;background-color:#f4f4f5;margin:0px auto;max-width:600px;\">      <table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"background:#f4f4f5;background-color:#f4f4f5;width:100%;\">        <tbody>          <tr>            <td style=\"direction:ltr;font-size:0px;padding:0 16px 32px;text-align:center;\">              <!--[if mso | IE]><table role=\"presentation\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\"><tr><td class=\"\" width=\"600px\" ><table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"\" role=\"presentation\" style=\"width:568px;\" width=\"568\" bgcolor=\"#ffffff\" ><tr><td style=\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\"><![endif]-->              <div style=\"background:#ffffff;background-color:#ffffff;margin:0px auto;max-width:568px;border-radius:12px;overflow:hidden;\">                <table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"background:#ffffff;background-color:#ffffff;width:100%;border-collapse:separate;\">                  <tbody>                    <tr>                      <td style=\"border-radius:12px;direction:ltr;font-size:0px;padding:40px 32px 32px;text-align:center;\">                        <!--[if mso | IE]><table role=\"presentation\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\"><tr><td class=\"\" style=\"vertical-align:top;width:504px;\" ><![endif]-->                        <div class=\"mj-column-per-100 mj-outlook-group-fix\" style=\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\">                          <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"vertical-align:top;\" width=\"100%\">                            <tbody>                              <tr>                                <td align=\"left\" style=\"font-size:0px;padding:10px 25px;padding-bottom:4px;word-break:break-word;\">                                  <div style=\"font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;font-size:22px;font-weight:700;line-height:1.6;text-align:left;color:#18181b;\">Your Interview is Tomorrow</div>                                </td>                              </tr>                              <tr>                                <td align=\"left\" style=\"font-size:0px;padding:10px 25px;padding-bottom:24px;word-break:break-word;\">                                  <div style=\"font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;font-size:14px;line-height:1.6;text-align:left;color:#71717a;\">Get ready — your interview is just one day away.</div>                                </td>                              </tr>                              <tr>                                <td align=\"center\" style=\"font-size:0px;padding:0 0 24px;word-break:break-word;\">                                  <p style=\"border-top:solid 1px #e4e4e7;font-size:1px;margin:0px auto;width:100%;\">                                  </p>                                  <!--[if mso | IE]><table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"border-top:solid 1px #e4e4e7;font-size:1px;margin:0px auto;width:504px;\" role=\"presentation\" width=\"504px\" ><tr><td style=\"height:0;line-height:0;\"> &nbsp;</td></tr></table><![endif]-->                                </td>                              </tr>                              <tr>                                <td align=\"left\" style=\"font-size:0px;padding:10px 25px;padding-bottom:16px;word-break:break-word;\">                                  <div style=\"font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;font-size:15px;line-height:1.6;text-align:left;color:#18181b;\">Hi {{ $('Get Upcoming Registrants').item.json.first_name }},</div>                                </td>                              </tr>                              <tr>                                <td align=\"left\" style=\"font-size:0px;padding:10px 25px;padding-bottom:16px;word-break:break-word;\">                                  <div style=\"font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;font-size:15px;line-height:1.6;text-align:left;color:#18181b;\">Just a quick heads-up — your group interview with ThisWay Global is <strong>tomorrow</strong>. Please make sure you have everything you need and are ready to join on time.</div>                                </td>                              </tr>                            </tbody>                          </table>                        </div>                        <!--[if mso | IE]></td></tr></table><![endif]-->                      </td>                    </tr>                  </tbody>                </table>              </div>              <!--[if mso | IE]></td></tr></table></td></tr><tr><td class=\"\" width=\"600px\" ><table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"\" role=\"presentation\" style=\"width:568px;\" width=\"568\" bgcolor=\"#ffffff\" ><tr><td style=\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\"><![endif]-->              <div style=\"background:#ffffff;background-color:#ffffff;margin:0px auto;max-width:568px;border-radius:12px;overflow:hidden;\">                <table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"background:#ffffff;background-color:#ffffff;width:100%;border-collapse:separate;\">                  <tbody>                    <tr>                      <td style=\"border-radius:12px;direction:ltr;font-size:0px;padding:0 32px 32px;text-align:center;\">                        <!--[if mso | IE]><table role=\"presentation\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\"><tr><td class=\"\" style=\"vertical-align:top;width:504px;\" ><![endif]-->                        <div class=\"mj-column-per-100 mj-outlook-group-fix\" style=\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\">                          <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" width=\"100%\" style=\"border-collapse:separate;\">                            <tbody>                              <tr>                                <td style=\"background-color:#f4f4f5;border-radius:8px;vertical-align:top;border-collapse:separate;padding:20px;\">                                  <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"\" width=\"100%\">                                    <tbody>                                      <tr>                                        <td align=\"left\" style=\"font-size:0px;padding:0 0 4px;word-break:break-word;\">                                          <div style=\"font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;font-size:11px;line-height:1.6;text-align:left;color:#71717a;\">YOUR INTERVIEW</div>                                        </td>                                      </tr>                                      <tr>                                        <td align=\"left\" style=\"font-size:0px;padding:0 0 16px;word-break:break-word;\">                                          <div style=\"font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;font-size:16px;font-weight:600;line-height:1.6;text-align:left;color:#18181b;\">{{ $('Get Upcoming Registrants').item.json.interview_label }}</div>                                        </td>                                      </tr>                                      <tr>                                        <td align=\"left\" style=\"font-size:0px;padding:0 0 4px;word-break:break-word;\">                                          <div style=\"font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;font-size:11px;line-height:1.6;text-align:left;color:#71717a;\">ROLE</div>                                        </td>                                      </tr>                                      <tr>                                        <td align=\"left\" style=\"font-size:0px;padding:0;word-break:break-word;\">                                          <div style=\"font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;font-size:16px;font-weight:600;line-height:1.6;text-align:left;color:#18181b;\">{{ $('Get Upcoming Registrants').item.json.role }}</div>                                        </td>                                      </tr>                                    </tbody>                                  </table>                                </td>                              </tr>                            </tbody>                          </table>                        </div>                        <!--[if mso | IE]></td></tr></table><![endif]-->                      </td>                    </tr>                  </tbody>                </table>              </div>              <!--[if mso | IE]></td></tr></table></td></tr><tr><td class=\"\" width=\"600px\" ><table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"\" role=\"presentation\" style=\"width:568px;\" width=\"568\" bgcolor=\"#ffffff\" ><tr><td style=\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\"><![endif]-->              <div style=\"background:#ffffff;background-color:#ffffff;margin:0px auto;max-width:568px;border-radius:12px;overflow:hidden;\">                <table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"background:#ffffff;background-color:#ffffff;width:100%;border-collapse:separate;\">                  <tbody>                    <tr>                      <td style=\"border-radius:12px;direction:ltr;font-size:0px;padding:0 32px 32px;text-align:center;\">                        <!--[if mso | IE]><table role=\"presentation\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\"><tr><td class=\"\" style=\"vertical-align:top;width:504px;\" ><![endif]-->                        <div class=\"mj-column-per-100 mj-outlook-group-fix\" style=\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\">                          <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"vertical-align:top;\" width=\"100%\">                            <tbody>                              <tr>                                <td align=\"center\" style=\"font-size:0px;padding:10px 25px;word-break:break-word;\">                                  <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"border-collapse:separate;line-height:100%;\">                                    <tbody>                                      <tr>                                        <td align=\"center\" bgcolor=\"#18181b\" role=\"presentation\" style=\"border:none;border-radius:6px;cursor:auto;mso-padding-alt:12px 24px;background:#18181b;\" valign=\"middle\">                                          <a href=\"https://us02web.zoom.us/j/88151751115?pwd=k1wvAbCpQ3fN5FHarOgY0W1dtd5Agb.1\" style=\"display:inline-block;background:#18181b;color:#fafafa;font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;font-size:14px;font-weight:600;line-height:120%;margin:0;text-decoration:none;text-transform:none;padding:12px 24px;mso-padding-alt:0px;border-radius:6px;\" target=\"_blank\"> Join Zoom Meeting </a>                                        </td>                                      </tr>                                    </tbody>                                  </table>                                </td>                              </tr>                              <tr>                                <td align=\"left\" style=\"font-size:0px;padding:10px 25px;padding-top:24px;padding-bottom:8px;word-break:break-word;\">                                  <div style=\"font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;font-size:15px;line-height:1.6;text-align:left;color:#18181b;\">We look forward to meeting you!</div>                                </td>                              </tr>                              <tr>                                <td align=\"left\" style=\"font-size:0px;padding:10px 25px;padding-top:16px;word-break:break-word;\">                                  <div style=\"font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;font-size:15px;line-height:1.6;text-align:left;color:#18181b;\">Best regards,<br />                                    <strong>The ThisWay Global Team</strong>                                  </div>                                </td>                              </tr>                            </tbody>                          </table>                        </div>                        <!--[if mso | IE]></td></tr></table><![endif]-->                      </td>                    </tr>                  </tbody>                </table>              </div>              <!--[if mso | IE]></td></tr></table></td></tr><tr><td class=\"\" width=\"600px\" ><table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"\" role=\"presentation\" style=\"width:568px;\" width=\"568\" ><tr><td style=\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\"><![endif]-->              <div style=\"margin:0px auto;max-width:568px;\">                <table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"width:100%;\">                  <tbody>                    <tr>                      <td style=\"direction:ltr;font-size:0px;padding:24px 32px 0;text-align:center;\">                        <!--[if mso | IE]><table role=\"presentation\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\"><tr><td class=\"\" style=\"vertical-align:top;width:504px;\" ><![endif]-->                        <div class=\"mj-column-per-100 mj-outlook-group-fix\" style=\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\">                          <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"vertical-align:top;\" width=\"100%\">                            <tbody>                              <tr>                                <td align=\"center\" style=\"font-size:0px;padding:10px 25px;word-break:break-word;\">                                  <div style=\"font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;font-size:12px;line-height:1.6;text-align:center;color:#a1a1aa;\">ThisWay Global &middot; Austin, TX</div>                                </td>                              </tr>                            </tbody>                          </table>                        </div>                        <!--[if mso | IE]></td></tr></table><![endif]-->                      </td>                    </tr>                  </tbody>                </table>              </div>              <!--[if mso | IE]></td></tr></table></td></tr></table><![endif]-->            </td>          </tr>        </tbody>      </table>    </div>    <!--[if mso | IE]></td></tr></table><![endif]-->  </div></body></html>"
+      },
+      "type": "n8n-nodes-base.mailgun",
+      "typeVersion": 1,
+      "position": [
+        760,
+        800
+      ],
+      "id": "bf000000-0000-0000-0000-000000000012",
+      "name": "Reminder: 1 Day",
+      "credentials": {
+        "mailgunApi": {
+          "id": "lHQnhWsSULcKXB4f",
+          "name": "Amalgamy.ai"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "bf",
+              "leftValue": "={{ DateTime.fromISO($('Get Upcoming Registrants').item.json.interview_date).minus({hours: 2}).toMillis() }}",
+              "rightValue": "={{ DateTime.now().toMillis() }}",
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "bf000000-0000-0000-0000-000000000020",
+      "name": "If >2 Hours Away",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        280,
+        1040
+      ]
+    },
+    {
+      "parameters": {
+        "resume": "specificTime",
+        "dateTime": "={{ DateTime.fromISO($('Get Upcoming Registrants').item.json.interview_date).minus({hours: 2}).toISO() }}"
+      },
+      "id": "bf000000-0000-0000-0000-000000000021",
+      "name": "Wait 2 Hours Before",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        520,
+        1000
+      ]
+    },
+    {
+      "parameters": {
+        "fromEmail": "notifications@m.thiswayglobal.com",
+        "toEmail": "={{ $('Get Upcoming Registrants').item.json.email }}",
+        "bccEmail": "wattstoworkers@thiswayglobal.com",
+        "subject": "=Starting Soon: Your Interview with ThisWay Global",
+        "html": "=<!doctype html><html lang=\"und\" dir=\"auto\" xmlns=\"http://www.w3.org/1999/xhtml\" xmlns:v=\"urn:schemas-microsoft-com:vml\" xmlns:o=\"urn:schemas-microsoft-com:office:office\"><head>  <title></title>  <!--[if !mso]><!-->  <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">  <!--<![endif]-->  <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">  <style type=\"text/css\">    #outlook a {      padding: 0;    }    body {      margin: 0;      padding: 0;      -webkit-text-size-adjust: 100%;      -ms-text-size-adjust: 100%;    }    table,    td {      border-collapse: collapse;      mso-table-lspace: 0pt;      mso-table-rspace: 0pt;    }    img {      border: 0;      height: auto;      line-height: 100%;      outline: none;      text-decoration: none;      -ms-interpolation-mode: bicubic;    }    p {      display: block;      margin: 13px 0;    }  </style>  <!--[if mso]>    <noscript>    <xml>    <o:OfficeDocumentSettings>      <o:AllowPNG/>      <o:PixelsPerInch>96</o:PixelsPerInch>    </o:OfficeDocumentSettings>    </xml>    </noscript>    <![endif]-->  <!--[if lte mso 11]>    <style type=\"text/css\">      .mj-outlook-group-fix { width:100% !important; }    </style>    <![endif]-->  <!--[if !mso]><!-->  <link href=\"https://fonts.googleapis.com/css?family=Roboto:300,400,500,700\" rel=\"stylesheet\" type=\"text/css\">  <style type=\"text/css\">    @import url(https://fonts.googleapis.com/css?family=Roboto:300,400,500,700);  </style>  <!--<![endif]-->  <style type=\"text/css\">    @media only screen and (min-width:480px) {      .mj-column-per-100 {        width: 100% !important;        max-width: 100%;      }    }  </style>  <style media=\"screen and (min-width:480px)\">    .moz-text-html .mj-column-per-100 {      width: 100% !important;      max-width: 100%;    }  </style>  <style type=\"text/css\">    @media only screen and (max-width:479px) {      table.mj-full-width-mobile {        width: 100% !important;      }      td.mj-full-width-mobile {        width: auto !important;      }    }  </style></head><body style=\"word-spacing:normal;background-color:#f4f4f5;\">  <div aria-roledescription=\"email\" style=\"background-color:#f4f4f5;\" role=\"article\" lang=\"und\" dir=\"auto\">    <!--[if mso | IE]><table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"\" role=\"presentation\" style=\"width:600px;\" width=\"600\" ><tr><td style=\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\"><![endif]-->    <div style=\"margin:0px auto;max-width:600px;\">      <table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"width:100%;\">        <tbody>          <tr>            <td style=\"direction:ltr;font-size:0px;padding:32px 16px 0;text-align:center;\">              <!--[if mso | IE]><table role=\"presentation\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\"><tr><td class=\"\" style=\"vertical-align:top;width:568px;\" ><![endif]-->              <div class=\"mj-column-per-100 mj-outlook-group-fix\" style=\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\">                <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"vertical-align:top;\" width=\"100%\">                  <tbody>                    <tr>                      <td align=\"center\" style=\"font-size:0px;padding:10px 25px;padding-bottom:24px;word-break:break-word;\">                        <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"border-collapse:collapse;border-spacing:0px;\">                          <tbody>                            <tr>                              <td style=\"width:140px;\">                                <img alt=\"ThisWay Global\" src=\"https://thiswayglobal.com/images/logo.png\" style=\"border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;font-size:13px;\" width=\"140\" height=\"auto\" />                              </td>                            </tr>                          </tbody>                        </table>                      </td>                    </tr>                  </tbody>                </table>              </div>              <!--[if mso | IE]></td></tr></table><![endif]-->            </td>          </tr>        </tbody>      </table>    </div>    <!--[if mso | IE]></td></tr></table><table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"\" role=\"presentation\" style=\"width:600px;\" width=\"600\" bgcolor=\"#f4f4f5\" ><tr><td style=\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\"><![endif]-->    <div style=\"background:#f4f4f5;background-color:#f4f4f5;margin:0px auto;max-width:600px;\">      <table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"background:#f4f4f5;background-color:#f4f4f5;width:100%;\">        <tbody>          <tr>            <td style=\"direction:ltr;font-size:0px;padding:0 16px 32px;text-align:center;\">              <!--[if mso | IE]><table role=\"presentation\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\"><tr><td class=\"\" width=\"600px\" ><table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"\" role=\"presentation\" style=\"width:568px;\" width=\"568\" bgcolor=\"#ffffff\" ><tr><td style=\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\"><![endif]-->              <div style=\"background:#ffffff;background-color:#ffffff;margin:0px auto;max-width:568px;border-radius:12px;overflow:hidden;\">                <table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"background:#ffffff;background-color:#ffffff;width:100%;border-collapse:separate;\">                  <tbody>                    <tr>                      <td style=\"border-radius:12px;direction:ltr;font-size:0px;padding:40px 32px 32px;text-align:center;\">                        <!--[if mso | IE]><table role=\"presentation\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\"><tr><td class=\"\" style=\"vertical-align:top;width:504px;\" ><![endif]-->                        <div class=\"mj-column-per-100 mj-outlook-group-fix\" style=\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\">                          <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"vertical-align:top;\" width=\"100%\">                            <tbody>                              <tr>                                <td align=\"left\" style=\"font-size:0px;padding:10px 25px;padding-bottom:4px;word-break:break-word;\">                                  <div style=\"font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;font-size:22px;font-weight:700;line-height:1.6;text-align:left;color:#18181b;\">Your Interview Starts Soon</div>                                </td>                              </tr>                              <tr>                                <td align=\"left\" style=\"font-size:0px;padding:10px 25px;padding-bottom:24px;word-break:break-word;\">                                  <div style=\"font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;font-size:14px;line-height:1.6;text-align:left;color:#71717a;\">You're up in about 2 hours — make sure you're ready.</div>                                </td>                              </tr>                              <tr>                                <td align=\"center\" style=\"font-size:0px;padding:0 0 24px;word-break:break-word;\">                                  <p style=\"border-top:solid 1px #e4e4e7;font-size:1px;margin:0px auto;width:100%;\">                                  </p>                                  <!--[if mso | IE]><table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"border-top:solid 1px #e4e4e7;font-size:1px;margin:0px auto;width:504px;\" role=\"presentation\" width=\"504px\" ><tr><td style=\"height:0;line-height:0;\"> &nbsp;</td></tr></table><![endif]-->                                </td>                              </tr>                              <tr>                                <td align=\"left\" style=\"font-size:0px;padding:10px 25px;padding-bottom:16px;word-break:break-word;\">                                  <div style=\"font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;font-size:15px;line-height:1.6;text-align:left;color:#18181b;\">Hi {{ $('Get Upcoming Registrants').item.json.first_name }},</div>                                </td>                              </tr>                              <tr>                                <td align=\"left\" style=\"font-size:0px;padding:10px 25px;padding-bottom:16px;word-break:break-word;\">                                  <div style=\"font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;font-size:15px;line-height:1.6;text-align:left;color:#18181b;\">Your group interview with ThisWay Global starts in about <strong>2 hours</strong>. Please make sure you're ready to join on time.</div>                                </td>                              </tr>                            </tbody>                          </table>                        </div>                        <!--[if mso | IE]></td></tr></table><![endif]-->                      </td>                    </tr>                  </tbody>                </table>              </div>              <!--[if mso | IE]></td></tr></table></td></tr><tr><td class=\"\" width=\"600px\" ><table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"\" role=\"presentation\" style=\"width:568px;\" width=\"568\" bgcolor=\"#ffffff\" ><tr><td style=\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\"><![endif]-->              <div style=\"background:#ffffff;background-color:#ffffff;margin:0px auto;max-width:568px;border-radius:12px;overflow:hidden;\">                <table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"background:#ffffff;background-color:#ffffff;width:100%;border-collapse:separate;\">                  <tbody>                    <tr>                      <td style=\"border-radius:12px;direction:ltr;font-size:0px;padding:0 32px 32px;text-align:center;\">                        <!--[if mso | IE]><table role=\"presentation\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\"><tr><td class=\"\" style=\"vertical-align:top;width:504px;\" ><![endif]-->                        <div class=\"mj-column-per-100 mj-outlook-group-fix\" style=\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\">                          <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" width=\"100%\" style=\"border-collapse:separate;\">                            <tbody>                              <tr>                                <td style=\"background-color:#f4f4f5;border-radius:8px;vertical-align:top;border-collapse:separate;padding:20px;\">                                  <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"\" width=\"100%\">                                    <tbody>                                      <tr>                                        <td align=\"left\" style=\"font-size:0px;padding:0 0 4px;word-break:break-word;\">                                          <div style=\"font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;font-size:11px;line-height:1.6;text-align:left;color:#71717a;\">YOUR INTERVIEW</div>                                        </td>                                      </tr>                                      <tr>                                        <td align=\"left\" style=\"font-size:0px;padding:0 0 16px;word-break:break-word;\">                                          <div style=\"font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;font-size:16px;font-weight:600;line-height:1.6;text-align:left;color:#18181b;\">{{ $('Get Upcoming Registrants').item.json.interview_label }}</div>                                        </td>                                      </tr>                                      <tr>                                        <td align=\"left\" style=\"font-size:0px;padding:0 0 4px;word-break:break-word;\">                                          <div style=\"font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;font-size:11px;line-height:1.6;text-align:left;color:#71717a;\">ROLE</div>                                        </td>                                      </tr>                                      <tr>                                        <td align=\"left\" style=\"font-size:0px;padding:0;word-break:break-word;\">                                          <div style=\"font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;font-size:16px;font-weight:600;line-height:1.6;text-align:left;color:#18181b;\">{{ $('Get Upcoming Registrants').item.json.role }}</div>                                        </td>                                      </tr>                                    </tbody>                                  </table>                                </td>                              </tr>                            </tbody>                          </table>                        </div>                        <!--[if mso | IE]></td></tr></table><![endif]-->                      </td>                    </tr>                  </tbody>                </table>              </div>              <!--[if mso | IE]></td></tr></table></td></tr><tr><td class=\"\" width=\"600px\" ><table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"\" role=\"presentation\" style=\"width:568px;\" width=\"568\" bgcolor=\"#ffffff\" ><tr><td style=\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\"><![endif]-->              <div style=\"background:#ffffff;background-color:#ffffff;margin:0px auto;max-width:568px;border-radius:12px;overflow:hidden;\">                <table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"background:#ffffff;background-color:#ffffff;width:100%;border-collapse:separate;\">                  <tbody>                    <tr>                      <td style=\"border-radius:12px;direction:ltr;font-size:0px;padding:0 32px 32px;text-align:center;\">                        <!--[if mso | IE]><table role=\"presentation\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\"><tr><td class=\"\" style=\"vertical-align:top;width:504px;\" ><![endif]-->                        <div class=\"mj-column-per-100 mj-outlook-group-fix\" style=\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\">                          <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"vertical-align:top;\" width=\"100%\">                            <tbody>                              <tr>                                <td align=\"center\" style=\"font-size:0px;padding:10px 25px;word-break:break-word;\">                                  <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"border-collapse:separate;line-height:100%;\">                                    <tbody>                                      <tr>                                        <td align=\"center\" bgcolor=\"#18181b\" role=\"presentation\" style=\"border:none;border-radius:6px;cursor:auto;mso-padding-alt:12px 24px;background:#18181b;\" valign=\"middle\">                                          <a href=\"https://us02web.zoom.us/j/88151751115?pwd=k1wvAbCpQ3fN5FHarOgY0W1dtd5Agb.1\" style=\"display:inline-block;background:#18181b;color:#fafafa;font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;font-size:14px;font-weight:600;line-height:120%;margin:0;text-decoration:none;text-transform:none;padding:12px 24px;mso-padding-alt:0px;border-radius:6px;\" target=\"_blank\"> Join Zoom Meeting </a>                                        </td>                                      </tr>                                    </tbody>                                  </table>                                </td>                              </tr>                              <tr>                                <td align=\"left\" style=\"font-size:0px;padding:10px 25px;padding-top:24px;word-break:break-word;\">                                  <div style=\"font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;font-size:15px;line-height:1.6;text-align:left;color:#18181b;\">See you shortly!</div>                                </td>                              </tr>                              <tr>                                <td align=\"left\" style=\"font-size:0px;padding:10px 25px;padding-top:16px;word-break:break-word;\">                                  <div style=\"font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;font-size:15px;line-height:1.6;text-align:left;color:#18181b;\">Best regards,<br />                                    <strong>The ThisWay Global Team</strong>                                  </div>                                </td>                              </tr>                            </tbody>                          </table>                        </div>                        <!--[if mso | IE]></td></tr></table><![endif]-->                      </td>                    </tr>                  </tbody>                </table>              </div>              <!--[if mso | IE]></td></tr></table></td></tr><tr><td class=\"\" width=\"600px\" ><table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"\" role=\"presentation\" style=\"width:568px;\" width=\"568\" ><tr><td style=\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\"><![endif]-->              <div style=\"margin:0px auto;max-width:568px;\">                <table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"width:100%;\">                  <tbody>                    <tr>                      <td style=\"direction:ltr;font-size:0px;padding:24px 32px 0;text-align:center;\">                        <!--[if mso | IE]><table role=\"presentation\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\"><tr><td class=\"\" style=\"vertical-align:top;width:504px;\" ><![endif]-->                        <div class=\"mj-column-per-100 mj-outlook-group-fix\" style=\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\">                          <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"vertical-align:top;\" width=\"100%\">                            <tbody>                              <tr>                                <td align=\"center\" style=\"font-size:0px;padding:10px 25px;word-break:break-word;\">                                  <div style=\"font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;font-size:12px;line-height:1.6;text-align:center;color:#a1a1aa;\">ThisWay Global &middot; Austin, TX</div>                                </td>                              </tr>                            </tbody>                          </table>                        </div>                        <!--[if mso | IE]></td></tr></table><![endif]-->                      </td>                    </tr>                  </tbody>                </table>              </div>              <!--[if mso | IE]></td></tr></table></td></tr></table><![endif]-->            </td>          </tr>        </tbody>      </table>    </div>    <!--[if mso | IE]></td></tr></table><![endif]-->  </div></body></html>"
+      },
+      "type": "n8n-nodes-base.mailgun",
+      "typeVersion": 1,
+      "position": [
+        760,
+        1000
+      ],
+      "id": "bf000000-0000-0000-0000-000000000022",
+      "name": "Reminder: Starting Soon",
+      "credentials": {
+        "mailgunApi": {
+          "id": "lHQnhWsSULcKXB4f",
+          "name": "Amalgamy.ai"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "bf",
+              "leftValue": "={{ DateTime.fromISO($('Get Upcoming Registrants').item.json.interview_date).plus({minutes: 90}).toMillis() }}",
+              "rightValue": "={{ DateTime.now().toMillis() }}",
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "bf000000-0000-0000-0000-000000000030",
+      "name": "If Not Yet Ended",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        280,
+        1240
+      ]
+    },
+    {
+      "parameters": {
+        "resume": "specificTime",
+        "dateTime": "={{ DateTime.fromISO($('Get Upcoming Registrants').item.json.interview_date).plus({minutes: 90}).toISO() }}"
+      },
+      "id": "bf000000-0000-0000-0000-000000000031",
+      "name": "Wait Post-Interview",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        520,
+        1200
+      ]
+    },
+    {
+      "parameters": {
+        "fromEmail": "notifications@m.thiswayglobal.com",
+        "toEmail": "={{ $('Get Upcoming Registrants').item.json.email }}",
+        "bccEmail": "wattstoworkers@thiswayglobal.com",
+        "subject": "=Thank You for Your Interview - Share Your Feedback",
+        "html": "=<!doctype html><html lang=\"und\" dir=\"auto\" xmlns=\"http://www.w3.org/1999/xhtml\" xmlns:v=\"urn:schemas-microsoft-com:vml\" xmlns:o=\"urn:schemas-microsoft-com:office:office\"><head>  <title></title>  <!--[if !mso]><!-->  <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">  <!--<![endif]-->  <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">  <style type=\"text/css\">    #outlook a {      padding: 0;    }    body {      margin: 0;      padding: 0;      -webkit-text-size-adjust: 100%;      -ms-text-size-adjust: 100%;    }    table,    td {      border-collapse: collapse;      mso-table-lspace: 0pt;      mso-table-rspace: 0pt;    }    img {      border: 0;      height: auto;      line-height: 100%;      outline: none;      text-decoration: none;      -ms-interpolation-mode: bicubic;    }    p {      display: block;      margin: 13px 0;    }  </style>  <!--[if mso]>    <noscript>    <xml>    <o:OfficeDocumentSettings>      <o:AllowPNG/>      <o:PixelsPerInch>96</o:PixelsPerInch>    </o:OfficeDocumentSettings>    </xml>    </noscript>    <![endif]-->  <!--[if lte mso 11]>    <style type=\"text/css\">      .mj-outlook-group-fix { width:100% !important; }    </style>    <![endif]-->  <!--[if !mso]><!-->  <link href=\"https://fonts.googleapis.com/css?family=Roboto:300,400,500,700\" rel=\"stylesheet\" type=\"text/css\">  <style type=\"text/css\">    @import url(https://fonts.googleapis.com/css?family=Roboto:300,400,500,700);  </style>  <!--<![endif]-->  <style type=\"text/css\">    @media only screen and (min-width:480px) {      .mj-column-per-100 {        width: 100% !important;        max-width: 100%;      }    }  </style>  <style media=\"screen and (min-width:480px)\">    .moz-text-html .mj-column-per-100 {      width: 100% !important;      max-width: 100%;    }  </style>  <style type=\"text/css\">    @media only screen and (max-width:479px) {      table.mj-full-width-mobile {        width: 100% !important;      }      td.mj-full-width-mobile {        width: auto !important;      }    }  </style></head><body style=\"word-spacing:normal;background-color:#f4f4f5;\">  <div aria-roledescription=\"email\" style=\"background-color:#f4f4f5;\" role=\"article\" lang=\"und\" dir=\"auto\">    <!--[if mso | IE]><table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"\" role=\"presentation\" style=\"width:600px;\" width=\"600\" ><tr><td style=\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\"><![endif]-->    <div style=\"margin:0px auto;max-width:600px;\">      <table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"width:100%;\">        <tbody>          <tr>            <td style=\"direction:ltr;font-size:0px;padding:32px 16px 0;text-align:center;\">              <!--[if mso | IE]><table role=\"presentation\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\"><tr><td class=\"\" style=\"vertical-align:top;width:568px;\" ><![endif]-->              <div class=\"mj-column-per-100 mj-outlook-group-fix\" style=\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\">                <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"vertical-align:top;\" width=\"100%\">                  <tbody>                    <tr>                      <td align=\"center\" style=\"font-size:0px;padding:10px 25px;padding-bottom:24px;word-break:break-word;\">                        <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"border-collapse:collapse;border-spacing:0px;\">                          <tbody>                            <tr>                              <td style=\"width:140px;\">                                <img alt=\"ThisWay Global\" src=\"https://thiswayglobal.com/images/logo.png\" style=\"border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;font-size:13px;\" width=\"140\" height=\"auto\" />                              </td>                            </tr>                          </tbody>                        </table>                      </td>                    </tr>                  </tbody>                </table>              </div>              <!--[if mso | IE]></td></tr></table><![endif]-->            </td>          </tr>        </tbody>      </table>    </div>    <!--[if mso | IE]></td></tr></table><table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"\" role=\"presentation\" style=\"width:600px;\" width=\"600\" bgcolor=\"#f4f4f5\" ><tr><td style=\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\"><![endif]-->    <div style=\"background:#f4f4f5;background-color:#f4f4f5;margin:0px auto;max-width:600px;\">      <table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"background:#f4f4f5;background-color:#f4f4f5;width:100%;\">        <tbody>          <tr>            <td style=\"direction:ltr;font-size:0px;padding:0 16px 32px;text-align:center;\">              <!--[if mso | IE]><table role=\"presentation\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\"><tr><td class=\"\" width=\"600px\" ><table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"\" role=\"presentation\" style=\"width:568px;\" width=\"568\" bgcolor=\"#ffffff\" ><tr><td style=\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\"><![endif]-->              <div style=\"background:#ffffff;background-color:#ffffff;margin:0px auto;max-width:568px;border-radius:12px;overflow:hidden;\">                <table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"background:#ffffff;background-color:#ffffff;width:100%;border-collapse:separate;\">                  <tbody>                    <tr>                      <td style=\"border-radius:12px;direction:ltr;font-size:0px;padding:40px 32px 32px;text-align:center;\">                        <!--[if mso | IE]><table role=\"presentation\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\"><tr><td class=\"\" style=\"vertical-align:top;width:504px;\" ><![endif]-->                        <div class=\"mj-column-per-100 mj-outlook-group-fix\" style=\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\">                          <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"vertical-align:top;\" width=\"100%\">                            <tbody>                              <tr>                                <td align=\"left\" style=\"font-size:0px;padding:10px 25px;padding-bottom:4px;word-break:break-word;\">                                  <div style=\"font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;font-size:22px;font-weight:700;line-height:1.6;text-align:left;color:#18181b;\">Thank You for Interviewing</div>                                </td>                              </tr>                              <tr>                                <td align=\"left\" style=\"font-size:0px;padding:10px 25px;padding-bottom:24px;word-break:break-word;\">                                  <div style=\"font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;font-size:14px;line-height:1.6;text-align:left;color:#71717a;\">We appreciate your time and interest.</div>                                </td>                              </tr>                              <tr>                                <td align=\"center\" style=\"font-size:0px;padding:0 0 24px;word-break:break-word;\">                                  <p style=\"border-top:solid 1px #e4e4e7;font-size:1px;margin:0px auto;width:100%;\">                                  </p>                                  <!--[if mso | IE]><table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"border-top:solid 1px #e4e4e7;font-size:1px;margin:0px auto;width:504px;\" role=\"presentation\" width=\"504px\" ><tr><td style=\"height:0;line-height:0;\"> &nbsp;</td></tr></table><![endif]-->                                </td>                              </tr>                              <tr>                                <td align=\"left\" style=\"font-size:0px;padding:10px 25px;padding-bottom:16px;word-break:break-word;\">                                  <div style=\"font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;font-size:15px;line-height:1.6;text-align:left;color:#18181b;\">Hi {{ $('Get Upcoming Registrants').item.json.first_name }},</div>                                </td>                              </tr>                              <tr>                                <td align=\"left\" style=\"font-size:0px;padding:10px 25px;padding-bottom:16px;word-break:break-word;\">                                  <div style=\"font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;font-size:15px;line-height:1.6;text-align:left;color:#18181b;\">Thank you for attending your group interview with ThisWay Global today. We appreciate your time and interest in the training program.</div>                                </td>                              </tr>                              <tr>                                <td align=\"left\" style=\"font-size:0px;padding:10px 25px;padding-bottom:16px;word-break:break-word;\">                                  <div style=\"font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;font-size:15px;line-height:1.6;text-align:left;color:#18181b;\">We'd love to hear about your experience. Simply reply to this email to share any feedback, questions, or thoughts about the process.</div>                                </td>                              </tr>                              <tr>                                <td align=\"left\" style=\"font-size:0px;padding:10px 25px;padding-bottom:24px;word-break:break-word;\">                                  <div style=\"font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;font-size:15px;line-height:1.6;text-align:left;color:#18181b;\">If you'd like to schedule another interview for a different role or time, you can do so using the link below:</div>                                </td>                              </tr>                              <tr>                                <td align=\"center\" style=\"font-size:0px;padding:10px 25px;word-break:break-word;\">                                  <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"border-collapse:separate;line-height:100%;\">                                    <tbody>                                      <tr>                                        <td align=\"center\" bgcolor=\"#18181b\" role=\"presentation\" style=\"border:none;border-radius:6px;cursor:auto;mso-padding-alt:12px 24px;background:#18181b;\" valign=\"middle\">                                          <a href=\"https://thiswayglobal.com/group-interview\" style=\"display:inline-block;background:#18181b;color:#fafafa;font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;font-size:14px;font-weight:600;line-height:120%;margin:0;text-decoration:none;text-transform:none;padding:12px 24px;mso-padding-alt:0px;border-radius:6px;\" target=\"_blank\"> Schedule Another Interview </a>                                        </td>                                      </tr>                                    </tbody>                                  </table>                                </td>                              </tr>                              <tr>                                <td align=\"left\" style=\"font-size:0px;padding:10px 25px;padding-top:24px;word-break:break-word;\">                                  <div style=\"font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;font-size:15px;line-height:1.6;text-align:left;color:#18181b;\">Best regards,<br />                                    <strong>The ThisWay Global Team</strong>                                  </div>                                </td>                              </tr>                            </tbody>                          </table>                        </div>                        <!--[if mso | IE]></td></tr></table><![endif]-->                      </td>                    </tr>                  </tbody>                </table>              </div>              <!--[if mso | IE]></td></tr></table></td></tr><tr><td class=\"\" width=\"600px\" ><table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"\" role=\"presentation\" style=\"width:568px;\" width=\"568\" ><tr><td style=\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\"><![endif]-->              <div style=\"margin:0px auto;max-width:568px;\">                <table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"width:100%;\">                  <tbody>                    <tr>                      <td style=\"direction:ltr;font-size:0px;padding:24px 32px 0;text-align:center;\">                        <!--[if mso | IE]><table role=\"presentation\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\"><tr><td class=\"\" style=\"vertical-align:top;width:504px;\" ><![endif]-->                        <div class=\"mj-column-per-100 mj-outlook-group-fix\" style=\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\">                          <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"vertical-align:top;\" width=\"100%\">                            <tbody>                              <tr>                                <td align=\"center\" style=\"font-size:0px;padding:10px 25px;word-break:break-word;\">                                  <div style=\"font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;font-size:12px;line-height:1.6;text-align:center;color:#a1a1aa;\">ThisWay Global &middot; Austin, TX</div>                                </td>                              </tr>                            </tbody>                          </table>                        </div>                        <!--[if mso | IE]></td></tr></table><![endif]-->                      </td>                    </tr>                  </tbody>                </table>              </div>              <!--[if mso | IE]></td></tr></table></td></tr></table><![endif]-->            </td>          </tr>        </tbody>      </table>    </div>    <!--[if mso | IE]></td></tr></table><![endif]-->  </div></body></html>"
+      },
+      "type": "n8n-nodes-base.mailgun",
+      "typeVersion": 1,
+      "position": [
+        760,
+        1200
+      ],
+      "id": "bf000000-0000-0000-0000-000000000032",
+      "name": "Follow-up: Rate or Reschedule",
+      "credentials": {
+        "mailgunApi": {
+          "id": "lHQnhWsSULcKXB4f",
+          "name": "Amalgamy.ai"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Backfill Workflow\n\nOne-time use: enrolls existing registrants into the reminder sequence.\n\n**Queries**: All registrants with interview_date >= NOW() - 30min\n\n**Logic per registrant**:\n- If interview is >1 day away → wait → send 1-day reminder\n- If interview is >2 hours away → wait → send 2-hour reminder\n- If interview hasn't ended (90min after start) → wait → send post-interview follow-up\n\nSkips 3-day reminder (none qualify). Each branch runs independently per registrant.\n\n**After running**: Deactivate or delete this workflow."
+      },
+      "id": "bf000000-0000-0000-0000-000000000099",
+      "name": "Notes",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -192,
+        640
+      ]
+    }
+  ],
+  "connections": {
+    "Manual Trigger": {
+      "main": [
+        [
+          {
+            "node": "Get Upcoming Registrants",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Upcoming Registrants": {
+      "main": [
+        [
+          {
+            "node": "If >1 Day Away",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "If >2 Hours Away",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "If Not Yet Ended",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If >1 Day Away": {
+      "main": [
+        [
+          {
+            "node": "Wait 1 Day Before",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
+    },
+    "Wait 1 Day Before": {
+      "main": [
+        [
+          {
+            "node": "Reminder: 1 Day",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If >2 Hours Away": {
+      "main": [
+        [
+          {
+            "node": "Wait 2 Hours Before",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
+    },
+    "Wait 2 Hours Before": {
+      "main": [
+        [
+          {
+            "node": "Reminder: Starting Soon",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If Not Yet Ended": {
+      "main": [
+        [
+          {
+            "node": "Wait Post-Interview",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
+    },
+    "Wait Post-Interview": {
+      "main": [
+        [
+          {
+            "node": "Follow-up: Rate or Reschedule",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "6abfb47bea51a6f610a03c2f772741bc5d6bf3fa9900a4ec5d91227cefde6c68"
+  }
+}

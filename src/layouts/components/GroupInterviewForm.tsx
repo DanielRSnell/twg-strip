@@ -13,20 +13,6 @@ interface SlotInfo {
 
 const INTERVIEW_SLOTS: SlotInfo[] = [
   {
-    date: "2026-02-09",
-    iso: "2026-02-09T18:00:00.000Z",
-    label: "Monday, Feb 9 - 12:00–12:30 PM CT",
-    day: "Mon, Feb 9",
-    time: "12:00 – 12:30 PM CT",
-  },
-  {
-    date: "2026-02-10",
-    iso: "2026-02-10T22:00:00.000Z",
-    label: "Tuesday, Feb 10 - 4:00–4:30 PM CT",
-    day: "Tue, Feb 10",
-    time: "4:00 – 4:30 PM CT",
-  },
-  {
     date: "2026-02-11",
     iso: "2026-02-11T15:30:00.000Z",
     label: "Wednesday, Feb 11 - 9:30–10:00 AM CT",
@@ -46,6 +32,34 @@ const INTERVIEW_SLOTS: SlotInfo[] = [
     label: "Friday, Feb 13 - 10:00–10:30 AM CT",
     day: "Fri, Feb 13",
     time: "10:00 – 10:30 AM CT",
+  },
+  {
+    date: "2026-02-17",
+    iso: "2026-02-17T18:00:00.000Z",
+    label: "Tuesday, Feb 17 - 12:00–12:30 PM CT",
+    day: "Tue, Feb 17",
+    time: "12:00 – 12:30 PM CT",
+  },
+  {
+    date: "2026-02-19",
+    iso: "2026-02-19T18:00:00.000Z",
+    label: "Thursday, Feb 19 - 12:00–12:30 PM CT",
+    day: "Thu, Feb 19",
+    time: "12:00 – 12:30 PM CT",
+  },
+  {
+    date: "2026-02-25",
+    iso: "2026-02-25T18:00:00.000Z",
+    label: "Wednesday, Feb 25 - 12:00–12:30 PM CT",
+    day: "Wed, Feb 25",
+    time: "12:00 – 12:30 PM CT",
+  },
+  {
+    date: "2026-02-27",
+    iso: "2026-02-27T15:30:00.000Z",
+    label: "Friday, Feb 27 - 9:30–10:00 AM CT",
+    day: "Fri, Feb 27",
+    time: "9:30 – 10:00 AM CT",
   },
 ];
 

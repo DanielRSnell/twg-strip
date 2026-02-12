@@ -1,0 +1,116 @@
+<mjml>
+  <mj-head>
+    <mj-attributes>
+      <mj-all font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" />
+      <mj-text font-size="15px" line-height="1.6" color="#18181b" />
+      <mj-section padding="0" />
+    </mj-attributes>
+    <mj-style>
+      a { color: #18181b; }
+      .detail-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: #71717a; margin-bottom: 4px; }
+      .detail-value { font-size: 16px; font-weight: 600; color: #18181b; }
+    </mj-style>
+  </mj-head>
+  <mj-body background-color="#f4f4f5">
+    <mj-section padding="32px 16px 0">
+      <mj-column>
+        <mj-image src="https://thiswayglobal.com/images/logo.png" alt="ThisWay Global" width="140px" padding-bottom="24px" />
+      </mj-column>
+    </mj-section>
+
+    <mj-wrapper padding="0 16px 32px" background-color="#f4f4f5">
+      <mj-section background-color="#ffffff" border-radius="12px" padding="40px 32px 32px">
+        <mj-column>
+          <mj-text font-size="22px" font-weight="700" padding-bottom="4px">
+            Registration Confirmed
+          </mj-text>
+          <mj-text color="#71717a" font-size="14px" padding-bottom="24px">
+            You're all set for your interview with ThisWay Global.
+          </mj-text>
+
+          <mj-divider border-color="#e4e4e7" border-width="1px" padding="0 0 24px" />
+
+          <mj-text padding-bottom="16px">
+            {{ $('Webhook').item.json.body.first_name }},
+          </mj-text>
+          <mj-text padding-bottom="16px">
+            Thank you for registering for an interview with ThisWay Global. We're pleased to confirm your registration. Below you'll find everything you need for the interview.
+          </mj-text>
+        </mj-column>
+      </mj-section>
+
+      <mj-section background-color="#ffffff" border-radius="12px" padding="0 32px 24px">
+        <mj-column background-color="#f4f4f5" border-radius="8px" padding="20px">
+          <mj-text font-size="11px" color="#71717a" padding="0 0 4px">
+            YOUR INTERVIEW
+          </mj-text>
+          <mj-text font-size="16px" font-weight="600" padding="0 0 16px">
+            {{ $('Webhook').item.json.body.interview_label }}
+          </mj-text>
+          <mj-text font-size="11px" color="#71717a" padding="0 0 4px">
+            ROLE
+          </mj-text>
+          <mj-text font-size="16px" font-weight="600" padding="0 0 16px">
+            {{ $('Webhook').item.json.body.role }}
+          </mj-text>
+          <mj-text font-size="11px" color="#71717a" padding="0 0 4px">
+            ZOOM MEETING LINK
+          </mj-text>
+          <mj-text font-size="14px" font-weight="500" padding="0">
+            <a href="https://us02web.zoom.us/j/88151751115?pwd=k1wvAbCpQ3fN5FHarOgY0W1dtd5Agb.1" style="color:#18181b; text-decoration:underline;">us02web.zoom.us/j/88151751115</a>
+          </mj-text>
+        </mj-column>
+      </mj-section>
+
+      <mj-section background-color="#ffffff" border-radius="12px" padding="0 32px 32px">
+        <mj-column>
+          <mj-text padding-bottom="24px">
+            Please join the Zoom meeting at your scheduled time using the button below:
+          </mj-text>
+
+          <mj-button background-color="#18181b" color="#fafafa" border-radius="6px" font-size="14px" font-weight="600" inner-padding="12px 24px" href="https://us02web.zoom.us/j/88151751115?pwd=k1wvAbCpQ3fN5FHarOgY0W1dtd5Agb.1">
+            Join Zoom Meeting
+          </mj-button>
+
+          <mj-text padding-top="24px" padding-bottom="16px" font-size="14px" color="#71717a">
+            Add this interview to your calendar:
+          </mj-text>
+        </mj-column>
+      </mj-section>
+
+      <mj-section background-color="#ffffff" border-radius="12px" padding="0 32px 32px">
+        <mj-column>
+          <mj-button background-color="#ffffff" color="#18181b" border-radius="6px" font-size="13px" font-weight="600" inner-padding="10px 20px" border="1px solid #e4e4e7" href="CALENDAR_GOOGLE_URL">
+            Google Calendar
+          </mj-button>
+        </mj-column>
+        <mj-column>
+          <mj-button background-color="#ffffff" color="#18181b" border-radius="6px" font-size="13px" font-weight="600" inner-padding="10px 20px" border="1px solid #e4e4e7" href="CALENDAR_OUTLOOK_URL">
+            Outlook Calendar
+          </mj-button>
+        </mj-column>
+      </mj-section>
+
+      <mj-section background-color="#ffffff" border-radius="12px" padding="0 32px 32px">
+        <mj-column>
+          <mj-text padding-bottom="8px">
+            If you have any questions prior to the interview, feel free to reach out. We look forward to connecting with you.
+          </mj-text>
+
+          <mj-text padding-top="16px">
+            Best regards,<br />
+            <strong>The ThisWay Global Team</strong>
+          </mj-text>
+        </mj-column>
+      </mj-section>
+
+      <mj-section padding="24px 32px 0">
+        <mj-column>
+          <mj-text align="center" font-size="12px" color="#a1a1aa">
+            ThisWay Global &middot; Austin, TX
+          </mj-text>
+        </mj-column>
+      </mj-section>
+    </mj-wrapper>
+  </mj-body>
+</mjml>
