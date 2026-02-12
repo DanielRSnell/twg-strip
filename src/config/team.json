@@ -77,17 +77,6 @@
     "path": "/images/team-members/craig.jpg"
   },
   {
-    "Name": "Joel Mjolsness",
-    "order": 5.2,
-    "Role": "Chief Revenue Officer",
-    "Department": "Revenue",
-    "Email": "joel.mjolsness@thiswayglobal.com",
-    "Linked In": "https://www.linkedin.com/in/joelmjolsness/",
-    "Bio": "Joel Mjolsness leads the market introduction of <a href=\"https://amalgamy.ai\" target=\"_blank\" rel=\"noopener noreferrer\">Amalgamy.ai</a>, ThisWay Global's next-generation AI-driven orchestration platform. With a distinguished background that includes military service and numerous accolades including the Bronze Star and Luther College Distinguished Service Award, Joel brings strategic leadership and extensive experience to driving market adoption. His expertise in business development, technology strategy, and go-to-market execution helps position Amalgamy.ai as the leading AI/HPC orchestration platform. Joel's commitment to excellence and innovation drives business growth and customer success.",
-    "Active": "TRUE",
-    "path": "/images/team-members/joel.png"
-  },
-  {
     "Name": "Daniel Snell",
     "order": 7,
     "Role": "Director of Marketing",
