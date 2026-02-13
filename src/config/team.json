@@ -1,5 +1,27 @@
 [
   {
+    "Name": "Lionel Branscomb",
+    "order": 5.05,
+    "Role": "Director of ADCAP",
+    "Department": "Technology",
+    "Email": "",
+    "Linked In": "",
+    "Bio": "",
+    "Active": "TRUE",
+    "path": "/images/team-members/lionel.jpg"
+  },
+  {
+    "Name": "Mike Mollohan",
+    "order": 5.06,
+    "Role": "Strategic Advisor to CEO/Founder, Government and International Affairs",
+    "Department": "Executive",
+    "Email": "",
+    "Linked In": "",
+    "Bio": "",
+    "Active": "TRUE",
+    "path": "/images/team-members/mike-m.jpeg"
+  },
+  {
     "Name": "Justin Hood",
     "order": 4,
     "Role": "Chief Operating Officer",
