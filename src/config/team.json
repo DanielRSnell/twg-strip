@@ -165,8 +165,19 @@
     "path": "/images/team-members/female.png"
   },
   {
-    "Name": "Daniel Keller",
+    "Name": "Eugene Huang",
     "order": 12,
+    "Role": "Senior Technical Product Manager",
+    "Department": "Product",
+    "Email": "",
+    "Linked In": "",
+    "Bio": "",
+    "Active": "TRUE",
+    "path": "/images/team-members/eugene.jpg"
+  },
+  {
+    "Name": "Daniel Keller",
+    "order": 13,
     "Role": "Principal Engineer",
     "Department": "Technology",
     "Email": "daniel.keller@thiswayglobal.com",
