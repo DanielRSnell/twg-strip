@@ -1,0 +1,20 @@
+<!--
+  Base reference for shared design tokens across all templates.
+  Not compiled directly — each template is self-contained.
+
+  Design System (ShadCN-inspired):
+  - Background: #f4f4f5 (zinc-100)
+  - Card: #ffffff
+  - Border: #e4e4e7 (zinc-200)
+  - Text primary: #18181b (zinc-900)
+  - Text secondary: #71717a (zinc-500)
+  - Text muted: #a1a1aa (zinc-400)
+  - Accent: #18181b (zinc-900, used for buttons)
+  - Accent foreground: #fafafa (zinc-50)
+  - Info badge bg: #f4f4f5 (zinc-100)
+  - Font: system-ui, -apple-system, sans-serif
+  - Border radius: rounded via mj-section/mj-column
+  - Button: dark bg, white text, rounded
+
+  Sender: notifications@m.thiswayglobal.com
+-->

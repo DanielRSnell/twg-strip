@@ -1,0 +1,114 @@
+---
+import config from "@/config/config.json";
+import theme from "@/config/theme.json";
+import { plainify } from "@/lib/utils/textConverter";
+import "@/styles/main.scss";
+import { AstroFont } from "astro-font";
+import "aos/dist/aos.css";
+import TexasTechComputeForm from "@/components/TexasTechComputeForm";
+
+const pf = theme.fonts.font_family.primary;
+const sf = theme.fonts.font_family.secondary;
+
+let fontPrimary, fontSecondary;
+if (theme.fonts.font_family.primary) {
+  fontPrimary = theme.fonts.font_family.primary
+    .replace(/\+/g, " ")
+    .replace(/:[ital,]*[ital@]*[wght@]*[0-9,;.]+/gi, "");
+}
+if (theme.fonts.font_family.secondary) {
+  fontSecondary = theme.fonts.font_family.secondary
+    .replace(/\+/g, " ")
+    .replace(/:[ital,]*[ital@]*[wght@]*[0-9,;.]+/gi, "");
+}
+
+const title = "Texas Tech University Computing Power";
+const meta_title =
+  "Interested in Purchasing Computing Power from Texas Tech University? | ThisWay Global";
+const description =
+  "Learn about purchasing computing power from Texas Tech University's high-performance cluster in Lubbock, TX. Available this summer.";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <link rel="shortcut icon" href={config.site.favicon} />
+    <meta name="theme-color" content="#fff" />
+    <meta name="generator" content={Astro.generator} />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <AstroFont
+      config={[
+        {
+          src: [],
+          preload: false,
+          display: "swap",
+          name: fontPrimary!,
+          fallback: "sans-serif",
+          cssVariable: "font-primary",
+          googleFontsURL: `https://fonts.googleapis.com/css2?family=${pf}&display=swap`,
+        },
+        {
+          src: [],
+          preload: false,
+          display: "swap",
+          name: fontSecondary!,
+          fallback: "sans-serif",
+          cssVariable: "font-secondary",
+          googleFontsURL: `https://fonts.googleapis.com/css2?family=${sf}&display=swap`,
+        },
+      ]}
+    />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=5"
+    />
+    <title>{plainify(meta_title)}</title>
+    <meta name="description" content={plainify(description)} />
+    <meta property="og:title" content={plainify(meta_title)} />
+    <meta property="og:description" content={plainify(description)} />
+    <meta property="og:type" content="website" />
+  </head>
+  <body class="min-h-screen bg-theme-light">
+    <header class="py-8 text-center">
+      <a href="/" class="inline-block">
+        <img
+          src="/images/logo.svg"
+          alt="ThisWay Global"
+          class="mx-auto h-10"
+        />
+      </a>
+    </header>
+
+    <main class="px-4 pb-16">
+      <div class="mx-auto max-w-2xl">
+        <div
+          class="mb-10 text-center"
+          data-aos="fade-up-sm"
+          data-aos-delay="100"
+        >
+          <h1 class="mb-4 text-3xl font-semibold text-dark sm:text-4xl">
+            Interested in Purchasing Computing Power from Texas Tech University?
+          </h1>
+          <p class="mx-auto max-w-xl text-base text-light">
+            Texas Tech University's high-performance computing cluster in
+            Lubbock, TX is making capacity available this summer. Fill out the
+            form below to connect with our team and explore your options.
+          </p>
+        </div>
+
+        <div data-aos="fade-up-sm" data-aos-delay="400">
+          <TexasTechComputeForm client:load />
+        </div>
+      </div>
+    </main>
+
+    <script>
+      import AOS from "aos";
+      function aosInit() {
+        AOS.init({ duration: 600, once: true });
+      }
+      aosInit();
+      document.addEventListener("astro:after-swap", aosInit);
+    </script>
+  </body>
+</html>
