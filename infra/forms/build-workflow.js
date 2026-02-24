@@ -16,6 +16,8 @@ const ttcAdmin = html("texas-tech-compute-admin.html");
 const ttcConfirm = html("texas-tech-compute-confirm.html");
 const w4wAdmin = html("watts-for-workers-admin.html");
 const w4wConfirm = html("watts-for-workers-confirm.html");
+const piAdmin = html("press-inquiry-admin.html");
+const piConfirm = html("press-inquiry-confirm.html");
 
 // Credentials
 const mailgunCred = {
@@ -48,7 +50,7 @@ const workflow = {
     {
       parameters: {
         content:
-          "## Generic Form Submissions Workflow\n\nAccepts POST requests at `/webhook/forms` with payload:\n```json\n{ \"form_type\": \"some-form\", \"data\": { ... } }\n```\n\nInserts into the `form_submissions` table with JSONB data column.\n\n### Email Notifications\nAfter insert, routes by `form_type` to send:\n- **Admin notification** to daniel.snell@ (cc: courtney.gwynn@)\n- **User confirmation** to the submitter's email\n\nSupported forms: `texas-tech-compute`, `watts-for-workers`\n\n### Editing Emails\nEdit the `.mjml` source files in `emails/`, then run:\n```\ncd emails && for f in *.mjml; do [[ \"$f\" == _* ]] && continue; mjml \"$f\" -o \"${f%.mjml}.html\" --config.minify true; done\n```\nThen run `node build-workflow.js` to regenerate this workflow JSON.",
+          "## Generic Form Submissions Workflow\n\nAccepts POST requests at `/webhook/forms` with payload:\n```json\n{ \"form_type\": \"some-form\", \"data\": { ... } }\n```\n\nInserts into the `form_submissions` table with JSONB data column.\n\n### Email Notifications\nAfter insert, routes by `form_type` to send:\n- **Admin notification** to daniel.snell@ (cc: courtney.gwynn@)\n- **User confirmation** to the submitter's email\n\nSupported forms: `texas-tech-compute`, `watts-for-workers`, `press-inquiry`\n\n### Editing Emails\nEdit the `.mjml` source files in `emails/`, then run:\n```\ncd emails && for f in *.mjml; do [[ \"$f\" == _* ]] && continue; mjml \"$f\" -o \"${f%.mjml}.html\" --config.minify true; done\n```\nThen run `node build-workflow.js` to regenerate this workflow JSON.",
       },
       id: "00000000-0000-0000-0000-000000000001",
       name: "Notes",
@@ -267,6 +269,29 @@ const workflow = {
               renameOutput: true,
               outputKey: "watts-for-workers",
             },
+            {
+              conditions: {
+                options: {
+                  caseSensitive: false,
+                  leftValue: "",
+                  typeValidation: "loose",
+                },
+                conditions: [
+                  {
+                    leftValue:
+                      "={{ $('Validate Input').item.json.form_type }}",
+                    rightValue: "press-inquiry",
+                    operator: {
+                      type: "string",
+                      operation: "equals",
+                    },
+                  },
+                ],
+                combinator: "and",
+              },
+              renameOutput: true,
+              outputKey: "press-inquiry",
+            },
           ],
         },
         options: {},
@@ -339,6 +364,37 @@ const workflow = {
       name: "W4W: Confirm User",
       credentials: mailgunCred,
     },
+    // --- PI: Notify Admin ---
+    {
+      parameters: {
+        fromEmail: from,
+        toEmail: adminTo,
+        ccEmail: adminCc,
+        subject: `=New Press Inquiry: {{ $('Validate Input').item.json.data.first_name }} {{ $('Validate Input').item.json.data.last_name }}`,
+        html: "=" + piAdmin,
+      },
+      type: "n8n-nodes-base.mailgun",
+      typeVersion: 1,
+      position: [928, 1560],
+      id: "a1b2c3d4-0001-0001-0001-000000000015",
+      name: "PI: Notify Admin",
+      credentials: mailgunCred,
+    },
+    // --- PI: Confirm User ---
+    {
+      parameters: {
+        fromEmail: from,
+        toEmail: `={{ $('Validate Input').item.json.data.email }}`,
+        subject: "=Thank You for Your Press Inquiry",
+        html: "=" + piConfirm,
+      },
+      type: "n8n-nodes-base.mailgun",
+      typeVersion: 1,
+      position: [928, 1660],
+      id: "a1b2c3d4-0001-0001-0001-000000000016",
+      name: "PI: Confirm User",
+      credentials: mailgunCred,
+    },
   ],
   connections: {
     Webhook: {
@@ -378,6 +434,11 @@ const workflow = {
         [
           { node: "W4W: Notify Admin", type: "main", index: 0 },
           { node: "W4W: Confirm User", type: "main", index: 0 },
+        ],
+        // Output 2: press-inquiry
+        [
+          { node: "PI: Notify Admin", type: "main", index: 0 },
+          { node: "PI: Confirm User", type: "main", index: 0 },
         ],
       ],
     },
@@ -455,6 +516,18 @@ const testWorkflow = {
                 "I have 3 years of experience in data center operations and am interested in transitioning to AI infrastructure roles.",
               type: "string",
             },
+            {
+              id: "a11",
+              name: "organization",
+              value: "Tech Press Daily",
+              type: "string",
+            },
+            {
+              id: "a12",
+              name: "inquiry_type",
+              value: "Interview Request",
+              type: "string",
+            },
           ],
         },
         options: {},
@@ -525,6 +598,36 @@ const testWorkflow = {
       name: "W4W: Confirm User",
       credentials: mailgunCred,
     },
+    // PI: Notify Admin
+    {
+      parameters: {
+        fromEmail: from,
+        toEmail: testTo,
+        subject: `=[TEST] New Press Inquiry: {{ $('Set Test Data').item.json.first_name }} {{ $('Set Test Data').item.json.last_name }}`,
+        html: "=" + rewriteHtml(piAdmin),
+      },
+      type: "n8n-nodes-base.mailgun",
+      typeVersion: 1,
+      position: [280, 1240],
+      id: "t0000000-0000-0000-0001-000000000007",
+      name: "PI: Notify Admin",
+      credentials: mailgunCred,
+    },
+    // PI: Confirm User
+    {
+      parameters: {
+        fromEmail: from,
+        toEmail: testTo,
+        subject: "=[TEST] Thank You for Your Press Inquiry",
+        html: "=" + rewriteHtml(piConfirm),
+      },
+      type: "n8n-nodes-base.mailgun",
+      typeVersion: 1,
+      position: [280, 1340],
+      id: "t0000000-0000-0000-0001-000000000008",
+      name: "PI: Confirm User",
+      credentials: mailgunCred,
+    },
   ],
   connections: {
     "Manual Trigger": {
@@ -537,6 +640,8 @@ const testWorkflow = {
           { node: "TTC: Confirm User", type: "main", index: 0 },
           { node: "W4W: Notify Admin", type: "main", index: 0 },
           { node: "W4W: Confirm User", type: "main", index: 0 },
+          { node: "PI: Notify Admin", type: "main", index: 0 },
+          { node: "PI: Confirm User", type: "main", index: 0 },
         ],
       ],
     },

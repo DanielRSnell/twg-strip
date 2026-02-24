@@ -28,6 +28,10 @@
         {
           "name": "Awards",
           "url": "/awards"
+        },
+        {
+          "name": "Press Inquiries",
+          "url": "/press-inquiry"
         }
       ]
     }

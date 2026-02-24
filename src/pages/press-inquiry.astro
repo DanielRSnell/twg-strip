@@ -1,0 +1,37 @@
+---
+import Base from "@/layouts/Base.astro";
+import CallToAction from "@/partials/CallToAction.astro";
+import PressInquiryForm from "@/components/PressInquiryForm";
+import { getEntry } from "astro:content";
+
+const call_to_action = await getEntry("sections", "call-to-action");
+---
+
+<Base
+  title="Press Inquiries"
+  meta_title="Press Inquiries | ThisWay Global"
+  description="Journalists and media, reach out for interviews, quotes, or company information."
+>
+  <section class="section bg-theme-light">
+    <div class="container">
+      <div class="mx-auto max-w-2xl text-center">
+        <h1 data-aos="fade-up-sm" data-aos-delay="100">Press Inquiries</h1>
+        <p class="mt-4 text-light" data-aos="fade-up-sm" data-aos-delay="200">
+          Members of the press can use the form below to request interviews,
+          quotes, or company information. Our communications team will
+          respond promptly.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div data-aos="fade-up-sm" data-aos-delay="300">
+        <PressInquiryForm client:load />
+      </div>
+    </div>
+  </section>
+
+  <CallToAction call_to_action={call_to_action} />
+</Base>
