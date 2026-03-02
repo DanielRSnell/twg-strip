@@ -13,10 +13,10 @@ interface SlotInfo {
 
 const INTERVIEW_SLOTS: SlotInfo[] = [
   {
-    date: "2026-03-03",
-    iso: "2026-03-03T18:00:00.000Z",
-    label: "Tuesday, Mar 3 - 12:00–12:30 PM CT",
-    day: "Tue, Mar 3",
+    date: "2026-03-05",
+    iso: "2026-03-05T18:00:00.000Z",
+    label: "Thursday, Mar 5 - 12:00–12:30 PM CT",
+    day: "Thu, Mar 5",
     time: "12:00 – 12:30 PM CT",
   },
   {
