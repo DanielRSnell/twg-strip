@@ -308,7 +308,7 @@ const posts = await getSinglePage(BLOG_FOLDER);
     });
   }
 
-  ["scroll", "wheel", "click", "keydown", "touchstart"].forEach((e) => {
+  ["scroll", "wheel", "mousemove", "click", "keydown", "touchstart"].forEach((e) => {
     window.addEventListener(e, loadGlobe, { once: true, passive: true });
   });
 </script>
