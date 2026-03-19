@@ -8,7 +8,6 @@ import { getEntry } from "astro:content";
 import { Icon } from "astro-icon/components";
 import { getSinglePage } from "@/lib/contentParser.astro";
 import BlogCard from "@/components/BlogCard.astro";
-import Globe from "@/helpers/Globe";
 import ServiceSlider from "@/components/homepage/ServiceSlider";
 
 const homepage = await getEntry("homepage", "-index");
@@ -59,7 +58,7 @@ const posts = await getSinglePage(BLOG_FOLDER);
         }
       </div>
 
-      <Globe client:visible />
+      <div id="globeCanvas"></div>
     </div>
   </section>
   <!-- /Banner -->
@@ -288,4 +287,29 @@ const posts = await getSinglePage(BLOG_FOLDER);
 
   <CallToAction call_to_action={call_to_action} />
 </Base>
+
+<script>
+  let globeLoaded = false;
+  function loadGlobe() {
+    if (globeLoaded) return;
+    globeLoaded = true;
+
+    Promise.all([
+      import("react"),
+      import("react-dom/client"),
+      import("../layouts/helpers/Globe"),
+    ]).then(([React, ReactDOM, Globe]) => {
+      const placeholder = document.getElementById("globeCanvas");
+      if (!placeholder) return;
+      const mount = document.createElement("div");
+      placeholder.replaceWith(mount);
+      const root = ReactDOM.createRoot(mount);
+      root.render(React.createElement(Globe.default));
+    });
+  }
+
+  ["scroll", "click", "keydown", "touchstart"].forEach((e) => {
+    window.addEventListener(e, loadGlobe, { once: true, passive: true });
+  });
+</script>
 
