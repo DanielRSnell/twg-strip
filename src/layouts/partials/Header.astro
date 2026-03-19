@@ -2,7 +2,7 @@
 import Logo from "@/components/Logo.astro";
 import config from "@/config/config.json";
 import menu from "@/config/menu.json";
-import NavDropDown from "./NavDropDown";
+import NavDropDown from "./NavDropDown.astro";
 
 export interface ChildNavigationLink {
   name: string;
@@ -53,7 +53,7 @@ const { pathname } = Astro.url;
         main.map((menu) => (
           <>
             {menu.hasChildren ? (
-              <NavDropDown menu={menu} pathname={pathname} client:load />
+              <NavDropDown menu={menu} pathname={pathname} />
             ) : (
               <li class="nav-item">
                 <a

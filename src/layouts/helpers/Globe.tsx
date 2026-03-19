@@ -39,16 +39,17 @@ const Globe = () => {
     window.addEventListener("resize", onResize);
     onResize();
 
+    const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
     // @ts-ignore
     globeRef.current = createGlobe(canvasRef.current, {
-      devicePixelRatio: 2,
+      devicePixelRatio: dpr,
       width: width * 2,
       height: width * 2,
       phi: 0,
       theta: 0,
       dark: 0,
       diffuse: 0,
-      mapSamples: 33000,
+      mapSamples: 16000,
       mapBrightness: 12,
       baseColor: [1, 1, 1],
       markerColor: [255, 255, 255],

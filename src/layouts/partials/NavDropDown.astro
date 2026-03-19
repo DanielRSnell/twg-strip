@@ -1,0 +1,71 @@
+---
+interface Props {
+  menu: {
+    name: string;
+    url: string;
+    hasChildren?: boolean;
+    children?: { name: string; url: string }[];
+  };
+  pathname: string;
+}
+
+const { menu, pathname } = Astro.props;
+---
+
+<li class="nav-item nav-dropdown group relative">
+  <span
+    class="nav-link inline-flex items-center nav-dropdown-trigger"
+    role="button"
+    tabindex="0"
+  >
+    {menu.name}
+    <svg
+      class="h-4 w-4 fill-current transition duration-300 lg:rotate-0 lg:group-hover:rotate-180 nav-dropdown-chevron"
+      viewBox="0 0 20 20"
+    >
+      <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+    </svg>
+  </span>
+  <ul
+    class="nav-dropdown-list hidden lg:group-hover:block lg:invisible lg:absolute lg:block lg:opacity-0 lg:group-hover:visible lg:group-hover:opacity-100"
+  >
+    {
+      menu.children?.map((child) => (
+        <li class="nav-dropdown-item">
+          <a
+            href={child.url}
+            aria-label={child.name}
+            class:list={[
+              "nav-dropdown-link block",
+              {
+                active:
+                  pathname === `${child.url}/` || pathname === child.url,
+              },
+            ]}
+          >
+            {child.name}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</li>
+
+<script>
+  function initNavDropdowns() {
+    document.querySelectorAll(".nav-dropdown-trigger").forEach((trigger) => {
+      if (trigger.hasAttribute("data-nav-init")) return;
+      trigger.setAttribute("data-nav-init", "true");
+      trigger.addEventListener("click", () => {
+        const li = trigger.closest(".nav-dropdown");
+        if (!li) return;
+        const list = li.querySelector(".nav-dropdown-list");
+        const chevron = li.querySelector(".nav-dropdown-chevron");
+        if (list) list.classList.toggle("max-lg:block");
+        if (chevron) chevron.classList.toggle("rotate-180");
+      });
+    });
+  }
+  initNavDropdowns();
+  document.addEventListener("astro:after-swap", initNavDropdowns);
+</script>

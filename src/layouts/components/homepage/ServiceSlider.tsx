@@ -1,6 +1,13 @@
-import DynamicIcon from "@/helpers/DynamicIcon";
+import { FaAsterisk, FaHandHoldingHeart, FaExpand } from "react-icons/fa6";
+import type { IconType } from "react-icons";
 import { markdownify } from "@/lib/utils/textConverter";
 import React, { useState } from "react";
+
+const iconMap: Record<string, IconType> = {
+  FaAsterisk,
+  FaHandHoldingHeart,
+  FaExpand,
+};
 
 const ServiceSlider = ({ feature }: { feature: any }) => {
   const [activeTab, setActiveTab] = useState(0);
@@ -25,16 +32,17 @@ const ServiceSlider = ({ feature }: { feature: any }) => {
                 <img
                   src={f.image}
                   width={259}
-                  height={0}
+                  height={302}
                   alt="feature image"
                   className="mx-auto"
+                  loading="lazy"
                 />
 
                 <div className="flex items-center gap-4 px-5 py-3 mt-4 bg-tertiary rounded-xl">
-                  <DynamicIcon
-                    icon={f.icon}
-                    className="text-secondary shrink-0 w-14 h-14"
-                  />
+                  {(() => {
+                    const Icon = iconMap[f.icon];
+                    return Icon ? <Icon className="text-secondary shrink-0 w-14 h-14" /> : null;
+                  })()}
                   <div>
                     <h3
                       className="pb-1 text-xl text-white"
@@ -64,10 +72,10 @@ const ServiceSlider = ({ feature }: { feature: any }) => {
                 data-aos-delay={i * 200}
               >
                 <div className="p-2 rounded-full bg-secondary/20">
-                  <DynamicIcon
-                    icon={f.icon}
-                    className="text-secondary shrink-0 w-7 h-7"
-                  />
+                  {(() => {
+                    const Icon = iconMap[f.icon];
+                    return Icon ? <Icon className="text-secondary shrink-0 w-7 h-7" /> : null;
+                  })()}
                 </div>
                 <div className="pb-5 hover-border-effect">
                   <h3

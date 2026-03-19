@@ -9,7 +9,6 @@ import Header from "@/partials/Header.astro";
 import "@/styles/main.scss";
 import { AstroFont } from "astro-font";
 import "aos/dist/aos.css";
-import "swiper/css";
 import Chatbot from '../components/Chatbot.jsx';
 
 // font families
@@ -48,6 +47,9 @@ const { title, meta_title, description, image, noindex, canonical } =
   <head>
     <!-- favicon -->
     <link rel="shortcut icon" href={config.site.favicon} />
+    <!-- preconnect to font origins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <!-- theme meta -->
     <meta name="theme-name" content="odfense-astro" />
     <meta name="msapplication-TileColor" content="#000000" />
@@ -69,7 +71,7 @@ const { title, meta_title, description, image, noindex, canonical } =
       config={[
         {
           src: [],
-          preload: false,
+          preload: true,
           display: "swap",
           name: fontPrimary!,
           fallback: "sans-serif",
@@ -166,8 +168,6 @@ const { title, meta_title, description, image, noindex, canonical } =
     />
     <meta name="twitter:card" content="summary_large_image" />
 
-    <!-- Lemlist tracking -->
-    <script is:inline type="text/javascript" src="https://app.lemlist.com/api/visitors/tracking?k=A54nYH8zU561SZ24Y61Vn%2FCpE3e73OeM7V0zFa4sHOw%3D&t=tea_7wBwdJFyRnNxMkhZ5"></script>
   </head>
   <body>
     <TwSizeIndicator />
@@ -177,16 +177,20 @@ const { title, meta_title, description, image, noindex, canonical } =
       <slot />
     </main>
     <script>
-      import AOS from "aos";
-
       function aosInit() {
-        AOS.init({
-          duration: 600,
-          once: true,
+        import("aos").then(({ default: AOS }) => {
+          AOS.init({
+            duration: 600,
+            once: true,
+          });
         });
       }
 
-      aosInit();
+      if ("requestIdleCallback" in window) {
+        requestIdleCallback(aosInit);
+      } else {
+        setTimeout(aosInit, 200);
+      }
       document.addEventListener("astro:after-swap", aosInit);
     </script>
     <script>
@@ -217,7 +221,43 @@ const { title, meta_title, description, image, noindex, canonical } =
 })();
     </script>
     <Footer />
-       <script> (function(){ var s = document.createElement('script'); var h = document.querySelector('head') || document.body; s.src = 'https://acsbapp.com/apps/app/dist/js/app.js'; s.async = true; s.onload = function(){ acsbJS.init(); }; h.appendChild(s); })(); </script> 
+    <script is:inline>
+      // Defer accessibility overlay until user interaction
+      (function(){
+        function loadAccessibility() {
+          var s = document.createElement('script');
+          s.src = 'https://acsbapp.com/apps/app/dist/js/app.js';
+          s.async = true;
+          s.onload = function(){ acsbJS.init(); };
+          document.body.appendChild(s);
+          ['scroll','click','keydown','touchstart'].forEach(function(e){
+            window.removeEventListener(e, loadAccessibility);
+          });
+        }
+        ['scroll','click','keydown','touchstart'].forEach(function(e){
+          window.addEventListener(e, loadAccessibility, {once: true, passive: true});
+        });
+      })();
+
+      // Defer Lemlist tracking
+      (function(){
+        if ('requestIdleCallback' in window) {
+          requestIdleCallback(function(){
+            var s = document.createElement('script');
+            s.src = 'https://app.lemlist.com/api/visitors/tracking?k=A54nYH8zU561SZ24Y61Vn%2FCpE3e73OeM7V0zFa4sHOw%3D&t=tea_7wBwdJFyRnNxMkhZ5';
+            s.async = true;
+            document.body.appendChild(s);
+          });
+        } else {
+          setTimeout(function(){
+            var s = document.createElement('script');
+            s.src = 'https://app.lemlist.com/api/visitors/tracking?k=A54nYH8zU561SZ24Y61Vn%2FCpE3e73OeM7V0zFa4sHOw%3D&t=tea_7wBwdJFyRnNxMkhZ5';
+            s.async = true;
+            document.body.appendChild(s);
+          }, 3000);
+        }
+      })();
+    </script>
   </body>
   
 </html>
