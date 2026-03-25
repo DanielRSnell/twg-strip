@@ -1,0 +1,74 @@
+{
+  "client": "watts-to-workers",
+  "name": "Watts to Workers",
+  "logo": "/images/logo.svg",
+  "title": "Interview Process",
+  "subtitle": "Watch the video below and complete the screening questions to continue.",
+  "video": {
+    "src": "/interview/video/texas-tech.mp4",
+    "poster": "",
+    "completionThreshold": 0.95
+  },
+  "questions": [
+    {
+      "id": "firstName",
+      "label": "What's your first name?",
+      "type": "text",
+      "required": true,
+      "placeholder": "First name"
+    },
+    {
+      "id": "lastName",
+      "label": "What's your last name?",
+      "type": "text",
+      "required": true,
+      "placeholder": "Last name"
+    },
+    {
+      "id": "phone",
+      "label": "What's your phone number?",
+      "type": "tel",
+      "required": true,
+      "placeholder": "(555) 123-4567"
+    },
+    {
+      "id": "stillInterested",
+      "label": "Are you still interested in the training opportunity?",
+      "type": "yesno",
+      "required": true
+    },
+    {
+      "id": "textMessageConsent",
+      "label": "We've found the best way to communicate is sometimes text messages. May we text you?",
+      "type": "yesno",
+      "required": true
+    },
+    {
+      "id": "availableSessions",
+      "label": "Which training session(s) are you available to participate in?",
+      "type": "select",
+      "required": true,
+      "dynamic": "upcoming-sessions"
+    },
+    {
+      "id": "currentLocation",
+      "label": "Where are you currently located?",
+      "type": "text",
+      "required": true,
+      "placeholder": "City, State"
+    },
+    {
+      "id": "willingToRelocate",
+      "label": "Are you willing to relocate for the right opportunity?",
+      "type": "yesno",
+      "required": true
+    },
+    {
+      "id": "referral",
+      "label": "Do you have anyone you'd like to refer for the opportunity?",
+      "type": "text",
+      "required": false,
+      "placeholder": "Name or N/A"
+    }
+  ]
+}

@@ -8,9 +8,10 @@ import "aos/dist/aos.css";
 import InterviewFunnel from "@/components/InterviewFunnel";
 
 import texasTechConfig from "@/config/interviews/texas-tech.json";
+import wattsToWorkersConfig from "@/config/interviews/watts-to-workers.json";
 
 export function getStaticPaths() {
-  const configs = [texasTechConfig];
+  const configs = [texasTechConfig, wattsToWorkersConfig];
   return configs.map((c) => ({
     params: { client: c.client },
     props: { clientConfig: c },
