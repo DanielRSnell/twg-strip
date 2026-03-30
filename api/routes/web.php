@@ -3,9 +3,7 @@
 use App\Models\EmailTemplate;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::redirect('/', '/admin');
 
 Route::get('/email-templates/{emailTemplate}/preview', function (EmailTemplate $emailTemplate) {
     // Sample data simulating a real form submission
