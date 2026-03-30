@@ -17,10 +17,10 @@
       <mj-section background-color="#ffffff" border-radius="12px" padding="40px 32px 32px">
         <mj-column>
           <mj-text font-size="22px" font-weight="700" padding-bottom="4px">
-            New Compute Inquiry
+            {{ $field_1 }}
           </mj-text>
           <mj-text color="#71717a" font-size="14px" padding-bottom="24px">
-            A new inquiry has been submitted for Texas Tech computing power.
+            {{ $field_2 }}
           </mj-text>
 
           <mj-divider border-color="#e4e4e7" border-width="1px" padding="0 0 24px" />
@@ -29,67 +29,43 @@
 
       <mj-section background-color="#ffffff" border-radius="12px" padding="0 32px 8px">
         <mj-column background-color="#f4f4f5" border-radius="8px" padding="20px">
-          <mj-text font-size="11px" color="#71717a" padding="0 0 4px">
-            NAME
-          </mj-text>
-          <mj-text font-size="16px" font-weight="600" padding="0">
-            {{ $('Validate Input').item.json.data.first_name }} {{ $('Validate Input').item.json.data.last_name }}
-          </mj-text>
+          <mj-text font-size="11px" color="#71717a" padding="0 0 4px">NAME</mj-text>
+          <mj-text font-size="16px" font-weight="600" padding="0">{{ $first_name }} {{ $last_name }}</mj-text>
         </mj-column>
       </mj-section>
 
       <mj-section background-color="#ffffff" border-radius="12px" padding="0 32px 8px">
         <mj-column background-color="#f4f4f5" border-radius="8px" padding="20px">
-          <mj-text font-size="11px" color="#71717a" padding="0 0 4px">
-            EMAIL
-          </mj-text>
-          <mj-text font-size="16px" font-weight="600" color="#18181b" padding="0">
-            {{ $('Validate Input').item.json.data.email }}
-          </mj-text>
+          <mj-text font-size="11px" color="#71717a" padding="0 0 4px">EMAIL</mj-text>
+          <mj-text font-size="16px" font-weight="600" color="#18181b" padding="0">{{ $email }}</mj-text>
         </mj-column>
       </mj-section>
 
       <mj-section background-color="#ffffff" border-radius="12px" padding="0 32px 8px">
         <mj-column background-color="#f4f4f5" border-radius="8px" padding="20px">
-          <mj-text font-size="11px" color="#71717a" padding="0 0 4px">
-            COMPANY
-          </mj-text>
-          <mj-text font-size="16px" font-weight="600" padding="0">
-            {{ $('Validate Input').item.json.data.company }}
-          </mj-text>
+          <mj-text font-size="11px" color="#71717a" padding="0 0 4px">COMPANY</mj-text>
+          <mj-text font-size="16px" font-weight="600" padding="0">{{ $company }}</mj-text>
         </mj-column>
       </mj-section>
 
       <mj-section background-color="#ffffff" border-radius="12px" padding="0 32px 8px">
         <mj-column background-color="#f4f4f5" border-radius="8px" padding="20px">
-          <mj-text font-size="11px" color="#71717a" padding="0 0 4px">
-            TITLE / POSITION
-          </mj-text>
-          <mj-text font-size="16px" font-weight="600" padding="0">
-            {{ $('Validate Input').item.json.data.title }}
-          </mj-text>
+          <mj-text font-size="11px" color="#71717a" padding="0 0 4px">TITLE / POSITION</mj-text>
+          <mj-text font-size="16px" font-weight="600" padding="0">{{ $title }}</mj-text>
         </mj-column>
       </mj-section>
 
       <mj-section background-color="#ffffff" border-radius="12px" padding="0 32px 8px">
         <mj-column background-color="#f4f4f5" border-radius="8px" padding="20px">
-          <mj-text font-size="11px" color="#71717a" padding="0 0 4px">
-            TIMELINE
-          </mj-text>
-          <mj-text font-size="16px" font-weight="600" padding="0">
-            {{ $('Validate Input').item.json.data.urgency }}
-          </mj-text>
+          <mj-text font-size="11px" color="#71717a" padding="0 0 4px">TIMELINE</mj-text>
+          <mj-text font-size="16px" font-weight="600" padding="0">{{ $urgency }}</mj-text>
         </mj-column>
       </mj-section>
 
       <mj-section background-color="#ffffff" border-radius="12px" padding="0 32px 32px">
         <mj-column background-color="#f4f4f5" border-radius="8px" padding="20px">
-          <mj-text font-size="11px" color="#71717a" padding="0 0 4px">
-            ADDITIONAL NOTES
-          </mj-text>
-          <mj-text font-size="16px" font-weight="600" padding="0">
-            {{ $('Validate Input').item.json.data.note }}
-          </mj-text>
+          <mj-text font-size="11px" color="#71717a" padding="0 0 4px">ADDITIONAL NOTES</mj-text>
+          <mj-text font-size="16px" font-weight="600" padding="0">{{ $note }}</mj-text>
         </mj-column>
       </mj-section>
 

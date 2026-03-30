@@ -1,4 +1,4 @@
-export type FunnelStep = "email" | "video" | "form" | "complete";
+export type FunnelStep = "email" | "video" | "form" | "complete" | "exited";
 
 export interface VideoProgress {
   currentTime: number;
@@ -7,14 +7,29 @@ export interface VideoProgress {
   completed: boolean;
 }
 
+export interface ExitConfig {
+  value: string;
+  heading: string;
+  body: string;
+}
+
 export interface QuestionConfig {
   id: string;
   label: string;
-  type: "text" | "tel" | "yesno" | "select";
+  type: "text" | "tel" | "yesno" | "select" | "multiselect";
   required: boolean;
   placeholder?: string;
   options?: string[];
   dynamic?: "upcoming-sessions";
+  disclaimer?: string;
+  exitOn?: ExitConfig;
+}
+
+export interface CompletionConfig {
+  heading: string;
+  body: string;
+  boxHeading: string;
+  boxBody: string;
 }
 
 export interface ClientConfig {
@@ -29,6 +44,7 @@ export interface ClientConfig {
     completionThreshold: number;
   };
   questions: QuestionConfig[];
+  completion?: CompletionConfig;
 }
 
 export interface InterviewState {

@@ -43,6 +43,7 @@ interface FormStepProps {
   onAnswer: (questionId: string, value: string) => void;
   onQuestionChange: (index: number) => void;
   onComplete: (answers: Record<string, string>) => void;
+  onExit: (question: QuestionConfig, answers: Record<string, string>) => void;
   trackEvent: (event: string, data?: Record<string, unknown>) => void;
 }
 
@@ -64,6 +65,7 @@ export default function FormStep({
   onAnswer,
   onQuestionChange,
   onComplete,
+  onExit,
   trackEvent,
 }: FormStepProps) {
   const [direction, setDirection] = useState(1); // 1 = forward, -1 = backward
@@ -111,7 +113,7 @@ export default function FormStep({
   const validate = useCallback((): boolean => {
     if (!question.required && !localValue.trim()) return true;
     if (question.required && !localValue.trim()) {
-      setError("This field is required");
+      setError(question.type === "multiselect" ? "Please select at least one option" : "This field is required");
       return false;
     }
     if (question.type === "tel" && !/^[\d\s\-+().]{7,}$/.test(localValue)) {
@@ -124,8 +126,10 @@ export default function FormStep({
   const goNext = useCallback(() => {
     if (!validate()) return;
 
+    const trimmed = localValue.trim();
+
     // Save answer
-    onAnswer(question.id, localValue.trim());
+    onAnswer(question.id, trimmed);
 
     // Track progress
     trackEvent("form_progress", {
@@ -134,9 +138,16 @@ export default function FormStep({
       totalQuestions,
     });
 
+    // Check for exit condition
+    if (question.exitOn && trimmed === question.exitOn.value) {
+      const finalAnswers = { ...answers, [question.id]: trimmed };
+      onExit(question, finalAnswers);
+      return;
+    }
+
     if (isLast) {
       // Submit the form
-      const finalAnswers = { ...answers, [question.id]: localValue.trim() };
+      const finalAnswers = { ...answers, [question.id]: trimmed };
       onComplete(finalAnswers);
     } else {
       setDirection(1);
@@ -153,6 +164,7 @@ export default function FormStep({
     onAnswer,
     onQuestionChange,
     onComplete,
+    onExit,
     trackEvent,
   ]);
 
@@ -187,6 +199,17 @@ export default function FormStep({
   const handleSelect = (value: string) => {
     setLocalValue(value);
     onAnswer(question.id, value);
+  };
+
+  // For multiselect: toggle values
+  const handleMultiSelect = (value: string) => {
+    const current = localValue ? localValue.split(", ").filter(Boolean) : [];
+    const updated = current.includes(value)
+      ? current.filter((v) => v !== value)
+      : [...current, value];
+    const joined = updated.join(", ");
+    setLocalValue(joined);
+    onAnswer(question.id, joined);
   };
 
   const progressPercent = ((currentQuestion + 1) / totalQuestions) * 100;
@@ -258,6 +281,28 @@ export default function FormStep({
           </div>
         );
 
+      case "multiselect": {
+        const selected = localValue ? localValue.split(", ").filter(Boolean) : [];
+        return (
+          <div className="space-y-3">
+            {question.options?.map((option) => (
+              <button
+                key={option}
+                type="button"
+                onClick={() => handleMultiSelect(option)}
+                className={`w-full rounded-xl border-2 px-5 py-3.5 text-left text-base font-medium transition-all ${
+                  selected.includes(option)
+                    ? "border-secondary bg-secondary/5 text-secondary"
+                    : "border-gray-200 text-dark hover:border-secondary/40 hover:bg-secondary/5"
+                }`}
+              >
+                {option}
+              </button>
+            ))}
+          </div>
+        );
+      }
+
       default:
         return null;
     }
@@ -304,9 +349,15 @@ export default function FormStep({
               <p className="mt-2 text-center text-sm text-red-500">{error}</p>
             )}
 
+            {question.disclaimer && (
+              <p className="mt-3 text-center text-xs leading-relaxed text-gray-400">
+                {question.disclaimer}
+              </p>
+            )}
+
             {!question.required && (
               <p className="mt-2 text-center text-xs text-light">
-                Optional. Press Next to skip.
+                Optional. Press {isLast ? "Submit" : "Next"} to skip.
               </p>
             )}
           </motion.div>

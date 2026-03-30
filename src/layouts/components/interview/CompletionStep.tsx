@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import type { CompletionConfig } from "./types";
 
 function launchConfetti(canvas: HTMLCanvasElement) {
   const ctx = canvas.getContext("2d");
@@ -68,7 +69,25 @@ function launchConfetti(canvas: HTMLCanvasElement) {
   animate();
 }
 
-export default function CompletionStep() {
+function renderTextWithLinks(text: string) {
+  const emailRegex = /([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/g;
+  const parts = text.split(emailRegex);
+  return parts.map((part, i) =>
+    emailRegex.test(part) ? (
+      <a key={i} href={`mailto:${part}`} className="text-secondary hover:underline">
+        {part}
+      </a>
+    ) : (
+      <span key={i}>{part}</span>
+    ),
+  );
+}
+
+interface CompletionStepProps {
+  config?: CompletionConfig;
+}
+
+export default function CompletionStep({ config }: CompletionStepProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -76,6 +95,15 @@ export default function CompletionStep() {
       launchConfetti(canvasRef.current);
     }
   }, []);
+
+  const heading = config?.heading ?? "You're All Set!";
+  const body =
+    config?.body ??
+    "Thank you for completing the interview process. Our team will review your responses and be in touch soon.";
+  const boxHeading = config?.boxHeading ?? "WHAT HAPPENS NEXT?";
+  const boxBody =
+    config?.boxBody ??
+    "We'll review your responses and reach out via email or text with next steps. Keep an eye on your inbox.";
 
   return (
     <>
@@ -103,21 +131,27 @@ export default function CompletionStep() {
         </div>
 
         <h2 className="mb-3 text-2xl font-semibold text-dark sm:text-3xl">
-          You're All Set!
+          {heading}
         </h2>
-        <p className="mx-auto mb-6 max-w-md text-base text-light">
-          Thank you for completing the interview process. Our team will review
-          your responses and be in touch soon.
-        </p>
+        <div className="mx-auto mb-6 max-w-md text-base text-light">
+          {body.split("\n").map((line, i) => (
+            <p key={i} className={i > 0 ? "mt-2" : ""}>
+              {renderTextWithLinks(line)}
+            </p>
+          ))}
+        </div>
 
         <div className="mx-auto max-w-sm rounded-xl border border-border bg-theme-light p-5">
           <div className="mb-2 text-sm font-medium uppercase tracking-wider text-light">
-            What happens next?
+            {boxHeading}
           </div>
-          <p className="text-sm text-dark">
-            We'll review your responses and reach out via email or text with
-            next steps. Keep an eye on your inbox.
-          </p>
+          <div className="text-sm text-dark">
+            {boxBody.split("\n").map((line, i) => (
+              <p key={i} className={i > 0 ? "mt-2" : ""}>
+                {renderTextWithLinks(line)}
+              </p>
+            ))}
+          </div>
         </div>
       </div>
     </>

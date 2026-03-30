@@ -17,19 +17,19 @@
       <mj-section background-color="#ffffff" border-radius="12px" padding="40px 32px 32px">
         <mj-column>
           <mj-text font-size="22px" font-weight="700" padding-bottom="4px">
-            Interest Received
+            {{ $field_1 }}
           </mj-text>
           <mj-text color="#71717a" font-size="14px" padding-bottom="24px">
-            Thank you for your interest in WattsForWorkers.
+            {{ $field_2 }}
           </mj-text>
 
           <mj-divider border-color="#e4e4e7" border-width="1px" padding="0 0 24px" />
 
           <mj-text padding-bottom="16px">
-            Hi {{ $('Validate Input').item.json.data.first_name }},
+            {{ $field_3 }}
           </mj-text>
           <mj-text padding-bottom="16px">
-            Thank you for expressing your interest in the WattsForWorkers program. We've received your submission and our team will follow up with you soon to discuss next steps and opportunities.
+            {{ $field_4 }}
           </mj-text>
         </mj-column>
       </mj-section>
@@ -40,7 +40,7 @@
             ROLE INTEREST
           </mj-text>
           <mj-text font-size="16px" font-weight="600" padding="0">
-            {{ $('Validate Input').item.json.data.role_interest }}
+            {{ $role_interest }}
           </mj-text>
         </mj-column>
       </mj-section>
@@ -48,8 +48,7 @@
       <mj-section background-color="#ffffff" border-radius="12px" padding="0 32px 32px">
         <mj-column>
           <mj-text padding-top="8px">
-            Best regards,<br />
-            <strong>The ThisWay Global Team</strong>
+            {{ $field_5 }}
           </mj-text>
         </mj-column>
       </mj-section>

@@ -1,14 +1,15 @@
-import { useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import type { ClientConfig, FunnelStep, TrackEventPayload } from "./interview/types";
+import type { ClientConfig, FunnelStep, QuestionConfig, TrackEventPayload } from "./interview/types";
 import { useInterviewState } from "./interview/useInterviewState";
 import ProgressBar from "./interview/ProgressBar";
 import EmailStep from "./interview/EmailStep";
 import VideoStep from "./interview/VideoStep";
 import FormStep from "./interview/FormStep";
 import CompletionStep from "./interview/CompletionStep";
+import ExitStep from "./interview/ExitStep";
 
-const TRACKING_URL = "https://api.umbral.ai/webhook/interview-tracking";
+const TRACKING_URL = `${import.meta.env.PUBLIC_API_URL}/webhook/interview-tracking`;
 
 interface InterviewFunnelProps {
   config: ClientConfig;
@@ -30,6 +31,8 @@ export default function InterviewFunnel({ config }: InterviewFunnelProps) {
     setCurrentFormQuestion,
     advanceStep,
   } = useInterviewState(config.client);
+
+  const [exitConfig, setExitConfig] = useState<{ heading: string; body: string } | null>(null);
 
   const trackEvent = useCallback(
     (event: string, data: Record<string, unknown> = {}) => {
@@ -76,6 +79,15 @@ export default function InterviewFunnel({ config }: InterviewFunnelProps) {
     [initSession, config.client],
   );
 
+  // Auto-resume from email link with ?email= query param
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const emailParam = params.get("email");
+    if (emailParam && !state) {
+      handleEmailSubmit(emailParam);
+    }
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
   const handleVideoComplete = useCallback(() => {
     trackEvent("video_completed", {
       duration: state?.videoProgress.duration ?? 0,
@@ -91,6 +103,22 @@ export default function InterviewFunnel({ config }: InterviewFunnelProps) {
         completedAt: new Date().toISOString(),
       });
       advanceStep("complete");
+    },
+    [trackEvent, advanceStep],
+  );
+
+  const handleFormExit = useCallback(
+    (question: QuestionConfig, answers: Record<string, string>) => {
+      trackEvent("funnel_exited", {
+        reason: question.exitOn?.value,
+        questionId: question.id,
+        answers,
+      });
+      setExitConfig({
+        heading: question.exitOn?.heading ?? "Thank You",
+        body: question.exitOn?.body ?? "Thank you for your time.",
+      });
+      advanceStep("exited");
     },
     [trackEvent, advanceStep],
   );
@@ -116,7 +144,7 @@ export default function InterviewFunnel({ config }: InterviewFunnelProps) {
         </div>
       )}
       <div className="rounded-2xl border border-gray-200 bg-white p-6 sm:p-10">
-        <ProgressBar currentStep={currentStep} />
+        {currentStep !== "exited" && <ProgressBar currentStep={currentStep} />}
         <AnimatePresence mode="wait">
           {currentStep === "email" && (
             <motion.div key="email" {...stepTransition}>
@@ -143,13 +171,19 @@ export default function InterviewFunnel({ config }: InterviewFunnelProps) {
                 onAnswer={setFormAnswer}
                 onQuestionChange={setCurrentFormQuestion}
                 onComplete={handleFormComplete}
+                onExit={handleFormExit}
                 trackEvent={trackEvent}
               />
             </motion.div>
           )}
           {currentStep === "complete" && (
             <motion.div key="complete" {...stepTransition}>
-              <CompletionStep />
+              <CompletionStep config={config.completion} />
+            </motion.div>
+          )}
+          {currentStep === "exited" && exitConfig && (
+            <motion.div key="exited" {...stepTransition}>
+              <ExitStep heading={exitConfig.heading} body={exitConfig.body} />
             </motion.div>
           )}
         </AnimatePresence>

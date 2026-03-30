@@ -3,7 +3,7 @@
   "name": "Watts to Workers",
   "logo": "/images/logo.svg",
   "title": "Interview Process",
-  "subtitle": "Watch the video below and complete the screening questions to continue.",
+  "subtitle": "Watch the video below and complete the screening questions to move forward in the process.",
   "video": {
     "src": "/interview/video/texas-tech.mp4",
     "poster": "",
@@ -25,28 +25,35 @@
       "placeholder": "Last name"
     },
     {
+      "id": "stillInterested",
+      "label": "Are you still interested in the training opportunity?",
+      "type": "yesno",
+      "required": true,
+      "exitOn": {
+        "value": "No",
+        "heading": "Thank You",
+        "body": "Thank you for taking the time to learn more about the Watts to Workers opportunity and for participating in the process.\n\nWe understand that this opportunity may not be the right fit for everyone. Based on your selection, you will be removed from future Watts to Workers program communications.\n\nWe appreciate your interest and wish you the best in your future endeavors."
+      }
+    },
+    {
+      "id": "textMessageConsent",
+      "label": "We've found that text messaging is often the easiest way to stay in touch. Would you like to receive updates via text?",
+      "type": "yesno",
+      "required": true,
+      "disclaimer": "By selecting \"Yes,\" you agree to receive text messages from Watts to Workers. Message and data rates may apply. Message frequency may vary. You can opt out at any time by sending an email to WattstoWorkers@thiswayglobal.com."
+    },
+    {
       "id": "phone",
       "label": "What's your phone number?",
       "type": "tel",
       "required": true,
-      "placeholder": "(555) 123-4567"
-    },
-    {
-      "id": "stillInterested",
-      "label": "Are you still interested in the training opportunity?",
-      "type": "yesno",
-      "required": true
-    },
-    {
-      "id": "textMessageConsent",
-      "label": "We've found the best way to communicate is sometimes text messages. May we text you?",
-      "type": "yesno",
-      "required": true
+      "placeholder": "(555) 123-4567",
+      "disclaimer": "Your phone number will only be used for communication from us and will not be shared with or sold to any third parties."
     },
     {
       "id": "availableSessions",
-      "label": "Which training session(s) are you available to participate in?",
-      "type": "select",
+      "label": "Which training session(s) are you available to participate in? (Select all that apply)",
+      "type": "multiselect",
       "required": true,
       "dynamic": "upcoming-sessions"
     },
@@ -55,13 +62,14 @@
       "label": "Where are you currently located?",
       "type": "text",
       "required": true,
-      "placeholder": "City, State"
+      "placeholder": "City, State, Country"
     },
     {
       "id": "willingToRelocate",
       "label": "Are you willing to relocate for the right opportunity?",
-      "type": "yesno",
-      "required": true
+      "type": "select",
+      "required": true,
+      "options": ["Yes", "No", "Possibly, for the right job"]
     },
     {
       "id": "referral",
@@ -70,5 +78,11 @@
       "required": false,
       "placeholder": "Name or N/A"
     }
-  ]
+  ],
+  "completion": {
+    "heading": "You're All Set!",
+    "body": "Thank you for taking the time to complete the initial interview for the Watts to Workers accelerated training program.\nIf you have any questions, please reach out to us at WattstoWorkers@thiswayglobal.com.",
+    "boxHeading": "NEXT STEPS",
+    "boxBody": "We will review your application and follow up via email with next steps. If you have any questions in the meantime, please don't hesitate to contact us.\nThank you again for your interest in Watts to Workers."
+  }
 }

@@ -16,69 +16,44 @@
     <mj-wrapper padding="0 16px 32px" background-color="#f4f4f5">
       <mj-section background-color="#ffffff" border-radius="12px" padding="40px 32px 32px">
         <mj-column>
-          <mj-text font-size="22px" font-weight="700" padding-bottom="4px">
-            New Press Inquiry
-          </mj-text>
-          <mj-text color="#71717a" font-size="14px" padding-bottom="24px">
-            A journalist or media contact has submitted an inquiry.
-          </mj-text>
-
+          <mj-text font-size="22px" font-weight="700" padding-bottom="4px">{{ $field_1 }}</mj-text>
+          <mj-text color="#71717a" font-size="14px" padding-bottom="24px">{{ $field_2 }}</mj-text>
           <mj-divider border-color="#e4e4e7" border-width="1px" padding="0 0 24px" />
         </mj-column>
       </mj-section>
 
       <mj-section background-color="#ffffff" border-radius="12px" padding="0 32px 8px">
         <mj-column background-color="#f4f4f5" border-radius="8px" padding="20px">
-          <mj-text font-size="11px" color="#71717a" padding="0 0 4px">
-            NAME
-          </mj-text>
-          <mj-text font-size="16px" font-weight="600" padding="0">
-            {{ $('Validate Input').item.json.data.first_name }} {{ $('Validate Input').item.json.data.last_name }}
-          </mj-text>
+          <mj-text font-size="11px" color="#71717a" padding="0 0 4px">NAME</mj-text>
+          <mj-text font-size="16px" font-weight="600" padding="0">{{ $first_name }} {{ $last_name }}</mj-text>
         </mj-column>
       </mj-section>
 
       <mj-section background-color="#ffffff" border-radius="12px" padding="0 32px 8px">
         <mj-column background-color="#f4f4f5" border-radius="8px" padding="20px">
-          <mj-text font-size="11px" color="#71717a" padding="0 0 4px">
-            EMAIL
-          </mj-text>
-          <mj-text font-size="16px" font-weight="600" color="#18181b" padding="0">
-            {{ $('Validate Input').item.json.data.email }}
-          </mj-text>
+          <mj-text font-size="11px" color="#71717a" padding="0 0 4px">EMAIL</mj-text>
+          <mj-text font-size="16px" font-weight="600" color="#18181b" padding="0">{{ $email }}</mj-text>
         </mj-column>
       </mj-section>
 
       <mj-section background-color="#ffffff" border-radius="12px" padding="0 32px 8px">
         <mj-column background-color="#f4f4f5" border-radius="8px" padding="20px">
-          <mj-text font-size="11px" color="#71717a" padding="0 0 4px">
-            ORGANIZATION
-          </mj-text>
-          <mj-text font-size="16px" font-weight="600" padding="0">
-            {{ $('Validate Input').item.json.data.organization }}
-          </mj-text>
+          <mj-text font-size="11px" color="#71717a" padding="0 0 4px">ORGANIZATION</mj-text>
+          <mj-text font-size="16px" font-weight="600" padding="0">{{ $organization }}</mj-text>
         </mj-column>
       </mj-section>
 
       <mj-section background-color="#ffffff" border-radius="12px" padding="0 32px 8px">
         <mj-column background-color="#f4f4f5" border-radius="8px" padding="20px">
-          <mj-text font-size="11px" color="#71717a" padding="0 0 4px">
-            INQUIRY TYPE
-          </mj-text>
-          <mj-text font-size="16px" font-weight="600" padding="0">
-            {{ $('Validate Input').item.json.data.inquiry_type }}
-          </mj-text>
+          <mj-text font-size="11px" color="#71717a" padding="0 0 4px">INQUIRY TYPE</mj-text>
+          <mj-text font-size="16px" font-weight="600" padding="0">{{ $inquiry_type }}</mj-text>
         </mj-column>
       </mj-section>
 
       <mj-section background-color="#ffffff" border-radius="12px" padding="0 32px 32px">
         <mj-column background-color="#f4f4f5" border-radius="8px" padding="20px">
-          <mj-text font-size="11px" color="#71717a" padding="0 0 4px">
-            MESSAGE
-          </mj-text>
-          <mj-text font-size="16px" font-weight="600" padding="0">
-            {{ $('Validate Input').item.json.data.message }}
-          </mj-text>
+          <mj-text font-size="11px" color="#71717a" padding="0 0 4px">MESSAGE</mj-text>
+          <mj-text font-size="16px" font-weight="600" padding="0">{{ $message }}</mj-text>
         </mj-column>
       </mj-section>
 

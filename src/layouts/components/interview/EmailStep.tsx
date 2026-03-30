@@ -45,11 +45,12 @@ export default function EmailStep({ onSubmit }: EmailStepProps) {
       </div>
 
       <h2 className="mb-3 text-2xl font-semibold text-dark sm:text-3xl">
-        Let's get started
+        Let's Get Started
       </h2>
       <p className="mx-auto mb-8 max-w-md text-base text-light">
-        Enter your email address to begin the interview process. If you've
-        started before, we'll pick up right where you left off.
+        Enter your email address to begin the initial interview and watch the
+        informational video. If you have already started, you will be able to
+        pick up right where you left off.
       </p>
 
       <form onSubmit={handleSubmit} className="mx-auto max-w-sm">
@@ -73,6 +74,11 @@ export default function EmailStep({ onSubmit }: EmailStepProps) {
         <button type="submit" className="btn btn-primary w-full px-8 py-3 text-base">
           Continue
         </button>
+
+        <p className="mt-4 text-xs leading-relaxed text-gray-400">
+          Your information will only be used to communicate with you about this
+          opportunity and will not be shared with or sold to any third parties.
+        </p>
       </form>
     </div>
   );

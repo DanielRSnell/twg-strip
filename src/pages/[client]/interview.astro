@@ -90,12 +90,16 @@ const description = `Complete your interview process for ${clientConfig.name} th
             class="h-10"
           />
         </a>
-        <div class="h-8 w-px bg-gray-300"></div>
-        <img
-          src={clientConfig.logo}
-          alt={clientConfig.name}
-          class="h-12 w-auto"
-        />
+        {clientConfig.logo !== "/images/logo.svg" && (
+          <>
+            <div class="h-8 w-px bg-gray-300"></div>
+            <img
+              src={clientConfig.logo}
+              alt={clientConfig.name}
+              class="h-12 w-auto"
+            />
+          </>
+        )}
       </div>
     </header>
 
