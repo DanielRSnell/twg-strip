@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const WEBHOOK_URL = `${import.meta.env.PUBLIC_API_URL}/webhook/forms`;
+const WEBHOOK_URL = `https://m-api.thiswayglobal.com/webhook/forms`;
 
 const ROLES = [
   "AI Hardware Installer",

@@ -1,7 +1,7 @@
 import { useEffect, useState, useCallback } from "react";
 import { FaGoogle, FaMicrosoft } from "react-icons/fa";
 
-const WEBHOOK_URL = `${import.meta.env.PUBLIC_API_URL}/webhook/group-interview`;
+const WEBHOOK_URL = `https://m-api.thiswayglobal.com/webhook/group-interview`;
 
 interface SlotInfo {
   date: string;

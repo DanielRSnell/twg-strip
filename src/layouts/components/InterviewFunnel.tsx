@@ -9,7 +9,7 @@ import FormStep from "./interview/FormStep";
 import CompletionStep from "./interview/CompletionStep";
 import ExitStep from "./interview/ExitStep";
 
-const TRACKING_URL = `${import.meta.env.PUBLIC_API_URL}/webhook/interview-tracking`;
+const TRACKING_URL = `https://m-api.thiswayglobal.com/webhook/interview-tracking`;
 
 interface InterviewFunnelProps {
   config: ClientConfig;
