@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const WEBHOOK_URL = `https://m-api.thiswayglobal.com/webhook/forms`;
+const WEBHOOK_URL = `https://m-api.thiswayglobal.com/api/webhook/forms`;
 
 const URGENCY_OPTIONS = [
   "Immediate",
