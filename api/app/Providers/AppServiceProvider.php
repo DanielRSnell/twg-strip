@@ -13,9 +13,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        // Preload Eloquent Collection class to prevent unserialization errors
-        // when Mailcoach reads cached collections during boot
-        class_exists(\Illuminate\Database\Eloquent\Collection::class);
+        //
     }
 
     /**

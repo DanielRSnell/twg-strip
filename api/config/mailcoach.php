@@ -26,6 +26,10 @@ use Spatie\Mailcoach\Http\App\Middleware\BootstrapNavigation;
 use Spatie\Mailcoach\Mailcoach;
 
 return [
+    'models' => [
+        'mailer' => \App\Models\MailcoachMailer::class,
+    ],
+
     'campaigns' => [
         /*
          * The default mailer used by Mailcoach for sending campaigns.
