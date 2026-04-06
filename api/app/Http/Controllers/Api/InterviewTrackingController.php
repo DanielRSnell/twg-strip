@@ -8,6 +8,8 @@ use App\Models\Applicant;
 use App\Models\InterviewEvent;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Spatie\Mailcoach\Domain\Audience\Models\EmailList;
+use Spatie\Mailcoach\Domain\Audience\Models\Subscriber;
 
 class InterviewTrackingController extends Controller
 {
@@ -30,19 +32,24 @@ class InterviewTrackingController extends Controller
         ]);
 
         // Create or update Applicant on key events
-        $this->syncApplicant($validated);
+        $applicant = $this->syncApplicant($validated);
+
+        // Sync to Mailcoach subscriber list
+        if ($applicant) {
+            $this->syncToMailcoach($applicant);
+        }
 
         return response()->json(['success' => true], 201);
     }
 
-    private function syncApplicant(array $data): void
+    private function syncApplicant(array $data): ?Applicant
     {
         $event = $data['event'];
         $eventData = $data['data'] ?? [];
 
         // Create applicant on email submission
         if ($event === 'email_submitted') {
-            Applicant::firstOrCreate(
+            return Applicant::firstOrCreate(
                 ['client' => $data['client'], 'email' => $data['email']],
                 ['status' => 'in_progress'],
             );
@@ -65,12 +72,14 @@ class InterviewTrackingController extends Controller
 
             // Send confirmation emails
             SendApplicantEmails::dispatchSync($applicant);
+
+            return $applicant;
         }
 
         // Handle exit
         if ($event === 'funnel_exited') {
             $answers = $eventData['answers'] ?? [];
-            Applicant::updateOrCreate(
+            return Applicant::updateOrCreate(
                 ['client' => $data['client'], 'email' => $data['email']],
                 [
                     'first_name' => $answers['firstName'] ?? null,
@@ -80,6 +89,42 @@ class InterviewTrackingController extends Controller
                     'exited_at' => now(),
                 ],
             );
+        }
+
+        return null;
+    }
+
+    private function syncToMailcoach(Applicant $applicant): void
+    {
+        try {
+            $list = EmailList::where('name', 'Watts to Workers')->first();
+
+            if (!$list) {
+                return;
+            }
+
+            $subscriber = Subscriber::where('email', $applicant->email)
+                ->where('email_list_id', $list->id)
+                ->first();
+
+            if (!$subscriber) {
+                $subscriber = Subscriber::createWithEmail($applicant->email)
+                    ->skipConfirmation()
+                    ->subscribeTo($list);
+            }
+
+            $subscriber->update([
+                'first_name' => $applicant->first_name,
+                'last_name' => $applicant->last_name,
+            ]);
+
+            $subscriber->addTag($applicant->status ?? 'in_progress');
+
+            if ($applicant->client) {
+                $subscriber->addTag($applicant->client);
+            }
+        } catch (\Throwable) {
+            // Don't let Mailcoach sync failures break the tracking flow
         }
     }
 }

@@ -2,11 +2,10 @@
 
 namespace App\Jobs;
 
-use App\Models\EmailTemplate;
 use App\Models\FormSubmission;
+use App\Support\MailcoachTransactional;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
-use Illuminate\Support\Facades\Mail;
 
 class SendFormNotifications implements ShouldQueue
 {
@@ -24,21 +23,12 @@ class SendFormNotifications implements ShouldQueue
 
     private function sendAdminNotification(): void
     {
-        $template = EmailTemplate::where('slug', $this->submission->form_type . '-admin')->first();
-
-        if (! $template) {
-            return;
-        }
-
-        $html = $template->render($this->flattenData());
-
-        Mail::html($html, function ($message) use ($template) {
-            $message->to(config('app.admin_email', 'wattstoworkers@thiswayglobal.com'))
-                ->subject($template->subject);
-            if ($cc = config('app.admin_cc')) {
-                $message->cc($cc);
-            }
-        });
+        MailcoachTransactional::send(
+            templateName: $this->submission->form_type . '-admin',
+            toEmail: config('app.admin_email', 'wattstoworkers@thiswayglobal.com'),
+            toName: 'Admin',
+            replacements: $this->flattenData(),
+        );
     }
 
     private function sendUserConfirmation(): void
@@ -46,28 +36,20 @@ class SendFormNotifications implements ShouldQueue
         $data = $this->submission->data;
         $email = $data['email'] ?? null;
 
-        if (! $email) {
+        if (!$email) {
             return;
         }
 
-        $template = EmailTemplate::where('slug', $this->submission->form_type . '-confirm')->first();
+        $name = trim(($data['first_name'] ?? '') . ' ' . ($data['last_name'] ?? ''));
 
-        if (! $template) {
-            return;
-        }
-
-        $html = $template->render($this->flattenData());
-
-        Mail::html($html, function ($message) use ($email, $template, $data) {
-            $name = trim(($data['first_name'] ?? '') . ' ' . ($data['last_name'] ?? ''));
-            $message->to($email, $name ?: null)
-                ->subject($template->subject);
-        });
+        MailcoachTransactional::send(
+            templateName: $this->submission->form_type . '-confirm',
+            toEmail: $email,
+            toName: $name,
+            replacements: $this->flattenData(),
+        );
     }
 
-    /**
-     * Flatten the submission data for template variable substitution.
-     */
     private function flattenData(): array
     {
         $flat = [];

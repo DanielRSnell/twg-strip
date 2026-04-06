@@ -4,8 +4,8 @@ namespace App\Filament\Resources\FormSubmissionResource\Pages;
 
 use App\Filament\Resources\FormSubmissionResource;
 use Filament\Infolists\Components\KeyValueEntry;
-use Filament\Infolists\Components\Section;
 use Filament\Infolists\Components\TextEntry;
+use Filament\Schemas\Components\Section;
 use Filament\Resources\Pages\ViewRecord;
 use Filament\Schemas\Schema;
 
@@ -16,6 +16,7 @@ class ViewFormSubmission extends ViewRecord
     public function infolist(Schema $schema): Schema
     {
         return $schema
+            ->columns(1)
             ->components([
                 Section::make('Submission Details')
                     ->schema([

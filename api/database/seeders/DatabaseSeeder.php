@@ -16,9 +16,5 @@ class DatabaseSeeder extends Seeder
             'name' => 'Daniel Snell',
             'email' => 'daniel.snell@thiswayglobal.com',
         ]);
-
-        $this->call([
-            EmailTemplateSeeder::class,
-        ]);
     }
 }

@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -11,7 +13,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        // Preload Eloquent Collection class to prevent unserialization errors
+        // when Mailcoach reads cached collections during boot
+        class_exists(\Illuminate\Database\Eloquent\Collection::class);
     }
 
     /**
@@ -19,6 +23,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Route::mailcoach('email');
+
+        Gate::define('viewMailcoach', function ($user = null) {
+            return true;
+        });
     }
 }
