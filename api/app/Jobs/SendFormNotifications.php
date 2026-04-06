@@ -33,9 +33,11 @@ class SendFormNotifications implements ShouldQueue
         $html = $template->render($this->flattenData());
 
         Mail::html($html, function ($message) use ($template) {
-            $message->to('daniel.snell@thiswayglobal.com')
-                ->cc('courtney.gwynn@thiswayglobal.com')
+            $message->to(config('app.admin_email', 'wattstoworkers@thiswayglobal.com'))
                 ->subject($template->subject);
+            if ($cc = config('app.admin_cc')) {
+                $message->cc($cc);
+            }
         });
     }
 

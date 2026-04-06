@@ -68,8 +68,8 @@ class SendDailyDigest extends Command
                 'ctaText' => '',
             ])->render();
 
-            $adminEmail = config('app.admin_email', 'daniel.snell@thiswayglobal.com');
-            $adminCc = config('app.admin_cc', 'courtney.gwynn@thiswayglobal.com');
+            $adminEmail = config('app.admin_email', 'wattstoworkers@thiswayglobal.com');
+            $adminCc = config('app.admin_cc');
 
             Mail::html($html, function ($message) use ($adminEmail, $adminCc) {
                 $message->to($adminEmail)

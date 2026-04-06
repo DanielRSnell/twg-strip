@@ -124,7 +124,7 @@ return [
     ],
 
     'frontend_url' => env('FRONTEND_URL', 'http://localhost:4321'),
-    'admin_email' => env('ADMIN_EMAIL', 'daniel.snell@thiswayglobal.com'),
-    'admin_cc' => env('ADMIN_CC', 'courtney.gwynn@thiswayglobal.com'),
+    'admin_email' => env('ADMIN_EMAIL', 'wattstoworkers@thiswayglobal.com'),
+    'admin_cc' => env('ADMIN_CC', ''),
 
 ];

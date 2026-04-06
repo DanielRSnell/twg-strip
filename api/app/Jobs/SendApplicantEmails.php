@@ -41,9 +41,9 @@ class SendApplicantEmails implements ShouldQueue
         // Send admin notification (use interview-specific template with all answers)
         $this->sendTemplateEmail(
             slug: $this->getClientSlug() . '-interview-admin',
-            toEmail: config('app.admin_email', 'daniel.snell@thiswayglobal.com'),
+            toEmail: config('app.admin_email', 'wattstoworkers@thiswayglobal.com'),
             toName: 'Admin',
-            cc: config('app.admin_cc', 'courtney.gwynn@thiswayglobal.com'),
+            cc: config('app.admin_cc'),
         );
     }
 
@@ -52,7 +52,7 @@ class SendApplicantEmails implements ShouldQueue
         // Notify admin that someone exited
         $this->sendTemplateEmail(
             slug: $this->getClientSlug() . '-admin',
-            toEmail: config('app.admin_email', 'daniel.snell@thiswayglobal.com'),
+            toEmail: config('app.admin_email', 'wattstoworkers@thiswayglobal.com'),
             toName: 'Admin',
             subjectOverride: 'Applicant Exited: ' . $this->applicant->full_name,
         );
