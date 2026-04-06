@@ -10,10 +10,10 @@ cmds = [
 
 [phases.build]
 cmds = [
-    "CACHE_STORE=array php artisan package:discover --ansi",
-    "CACHE_STORE=array php artisan filament:assets",
-    "CACHE_STORE=array php artisan mailcoach:publish",
-    "CACHE_STORE=array php artisan view:cache"
+    "CACHE_STORE=null php artisan package:discover --ansi",
+    "CACHE_STORE=null php artisan filament:assets",
+    "CACHE_STORE=null php artisan mailcoach:publish",
+    "CACHE_STORE=null php artisan view:cache"
 ]
 
 [start]
