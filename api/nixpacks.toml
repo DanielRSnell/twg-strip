@@ -1,5 +1,5 @@
 [phases.setup]
-nixPkgs = ["php84", "php84Extensions.pdo_pgsql", "php84Extensions.pgsql", "php84Extensions.zip", "php84Extensions.pcntl", "php84Extensions.redis", "php84Packages.composer", "nodejs_22", "redis"]
+nixPkgs = ["php84", "php84Extensions.pdo_pgsql", "php84Extensions.pgsql", "php84Extensions.zip", "php84Extensions.pcntl", "php84Extensions.phpredis", "php84Packages.composer", "nodejs_22", "redis"]
 
 [phases.install]
 cmds = [
