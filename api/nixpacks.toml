@@ -19,4 +19,4 @@ cmds = [
 ]
 
 [start]
-cmd = "php clear-cache.php && CACHE_STORE=array php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=8080"
+cmd = "php clear-cache.php && CACHE_STORE=array php artisan migrate --force && (CACHE_STORE=array php artisan queue:work --sleep=3 --tries=3 --timeout=300 &) && php artisan serve --host=0.0.0.0 --port=8080"
