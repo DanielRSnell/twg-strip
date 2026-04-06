@@ -5,13 +5,12 @@ nixPkgs = ["php84", "php84Extensions.pdo_pgsql", "php84Extensions.pgsql", "php84
 cmds = [
     "echo '{\"http-basic\":{\"satis.spatie.be\":{\"username\":\"'$SATIS_USERNAME'\",\"password\":\"'$SATIS_PASSWORD'\"}}}' > auth.json",
     "composer install --no-dev --optimize-autoloader --no-scripts",
-    "composer dump-autoload --optimize",
-    "php artisan package:discover --ansi",
     "npm install -g mjml"
 ]
 
 [phases.build]
 cmds = [
+    "CACHE_STORE=array php artisan package:discover --ansi",
     "CACHE_STORE=array php artisan filament:assets",
     "CACHE_STORE=array php artisan mailcoach:publish",
     "CACHE_STORE=array php artisan config:cache",
