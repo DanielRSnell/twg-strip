@@ -4,7 +4,6 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\ApplicantResource\Pages;
 use App\Models\Applicant;
-use Filament\Actions\ExportAction;
 use Filament\Actions\ViewAction;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -73,25 +72,8 @@ class ApplicantResource extends Resource
                 ViewAction::make(),
             ])
             ->headerActions([
-                ExportAction::make()
-                    ->exporter(ApplicantExporter::class)
-                    ->fileDisk('local')
-                    ->modifyQueryUsing(fn ($query, array $options) => match ($options['status'] ?? 'all') {
-                        'all' => $query,
-                        default => $query->where('status', $options['status']),
-                    })
-                    ->optionsFormSchema(fn () => [
-                        \Filament\Forms\Components\Select::make('status')
-                            ->label('Filter by status')
-                            ->options([
-                                'all' => 'All Applicants',
-                                'completed' => 'Completed',
-                                'in_progress' => 'In Progress',
-                                'abandoned' => 'Abandoned',
-                                'exited' => 'Exited',
-                            ])
-                            ->default('all'),
-                    ]),
+                Tables\Actions\ExportAction::make()
+                    ->exporter(ApplicantExporter::class),
             ]);
     }
 
