@@ -47,7 +47,7 @@ class ExportResource extends Resource
             ])
             ->defaultSort('created_at', 'desc')
             ->actions([
-                Tables\Actions\Action::make('download')
+                \Filament\Actions\Action::make('download')
                     ->label('Download')
                     ->icon('heroicon-o-arrow-down-tray')
                     ->url(fn (Export $record) => route('export.download', $record))

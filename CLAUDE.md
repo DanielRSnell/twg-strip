@@ -104,6 +104,19 @@ When working with blog content, use the `content_type` field:
 - Uses Yarn 1.22.22 as package manager
 - RSS feed and sitemap automatically generated on build
 
+## Laravel API (./api)
+
+### Laravel Boost
+**ALWAYS use Laravel Boost's `search-docs` MCP tool before writing Filament or Laravel code.** Do not rely on training data for API signatures, method names, or class namespaces. Boost returns version-specific docs for the installed packages.
+
+### Filament v5 Namespace Guide
+Filament v5 moved many classes. Always verify with Boost, but common corrections:
+- Actions: `Filament\Actions\Action`, `Filament\Actions\ExportAction` (NOT `Filament\Tables\Actions\Action`)
+- Table actions use the same `Filament\Actions\Action` class
+- Sections: `Filament\Schemas\Components\Section` (NOT `Filament\Infolists\Components\Section`)
+- Infolist entries: `Filament\Infolists\Components\TextEntry`, `KeyValueEntry` (still in Infolists)
+- Widget view: `protected string $view` (non-static instance property in v5)
+
 ## Project Management
 
 **STRICT RULE**: All projects, plans, and progress updates MUST be communicated to the Octocat agent for GitHub issue/project tracking. This includes:
