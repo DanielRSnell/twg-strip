@@ -74,7 +74,24 @@ class ApplicantResource extends Resource
             ])
             ->headerActions([
                 ExportAction::make()
-                    ->exporter(ApplicantExporter::class),
+                    ->exporter(ApplicantExporter::class)
+                    ->fileDisk('local')
+                    ->modifyQueryUsing(fn ($query, array $options) => match ($options['status'] ?? 'all') {
+                        'all' => $query,
+                        default => $query->where('status', $options['status']),
+                    })
+                    ->optionsFormSchema(fn () => [
+                        \Filament\Forms\Components\Select::make('status')
+                            ->label('Filter by status')
+                            ->options([
+                                'all' => 'All Applicants',
+                                'completed' => 'Completed',
+                                'in_progress' => 'In Progress',
+                                'abandoned' => 'Abandoned',
+                                'exited' => 'Exited',
+                            ])
+                            ->default('all'),
+                    ]),
             ]);
     }
 
