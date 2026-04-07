@@ -17,4 +17,4 @@ cmds = [
 ]
 
 [start]
-cmd = "php artisan migrate --force && (php artisan queue:work --queue=send-campaign,mailcoach,mailcoach-schedule,mailcoach-feedback,send-mail,send-automation-mail,default --sleep=3 --tries=3 --timeout=300 &) && (php artisan schedule:work &) && php artisan serve --host=0.0.0.0 --port=8080"
+cmd = "php artisan migrate --force && (php artisan mailcoach:work --sleep=3 --tries=3 --timeout=300 &) && (php artisan schedule:work &) && php artisan serve --host=0.0.0.0 --port=8080"
