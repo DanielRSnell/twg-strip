@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\ApplicantResource\Pages;
 use App\Models\Applicant;
+use Filament\Actions\ExportAction;
 use Filament\Actions\ViewAction;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -72,7 +73,7 @@ class ApplicantResource extends Resource
                 ViewAction::make(),
             ])
             ->headerActions([
-                Tables\Actions\ExportAction::make()
+                ExportAction::make()
                     ->exporter(ApplicantExporter::class),
             ]);
     }
