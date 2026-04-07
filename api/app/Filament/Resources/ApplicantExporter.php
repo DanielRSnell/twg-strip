@@ -35,18 +35,19 @@ class ApplicantExporter extends Exporter
 
     public static function getCompletedNotificationBody(Export $export): string
     {
-        // Email the export to the requesting user
+        // Email the export download link to the requesting user
         try {
             $user = $export->user;
-            $filePath = Storage::disk($export->file_disk)->path($export->file_name . '.csv');
+            $fileName = $export->file_name . '.csv';
 
-            if ($user && file_exists($filePath)) {
+            if ($user && Storage::disk($export->file_disk)->exists($fileName)) {
+                $url = Storage::disk($export->file_disk)->temporaryUrl($fileName, now()->addHours(24));
+
                 Mail::raw(
-                    'Your applicant export is ready. ' . number_format($export->successful_rows) . ' rows exported.',
-                    function ($message) use ($user, $filePath, $export) {
+                    "Your applicant export is ready with " . number_format($export->successful_rows) . " rows.\n\nDownload: {$url}\n\nThis link expires in 24 hours.",
+                    function ($message) use ($user, $export) {
                         $message->to($user->email)
-                            ->subject('Applicant Export Ready - ' . number_format($export->successful_rows) . ' rows')
-                            ->attach($filePath, ['as' => 'applicants.csv', 'mime' => 'text/csv']);
+                            ->subject('Applicant Export Ready - ' . number_format($export->successful_rows) . ' rows');
                     }
                 );
             }
@@ -54,6 +55,6 @@ class ApplicantExporter extends Exporter
             // Don't block the notification if email fails
         }
 
-        return 'Your applicant export has completed. ' . number_format($export->successful_rows) . ' rows exported. A copy has been emailed to you.';
+        return 'Your applicant export has completed. ' . number_format($export->successful_rows) . ' rows exported. A download link has been emailed to you.';
     }
 }
