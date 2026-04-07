@@ -50,7 +50,7 @@ class ExportResource extends Resource
                 \Filament\Actions\Action::make('download')
                     ->label('Download')
                     ->icon('heroicon-o-arrow-down-tray')
-                    ->url(fn (Export $record) => route('export.download', $record))
+                    ->url(fn (Export $record) => route('filament.exports.download', $record))
                     ->visible(fn (Export $record) => $record->completed_at !== null),
             ]);
     }
