@@ -6,6 +6,8 @@ use App\Models\Applicant;
 use Filament\Actions\Exports\ExportColumn;
 use Filament\Actions\Exports\Exporter;
 use Filament\Actions\Exports\Models\Export;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
 
 class ApplicantExporter extends Exporter
 {
@@ -33,6 +35,25 @@ class ApplicantExporter extends Exporter
 
     public static function getCompletedNotificationBody(Export $export): string
     {
-        return 'Your applicant export has completed. ' . number_format($export->successful_rows) . ' rows exported.';
+        // Email the export to the requesting user
+        try {
+            $user = $export->user;
+            $filePath = Storage::disk($export->file_disk)->path($export->file_name . '.csv');
+
+            if ($user && file_exists($filePath)) {
+                Mail::raw(
+                    'Your applicant export is ready. ' . number_format($export->successful_rows) . ' rows exported.',
+                    function ($message) use ($user, $filePath, $export) {
+                        $message->to($user->email)
+                            ->subject('Applicant Export Ready - ' . number_format($export->successful_rows) . ' rows')
+                            ->attach($filePath, ['as' => 'applicants.csv', 'mime' => 'text/csv']);
+                    }
+                );
+            }
+        } catch (\Throwable) {
+            // Don't block the notification if email fails
+        }
+
+        return 'Your applicant export has completed. ' . number_format($export->successful_rows) . ' rows exported. A copy has been emailed to you.';
     }
 }
