@@ -24,14 +24,17 @@ class ExportResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('id')
                     ->label('#')
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('user.name')
                     ->label('Exported By')
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('exporter')
                     ->label('Type')
                     ->formatStateUsing(fn (string $state): string => str_replace('App\\Filament\\Resources\\', '', $state))
-                    ->badge(),
+                    ->badge()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('successful_rows')
                     ->label('Rows')
                     ->sortable(),
@@ -46,6 +49,11 @@ class ExportResource extends Resource
                     ->sortable(),
             ])
             ->defaultSort('created_at', 'desc')
+            ->filters([
+                Tables\Filters\SelectFilter::make('user')
+                    ->relationship('user', 'name')
+                    ->label('Exported By'),
+            ])
             ->actions([
                 \Filament\Actions\Action::make('download')
                     ->label('Download')

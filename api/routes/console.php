@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Schedule;
 
 Schedule::command('applicants:daily-digest')->dailyAt('08:00')->timezone('America/Chicago');
+Schedule::command('exports:cleanup --days=7')->daily();
 
 // Mailcoach scheduled commands
 Schedule::command('mailcoach:send-scheduled-campaigns')->everyMinute();
