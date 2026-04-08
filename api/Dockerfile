@@ -31,11 +31,11 @@ RUN composer install --no-dev --optimize-autoloader --no-scripts
 
 # Copy application
 COPY . .
-RUN composer run-script post-autoload-dump
+RUN CACHE_STORE=null composer run-script post-autoload-dump
 
 # Build Filament and Mailcoach assets
-RUN php artisan filament:assets \
-    && php artisan mailcoach:publish
+RUN CACHE_STORE=null php artisan filament:assets \
+    && CACHE_STORE=null php artisan mailcoach:publish
 
 # Deploy configs
 COPY deploy/nginx.conf /etc/nginx/sites-available/default
