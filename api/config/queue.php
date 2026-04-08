@@ -73,6 +73,15 @@ return [
             'after_commit' => false,
         ],
 
+        'mailcoach-redis' => [
+            'driver' => 'redis',
+            'connection' => 'default',
+            'queue' => 'default',
+            'retry_after' => 11 * 60,
+            'block_for' => null,
+            'after_commit' => false,
+        ],
+
         'deferred' => [
             'driver' => 'deferred',
         ],
