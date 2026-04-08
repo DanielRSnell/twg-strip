@@ -8,10 +8,21 @@ Route::redirect('/', '/admin');
 Route::get('/login', fn () => redirect('/admin/login'))->name('login');
 
 Route::get('/exports/{export}/download', function (Export $export) {
-    $path = $export->file_name . '.csv';
     $disk = Storage::disk($export->file_disk);
 
-    if (!$disk->exists($path)) {
+    // Filament stores exports as filament_exports/{id}/{filename}.xlsx
+    $xlsxPath = "filament_exports/{$export->id}/{$export->file_name}.xlsx";
+    $csvPath = "filament_exports/{$export->id}/{$export->file_name}.csv";
+    $legacyCsvPath = $export->file_name . '.csv';
+
+    $path = match (true) {
+        $disk->exists($xlsxPath) => $xlsxPath,
+        $disk->exists($csvPath) => $csvPath,
+        $disk->exists($legacyCsvPath) => $legacyCsvPath,
+        default => null,
+    };
+
+    if (!$path) {
         abort(404, 'Export file not found.');
     }
 
@@ -20,5 +31,5 @@ Route::get('/exports/{export}/download', function (Export $export) {
         return redirect($disk->temporaryUrl($path, now()->addHours(1)));
     }
 
-    return $disk->download($path, 'applicants-export-' . $export->id . '.csv');
+    return $disk->download($path, basename($path));
 })->middleware('auth')->name('export.download');

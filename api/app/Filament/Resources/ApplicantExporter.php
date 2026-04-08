@@ -38,10 +38,12 @@ class ApplicantExporter extends Exporter
         // Email the export download link to the requesting user
         try {
             $user = $export->user;
-            $fileName = $export->file_name . '.csv';
+            $xlsxPath = "filament_exports/{$export->id}/{$export->file_name}.xlsx";
+            $csvPath = "filament_exports/{$export->id}/{$export->file_name}.csv";
+            $filePath = Storage::disk($export->file_disk)->exists($xlsxPath) ? $xlsxPath : $csvPath;
 
-            if ($user && Storage::disk($export->file_disk)->exists($fileName)) {
-                $url = Storage::disk($export->file_disk)->temporaryUrl($fileName, now()->addHours(24));
+            if ($user && Storage::disk($export->file_disk)->exists($filePath)) {
+                $url = Storage::disk($export->file_disk)->temporaryUrl($filePath, now()->addHours(24));
 
                 Mail::raw(
                     "Your applicant export is ready with " . number_format($export->successful_rows) . " rows.\n\nDownload: {$url}\n\nThis link expires in 24 hours.",
