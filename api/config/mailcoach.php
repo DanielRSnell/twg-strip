@@ -27,7 +27,7 @@ use Spatie\Mailcoach\Mailcoach;
 
 return [
     'models' => [
-        'mailer' => \App\Models\MailcoachMailer::class,
+        'mailer' => \Spatie\Mailcoach\Domain\Settings\Models\Mailer::class,
     ],
 
     'campaigns' => [
