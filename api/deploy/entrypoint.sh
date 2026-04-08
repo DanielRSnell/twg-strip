@@ -3,13 +3,15 @@ set -e
 
 cd /var/www/html
 
-echo "Running migrations..."
-php artisan migrate --force
+echo "Clearing stale cache..."
+CACHE_STORE=null php artisan cache:clear 2>/dev/null || true
 
-echo "Caching config and routes..."
-php artisan config:cache
-php artisan route:cache
-php artisan view:cache
+echo "Running migrations..."
+CACHE_STORE=null php artisan migrate --force
+
+echo "Caching routes and views..."
+CACHE_STORE=null php artisan route:cache
+CACHE_STORE=null php artisan view:cache
 
 echo "Starting supervisord..."
 exec /usr/bin/supervisord -c /etc/supervisor/conf.d/app.conf
