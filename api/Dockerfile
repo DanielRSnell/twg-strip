@@ -20,7 +20,8 @@ WORKDIR /var/www/html
 # Composer auth for Satis (Spatie Mailcoach)
 ARG SATIS_USERNAME
 ARG SATIS_PASSWORD
-RUN if [ -n "$SATIS_USERNAME" ] && [ -n "$SATIS_PASSWORD" ]; then \
+RUN mkdir -p /root/.composer && \
+    if [ -n "$SATIS_USERNAME" ] && [ -n "$SATIS_PASSWORD" ]; then \
     echo "{\"http-basic\":{\"satis.spatie.be\":{\"username\":\"$SATIS_USERNAME\",\"password\":\"$SATIS_PASSWORD\"}}}" > /root/.composer/auth.json; \
     fi
 
