@@ -3,9 +3,9 @@ set -e
 
 cd /var/www/html
 
-echo "Clearing application cache..."
-php artisan cache:clear
+echo "Clearing caches..."
 php artisan config:clear
+php artisan cache:clear
 
 echo "Running migrations..."
 php artisan migrate --force
