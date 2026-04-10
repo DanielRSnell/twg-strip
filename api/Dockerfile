@@ -37,6 +37,9 @@ RUN CACHE_STORE=null composer run-script post-autoload-dump
 RUN CACHE_STORE=null php artisan filament:assets \
     && CACHE_STORE=null php artisan mailcoach:publish
 
+# Generate OpenAPI/Swagger docs
+RUN CACHE_STORE=null php artisan l5-swagger:generate
+
 # Deploy configs
 COPY deploy/nginx.conf /etc/nginx/sites-available/default
 COPY deploy/supervisord.conf /etc/supervisor/conf.d/app.conf

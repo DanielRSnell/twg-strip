@@ -8,11 +8,40 @@ use App\Models\Applicant;
 use App\Models\InterviewEvent;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use OpenApi\Attributes as OA;
 use Spatie\Mailcoach\Domain\Audience\Models\EmailList;
 use Spatie\Mailcoach\Domain\Audience\Models\Subscriber;
 
 class InterviewTrackingController extends Controller
 {
+    #[OA\Post(
+        path: '/api/webhook/interview-tracking',
+        summary: 'Record an interview funnel event',
+        tags: ['Webhooks'],
+        requestBody: new OA\RequestBody(
+            required: true,
+            content: new OA\JsonContent(
+                required: ['client', 'email', 'event', 'timestamp'],
+                properties: [
+                    new OA\Property(property: 'client', type: 'string', example: 'watts-to-workers'),
+                    new OA\Property(property: 'email', type: 'string', format: 'email', example: 'jane@example.com'),
+                    new OA\Property(property: 'event', type: 'string', example: 'form_completed', description: 'One of: email_submitted, form_completed, funnel_exited'),
+                    new OA\Property(property: 'timestamp', type: 'string', format: 'date-time', example: '2026-04-08T14:25:00Z'),
+                    new OA\Property(property: 'data', type: 'object', nullable: true, example: ['answers' => ['firstName' => 'Jane']]),
+                ],
+            ),
+        ),
+        responses: [
+            new OA\Response(
+                response: 201,
+                description: 'Event recorded',
+                content: new OA\JsonContent(
+                    properties: [new OA\Property(property: 'success', type: 'boolean', example: true)],
+                ),
+            ),
+            new OA\Response(response: 422, description: 'Validation failed'),
+        ],
+    )]
     public function store(Request $request): JsonResponse
     {
         $validated = $request->validate([
@@ -79,6 +108,7 @@ class InterviewTrackingController extends Controller
         // Handle exit
         if ($event === 'funnel_exited') {
             $answers = $eventData['answers'] ?? [];
+
             return Applicant::updateOrCreate(
                 ['client' => $data['client'], 'email' => $data['email']],
                 [
@@ -99,7 +129,7 @@ class InterviewTrackingController extends Controller
         try {
             $list = EmailList::where('name', 'Watts to Workers')->first();
 
-            if (!$list) {
+            if (! $list) {
                 return;
             }
 
@@ -107,7 +137,7 @@ class InterviewTrackingController extends Controller
                 ->where('email_list_id', $list->id)
                 ->first();
 
-            if (!$subscriber) {
+            if (! $subscriber) {
                 $subscriber = Subscriber::createWithEmail($applicant->email)
                     ->skipConfirmation()
                     ->subscribeTo($list);
