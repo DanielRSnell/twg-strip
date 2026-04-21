@@ -2,7 +2,7 @@
   "main": [
     {
       "name": "Company",
-      "url": "https://amalgamy.ai/about"
+      "url": "/about"
     },
     {
       "name": "Products",
