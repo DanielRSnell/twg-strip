@@ -1,7 +1,7 @@
 [
   {
     "Name": "Angela Hood",
-    "order": 1,
+    "order": 2,
     "Role": "Founder & Executive Chairwoman",
     "Department": "Executive",
     "Email": "angela@thiswayglobal.com",
@@ -12,14 +12,14 @@
   },
   {
     "Name": "Stephan Fabel",
-    "order": 2,
+    "order": 1,
     "Role": "Chief Executive Officer",
     "Department": "Executive",
     "Email": "",
     "Linked In": "",
     "Bio": "Stephan Fabel is the Chief Executive Officer of ThisWay Global, a Google-accelerated, VC-backed leader in AI-powered high-performance cloud computing. With more than 30 years in the technology industry and a distinguished background in computer engineering, robotics, and cloud AI infrastructure, Stephan brings significant executive experience to driving product strategy, organizational growth, and large-scale digital transformation for global enterprises. Before joining ThisWay Global, Stephan held senior leadership roles at NVIDIA and other leading Silicon Valley technology companies, where he led cross-functional teams at the forefront of artificial intelligence, open-source cloud computing, and enterprise platform development. Originally from Germany, Stephan's career has spanned both Europe and the United States since 1998, integrating deep technical expertise with a passion for driving innovation.",
-    "Active": "",
-    "path": "/images/team-members/male.png"
+    "Active": "TRUE",
+    "path": "/images/team-members/stephan.png"
   },
   {
     "Name": "Alex Shmelev",
@@ -62,7 +62,7 @@
     "Email": "",
     "Linked In": "",
     "Bio": "",
-    "Active": "TRUE",
+    "Active": "",
     "path": "/images/team-members/lionel.jpg"
   },
   {
@@ -79,7 +79,7 @@
   {
     "Name": "Craig Peters",
     "order": 8,
-    "Role": "Chief Product Officer",
+    "Role": "VP of Product",
     "Department": "Product",
     "Email": "craig.peters@thiswayglobal.com",
     "Linked In": "https://www.linkedin.com/in/craiglpeters/",
