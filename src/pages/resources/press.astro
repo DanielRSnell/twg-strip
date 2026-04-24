@@ -13,15 +13,18 @@ interface PressRelease {
   Date: string;
   Summary: string;
   Link: string;
+  Active?: string;
   "Media Coverage": string;
 }
 
-// Sort press releases by date (newest first)
-const pressReleases = PressReleases.sort((a: PressRelease, b: PressRelease) => {
-  const dateA = new Date(a.Date);
-  const dateB = new Date(b.Date);
-  return dateB.getTime() - dateA.getTime();
-});
+// Hide entries explicitly flagged inactive, then sort newest first
+const pressReleases = PressReleases
+  .filter((p: PressRelease) => p.Active !== "FALSE")
+  .sort((a: PressRelease, b: PressRelease) => {
+    const dateA = new Date(a.Date);
+    const dateB = new Date(b.Date);
+    return dateB.getTime() - dateA.getTime();
+  });
 
 // Get call to action section
 const call_to_action = await getEntry("sections", "call-to-action");
