@@ -168,6 +168,58 @@ const { title, meta_title, description, image, noindex, canonical } =
     />
     <meta name="twitter:card" content="summary_large_image" />
 
+    <!-- Structured Data: Organization + WebSite (baseline) -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": `${config.site.base_url}/#organization`,
+          "name": "ThisWay Global",
+          "url": config.site.base_url,
+          "logo": {
+            "@type": "ImageObject",
+            "url": `${config.site.base_url}/images/logo.svg`
+          },
+          "description": config.metadata.meta_description,
+          "sameAs": [
+            "https://www.linkedin.com/company/thiswayglobal",
+            "https://amalgamy.ai"
+          ],
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Austin",
+            "addressRegion": "TX",
+            "addressCountry": "US"
+          },
+          "foundingDate": "2015",
+          "knowsAbout": [
+            "Sovereign AI Infrastructure",
+            "High-Performance Computing",
+            "GPU Orchestration",
+            "Data Center Acceleration",
+            "Workforce Development"
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "@id": `${config.site.base_url}/#website`,
+          "url": config.site.base_url,
+          "name": "ThisWay Global",
+          "publisher": { "@id": `${config.site.base_url}/#organization` }
+        },
+        {
+          "@type": "WebPage",
+          "@id": `${config.site.base_url}${Astro.url.pathname}#webpage`,
+          "url": `${config.site.base_url}${Astro.url.pathname}`,
+          "name": plainify(meta_title || title || config.site.title),
+          "description": plainify(description || config.metadata.meta_description),
+          "isPartOf": { "@id": `${config.site.base_url}/#website` },
+          "about": { "@id": `${config.site.base_url}/#organization` }
+        }
+      ]
+    })} />
+
   </head>
   <body>
     <TwSizeIndicator />
