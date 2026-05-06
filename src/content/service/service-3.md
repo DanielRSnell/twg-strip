@@ -1,37 +1,37 @@
 ---
-title: "AI4JOBS"
-contact_1: "Transform your recruitment process with our AI-driven talent acquisition platform. AI4JOBS uses advanced algorithms to identify and match passive candidates with opportunities, going beyond traditional keyword matching to understand true potential and fit."
-contact_2: "Our solution integrates seamlessly with your existing HR systems, providing intelligent candidate sourcing, matching, and engagement tools that significantly improve hiring outcomes while reducing time-to-hire and recruitment costs."
+title: "Workforce Development"
+contact_1: "AI-powered workforce development connecting skilled talent to data center construction, operations, and engineering roles. AI4JOBS uses advanced matching algorithms to identify candidates with the specialized skills needed to build and operate next-generation AI infrastructure."
+contact_2: "From electricians and mechanical engineers to network architects and facility managers, AI4JOBS bridges the talent gap in data center development. Our platform integrates with workforce training programs to ensure a pipeline of qualified professionals ready to meet the demands of rapid infrastructure buildout."
 image: "service-3"
 button:
   enable: true
-  label: "Get Started"
-  link: "contact"
+  label: "Contact Us"
+  link: "/contact"
 ---
 
 #### Platform Features
 
-- **AI-Powered Matching**: Intelligent candidate identification
-- **Passive Candidate Sourcing**: Proactive talent discovery
-- **Skills Analysis**: Comprehensive capability assessment
-- **Cultural Fit Evaluation**: Team compatibility matching
-- **ATS Integration**: Seamless system connection
-- **Analytics Dashboard**: Performance tracking
+- **Skills-Based Matching**: Identify talent by trade and certification
+- **Workforce Pipeline**: Connect training programs to open roles
+- **Data Center Specialization**: Purpose-built for infrastructure hiring
+- **Credential Verification**: Validate certifications and clearances
+- **Regional Targeting**: Source talent near project sites
+- **Analytics Dashboard**: Workforce planning and forecasting
 
 #### Use Cases
 
-- Technical Talent Acquisition
-- Executive Search
-- Volume Hiring
-- Specialized Role Recruitment
-- Internal Mobility
-- Talent Pool Development
+- Data Center Construction Staffing
+- Facility Operations Hiring
+- Electrical & Mechanical Trades
+- Network Infrastructure Teams
+- Security Cleared Personnel
+- Training Program Placement
 
 #### Benefits
 
-- Reduce Time-to-Hire
-- Improve Candidate Quality
-- Lower Recruitment Costs
-- Enhance Hiring Efficiency
-- Expand Talent Pool
-- Better Matching Accuracy
+- Close the Data Center Talent Gap
+- Reduce Time-to-Hire for Specialized Roles
+- Connect to Workforce Training Pipelines
+- Regional and Project-Based Sourcing
+- Scalable for Multi-Site Buildouts
+- Compliance-Ready Credential Tracking

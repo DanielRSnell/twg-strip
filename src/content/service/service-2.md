@@ -1,37 +1,37 @@
 ---
-title: "Sully's Sandbox"
-contact_1: "Access our curated marketplace of specialized AI models and LLMs, designed for immediate implementation across various business applications. Sully's Sandbox streamlines the process of finding, testing, and deploying AI models tailored to your specific needs."
-contact_2: "Our platform provides comprehensive documentation, integration support, and performance metrics for each model, enabling quick evaluation and implementation while ensuring optimal results for your use case."
+title: "Sovereign Blueprint"
+contact_1: "A comprehensive planning and deployment framework for sovereign AI infrastructure. Sovereign Blueprint guides organizations through every phase of building AI-ready environments, from site evaluation and compliance mapping to hardware selection and operational handoff."
+contact_2: "Purpose-built for organizations that require full control over their data and compute. Whether deploying on-premises, in air-gapped environments, or across hybrid architectures, Sovereign Blueprint ensures your infrastructure meets ITAR, FedRAMP, and GDPR requirements from day one."
 image: "service-2"
 button:
   enable: true
-  label: "Get Started"
-  link: "contact"
+  label: "Contact Us"
+  link: "/contact"
 ---
 
-#### Platform Features
+#### Framework Capabilities
 
-- **Curated Model Selection**: Pre-vetted AI models
-- **Immediate Implementation**: Ready-to-use solutions
-- **Performance Metrics**: Detailed model analytics
-- **Integration Support**: Comprehensive documentation
-- **Version Control**: Latest model updates
-- **Custom Deployment**: Flexible implementation options
+- **Site Evaluation**: Data center readiness assessment
+- **Compliance Mapping**: ITAR, FedRAMP, GDPR alignment
+- **Hardware Selection**: GPU, networking, and storage planning
+- **Architecture Design**: Hybrid, on-prem, and air-gapped topologies
+- **Deployment Playbooks**: Step-by-step rollout guides
+- **Operational Handoff**: Training and documentation for your team
 
-#### Use Cases
+#### Deployment Models
 
-- Natural Language Processing
-- Computer Vision Applications
-- Predictive Analytics
-- Data Classification
-- Pattern Recognition
-- Automated Decision Making
+- On-Premises Sovereign Clouds
+- Air-Gapped Secure Environments
+- Hybrid Multi-Cloud Architectures
+- Edge AI Deployments
+- Government & SLED Infrastructure
+- Research & Higher Education Labs
 
 #### Benefits
 
-- Reduce Development Time
-- Access Specialized Models
-- Ensure Quality Solutions
-- Scale AI Capabilities
-- Minimize Implementation Risk
-- Accelerate Innovation
+- Full Data Sovereignty
+- Regulatory Compliance from Day One
+- Reduced Deployment Risk
+- Accelerated Time to Production
+- Vendor-Neutral Architecture
+- Long-Term Operational Clarity

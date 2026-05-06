@@ -11,6 +11,11 @@ export const homeCollection = defineCollection({
         label: z.string(),
         link: z.string(),
       }),
+      button_secondary: z.object({
+        enable: z.boolean(),
+        label: z.string(),
+        link: z.string(),
+      }).optional(),
       brands: z.array(z.string()),
     }),
     service: z.object({

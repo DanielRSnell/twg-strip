@@ -38,8 +38,8 @@ const CustomAccordion = ({
                       activeTab === i ? setActiveTab(null) : setActiveTab(i);
                     }}
                   >
-                    <div className="bg-secondary/15 w-10 h-10 rounded-full flex justify-center items-center shrink-0">
-                      <p className="text-secondary font-bold text-lg">
+                    <div className="bg-brand/10 w-10 h-10 rounded-lg flex justify-center items-center shrink-0">
+                      <p className="text-brand font-bold text-lg">
                         {i + 1}
                       </p>
                     </div>

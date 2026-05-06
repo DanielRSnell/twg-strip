@@ -9,6 +9,7 @@ export interface Banner {
   content: string;
   image: string;
   button: Button;
+  button_secondary?: Button;
   brands: string[];
 }
 

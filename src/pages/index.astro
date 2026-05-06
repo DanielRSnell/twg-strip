@@ -9,6 +9,7 @@ import { Icon } from "astro-icon/components";
 import { getSinglePage } from "@/lib/contentParser.astro";
 import BlogCard from "@/components/BlogCard.astro";
 import ServiceSlider from "@/components/homepage/ServiceSlider";
+import HeroInfographic from "@/helpers/HeroInfographic";
 
 const homepage = await getEntry("homepage", "-index");
 const testimonial = await getEntry("sections", "testimonial");
@@ -24,41 +25,61 @@ const posts = await getSinglePage(BLOG_FOLDER);
 
 <Base>
   <!-- Banner -->
-  <section class="section pt-[75px] pb-0 bg-theme-light">
-    <div class="container relative">
-      <div class="justify-center row gy-3">
-        <div class="lg:col-8">
+  <section class="relative overflow-hidden bg-primary pt-[100px] pb-[80px] lg:pt-[120px] lg:pb-[100px]">
+    <div class="absolute inset-0 bg-gradient-to-br from-primary via-[#0d1117] to-primary"></div>
+    <div class="absolute inset-0 opacity-[0.03]" style="background-image: url('data:image/svg+xml,%3Csvg width=&quot;60&quot; height=&quot;60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cpath d=&quot;M0 30h60M30 0v60&quot; stroke=&quot;%23fff&quot; stroke-width=&quot;0.5&quot; fill=&quot;none&quot;/%3E%3C/svg%3E');"></div>
+    <div class="container relative z-10">
+      <div class="items-center row gy-5">
+        <div class="lg:col-7">
+          <div
+            class="inline-flex items-center gap-2 px-4 py-2 mb-8 text-sm font-medium text-white/90 rounded-full border border-white/[0.08] bg-white/[0.04] backdrop-blur-sm shadow-[0_0_20px_rgba(36,171,157,0.08)]"
+            data-aos="fade-right-sm"
+            data-aos-delay="50"
+          >
+            <span class="inline-block w-1.5 h-1.5 rounded-full bg-brand shadow-[0_0_6px_rgba(36,171,157,0.6)]"></span>
+            The Amalgamy.ai Platform by ThisWay Global
+          </div>
           <h1
-            class="text-center"
-            data-aos="fade-up-sm"
+            class="mb-6 text-white"
+            data-aos="fade-right-sm"
             data-aos-delay="100"
             set:html={markdownify(banner.title)}
           />
-        </div>
-        <div class="lg:col-6">
           <p
-            class="pb-8 text-center"
-            data-aos="fade-up-sm"
+            class="mb-10 max-w-xl text-lg leading-relaxed text-white/60"
+            data-aos="fade-right-sm"
             data-aos-delay="200"
             set:html={markdownify(banner.content)}
           />
-        </div>
-        {
-          banner.button && (
-            <div
-              class="inline-block text-center"
-              data-aos="fade-up-sm"
-              data-aos-delay="300"
-            >
-              <a class="btn btn-primary" href={banner.button.link}>
+          <div
+            class="flex flex-wrap gap-4"
+            data-aos="fade-right-sm"
+            data-aos-delay="300"
+          >
+            {banner.button?.enable && (
+              <a
+                class="group relative inline-flex items-center gap-2 px-7 py-3 text-sm font-semibold text-white rounded-full bg-brand border border-brand/80 shadow-[0_1px_2px_rgba(0,0,0,0.2),0_0_20px_rgba(36,171,157,0.15)] hover:shadow-[0_1px_2px_rgba(0,0,0,0.2),0_0_30px_rgba(36,171,157,0.25)] hover:bg-brand/90 transition-all duration-300"
+                href={banner.button.link}
+              >
                 {banner.button.label}
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-0.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
               </a>
-            </div>
-          )
-        }
+            )}
+            {banner.button_secondary?.enable && (
+              <a
+                class="group relative inline-flex items-center gap-2 px-7 py-3 text-sm font-semibold text-white/90 rounded-full border border-white/[0.12] bg-white/[0.04] backdrop-blur-sm hover:bg-white/[0.08] hover:border-white/[0.2] transition-all duration-300"
+                href={banner.button_secondary.link}
+              >
+                {banner.button_secondary.label}
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-0.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              </a>
+            )}
+          </div>
+        </div>
+        <div class="hidden lg:block lg:col-5">
+          <HeroInfographic client:visible />
+        </div>
       </div>
-
-      <div id="globeCanvas"></div>
     </div>
   </section>
   <!-- /Banner -->
@@ -76,17 +97,18 @@ const posts = await getSinglePage(BLOG_FOLDER);
         {
           service.services.map((s, i: number) => (
             <div
-              class="p-8 rounded-xl border"
+              class="relative p-8 rounded-2xl border border-border/60 bg-white shadow-sm overflow-hidden"
               data-aos="fade-right-sm"
               data-aos-delay={i * 100}
             >
-              <Icon name={s.image} class="mb-24 w-16 h-16" />
-              <h3 class="mb-4 text-2xl" set:html={markdownify(s.title)} />
-              <p class="mb-4" set:html={markdownify(s.content)} />
+              <div class="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-brand/60 via-brand to-brand/60" />
+              <Icon name={s.image} class="mb-20 w-14 h-14" />
+              <h3 class="mb-3 text-xl font-semibold" set:html={markdownify(s.title)} />
+              <p class="mb-4 text-sm text-light leading-relaxed" set:html={markdownify(s.content)} />
               {s.button.enable && (
                 <a
                   href={s.button.link}
-                  class="flex gap-1 items-center transition duration-300 text-secondary hover:opacity-80"
+                  class="flex gap-1 items-center transition duration-300 text-brand hover:opacity-80"
                 >
                   Learn More <span class="sr-only">Details</span>
                   <svg
@@ -288,28 +310,4 @@ const posts = await getSinglePage(BLOG_FOLDER);
   <CallToAction call_to_action={call_to_action} />
 </Base>
 
-<script>
-  let globeLoaded = false;
-  function loadGlobe() {
-    if (globeLoaded) return;
-    globeLoaded = true;
-
-    Promise.all([
-      import("react"),
-      import("react-dom/client"),
-      import("../layouts/helpers/Globe"),
-    ]).then(([React, ReactDOM, Globe]) => {
-      const placeholder = document.getElementById("globeCanvas");
-      if (!placeholder) return;
-      const mount = document.createElement("div");
-      placeholder.replaceWith(mount);
-      const root = ReactDOM.createRoot(mount);
-      root.render(React.createElement(Globe.default));
-    });
-  }
-
-  ["scroll", "wheel", "mousemove", "click", "keydown", "touchstart"].forEach((e) => {
-    window.addEventListener(e, loadGlobe, { once: true, passive: true });
-  });
-</script>
 

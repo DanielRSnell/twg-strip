@@ -41,21 +41,30 @@ function extractDomain(url: string): string {
 ---
 
 <Base title="Press Releases" meta_title="ThisWay Global Press Releases" description="Latest press releases and media coverage from ThisWay Global">
-  <section class="section bg-theme-light">
-    <div class="container">
+  <section class="relative overflow-hidden bg-primary pt-[100px] pb-[60px] lg:pt-[120px] lg:pb-[80px]">
+    <div class="absolute inset-0 bg-gradient-to-br from-primary via-[#0d1117] to-primary"></div>
+    <div class="absolute inset-0 opacity-[0.03]" style="background-image: url('data:image/svg+xml,%3Csvg width=&quot;60&quot; height=&quot;60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cpath d=&quot;M0 30h60M30 0v60&quot; stroke=&quot;%23fff&quot; stroke-width=&quot;0.5&quot; fill=&quot;none&quot;/%3E%3C/svg%3E');"></div>
+    <div class="absolute -top-20 -right-20 w-[350px] h-[350px] rounded-full bg-brand/10 blur-3xl pointer-events-none"></div>
+    <div class="container relative z-10">
       <div class="mx-auto max-w-2xl text-center">
+        <div
+          class="inline-flex items-center gap-2 px-4 py-2 mb-8 text-sm font-medium text-white/90 rounded-full border border-white/[0.08] bg-white/[0.04] backdrop-blur-sm shadow-[0_0_20px_rgba(36,171,157,0.08)]"
+          data-aos="fade-up-sm"
+          data-aos-delay="50"
+        >
+          <span class="inline-block w-1.5 h-1.5 rounded-full bg-brand shadow-[0_0_6px_rgba(36,171,157,0.6)]"></span>
+          Resources
+        </div>
         <h1
-          class="pb-4"
+          class="pb-4 text-white"
           data-aos="fade-up-sm"
           data-aos-delay="100"
-          set:html={markdownify("Press Releases")}
-        />
+        >Press Releases</h1>
         <p
-          class="pb-8"
+          class="text-lg text-white/60"
           data-aos="fade-up-sm"
           data-aos-delay="200"
-          set:html={markdownify("Latest press releases and media coverage from ThisWay Global")}
-        />
+        >Latest press releases and media coverage from ThisWay Global</p>
       </div>
     </div>
   </section>
@@ -72,44 +81,29 @@ function extractDomain(url: string): string {
                 data-aos-delay={(i + 1) * 100}
                 class="relative md:col-6"
               >
-                <div class="p-8 h-full rounded-xl border transition duration-200 bg-theme-light/50 hover:bg-theme-light/80">
-                  <div class="flex gap-6 items-center pb-6">
-                    <div class="w-[180px] flex items-center">
-                      <ExternalLogo 
-                        domain={domain} 
-                        name={domain.split('.')[0]} 
-                        class="h-[60px] w-auto object-contain"
+                <div class="p-6 h-full rounded-2xl border border-border/60 bg-white shadow-sm transition duration-200 hover:shadow-md">
+                  <div class="flex justify-between items-center mb-5">
+                    <span class="px-3 py-1 text-xs font-medium rounded-full text-brand bg-brand/10 border border-brand/20">
+                      {dateFormat(press.Date)}
+                    </span>
+                    <div class="flex items-center h-8">
+                      <ExternalLogo
+                        domain={domain}
+                        name={domain.split('.')[0]}
+                        class="h-8 w-auto object-contain"
                       />
                     </div>
-                    <div class="absolute top-0 right-0 -mt-2 rounded-xl border-gray-600 shadow-inner transition duration-200 border-1 bg-theme-light/50 hover:bg-theme-light/80">
-                      <span class="px-3 py-1 text-sm rounded-full text-light bg-dark/5">
-                        {dateFormat(press.Date)}
-                      </span>
-                    </div>
                   </div>
-                  <h4 class="mb-4" set:html={markdownify(press.Title)} />
-                  <p class="pb-6" set:html={markdownify(press.Summary)} />
+                  <h4 class="mb-3 text-base font-semibold leading-snug" set:html={markdownify(press.Title)} />
+                  <p class="mb-5 text-sm text-light leading-relaxed" set:html={markdownify(press.Summary)} />
                   <a
                     href={press.Link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="inline-flex gap-1 items-center text-primary hover:opacity-80"
+                    class="inline-flex gap-1 items-center text-sm font-medium text-brand hover:opacity-80 transition duration-300"
                   >
                     Read Full Article
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2.5"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    >
-                      <line x1="5" y1="12" x2="19" y2="12" />
-                      <polyline points="12 5 19 12 12 19" />
-                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                   </a>
                 </div>
               </div>

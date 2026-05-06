@@ -1,98 +1,135 @@
-import { FaAsterisk, FaHandHoldingHeart, FaExpand } from "react-icons/fa6";
+import { FaShieldHalved, FaLock, FaBuildingColumns } from "react-icons/fa6";
 import type { IconType } from "react-icons";
 import { markdownify } from "@/lib/utils/textConverter";
 import React, { useState } from "react";
 
 const iconMap: Record<string, IconType> = {
-  FaAsterisk,
-  FaHandHoldingHeart,
-  FaExpand,
+  FaShieldHalved,
+  FaLock,
+  FaBuildingColumns,
 };
 
 const ServiceSlider = ({ feature }: { feature: any }) => {
   const [activeTab, setActiveTab] = useState(0);
   return (
     <>
-      <div
-        className="w-full md:w-1/2"
-        data-aos="fade-up-sm"
-        data-aos-delay="200"
-      >
-        <div className="relative h-full border bg-theme-light rounded-xl overflow-hidden">
-          <div
-            data-aos="fade-up-sm"
-            data-aos-delay="250"
-            className="p-8 md:h-full h-[500px] md:p-14 bg-[url('/images/pattern.png')] bg-[length:60%] bg-center bg-no-repeat"
-          >
-            {feature.map((f: any, i: number) => (
+      {/* Preview panel */}
+      <div className="w-full md:w-1/2">
+        <div className="relative rounded-2xl border border-border/60 bg-white shadow-sm overflow-hidden">
+          <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-brand/60 via-brand to-brand/60" />
+
+          <div className="relative p-6 md:p-8">
+            <div className="relative h-[260px] flex items-center justify-center">
+              {feature.map((f: any, i: number) => (
+                <div
+                  key={i}
+                  className={`absolute inset-0 flex items-center justify-center transition-all duration-500 ${
+                    activeTab === i
+                      ? "opacity-100 scale-100"
+                      : "opacity-0 scale-95 pointer-events-none"
+                  }`}
+                >
+                  <img
+                    src={f.image}
+                    alt={f.title}
+                    className="w-full max-w-[300px] drop-shadow-sm"
+                    loading="lazy"
+                  />
+                </div>
+              ))}
+            </div>
+
+            <div className="relative mt-4 h-[72px]">
+              {feature.map((f: any, i: number) => {
+                const Icon = iconMap[f.icon];
+                return (
+                  <div
+                    key={i}
+                    className={`absolute inset-x-0 top-0 transition-all duration-500 ${
+                      activeTab === i
+                        ? "opacity-100 translate-y-0"
+                        : "opacity-0 translate-y-2 pointer-events-none"
+                    }`}
+                  >
+                    <div className="flex items-center gap-4 px-5 py-4 rounded-xl border border-border/60 bg-white shadow-sm">
+                      {Icon && (
+                        <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-brand/10 shrink-0">
+                          <Icon className="text-brand w-5 h-5" />
+                        </div>
+                      )}
+                      <div>
+                        <h3
+                          className="text-base font-semibold text-dark leading-tight"
+                          dangerouslySetInnerHTML={{
+                            __html: markdownify(f.title),
+                          }}
+                        />
+                        <p
+                          className="text-xs text-light mt-0.5 leading-relaxed"
+                          dangerouslySetInnerHTML={{ __html: f.card_content }}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Tab list */}
+      <div className="w-full md:w-1/2">
+        <div className="flex flex-col gap-2">
+          {feature.map((f: any, i: number) => {
+            const Icon = iconMap[f.icon];
+            const isActive = activeTab === i;
+            return (
               <div
                 key={i}
-                className={`absolute w-[90%] md:w-max h-max top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 transition-opacity duration-300 ${activeTab === i ? "opacity-100" : "opacity-0 pointer-events-none"}`}
+                onClick={() => setActiveTab(i)}
+                className={`group cursor-pointer rounded-xl border p-5 transition-all duration-300 ${
+                  isActive
+                    ? "border-brand/30 bg-brand/[0.04] shadow-sm"
+                    : "border-transparent bg-transparent hover:bg-theme-light/60"
+                }`}
               >
-                <img
-                  src={f.image}
-                  width={259}
-                  height={302}
-                  alt="feature image"
-                  className="mx-auto"
-                  loading="lazy"
-                />
-
-                <div className="flex items-center gap-4 px-5 py-3 mt-4 bg-tertiary rounded-xl">
-                  {(() => {
-                    const Icon = iconMap[f.icon];
-                    return Icon ? <Icon className="text-secondary shrink-0 w-14 h-14" /> : null;
-                  })()}
+                <div className="flex items-start gap-4">
+                  <div
+                    className={`flex items-center justify-center w-10 h-10 rounded-lg shrink-0 transition-colors duration-300 ${
+                      isActive ? "bg-brand/15" : "bg-theme-light"
+                    }`}
+                  >
+                    {Icon && (
+                      <Icon
+                        className={`w-5 h-5 transition-colors duration-300 ${
+                          isActive ? "text-brand" : "text-light"
+                        }`}
+                      />
+                    )}
+                  </div>
                   <div>
                     <h3
-                      className="pb-1 text-xl text-white"
+                      className={`text-lg font-semibold leading-tight transition-colors duration-300 ${
+                        isActive ? "text-dark" : "text-dark/80"
+                      }`}
                       dangerouslySetInnerHTML={{
                         __html: markdownify(f.title),
                       }}
                     />
                     <p
-                      className="text-xs text-white/50"
-                      dangerouslySetInnerHTML={{ __html: f.card_content }}
+                      className={`mt-2 text-sm leading-relaxed transition-colors duration-300 ${
+                        isActive ? "text-dark/70" : "text-light"
+                      }`}
+                      dangerouslySetInnerHTML={{
+                        __html: markdownify(f.description),
+                      }}
                     />
                   </div>
                 </div>
               </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      <div className="w-full md:w-1/2">
-        <div className="row md:gy-4">
-          {feature.map((f: any, i: number) => (
-            <div onClick={() => setActiveTab(i)}>
-              <div
-                className="flex flex-col pb-10 md:pb-7 gap-5 sm:flex-row items-start"
-                data-aos="fade-left-sm"
-                data-aos-delay={i * 200}
-              >
-                <div className="p-2 rounded-full bg-secondary/20">
-                  {(() => {
-                    const Icon = iconMap[f.icon];
-                    return Icon ? <Icon className="text-secondary shrink-0 w-7 h-7" /> : null;
-                  })()}
-                </div>
-                <div className="pb-5 hover-border-effect">
-                  <h3
-                    className="pb-4 text-2xl"
-                    dangerouslySetInnerHTML={{
-                      __html: markdownify(f.title),
-                    }}
-                  />
-                  <p
-                    dangerouslySetInnerHTML={{
-                      __html: markdownify(f.description),
-                    }}
-                  />
-                </div>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </>
