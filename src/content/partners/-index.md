@@ -1,7 +1,7 @@
 ---
 title: "Strategic Technology Partners"
-meta_title: "Our Partners - ThisWay Global"
-description: "Collaborating with industry leaders to deliver cutting-edge AI solutions and enterprise technology services"
+meta_title: "Strategic Technology Partners - ThisWay Global"
+description: "Partnering with NVIDIA, Dell, and industry leaders to deliver sovereign AI infrastructure and high-performance computing at scale."
 partners:
   - name: "NVIDIA"
     logo: "/images/partners/nvidia.svg"

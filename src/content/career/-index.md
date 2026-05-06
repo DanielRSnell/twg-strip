@@ -1,8 +1,8 @@
 ---
 title: "Shape the Future: Careers **at ThisWay Global**"
-meta_title: "Career"
-description: ""
-content: "Join a team of innovators working at the intersection of AI, HR technology, and enterprise solutions."
+meta_title: "Careers at ThisWay Global - Join Our Infrastructure Team"
+description: "Join a team building sovereign AI infrastructure for enterprises and governments worldwide."
+content: "Join a team building sovereign AI infrastructure at the intersection of high-performance computing, data center operations, and workforce development."
 button:
   enable: true
   link: "#jobs"

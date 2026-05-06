@@ -1,7 +1,7 @@
 ---
 title: "ThisWay Global: Pioneering **AI Enterprise Solutions**"
-meta_title: "About"
-description: "ThisWay Global delivers cutting-edge AI solutions across recruitment, high-performance computing, and model marketplace platforms."
+meta_title: "About ThisWay Global - Sovereign AI Infrastructure Company"
+description: "ThisWay Global builds sovereign AI infrastructure for enterprises, governments, and research institutions. From GPU orchestration to workforce development."
 image: "/images/about-hero.webp"
 button:
   enable: true

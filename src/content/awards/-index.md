@@ -1,7 +1,7 @@
 ---
 title: "ThisWay Global Awards"
-meta_title: "Industry Recognition & Achievement Awards | ThisWay Global"
-description: "Explore the awards and recognition received by ThisWay Global for our innovative AI technology, high-performance computing, and intelligent recruitment solutions."
+meta_title: "Industry Recognition & Awards | ThisWay Global"
+description: "Awards and recognition for ThisWay Global's leadership in sovereign AI infrastructure, high-performance computing, and workforce development."
 date: 2024-01-01T05:00:00Z
 image: "/images/awards/awards-index.jpg"
 categories: ["Industry Recognition", "Technology Awards", "Innovation"]

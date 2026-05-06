@@ -1,8 +1,8 @@
 ---
 title: "Products"
 banner_title: "AI Infrastructure **& Workforce Solutions**"
-meta_title: "ThisWay Global Products"
-description: "From sovereign AI deployment to data center workforce development, our platform suite accelerates every stage of your AI infrastructure journey."
+meta_title: "Products - Sovereign AI Infrastructure & Workforce Solutions"
+description: "Amalgamy.ai GPU orchestration, Sovereign Blueprint deployment framework, and Workforce Development for data center talent. Purpose-built for enterprises and government."
 button:
   enable: true
   label: "Contact Us"

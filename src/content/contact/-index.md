@@ -1,13 +1,13 @@
 ---
 title: "Connect With ThisWay Global"
-meta_title: "Contact ThisWay Global"
-description: "Get in touch to learn how our AI-powered solutions can transform your business operations."
+meta_title: "Contact ThisWay Global - Talk to an Infrastructure Expert"
+description: "Connect with our team to discuss sovereign AI deployment, GPU orchestration, data center workforce solutions, and infrastructure planning."
 draft: false
 
 # Contact Information
 contact_info:
-  title: "Transform Your Business with AI Innovation"
-  description: "Ready to leverage the power of AI for your organization? Our team is here to help you explore our solutions and find the perfect fit for your needs."
+  title: "Talk to an Infrastructure Expert"
+  description: "From sovereign AI deployment to data center acceleration, our team brings deep expertise across every layer of the stack. Let's discuss your infrastructure needs."
 
   # Office Locations
   offices:
