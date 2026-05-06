@@ -20,7 +20,29 @@ export async function getStaticPaths() {
 }
 
 const { post } = Astro.props;
-const { title, meta_title, description, image, type } = post.data;
+const { title, meta_title, description, image, type, author, date } = post.data;
+
+import config from "@/config/config.json";
+const articleSchema = type === 'post' ? JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": title,
+  "description": description || "",
+  "image": image ? `${config.site.base_url}${image}` : undefined,
+  "datePublished": date ? new Date(date).toISOString() : undefined,
+  "author": {
+    "@type": "Person",
+    "name": author || "ThisWay Global"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "ThisWay Global",
+    "logo": {
+      "@type": "ImageObject",
+      "url": `${config.site.base_url}/images/logo.svg`
+    }
+  }
+}) : null;
 
 const layouts = {
   post: PostSingle,
@@ -39,4 +61,5 @@ const ContentLayout = layouts[type];
   image={image}
 >
   <ContentLayout post={post} />
+  {articleSchema && <script type="application/ld+json" set:html={articleSchema} />}
 </Base>
