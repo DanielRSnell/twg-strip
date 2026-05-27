@@ -1,26 +1,12 @@
 ---
-import ImageMod from "@/components/ImageMod.astro";
 import Base from "@/layouts/Base.astro";
 import { markdownify } from "@/lib/utils/textConverter";
-import CallToAction from "@/partials/CallToAction.astro";
-import Testimonial from "@/partials/Testimonial.astro";
 import { getEntry } from "astro:content";
-import { Icon } from "astro-icon/components";
-import { getSinglePage } from "@/lib/contentParser.astro";
-import BlogCard from "@/components/BlogCard.astro";
-import ServiceSlider from "@/components/homepage/ServiceSlider";
 import HeroInfographic from "@/helpers/HeroInfographic";
+import ExternalLogo from "@/base/ExternalLogo.astro";
 
 const homepage = await getEntry("homepage", "-index");
-const testimonial = await getEntry("sections", "testimonial");
-const call_to_action = await getEntry("sections", "call-to-action");
-const { banner, service, feature, about } = homepage.data;
-
-const BLOG_FOLDER = "blog";
-const postIndex = await getEntry(BLOG_FOLDER, "-index");
-const { homepage_title, homepage_description } = postIndex.data;
-const posts = await getSinglePage(BLOG_FOLDER);
-
+const { banner, social_proof, blueprint, tracks, coop, empower, cta_section } = homepage.data;
 ---
 
 <Base>
@@ -31,22 +17,14 @@ const posts = await getSinglePage(BLOG_FOLDER);
     <div class="container relative z-10">
       <div class="items-center row gy-5">
         <div class="lg:col-7">
-          <div
-            class="inline-flex items-center gap-2 px-4 py-2 mb-8 text-sm font-medium text-white/90 rounded-full border border-white/[0.08] bg-white/[0.04] backdrop-blur-sm shadow-[0_0_20px_rgba(36,171,157,0.08)]"
-            data-aos="fade-right-sm"
-            data-aos-delay="50"
-          >
-            <span class="inline-block w-1.5 h-1.5 rounded-full bg-brand shadow-[0_0_6px_rgba(36,171,157,0.6)]"></span>
-            The Amalgamy.ai Platform by ThisWay Global
-          </div>
           <h1
-            class="mb-6 text-white"
+            class="mb-6 font-extrabold hero-gradient-text"
             data-aos="fade-right-sm"
             data-aos-delay="100"
             set:html={markdownify(banner.title)}
           />
-          <p
-            class="mb-10 max-w-xl text-lg leading-relaxed text-white/60"
+          <div
+            class="mb-10 max-w-xl text-lg leading-relaxed text-white/60 [&>p]:mb-4 [&>p:last-child]:mb-0"
             data-aos="fade-right-sm"
             data-aos-delay="200"
             set:html={markdownify(banner.content)}
@@ -84,230 +62,358 @@ const posts = await getSinglePage(BLOG_FOLDER);
   </section>
   <!-- /Banner -->
 
-
-  <!-- service -->
-  <section class="pb-0 section">
-    <div class="container">
-      <h2
-        class="pb-8"
-        data-aos="fade-right-sm"
-        set:html={markdownify(service.title)}
-      />
-      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {
-          service.services.map((s, i: number) => (
-            <div
-              class="relative p-8 rounded-2xl border border-border/60 bg-white shadow-sm overflow-hidden"
-              data-aos="fade-right-sm"
-              data-aos-delay={i * 100}
-            >
-              <div class="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-brand/60 via-brand to-brand/60" />
-              <Icon name={s.image} class="mb-20 w-14 h-14" />
-              <h3 class="mb-3 text-xl font-semibold" set:html={markdownify(s.title)} />
-              <p class="mb-4 text-sm text-light leading-relaxed" set:html={markdownify(s.content)} />
-              {s.button.enable && (
-                <a
-                  href={s.button.link}
-                  class="flex gap-1 items-center transition duration-300 text-brand hover:opacity-80"
-                >
-                  Learn More <span class="sr-only">Details</span>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    class="icon icon-tabler icons-tabler-outline icon-tabler-arrow-right"
-                  >
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                    <path d="M5 12l14 0" />
-                    <path d="M13 18l6 -6" />
-                    <path d="M13 6l6 6" />
-                  </svg>
-                </a>
-              )}
-            </div>
-          ))
-        }
-      </div>
-    </div>
-  </section>
-  <!-- service -->
-
-  <!-- feature -->
-  <section class="section">
-    <div class="container">
-      <div class="justify-center mb-10 row xl:mb-14">
-        <div class="lg:col-8">
-          <h2
-            class="text-center"
-            data-aos="fade-up-sm"
-            data-aos-delay="100"
-            set:html={markdownify(feature.title)}
-          />
-        </div>
-        <div class="lg:col-6">
-          <p
-            class="text-center"
-            data-aos="fade-up-sm"
-            data-aos-delay="200"
-            set:html={markdownify(feature.content)}
-          />
-        </div>
-      </div>
-      <div
-        class="flex flex-col gap-10 justify-center md:flex-row lg:justify-between md:items-stretch"
-      >
-        <ServiceSlider feature={feature.features} client:visible />
-      </div>
-    </div>
-  </section>
-  <!-- feature -->
-
-  <!-- review -->
-  <section class="hidden section bg-primary">
-    <div class="container text-white">
-      <div class="pb-24 lg:pb-28">
-        <div class="flex flex-col gap-10 justify-center">
-          <div>
-            <h2
-              class="pb-4 text-center text-white"
-              data-aos="fade-up-sm"
-              data-aos-delay="100"
-              set:html={markdownify(testimonial.data.homepage_title)}
-            />
-            <p
-              class="mx-auto max-w-xl text-center text-theme-light/80"
-              data-aos="fade-up-sm"
-              data-aos-delay="200"
-              set:html={markdownify(testimonial.data.content)}
-            />
-          </div>
-
-          <Testimonial
-            testimonials={testimonial.data.testimonials.slice(0, 3)}
-          />
-
-          <div class="inline-block text-center">
-            <a href="/reviews" class="btn btn-outline-secondary">
-              Read All Reviews
-            </a>
-          </div>
-        </div>
-      </div>
-      <div class="pt-24 border-t lg:pt-28 border-border/20">
-        <div
-          class="justify-center items-center row md:justify-between gy-5 gx-4 xl:gx-5"
-        >
-          <div class="order-2 col-12 md:col-5 md:order-1">
-            <div class="flex flex-col gap-6">
-              <h2
-                class="text-white"
-                data-aos="fade-up-sm"
-                data-aos-delay="100"
-                set:html={markdownify(about.title)}
-              />
-              <p
-                class="text-theme-light/80"
-                data-aos="fade-up-sm"
-                data-aos-delay="200"
-                set:html={markdownify(about.content)}
-              />
-              <p
-                class="text-theme-light/80"
-                data-aos="fade-up-sm"
-                data-aos-delay="300"
-                set:html={markdownify(about.content_2)}
-              />
-              {
-                about.button.enable && (
-                  <div
-                    class="inline-block"
-                    data-aos="fade-up-sm"
-                    data-aos-delay="400"
-                  >
-                    <a
-                      href={about.button.link}
-                      class="btn btn-outline-secondary"
-                      set:html={about.button.label}
-                    />
-                  </div>
-                )
-              }
-            </div>
-          </div>
-          <div
-            class="order-1 col-12 md:col-6 md:order-2"
-            data-aos="fade-up-sm"
-            data-aos-delay="200"
-          >
-            <div
-              class="p-8 rounded-xl border bg-tertiary/20 border-border/20 md:px-24 md:py-14"
-            >
-              <ImageMod
-                class="mx-auto"
-                src={about.image}
-                width={0}
-                height={435}
-                alt={about.title}
-                format="webp"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- review -->
-
-  <!-- blog -->
-  <section class="hidden pb-0 section">
-    <div class="container">
-      <div class="flex flex-col gap-14">
-        <div class="justify-center row">
+  <!-- Social Proof -->
+  {social_proof && (
+    <section class="section pb-0">
+      <div class="container">
+        <div class="justify-center mb-10 row">
           <div class="lg:col-8">
             <h2
               class="pb-4 text-center"
               data-aos="fade-up-sm"
               data-aos-delay="100"
-              set:html={markdownify(homepage_title!)}
+              set:html={markdownify(social_proof.title)}
             />
             <p
-              class="text-center"
+              class="text-center text-light"
               data-aos="fade-up-sm"
               data-aos-delay="200"
-              set:html={markdownify(homepage_description!)}
+              set:html={markdownify(social_proof.subtitle)}
             />
           </div>
         </div>
-        <div class="row g-4">
-          {
-            posts.map((post, i: number) => (
-              <div
-                class="relative sm:col-6 lg:col-4 group"
-                data-aos="fade-up-sm"
-                data-aos-delay={(i + 1) * 100}
-              >
-                <BlogCard post={post} />
-              </div>
-            ))
-          }
+
+        <div
+          class="flex flex-wrap items-center justify-center gap-8 lg:gap-12 mb-12"
+          data-aos="fade-up-sm"
+          data-aos-delay="300"
+        >
+          {social_proof.logos.map((logo) => (
+            <ExternalLogo
+              domain={logo.domain}
+              name={logo.name}
+              height={50}
+              width={140}
+              class="opacity-60 hover:opacity-100 transition-opacity duration-300 grayscale hover:grayscale-0"
+            />
+          ))}
         </div>
-        <div class="inline-block text-center">
-          <a class="btn btn-outline-primary" href="/blog">
-            Read All Articles
+
+        <div
+          class="mx-auto max-w-3xl rounded-2xl border border-brand/20 bg-brand/[0.04] p-8 text-center"
+          data-aos="fade-up-sm"
+          data-aos-delay="400"
+        >
+          <p class="mb-2 text-lg font-semibold text-dark" set:html={markdownify(social_proof.callout)} />
+          {social_proof.callout_stats && (
+            <p class="text-sm text-light" set:html={markdownify(social_proof.callout_stats)} />
+          )}
+        </div>
+
+        <div
+          class="mx-auto mt-10 max-w-3xl rounded-2xl border border-border/60 bg-theme-light/30 p-10 flex items-center justify-center min-h-[200px]"
+          data-aos="fade-up-sm"
+          data-aos-delay="500"
+        >
+          <div class="text-center text-light">
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="mx-auto mb-3 text-brand/40"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            <p class="text-sm">Video testimonial coming soon</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  )}
+  <!-- /Social Proof -->
+
+  <!-- Blueprint to Bluelight -->
+  {blueprint && (
+    <section class="section">
+      <div class="container">
+        <div class="row gy-5 items-start">
+          <div class="lg:col-5">
+            <h2
+              class="mb-6"
+              data-aos="fade-right-sm"
+              data-aos-delay="100"
+              set:html={markdownify(blueprint.title)}
+            />
+            <p
+              class="text-light leading-relaxed"
+              data-aos="fade-right-sm"
+              data-aos-delay="200"
+              set:html={markdownify(blueprint.description)}
+            />
+          </div>
+          <div class="lg:col-7">
+            <div class="mb-4 text-sm font-semibold uppercase tracking-wider text-brand" data-aos="fade-left-sm" data-aos-delay="100">
+              We provide:
+            </div>
+            <div class="flex flex-col gap-5">
+              {blueprint.points.map((point, i) => (
+                <div
+                  class="flex gap-4 items-start"
+                  data-aos="fade-left-sm"
+                  data-aos-delay={(i + 1) * 100}
+                >
+                  <div class="mt-1 flex-shrink-0 w-8 h-8 rounded-full bg-brand/10 flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-brand"><path d="M20 6 9 17l-5-5"/></svg>
+                  </div>
+                  <p class="text-dark leading-relaxed">
+                    <strong>{point.title}</strong> {point.text}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <p
+          class="mt-10 text-light leading-relaxed"
+          data-aos="fade-up-sm"
+          data-aos-delay="100"
+          set:html={markdownify(blueprint.footer)}
+        />
+
+        <div class="mt-6" data-aos="fade-up-sm" data-aos-delay="200">
+          <a
+            href={blueprint.button.link}
+            class="group inline-flex items-center gap-1 text-brand font-semibold hover:opacity-80 transition duration-300"
+          >
+            {blueprint.button.label}
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-0.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
           </a>
         </div>
       </div>
-    </div>
-  </section>
-  <!-- blog -->
+    </section>
+  )}
+  <!-- /Blueprint to Bluelight -->
 
-  <CallToAction call_to_action={call_to_action} />
+  <!-- Built for where you are -->
+  {tracks && (
+    <section class="section bg-theme-light/40">
+      <div class="container">
+        <h2
+          class="pb-10 text-center"
+          data-aos="fade-up-sm"
+          data-aos-delay="100"
+          set:html={markdownify(tracks.title)}
+        />
+        <div class="row gy-5">
+          <div
+            class="lg:col-6"
+            data-aos="fade-right-sm"
+            data-aos-delay="200"
+          >
+            <div class="relative h-full p-8 rounded-2xl border border-border/60 bg-white shadow-sm overflow-hidden">
+              <div class="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-brand/60 via-brand to-brand/60" />
+              <h3 class="mb-4 text-xl font-semibold" set:html={markdownify(tracks.track_a.title)} />
+              <div class="mb-6 text-light leading-relaxed" set:html={markdownify(tracks.track_a.description)} />
+              <div class="flex flex-col gap-5">
+                {tracks.track_a.points.map((point) => (
+                  <div class="flex gap-3 items-start">
+                    <div class="mt-1 flex-shrink-0 w-6 h-6 rounded-full bg-brand/10 flex items-center justify-center">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="text-brand"><path d="M20 6 9 17l-5-5"/></svg>
+                    </div>
+                    <p class="text-sm text-dark leading-relaxed">
+                      <strong>{point.title}</strong> {point.text}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="lg:col-6"
+            data-aos="fade-left-sm"
+            data-aos-delay="200"
+          >
+            <div class="relative h-full p-8 rounded-2xl border border-border/60 bg-white shadow-sm overflow-hidden">
+              <div class="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-brand/60 via-brand to-brand/60" />
+              <h3 class="mb-4 text-xl font-semibold" set:html={markdownify(tracks.track_b.title)} />
+              <div class="mb-6 text-light leading-relaxed" set:html={markdownify(tracks.track_b.description)} />
+              <div class="flex flex-col gap-5">
+                {tracks.track_b.points.map((point) => (
+                  <div class="flex gap-3 items-start">
+                    <div class="mt-1 flex-shrink-0 w-6 h-6 rounded-full bg-brand/10 flex items-center justify-center">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="text-brand"><path d="M20 6 9 17l-5-5"/></svg>
+                    </div>
+                    <p class="text-sm text-dark leading-relaxed">
+                      <strong>{point.title}</strong> {point.text}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )}
+  <!-- /Built for where you are -->
+
+  <!-- Sovereign Co-Op Framework -->
+  {coop && (
+    <section class="section bg-primary">
+      <div class="container">
+        <div class="justify-center mb-10 row">
+          <div class="lg:col-8">
+            <h2
+              class="pb-4 text-center text-white"
+              data-aos="fade-up-sm"
+              data-aos-delay="100"
+              set:html={markdownify(coop.title)}
+            />
+            <div
+              class="text-center text-theme-light/80"
+              data-aos="fade-up-sm"
+              data-aos-delay="200"
+              set:html={markdownify(coop.description)}
+            />
+          </div>
+        </div>
+
+        <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {coop.points.map((point, i) => (
+            <div
+              class="relative p-8 rounded-2xl border border-white/[0.08] bg-white/[0.04] backdrop-blur-sm"
+              data-aos="fade-up-sm"
+              data-aos-delay={(i + 1) * 100}
+            >
+              <h3 class="mb-3 text-lg font-semibold text-white">{point.title}</h3>
+              <p class="text-sm text-theme-light/70 leading-relaxed">{point.text}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+  <!-- /Sovereign Co-Op Framework -->
+
+  <!-- Empower Your Team -->
+  {empower && (
+    <section class="section">
+      <div class="container">
+        <div class="justify-center mb-10 row">
+          <div class="lg:col-8">
+            <h2
+              class="pb-4 text-center"
+              data-aos="fade-up-sm"
+              data-aos-delay="100"
+              set:html={markdownify(empower.title)}
+            />
+            <p
+              class="text-center text-light"
+              data-aos="fade-up-sm"
+              data-aos-delay="200"
+              set:html={markdownify(empower.description)}
+            />
+          </div>
+        </div>
+
+        <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {empower.points.map((point, i) => (
+            <div
+              class="relative p-8 rounded-2xl border border-border/60 bg-white shadow-sm overflow-hidden"
+              data-aos="fade-up-sm"
+              data-aos-delay={(i + 1) * 100}
+            >
+              <div class="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-brand/60 via-brand to-brand/60" />
+              <h3 class="mb-3 text-lg font-semibold">{point.title}</h3>
+              <p class="text-sm text-light leading-relaxed">{point.text}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+  <!-- /Empower Your Team -->
+
+  <!-- CTA: Own Your AI Future -->
+  {cta_section && (
+    <section class="mx-4 overflow-hidden section">
+      <div
+        data-aos="fade-up"
+        data-aos-delay="100"
+        class="container relative px-8 py-16 text-white bg-primary sm:p-24 lg:px-36 lg:py-28 rounded-xl overflow-hidden"
+      >
+        <div class="absolute -top-20 -right-20 w-[350px] h-[350px] rounded-full bg-brand/10 blur-3xl pointer-events-none" />
+        <div class="absolute -bottom-20 -left-20 w-[250px] h-[250px] rounded-full bg-brand/5 blur-3xl pointer-events-none" />
+
+        <div class="relative z-10">
+          <h2
+            class="pb-4 text-center text-white"
+            data-aos="fade-up-sm"
+            data-aos-delay="200"
+            set:html={markdownify(cta_section.title)}
+          />
+
+          <p
+            class="mx-auto max-w-2xl pb-10 text-center text-white/70"
+            data-aos="fade-up-sm"
+            data-aos-delay="300"
+            set:html={markdownify(cta_section.description)}
+          />
+
+          <h3
+            class="pb-8 text-center text-xl font-semibold text-white"
+            data-aos="fade-up-sm"
+            data-aos-delay="350"
+          >
+            {cta_section.subtitle}
+          </h3>
+
+          <p
+            class="pb-6 text-center text-sm text-white/50"
+            data-aos="fade-up-sm"
+            data-aos-delay="370"
+          >
+            Start a structured engagement to define your deployment path:
+          </p>
+
+          <div
+            class="mx-auto mb-12 max-w-2xl"
+            data-aos="fade-up-sm"
+            data-aos-delay="400"
+          >
+            <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-4 sm:gap-0">
+              {cta_section.steps.map((step, i) => (
+                <>
+                  <div class="flex-1 text-center px-4 py-4 sm:py-0">
+                    <div class="inline-flex items-center justify-center w-10 h-10 rounded-full border-2 border-brand/40 bg-brand/10 mb-3">
+                      <span class="text-sm font-bold text-brand">{i + 1}</span>
+                    </div>
+                    <p class="text-sm font-semibold text-white">{step.label}</p>
+                    <p class="mt-1 text-xs text-white/50">{step.text}</p>
+                  </div>
+                  {i < cta_section.steps.length - 1 && (
+                    <div class="hidden sm:flex items-center justify-center w-8">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white/20"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                    </div>
+                  )}
+                </>
+              ))}
+            </div>
+          </div>
+
+          <div
+            class="w-fit mx-auto block"
+            data-aos="fade-up-sm"
+            data-aos-delay="500"
+          >
+            <a
+              href={cta_section.button.link}
+              class="group relative z-10 inline-flex items-center gap-2 px-7 py-3 text-sm font-semibold text-white rounded-full bg-brand border border-brand/80 shadow-[0_1px_2px_rgba(0,0,0,0.2),0_0_20px_rgba(36,171,157,0.15)] hover:shadow-[0_1px_2px_rgba(0,0,0,0.2),0_0_30px_rgba(36,171,157,0.25)] hover:bg-brand/90 transition-all duration-300"
+            >
+              {cta_section.button.label}
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-0.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  )}
+  <!-- /CTA -->
 
   <script type="application/ld+json" set:html={JSON.stringify({
     "@context": "https://schema.org",
@@ -328,4 +434,14 @@ const posts = await getSinglePage(BLOG_FOLDER);
       "url": "https://thiswayglobal.com"
     }
   })} />
+
+  <style is:global>
+    .hero-gradient-text,
+    .hero-gradient-text * {
+      background: linear-gradient(to right, #fff, #24ab9d);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  </style>
 </Base>
