@@ -13,7 +13,7 @@ const { banner, social_proof, blueprint, tracks, coop, empower, cta_section } = 
   <!-- Banner -->
   <section class="relative overflow-hidden bg-primary pt-[100px] pb-[80px] lg:pt-[120px] lg:pb-[100px]">
     <div class="absolute inset-0 bg-gradient-to-br from-primary via-[#0d1117] to-primary"></div>
-    <div class="absolute inset-0 opacity-[0.03]" style="background-image: url('data:image/svg+xml,%3Csvg width=&quot;60&quot; height=&quot;60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cpath d=&quot;M0 30h60M30 0v60&quot; stroke=&quot;%23fff&quot; stroke-width=&quot;0.5&quot; fill=&quot;none&quot;/%3E%3C/svg%3E');"></div>
+    <div class="absolute inset-0 opacity-[0.06]" style="background-image: url('data:image/svg+xml,%3Csvg width=&quot;60&quot; height=&quot;60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cpath d=&quot;M0 30h60M30 0v60&quot; stroke=&quot;%23fff&quot; stroke-width=&quot;0.5&quot; fill=&quot;none&quot;/%3E%3C/svg%3E');"></div>
     <div class="container relative z-10">
       <div class="items-center row gy-5">
         <div class="lg:col-7">
@@ -64,9 +64,9 @@ const { banner, social_proof, blueprint, tracks, coop, empower, cta_section } = 
 
   <!-- Social Proof -->
   {social_proof && (
-    <section class="section pb-0">
+    <section class="section">
       <div class="container">
-        <div class="justify-center mb-10 row">
+        <div class="justify-center mb-8 row">
           <div class="lg:col-8">
             <h2
               class="pb-4 text-center"
@@ -84,23 +84,28 @@ const { banner, social_proof, blueprint, tracks, coop, empower, cta_section } = 
         </div>
 
         <div
-          class="flex flex-wrap items-center justify-center gap-8 lg:gap-12 mb-12"
+          class="flex items-stretch justify-center mx-auto max-w-3xl rounded-xl border border-border/60 bg-white shadow-sm overflow-hidden divide-x divide-border/60 mb-8"
           data-aos="fade-up-sm"
           data-aos-delay="300"
         >
-          {social_proof.logos.map((logo) => (
-            <ExternalLogo
-              domain={logo.domain}
-              name={logo.name}
-              height={50}
-              width={140}
-              class="opacity-60 hover:opacity-100 transition-opacity duration-300 grayscale hover:grayscale-0"
-            />
-          ))}
+          {social_proof.logos.map((logo) => {
+            const isTstc = logo.domain === "tstc.edu";
+            return (
+              <div class="flex-1 flex items-center justify-center py-6 px-5 hover:bg-theme-light/40 transition-colors duration-300">
+                <ExternalLogo
+                  domain={logo.domain}
+                  name={logo.name}
+                  height={isTstc ? 56 : 44}
+                  width={isTstc ? 140 : 110}
+                  class={`object-contain ${isTstc ? "max-h-14" : "max-h-11"}`}
+                />
+              </div>
+            );
+          })}
         </div>
 
         <div
-          class="mx-auto max-w-3xl rounded-2xl border border-brand/20 bg-brand/[0.04] p-8 text-center"
+          class="rounded-2xl border border-brand/20 bg-brand/[0.03] p-8 lg:p-10 text-center"
           data-aos="fade-up-sm"
           data-aos-delay="400"
         >
@@ -111,13 +116,16 @@ const { banner, social_proof, blueprint, tracks, coop, empower, cta_section } = 
         </div>
 
         <div
-          class="mx-auto mt-10 max-w-3xl rounded-2xl border border-border/60 bg-theme-light/30 p-10 flex items-center justify-center min-h-[200px]"
+          class="mt-8 rounded-2xl bg-dark/95 border border-border/20 overflow-hidden flex items-center justify-center aspect-video relative"
           data-aos="fade-up-sm"
           data-aos-delay="500"
         >
-          <div class="text-center text-light">
-            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="mx-auto mb-3 text-brand/40"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-            <p class="text-sm">Video testimonial coming soon</p>
+          <div class="absolute inset-0 opacity-[0.04]" style="background-image: url('data:image/svg+xml,%3Csvg width=&quot;60&quot; height=&quot;60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cpath d=&quot;M0 30h60M30 0v60&quot; stroke=&quot;%23fff&quot; stroke-width=&quot;0.5&quot; fill=&quot;none&quot;/%3E%3C/svg%3E');"></div>
+          <div class="text-center relative z-10">
+            <div class="inline-flex items-center justify-center w-16 h-16 rounded-full border-2 border-brand/30 bg-brand/10 mb-4 hover:bg-brand/20 hover:border-brand/50 transition-all duration-300 cursor-pointer">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="text-brand ml-1"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            </div>
+            <p class="text-sm text-white/50">Video testimonial coming soon</p>
           </div>
         </div>
       </div>
@@ -127,61 +135,65 @@ const { banner, social_proof, blueprint, tracks, coop, empower, cta_section } = 
 
   <!-- Blueprint to Bluelight -->
   {blueprint && (
-    <section class="section">
+    <section class="section pt-0">
       <div class="container">
-        <div class="row gy-5 items-start">
-          <div class="lg:col-5">
-            <h2
-              class="mb-6"
-              data-aos="fade-right-sm"
-              data-aos-delay="100"
-              set:html={markdownify(blueprint.title)}
-            />
+        <div class="relative rounded-2xl border border-border/60 bg-white shadow-sm overflow-hidden p-8 lg:p-12">
+          <div class="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-brand/60 via-brand to-brand/60" />
+          <div class="row gy-5 items-start">
+            <div class="lg:col-5">
+              <h2
+                class="mb-6"
+                data-aos="fade-right-sm"
+                data-aos-delay="100"
+                set:html={markdownify(blueprint.title)}
+              />
+              <p
+                class="text-light leading-relaxed"
+                data-aos="fade-right-sm"
+                data-aos-delay="200"
+                set:html={markdownify(blueprint.description)}
+              />
+            </div>
+            <div class="lg:col-7">
+              <div class="mb-5 text-xs font-semibold uppercase tracking-widest text-brand" data-aos="fade-left-sm" data-aos-delay="100">
+                We provide:
+              </div>
+              <div class="flex flex-col gap-4">
+                {blueprint.points.map((point, i) => (
+                  <div
+                    class="flex gap-4 items-start p-4 rounded-xl bg-theme-light/40 border border-border/30"
+                    data-aos="fade-left-sm"
+                    data-aos-delay={(i + 1) * 100}
+                  >
+                    <div class="mt-0.5 flex-shrink-0 w-7 h-7 rounded-full bg-brand/10 flex items-center justify-center">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-brand"><path d="M20 6 9 17l-5-5"/></svg>
+                    </div>
+                    <p class="text-sm text-dark leading-relaxed">
+                      <strong>{point.title}</strong> {point.text}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-8 pt-8 border-t border-border/40">
             <p
               class="text-light leading-relaxed"
-              data-aos="fade-right-sm"
-              data-aos-delay="200"
-              set:html={markdownify(blueprint.description)}
+              data-aos="fade-up-sm"
+              data-aos-delay="100"
+              set:html={markdownify(blueprint.footer)}
             />
-          </div>
-          <div class="lg:col-7">
-            <div class="mb-4 text-sm font-semibold uppercase tracking-wider text-brand" data-aos="fade-left-sm" data-aos-delay="100">
-              We provide:
-            </div>
-            <div class="flex flex-col gap-5">
-              {blueprint.points.map((point, i) => (
-                <div
-                  class="flex gap-4 items-start"
-                  data-aos="fade-left-sm"
-                  data-aos-delay={(i + 1) * 100}
-                >
-                  <div class="mt-1 flex-shrink-0 w-8 h-8 rounded-full bg-brand/10 flex items-center justify-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-brand"><path d="M20 6 9 17l-5-5"/></svg>
-                  </div>
-                  <p class="text-dark leading-relaxed">
-                    <strong>{point.title}</strong> {point.text}
-                  </p>
-                </div>
-              ))}
+            <div class="mt-4" data-aos="fade-up-sm" data-aos-delay="200">
+              <a
+                href={blueprint.button.link}
+                class="group inline-flex items-center gap-1 text-brand font-semibold hover:opacity-80 transition duration-300"
+              >
+                {blueprint.button.label}
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-0.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              </a>
             </div>
           </div>
-        </div>
-
-        <p
-          class="mt-10 text-light leading-relaxed"
-          data-aos="fade-up-sm"
-          data-aos-delay="100"
-          set:html={markdownify(blueprint.footer)}
-        />
-
-        <div class="mt-6" data-aos="fade-up-sm" data-aos-delay="200">
-          <a
-            href={blueprint.button.link}
-            class="group inline-flex items-center gap-1 text-brand font-semibold hover:opacity-80 transition duration-300"
-          >
-            {blueprint.button.label}
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-0.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-          </a>
         </div>
       </div>
     </section>
@@ -193,26 +205,25 @@ const { banner, social_proof, blueprint, tracks, coop, empower, cta_section } = 
     <section class="section bg-theme-light/40">
       <div class="container">
         <h2
-          class="pb-10 text-center"
+          class="pb-8 text-center"
           data-aos="fade-up-sm"
           data-aos-delay="100"
           set:html={markdownify(tracks.title)}
         />
-        <div class="row gy-5">
+        <div class="grid gap-4 lg:grid-cols-2">
           <div
-            class="lg:col-6"
             data-aos="fade-right-sm"
             data-aos-delay="200"
           >
-            <div class="relative h-full p-8 rounded-2xl border border-border/60 bg-white shadow-sm overflow-hidden">
+            <div class="relative h-full p-8 lg:p-10 rounded-2xl border border-border/60 bg-white shadow-sm overflow-hidden">
               <div class="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-brand/60 via-brand to-brand/60" />
               <h3 class="mb-4 text-xl font-semibold" set:html={markdownify(tracks.track_a.title)} />
-              <div class="mb-6 text-light leading-relaxed" set:html={markdownify(tracks.track_a.description)} />
-              <div class="flex flex-col gap-5">
+              <div class="mb-6 text-sm text-light leading-relaxed" set:html={markdownify(tracks.track_a.description)} />
+              <div class="flex flex-col gap-4">
                 {tracks.track_a.points.map((point) => (
                   <div class="flex gap-3 items-start">
-                    <div class="mt-1 flex-shrink-0 w-6 h-6 rounded-full bg-brand/10 flex items-center justify-center">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="text-brand"><path d="M20 6 9 17l-5-5"/></svg>
+                    <div class="mt-0.5 flex-shrink-0 w-5 h-5 rounded-full bg-brand/10 flex items-center justify-center">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="text-brand"><path d="M20 6 9 17l-5-5"/></svg>
                     </div>
                     <p class="text-sm text-dark leading-relaxed">
                       <strong>{point.title}</strong> {point.text}
@@ -224,19 +235,18 @@ const { banner, social_proof, blueprint, tracks, coop, empower, cta_section } = 
           </div>
 
           <div
-            class="lg:col-6"
             data-aos="fade-left-sm"
             data-aos-delay="200"
           >
-            <div class="relative h-full p-8 rounded-2xl border border-border/60 bg-white shadow-sm overflow-hidden">
+            <div class="relative h-full p-8 lg:p-10 rounded-2xl border border-border/60 bg-white shadow-sm overflow-hidden">
               <div class="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-brand/60 via-brand to-brand/60" />
               <h3 class="mb-4 text-xl font-semibold" set:html={markdownify(tracks.track_b.title)} />
-              <div class="mb-6 text-light leading-relaxed" set:html={markdownify(tracks.track_b.description)} />
-              <div class="flex flex-col gap-5">
+              <div class="mb-6 text-sm text-light leading-relaxed" set:html={markdownify(tracks.track_b.description)} />
+              <div class="flex flex-col gap-4">
                 {tracks.track_b.points.map((point) => (
                   <div class="flex gap-3 items-start">
-                    <div class="mt-1 flex-shrink-0 w-6 h-6 rounded-full bg-brand/10 flex items-center justify-center">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="text-brand"><path d="M20 6 9 17l-5-5"/></svg>
+                    <div class="mt-0.5 flex-shrink-0 w-5 h-5 rounded-full bg-brand/10 flex items-center justify-center">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="text-brand"><path d="M20 6 9 17l-5-5"/></svg>
                     </div>
                     <p class="text-sm text-dark leading-relaxed">
                       <strong>{point.title}</strong> {point.text}
@@ -254,9 +264,13 @@ const { banner, social_proof, blueprint, tracks, coop, empower, cta_section } = 
 
   <!-- Sovereign Co-Op Framework -->
   {coop && (
-    <section class="section bg-primary">
-      <div class="container">
-        <div class="justify-center mb-10 row">
+    <section class="relative section bg-primary overflow-hidden">
+      <div class="absolute inset-0 bg-gradient-to-br from-primary via-[#0d1117] to-primary"></div>
+      <div class="absolute inset-0 opacity-[0.06]" style="background-image: url('data:image/svg+xml,%3Csvg width=&quot;60&quot; height=&quot;60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cpath d=&quot;M0 30h60M30 0v60&quot; stroke=&quot;%23fff&quot; stroke-width=&quot;0.5&quot; fill=&quot;none&quot;/%3E%3C/svg%3E');"></div>
+      <div class="absolute -top-40 -right-40 w-[500px] h-[500px] rounded-full bg-brand/8 blur-3xl pointer-events-none" />
+      <div class="absolute -bottom-40 -left-40 w-[400px] h-[400px] rounded-full bg-brand/5 blur-3xl pointer-events-none" />
+      <div class="container relative z-10">
+        <div class="justify-center mb-8 row">
           <div class="lg:col-8">
             <h2
               class="pb-4 text-center text-white"
@@ -265,7 +279,7 @@ const { banner, social_proof, blueprint, tracks, coop, empower, cta_section } = 
               set:html={markdownify(coop.title)}
             />
             <div
-              class="text-center text-theme-light/80"
+              class="text-center text-theme-light/70"
               data-aos="fade-up-sm"
               data-aos-delay="200"
               set:html={markdownify(coop.description)}
@@ -273,15 +287,16 @@ const { banner, social_proof, blueprint, tracks, coop, empower, cta_section } = 
           </div>
         </div>
 
-        <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {coop.points.map((point, i) => (
             <div
-              class="relative p-8 rounded-2xl border border-white/[0.08] bg-white/[0.04] backdrop-blur-sm"
+              class="relative p-8 rounded-2xl border border-white/[0.08] bg-white/[0.03] overflow-hidden"
               data-aos="fade-up-sm"
               data-aos-delay={(i + 1) * 100}
             >
+              <div class="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-brand/40 via-brand/80 to-brand/40" />
               <h3 class="mb-3 text-lg font-semibold text-white">{point.title}</h3>
-              <p class="text-sm text-theme-light/70 leading-relaxed">{point.text}</p>
+              <p class="text-sm text-white/50 leading-relaxed">{point.text}</p>
             </div>
           ))}
         </div>
@@ -294,7 +309,7 @@ const { banner, social_proof, blueprint, tracks, coop, empower, cta_section } = 
   {empower && (
     <section class="section">
       <div class="container">
-        <div class="justify-center mb-10 row">
+        <div class="justify-center mb-8 row">
           <div class="lg:col-8">
             <h2
               class="pb-4 text-center"
@@ -311,18 +326,33 @@ const { banner, social_proof, blueprint, tracks, coop, empower, cta_section } = 
           </div>
         </div>
 
-        <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {empower.points.map((point, i) => (
-            <div
-              class="relative p-8 rounded-2xl border border-border/60 bg-white shadow-sm overflow-hidden"
-              data-aos="fade-up-sm"
-              data-aos-delay={(i + 1) * 100}
-            >
-              <div class="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-brand/60 via-brand to-brand/60" />
-              <h3 class="mb-3 text-lg font-semibold">{point.title}</h3>
-              <p class="text-sm text-light leading-relaxed">{point.text}</p>
+        <div class="row gy-5 items-stretch" data-aos="fade-up-sm" data-aos-delay="300">
+          <div class="lg:col-5">
+            <div class="h-full rounded-2xl bg-dark/95 border border-border/20 overflow-hidden flex items-center justify-center relative">
+              <div class="absolute inset-0 opacity-[0.04]" style="background-image: url('data:image/svg+xml,%3Csvg width=&quot;60&quot; height=&quot;60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cpath d=&quot;M0 30h60M30 0v60&quot; stroke=&quot;%23fff&quot; stroke-width=&quot;0.5&quot; fill=&quot;none&quot;/%3E%3C/svg%3E');"></div>
+              <div class="text-center p-8 relative z-10">
+                <div class="inline-flex items-center justify-center w-16 h-16 rounded-full border-2 border-brand/30 bg-brand/10 mb-4 hover:bg-brand/20 hover:border-brand/50 transition-all duration-300 cursor-pointer">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="text-brand ml-1"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                </div>
+                <p class="text-sm text-white/50">Video coming soon</p>
+              </div>
             </div>
-          ))}
+          </div>
+          <div class="lg:col-7">
+            <div class="flex flex-col gap-4 lg:pl-2">
+              {empower.points.map((point, i) => (
+                <div
+                  class="relative p-6 rounded-xl border border-border/60 bg-white shadow-sm overflow-hidden"
+                  data-aos="fade-left-sm"
+                  data-aos-delay={(i + 1) * 100}
+                >
+                  <div class="absolute left-0 inset-y-0 w-1 bg-gradient-to-b from-brand/60 via-brand to-brand/60" />
+                  <h3 class="text-base font-semibold mb-1 pl-3">{point.title}</h3>
+                  <p class="text-sm text-light leading-relaxed pl-3">{point.text}</p>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -335,10 +365,32 @@ const { banner, social_proof, blueprint, tracks, coop, empower, cta_section } = 
       <div
         data-aos="fade-up"
         data-aos-delay="100"
-        class="container relative px-8 py-16 text-white bg-primary sm:p-24 lg:px-36 lg:py-28 rounded-xl overflow-hidden"
+        class="container relative px-8 py-12 text-white bg-primary sm:px-16 sm:py-14 lg:px-24 lg:py-20 rounded-xl overflow-hidden"
       >
+        <div class="absolute inset-0 bg-gradient-to-br from-primary via-[#0d1117] to-primary rounded-xl"></div>
+        <div class="absolute inset-0 opacity-[0.06] rounded-xl" style="background-image: url('data:image/svg+xml,%3Csvg width=&quot;60&quot; height=&quot;60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cpath d=&quot;M0 30h60M30 0v60&quot; stroke=&quot;%23fff&quot; stroke-width=&quot;0.5&quot; fill=&quot;none&quot;/%3E%3C/svg%3E');"></div>
         <div class="absolute -top-20 -right-20 w-[350px] h-[350px] rounded-full bg-brand/10 blur-3xl pointer-events-none" />
-        <div class="absolute -bottom-20 -left-20 w-[250px] h-[250px] rounded-full bg-brand/5 blur-3xl pointer-events-none" />
+
+        <div class="absolute bottom-0 left-1/2 w-2/3 pointer-events-none" style="transform: translateY(50%);">
+          <img
+            src="/images/cta/cta-img-1.png"
+            alt=""
+            class="w-full cta-rotate-animation opacity-90"
+            style="filter: sepia(1) hue-rotate(130deg) saturate(8) brightness(1);"
+          />
+        </div>
+        <img
+          src="/images/cta/cta-img-2.png"
+          alt=""
+          class="w-1/3 absolute top-[10%] -left-[10%] opacity-90 pointer-events-none"
+          style="filter: sepia(1) hue-rotate(130deg) saturate(8) brightness(1);"
+        />
+        <img
+          src="/images/cta/cta-img-2.png"
+          alt=""
+          class="w-1/3 absolute top-[10%] -right-[10%] opacity-90 pointer-events-none"
+          style="filter: sepia(1) hue-rotate(130deg) saturate(8) brightness(1);"
+        />
 
         <div class="relative z-10">
           <h2
@@ -349,51 +401,39 @@ const { banner, social_proof, blueprint, tracks, coop, empower, cta_section } = 
           />
 
           <p
-            class="mx-auto max-w-2xl pb-10 text-center text-white/70"
+            class="mx-auto max-w-2xl pb-8 text-center text-white/60"
             data-aos="fade-up-sm"
             data-aos-delay="300"
             set:html={markdownify(cta_section.description)}
           />
 
-          <h3
-            class="pb-8 text-center text-xl font-semibold text-white"
+          <div class="mx-auto max-w-2xl rounded-2xl border border-white/[0.06] bg-white/[0.03] backdrop-blur-sm p-8 lg:p-10 mb-10"
             data-aos="fade-up-sm"
             data-aos-delay="350"
           >
+          <h3 class="pb-1 text-center text-lg font-semibold text-white">
             {cta_section.subtitle}
           </h3>
-
-          <p
-            class="pb-6 text-center text-sm text-white/50"
-            data-aos="fade-up-sm"
-            data-aos-delay="370"
-          >
+          <p class="pb-8 text-center text-xs text-white/40">
             Start a structured engagement to define your deployment path:
           </p>
 
-          <div
-            class="mx-auto mb-12 max-w-2xl"
-            data-aos="fade-up-sm"
-            data-aos-delay="400"
-          >
-            <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-4 sm:gap-0">
+          <div class="relative">
+            <div class="absolute top-[7px] left-0 right-0 h-[2px] bg-gradient-to-r from-brand/0 via-brand/40 to-brand/0" />
+            <div class="flex justify-between relative">
               {cta_section.steps.map((step, i) => (
-                <>
-                  <div class="flex-1 text-center px-4 py-4 sm:py-0">
-                    <div class="inline-flex items-center justify-center w-10 h-10 rounded-full border-2 border-brand/40 bg-brand/10 mb-3">
-                      <span class="text-sm font-bold text-brand">{i + 1}</span>
-                    </div>
-                    <p class="text-sm font-semibold text-white">{step.label}</p>
-                    <p class="mt-1 text-xs text-white/50">{step.text}</p>
+                <div class="flex flex-col items-center" style={`width: ${100 / cta_section.steps.length}%`}>
+                  <div class="relative z-10 w-4 h-4 rounded-full border-2 border-brand bg-primary shadow-[0_0_8px_rgba(36,171,157,0.3)]">
+                    <div class="absolute inset-[3px] rounded-full bg-brand" />
                   </div>
-                  {i < cta_section.steps.length - 1 && (
-                    <div class="hidden sm:flex items-center justify-center w-8">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white/20"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-                    </div>
-                  )}
-                </>
+                  <div class="mt-4 text-center">
+                    <p class="text-sm font-semibold text-white">{step.label}</p>
+                    <p class="mt-1 text-xs text-white/35 leading-relaxed max-w-[160px] mx-auto">{step.text}</p>
+                  </div>
+                </div>
               ))}
             </div>
+          </div>
           </div>
 
           <div
