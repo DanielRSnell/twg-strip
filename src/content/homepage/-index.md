@@ -1,7 +1,7 @@
 ---
 # Banner
 banner:
-  title: "**Control Your Infrastructure.**\n**Shape your AI Future.**"
+  title: "Control Your Infrastructure.\n**Shape your AI Future.**"
   content: "True **AI independence** belongs to enterprises and institutions with the **freedom** to build and run their own systems.\n\nThisWayGlobal provides the definitive blueprint, delivering priority access to high-demand compute, Amalgamy, our unified AI and HPC Operating System,  and local operational capability with workforce enablement."
   button:
     enable: true

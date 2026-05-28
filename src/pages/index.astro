@@ -105,14 +105,29 @@ const { banner, social_proof, blueprint, tracks, coop, empower, cta_section } = 
         </div>
 
         <div
-          class="rounded-2xl border border-brand/20 bg-brand/[0.03] p-8 lg:p-10 text-center"
+          class="relative rounded-2xl bg-primary overflow-hidden p-8 lg:p-10 text-center"
           data-aos="fade-up-sm"
           data-aos-delay="400"
         >
-          <p class="mb-2 text-lg font-semibold text-dark" set:html={markdownify(social_proof.callout)} />
-          {social_proof.callout_stats && (
-            <p class="text-sm text-light" set:html={markdownify(social_proof.callout_stats)} />
-          )}
+          <div class="absolute inset-0 bg-gradient-to-br from-primary via-[#0d1117] to-primary"></div>
+          <div class="absolute inset-0 opacity-[0.06]" style="background-image: url('data:image/svg+xml,%3Csvg width=&quot;60&quot; height=&quot;60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cpath d=&quot;M0 30h60M30 0v60&quot; stroke=&quot;%23fff&quot; stroke-width=&quot;0.5&quot; fill=&quot;none&quot;/%3E%3C/svg%3E');"></div>
+          <div class="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-brand/0 via-brand/80 to-brand/0" />
+          <div class="absolute -top-20 -right-20 w-[350px] h-[350px] rounded-full bg-brand/10 blur-3xl pointer-events-none" />
+          <div class="relative z-10">
+            <p class="mb-4 text-xl font-bold text-white" set:html={markdownify(social_proof.callout)} />
+            {social_proof.callout_stats && (
+              <div class="flex flex-wrap justify-center gap-3 text-sm">
+                {social_proof.callout_stats.split(' | ').map((stat, i, arr) => (
+                  <span class="flex items-center gap-3">
+                    <span class="text-white/50 [&>strong]:text-brand [&>strong]:font-semibold" set:html={markdownify(stat.trim())} />
+                    {i < arr.length - 1 && (
+                      <span class="w-[3px] h-[3px] rounded-full bg-brand/50" />
+                    )}
+                  </span>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
 
         <div
@@ -476,12 +491,12 @@ const { banner, social_proof, blueprint, tracks, coop, empower, cta_section } = 
   })} />
 
   <style is:global>
-    .hero-gradient-text,
-    .hero-gradient-text * {
-      background: linear-gradient(to right, #fff, #24ab9d);
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
+    .hero-gradient-text {
+      color: #fff;
+    }
+    .hero-gradient-text strong {
+      color: #9ca3af;
+      font-weight: inherit;
     }
   </style>
 </Base>

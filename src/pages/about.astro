@@ -66,7 +66,7 @@ const careers = await getSinglePage("career");
             About ThisWay Global
           </div>
           <h1
-            class="mb-6 text-white"
+            class="mb-6 text-white hero-gradient-text font-extrabold"
             data-aos="fade-right-sm"
             data-aos-delay="100"
             set:html={markdownify(title)}
@@ -347,4 +347,14 @@ const careers = await getSinglePage("career");
   </section>
 
   <CallToAction call_to_action={call_to_action} />
+
+  <style is:global>
+    .hero-gradient-text {
+      color: #fff;
+    }
+    .hero-gradient-text strong {
+      color: #9ca3af;
+      font-weight: inherit;
+    }
+  </style>
 </Base>

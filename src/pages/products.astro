@@ -1,27 +1,20 @@
 ---
-import CustomAccordion from "@/helpers/CustomAccordion";
 import Base from "@/layouts/Base.astro";
-import { getSinglePage } from "@/lib/contentParser.astro";
 import { markdownify } from "@/lib/utils/textConverter";
-import CallToAction from "@/partials/CallToAction.astro";
-import Testimonial from "@/partials/Testimonial.astro";
-import { Icon } from "astro-icon/components";
 import type { CollectionEntry } from "astro:content";
 import { getEntry } from "astro:content";
 
 const serviceIndex = await getEntry("service", "-index");
-const { title, banner_title, description, meta_title, button } =
-  serviceIndex.data as CollectionEntry<"services">["data"];
-const testimonial = await getEntry("sections", "testimonial");
-const call_to_action = await getEntry("sections", "call-to-action");
-const products = await getSinglePage("service");
-const faqs = await getEntry("sections", "faq");
+const { title, meta_title, description, hero, bottleneck, capabilities, federated, roadmap, cta } =
+  serviceIndex.data as CollectionEntry<"service">["data"];
 ---
 
 <Base title={title} meta_title={meta_title} description={description}>
+
+  <!-- Hero -->
   <section class="relative overflow-hidden bg-primary pt-[100px] pb-[60px] lg:pt-[120px] lg:pb-[80px]">
     <div class="absolute inset-0 bg-gradient-to-br from-primary via-[#0d1117] to-primary"></div>
-    <div class="absolute inset-0 opacity-[0.03]" style="background-image: url('data:image/svg+xml,%3Csvg width=&quot;60&quot; height=&quot;60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cpath d=&quot;M0 30h60M30 0v60&quot; stroke=&quot;%23fff&quot; stroke-width=&quot;0.5&quot; fill=&quot;none&quot;/%3E%3C/svg%3E');"></div>
+    <div class="absolute inset-0 opacity-[0.06]" style="background-image: url('data:image/svg+xml,%3Csvg width=&quot;60&quot; height=&quot;60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cpath d=&quot;M0 30h60M30 0v60&quot; stroke=&quot;%23fff&quot; stroke-width=&quot;0.5&quot; fill=&quot;none&quot;/%3E%3C/svg%3E');"></div>
     <div class="absolute -top-20 -right-20 w-[350px] h-[350px] rounded-full bg-brand/10 blur-3xl pointer-events-none"></div>
     <div class="container relative z-10">
       <div class="items-center row gy-5">
@@ -32,42 +25,46 @@ const faqs = await getEntry("sections", "faq");
             data-aos-delay="50"
           >
             <span class="inline-block w-1.5 h-1.5 rounded-full bg-brand shadow-[0_0_6px_rgba(36,171,157,0.6)]"></span>
-            Products & Solutions
+            {hero.badge}
           </div>
           <h1
-            class="mb-6 text-white"
+            class="mb-6 font-extrabold hero-gradient-text"
             data-aos="fade-right-sm"
             data-aos-delay="100"
-            set:html={markdownify(banner_title)}
+            set:html={markdownify(hero.title)}
           />
           <p
             class="mb-10 max-w-xl text-lg leading-relaxed text-white/60"
             data-aos="fade-right-sm"
             data-aos-delay="200"
-            set:html={markdownify(description)}
-          />
+          >
+            {hero.tagline}
+          </p>
           <div
             class="flex flex-wrap gap-4"
             data-aos="fade-right-sm"
             data-aos-delay="300"
           >
-            {
-              button.enable && (
-                <a
-                  href={button.link}
-                  class="group relative inline-flex items-center gap-2 px-7 py-3 text-sm font-semibold text-white rounded-full bg-brand border border-brand/80 shadow-[0_1px_2px_rgba(0,0,0,0.2),0_0_20px_rgba(36,171,157,0.15)] hover:shadow-[0_1px_2px_rgba(0,0,0,0.2),0_0_30px_rgba(36,171,157,0.25)] hover:bg-brand/90 transition-all duration-300"
-                >
-                  {button.label}
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-0.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-                </a>
-              )
-            }
+            <a
+              href={hero.button_primary.link}
+              class="group relative inline-flex items-center gap-2 px-7 py-3 text-sm font-semibold text-white rounded-full bg-brand border border-brand/80 shadow-[0_1px_2px_rgba(0,0,0,0.2),0_0_20px_rgba(36,171,157,0.15)] hover:shadow-[0_1px_2px_rgba(0,0,0,0.2),0_0_30px_rgba(36,171,157,0.25)] hover:bg-brand/90 transition-all duration-300"
+            >
+              {hero.button_primary.label}
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-0.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </a>
+            <a
+              href={hero.button_secondary.link}
+              class="group relative inline-flex items-center gap-2 px-7 py-3 text-sm font-semibold text-white/90 rounded-full border border-white/[0.12] bg-white/[0.04] backdrop-blur-sm hover:bg-white/[0.08] hover:border-white/[0.2] transition-all duration-300"
+            >
+              {hero.button_secondary.label}
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-0.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </a>
           </div>
         </div>
         <div class="hidden lg:block lg:col-5">
           <img
             src="/images/infrastructure/data-center-dark.svg"
-            alt="AI Infrastructure"
+            alt="Amalgamy AI Infrastructure"
             class="w-full h-auto drop-shadow-[0_0_30px_rgba(36,171,157,0.15)]"
             data-aos="fade-left-sm"
             data-aos-delay="200"
@@ -76,136 +73,372 @@ const faqs = await getEntry("sections", "faq");
       </div>
     </div>
   </section>
+  <!-- /Hero -->
 
+  <!-- Operational Bottleneck -->
   <section class="section">
     <div class="container">
+      <div class="justify-center mb-12 row">
+        <div class="lg:col-8">
+          <h2
+            class="pb-4 text-center"
+            data-aos="fade-up-sm"
+            data-aos-delay="100"
+            set:html={markdownify(bottleneck.title)}
+          />
+          <p
+            class="text-center text-light"
+            data-aos="fade-up-sm"
+            data-aos-delay="200"
+          >
+            {bottleneck.intro}
+          </p>
+        </div>
+      </div>
+
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 mb-10">
+        {bottleneck.pain_points.map((point, i) => (
+          <div
+            class="relative p-8 rounded-2xl border border-border/60 bg-white shadow-sm overflow-hidden"
+            data-aos="fade-up-sm"
+            data-aos-delay={(i + 1) * 100}
+          >
+            <div class="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-brand/40 via-brand/80 to-brand/40" />
+            <h3 class="mb-3 text-lg font-semibold">{point.title}</h3>
+            <p class="text-sm text-light leading-relaxed">{point.text}</p>
+          </div>
+        ))}
+      </div>
+
       <div
-        class="flex flex-col gap-20 mx-auto max-w-xl lg:gap-24 xl:gap-32 lg:max-w-full"
+        class="relative mx-auto max-w-3xl rounded-2xl bg-primary overflow-hidden mb-10"
+        data-aos="fade-up-sm"
+        data-aos-delay="400"
       >
-        {
-          products.map((product, i: number) => (
-            <div class="flex flex-col gap-10 justify-between items-center lg:flex-row">
-              <div class={`lg:w-[60%] w-full ${i % 2 !== 0 && "lg:order-2"}`}>
-                <h3
-                  class="pb-4 text-4xl"
-                  data-aos="fade-up-sm"
-                  data-aos-delay="100"
-                  set:html={product.data.title}
-                />
-                <p
-                  class="pb-4 text-light leading-relaxed"
-                  data-aos="fade-up-sm"
-                  data-aos-delay="200"
-                  set:html={product.data.contact_1}
-                />
-                <p
-                  class="pb-8 text-light leading-relaxed"
-                  data-aos="fade-up-sm"
-                  data-aos-delay="300"
-                  set:html={product.data.contact_2}
-                />
-                {product.data.button.enable && (
-                  <a
-                    href={product.data.button.link}
-                    class="group inline-flex items-center gap-2 rounded-full px-6 py-2.5 text-sm font-semibold text-white bg-brand border border-brand/80 shadow-sm hover:bg-brand/90 transition-all duration-300"
-                    data-aos="fade-up-sm"
-                    data-aos-delay="400"
-                    {...(product.data.button.link.startsWith('http') && {
-                      target: '_blank',
-                      rel: 'noopener noreferrer'
-                    })}
-                  >
-                    {product.data.button.label}
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-0.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-                  </a>
-                )}
-              </div>
-              <div class={`lg:w-[40%] w-full`}>
-                <div class="relative p-16 rounded-2xl border border-border/60 bg-white shadow-sm overflow-hidden">
-                  <div class="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-brand/60 via-brand to-brand/60"></div>
-                  <Icon
-                    name={product.data.image}
-                    class={`h-auto w-full mx-auto ${
-                      i !== products.length - 1 ? "spin-animation" : ""
-                    }`}
-                    data-aos="zoom-in"
-                    data-aos-delay="100"
-                    data-aos-duration="1000"
-                  />
-                </div>
-              </div>
+        <div class="absolute inset-0 opacity-[0.06]" style="background-image: url('data:image/svg+xml,%3Csvg width=&quot;60&quot; height=&quot;60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cpath d=&quot;M0 30h60M30 0v60&quot; stroke=&quot;%23fff&quot; stroke-width=&quot;0.5&quot; fill=&quot;none&quot;/%3E%3C/svg%3E');"></div>
+        <div class="absolute -top-20 -right-20 w-[250px] h-[250px] rounded-full bg-brand/10 blur-3xl pointer-events-none" />
+        <div class="absolute left-0 inset-y-0 w-1 bg-gradient-to-b from-brand/60 via-brand to-brand/60" />
+        <div class="relative z-10 flex items-start gap-5 p-8 lg:p-10">
+          <div class="flex-shrink-0 mt-1">
+            <div class="flex items-center justify-center w-10 h-10 rounded-full border border-brand/30 bg-brand/10">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-brand"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
             </div>
-          ))
-        }
+          </div>
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-widest text-brand mb-2">The &ldquo;{bottleneck.callout.title}&rdquo;</p>
+            <p class="text-white/60 leading-relaxed">{bottleneck.callout.text}</p>
+          </div>
+        </div>
+      </div>
+
+      <p
+        class="text-center text-xl font-bold text-dark"
+        data-aos="fade-up-sm"
+        data-aos-delay="500"
+      >
+        {bottleneck.closer}
+      </p>
+    </div>
+  </section>
+  <!-- /Operational Bottleneck -->
+
+  <!-- Key Capabilities -->
+  <section class="section bg-theme-light/40">
+    <div class="container">
+      <div class="justify-center mb-12 row">
+        <div class="lg:col-8">
+          <h2
+            class="pb-4 text-center"
+            data-aos="fade-up-sm"
+            data-aos-delay="100"
+            set:html={markdownify(capabilities.title)}
+          />
+          <p
+            class="text-center text-light"
+            data-aos="fade-up-sm"
+            data-aos-delay="200"
+          >
+            {capabilities.intro}
+          </p>
+        </div>
+      </div>
+
+      <div class="grid gap-6 lg:grid-cols-3">
+        {capabilities.columns.map((col, i) => (
+          <div
+            class="relative p-8 rounded-2xl border border-border/60 bg-white shadow-sm overflow-hidden"
+            data-aos="fade-up-sm"
+            data-aos-delay={(i + 1) * 100}
+          >
+            <div class="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-brand/40 via-brand/80 to-brand/40" />
+            <h3 class="mb-2 text-base font-semibold text-dark">{col.title}</h3>
+            <p class="mb-6 text-xs text-light">
+              {i === 0 && "Amalgamy dynamically routes AI and HPC jobs based on data locality and right resources availability:"}
+              {i === 1 && "Traditional schedulers are not designed for modern data governance. Amalgamy enforces policies at the orchestration layer:"}
+              {i === 2 && "You don't need to rebuild your software stack. Amalgamy operates underneath the tools and workflows your teams already use:"}
+            </p>
+            <ul class="space-y-4">
+              {col.benefits.map((b) => (
+                <li class="flex items-start gap-3">
+                  <div class="mt-1 flex-shrink-0 w-5 h-5 rounded-full bg-brand/10 flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="text-brand"><polyline points="20 6 9 17 4 12"/></svg>
+                  </div>
+                  <p class="text-sm text-light leading-relaxed">
+                    <strong class="text-dark">{b.bold}</strong> {b.text}
+                  </p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
       </div>
     </div>
   </section>
+  <!-- /Key Capabilities -->
 
-  <section class="section bg-primary" hidden>
-    <div class="container text-white">
-      <div class="pb-24 lg:pb-28">
-        <div class="flex flex-col gap-10 justify-center">
-          <div>
-            <h2
-              class="pb-4 text-center text-white"
-              data-aos="fade-up-sm"
-              data-aos-delay="100"
-              set:html={markdownify(testimonial.data.homepage_title)}
-            />
-            <p
-              class="mx-auto max-w-xl text-center text-theme-light/80"
-              data-aos="fade-up-sm"
-              data-aos-delay="200"
-              set:html={markdownify(testimonial.data.content)}
-            />
-          </div>
-
-          <Testimonial
-            testimonials={testimonial.data.testimonials.slice(0, 3)}
+  <!-- Federated Infrastructure -->
+  <section class="relative section bg-primary overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-primary via-[#0d1117] to-primary"></div>
+    <div class="absolute inset-0 opacity-[0.06]" style="background-image: url('data:image/svg+xml,%3Csvg width=&quot;60&quot; height=&quot;60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cpath d=&quot;M0 30h60M30 0v60&quot; stroke=&quot;%23fff&quot; stroke-width=&quot;0.5&quot; fill=&quot;none&quot;/%3E%3C/svg%3E');"></div>
+    <div class="absolute -top-40 -right-40 w-[500px] h-[500px] rounded-full bg-brand/8 blur-3xl pointer-events-none" />
+    <div class="absolute -bottom-40 -left-40 w-[400px] h-[400px] rounded-full bg-brand/5 blur-3xl pointer-events-none" />
+    <div class="container relative z-10">
+      <div class="justify-center mb-12 row">
+        <div class="lg:col-8">
+          <h2
+            class="pb-4 text-center text-white"
+            data-aos="fade-up-sm"
+            data-aos-delay="100"
+            set:html={markdownify(federated.title)}
           />
+          <p
+            class="text-center text-theme-light/70"
+            data-aos="fade-up-sm"
+            data-aos-delay="200"
+          >
+            {federated.intro}
+          </p>
+        </div>
+      </div>
 
-          <div class="inline-block text-center">
-            <a href="/reviews" class="btn btn-outline-secondary">
-              Read All Reviews
-            </a>
+      <div class="mb-4 row">
+        <div class="lg:col-10 mx-auto">
+          <p
+            class="mb-2 text-xs font-semibold uppercase tracking-widest text-brand"
+            data-aos="fade-up-sm"
+            data-aos-delay="250"
+          >
+            Core Deployment Models
+          </p>
+        </div>
+      </div>
+
+      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-2 mb-16 max-w-4xl mx-auto">
+        {federated.deployment_models.map((model, i) => (
+          <div
+            class="relative p-8 rounded-2xl border border-white/[0.08] bg-white/[0.03] overflow-hidden"
+            data-aos="fade-up-sm"
+            data-aos-delay={(i + 1) * 100}
+          >
+            <div class="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-brand/40 via-brand/80 to-brand/40" />
+            <h3 class="mb-3 text-lg font-semibold text-white">{model.title}</h3>
+            <p class="text-sm text-white/50 leading-relaxed">{model.text}</p>
           </div>
+        ))}
+      </div>
+
+      <div class="max-w-4xl mx-auto">
+        <p
+          class="mb-8 text-center text-white/70"
+          data-aos="fade-up-sm"
+          data-aos-delay="100"
+        >
+          {federated.handshake.intro}
+        </p>
+        <div class="grid gap-4 sm:grid-cols-3">
+          {federated.handshake.items.map((item, i) => (
+            <div
+              class="relative p-6 rounded-2xl border border-white/[0.08] bg-white/[0.03] backdrop-blur-sm overflow-hidden text-center"
+              data-aos="fade-up-sm"
+              data-aos-delay={(i + 1) * 100}
+            >
+              <p class="mb-2 text-xs font-semibold uppercase tracking-widest text-brand">{item.label}</p>
+              <p class="text-sm text-white/60 leading-relaxed">{item.text}</p>
+            </div>
+          ))}
         </div>
       </div>
     </div>
   </section>
+  <!-- /Federated Infrastructure -->
 
-  <CustomAccordion faqs={faqs.data} client:only="react" />
-  <CallToAction call_to_action={call_to_action} />
+  <!-- Roadmap -->
+  <section class="section">
+    <div class="container">
+      <div class="justify-center mb-12 row">
+        <div class="lg:col-8">
+          <h2
+            class="pb-4 text-center"
+            data-aos="fade-up-sm"
+            data-aos-delay="100"
+            set:html={markdownify(roadmap.title)}
+          />
+          <p
+            class="text-center text-light"
+            data-aos="fade-up-sm"
+            data-aos-delay="200"
+          >
+            {roadmap.intro}
+          </p>
+        </div>
+      </div>
 
+      <div class="mx-auto max-w-3xl">
+        {roadmap.items.map((item, i) => (
+          <div
+            class="relative flex gap-6 pb-12 last:pb-0"
+            data-aos="fade-up-sm"
+            data-aos-delay={(i + 1) * 100}
+          >
+            <div class="flex flex-col items-center">
+              <div class="relative z-10 flex items-center justify-center w-10 h-10 rounded-full border-2 border-brand bg-white shadow-[0_0_12px_rgba(36,171,157,0.2)]">
+                <span class="text-sm font-bold text-brand">{item.number}</span>
+              </div>
+              {i < roadmap.items.length - 1 && (
+                <div class="flex-1 w-[2px] bg-gradient-to-b from-brand/40 to-brand/10 mt-2" />
+              )}
+            </div>
+            <div class="flex-1 pt-1.5">
+              <h3 class="mb-2 text-lg font-semibold">{item.title}</h3>
+              <p class="text-sm text-light leading-relaxed mb-3">{item.description}</p>
+              {item.sub_heading && (
+                <p class="text-xs font-semibold text-dark mb-2">{item.sub_heading}</p>
+              )}
+              {item.sub_points && (
+                <ul class="space-y-2">
+                  {item.sub_points.map((sp) => (
+                    <li class="flex items-start gap-2">
+                      <div class="mt-1.5 flex-shrink-0 w-1.5 h-1.5 rounded-full bg-brand" />
+                      <p class="text-sm text-light leading-relaxed">
+                        <strong class="text-dark">{sp.bold}:</strong> {sp.text}
+                      </p>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+  <!-- /Roadmap -->
+
+  <!-- CTA: Speak to a Project Architect -->
+  <section class="mx-4 overflow-hidden section">
+    <div
+      data-aos="fade-up"
+      data-aos-delay="100"
+      class="container relative px-8 py-12 text-white bg-primary sm:px-16 sm:py-14 lg:px-24 lg:py-20 rounded-xl overflow-hidden"
+    >
+      <div class="absolute inset-0 bg-gradient-to-br from-primary via-[#0d1117] to-primary rounded-xl"></div>
+      <div class="absolute inset-0 opacity-[0.06] rounded-xl" style="background-image: url('data:image/svg+xml,%3Csvg width=&quot;60&quot; height=&quot;60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cpath d=&quot;M0 30h60M30 0v60&quot; stroke=&quot;%23fff&quot; stroke-width=&quot;0.5&quot; fill=&quot;none&quot;/%3E%3C/svg%3E');"></div>
+      <div class="absolute -top-20 -right-20 w-[350px] h-[350px] rounded-full bg-brand/10 blur-3xl pointer-events-none" />
+
+      <div class="absolute bottom-0 left-1/2 w-2/3 pointer-events-none" style="transform: translateY(50%);">
+        <img
+          src="/images/cta/cta-img-1.png"
+          alt=""
+          class="w-full cta-rotate-animation opacity-90"
+          style="filter: sepia(1) hue-rotate(130deg) saturate(8) brightness(1);"
+        />
+      </div>
+      <img
+        src="/images/cta/cta-img-2.png"
+        alt=""
+        class="w-1/3 absolute top-[10%] -left-[10%] opacity-90 pointer-events-none"
+        style="filter: sepia(1) hue-rotate(130deg) saturate(8) brightness(1);"
+      />
+      <img
+        src="/images/cta/cta-img-2.png"
+        alt=""
+        class="w-1/3 absolute top-[10%] -right-[10%] opacity-90 pointer-events-none"
+        style="filter: sepia(1) hue-rotate(130deg) saturate(8) brightness(1);"
+      />
+
+      <div class="relative z-10">
+        <h2
+          class="pb-4 text-center text-white"
+          data-aos="fade-up-sm"
+          data-aos-delay="200"
+          set:html={markdownify(cta.title)}
+        />
+        <p
+          class="mx-auto max-w-2xl pb-8 text-center text-white/60"
+          data-aos="fade-up-sm"
+          data-aos-delay="300"
+        >
+          {cta.description}
+        </p>
+        <p
+          class="mx-auto max-w-md pb-6 text-center text-sm text-white/40"
+          data-aos="fade-up-sm"
+          data-aos-delay="350"
+        >
+          Design, deploy, and operationalize AI infrastructure with Amalgamy.
+        </p>
+        <div
+          class="flex flex-wrap justify-center gap-4"
+          data-aos="fade-up-sm"
+          data-aos-delay="400"
+        >
+          <a
+            href={cta.button_primary.link}
+            class="group relative z-10 inline-flex items-center gap-2 px-7 py-3 text-sm font-semibold text-white rounded-full bg-brand border border-brand/80 shadow-[0_1px_2px_rgba(0,0,0,0.2),0_0_20px_rgba(36,171,157,0.15)] hover:shadow-[0_1px_2px_rgba(0,0,0,0.2),0_0_30px_rgba(36,171,157,0.25)] hover:bg-brand/90 transition-all duration-300"
+          >
+            {cta.button_primary.label}
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-0.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+          <a
+            href={cta.button_secondary.link}
+            class="group relative z-10 inline-flex items-center gap-2 px-7 py-3 text-sm font-semibold text-white/90 rounded-full border border-white/[0.12] bg-white/[0.04] backdrop-blur-sm hover:bg-white/[0.08] hover:border-white/[0.2] transition-all duration-300"
+          >
+            {cta.button_secondary.label}
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-0.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- /CTA -->
+
+  <!-- JSON-LD: SoftwareApplication -->
   <script type="application/ld+json" set:html={JSON.stringify({
     "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": faqs.data.faqs.map((f: { question: string; answer: string }) => ({
-      "@type": "Question",
-      "name": f.question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": f.answer.replace(/<[^>]*>/g, '')
-      }
-    }))
+    "@type": "SoftwareApplication",
+    "name": "Amalgamy",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Cloud",
+    "description": description,
+    "url": "https://amalgamy.ai",
+    "offers": {
+      "@type": "Offer",
+      "availability": "https://schema.org/InStock",
+      "priceCurrency": "USD"
+    },
+    "creator": {
+      "@type": "Organization",
+      "name": "ThisWay Global",
+      "url": "https://thiswayglobal.com"
+    }
   })} />
-
-  <script type="application/ld+json" set:html={JSON.stringify({
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    "name": "ThisWay Global Products",
-    "itemListElement": products.map((p: any, i: number) => ({
-      "@type": "ListItem",
-      "position": i + 1,
-      "item": {
-        "@type": "Product",
-        "name": p.data.title,
-        "description": p.data.contact_1.replace(/<[^>]*>/g, ''),
-        "brand": {
-          "@type": "Brand",
-          "name": "ThisWay Global"
-        }
-      }
-    }))
-  })} />
+  <style is:global>
+    .hero-gradient-text {
+      color: #fff;
+    }
+    .hero-gradient-text strong {
+      color: #9ca3af;
+      font-weight: inherit;
+    }
+  </style>
 </Base>

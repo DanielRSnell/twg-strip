@@ -1,0 +1,211 @@
+---
+import CustomAccordion from "@/helpers/CustomAccordion";
+import Base from "@/layouts/Base.astro";
+import { getSinglePage } from "@/lib/contentParser.astro";
+import { markdownify } from "@/lib/utils/textConverter";
+import CallToAction from "@/partials/CallToAction.astro";
+import Testimonial from "@/partials/Testimonial.astro";
+import { Icon } from "astro-icon/components";
+import type { CollectionEntry } from "astro:content";
+import { getEntry } from "astro:content";
+
+const serviceIndex = await getEntry("service", "-index");
+const { title, banner_title, description, meta_title, button } =
+  serviceIndex.data as CollectionEntry<"services">["data"];
+const testimonial = await getEntry("sections", "testimonial");
+const call_to_action = await getEntry("sections", "call-to-action");
+const products = await getSinglePage("service");
+const faqs = await getEntry("sections", "faq");
+---
+
+<Base title={title} meta_title={meta_title} description={description}>
+  <section class="relative overflow-hidden bg-primary pt-[100px] pb-[60px] lg:pt-[120px] lg:pb-[80px]">
+    <div class="absolute inset-0 bg-gradient-to-br from-primary via-[#0d1117] to-primary"></div>
+    <div class="absolute inset-0 opacity-[0.03]" style="background-image: url('data:image/svg+xml,%3Csvg width=&quot;60&quot; height=&quot;60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cpath d=&quot;M0 30h60M30 0v60&quot; stroke=&quot;%23fff&quot; stroke-width=&quot;0.5&quot; fill=&quot;none&quot;/%3E%3C/svg%3E');"></div>
+    <div class="absolute -top-20 -right-20 w-[350px] h-[350px] rounded-full bg-brand/10 blur-3xl pointer-events-none"></div>
+    <div class="container relative z-10">
+      <div class="items-center row gy-5">
+        <div class="lg:col-7">
+          <div
+            class="inline-flex items-center gap-2 px-4 py-2 mb-8 text-sm font-medium text-white/90 rounded-full border border-white/[0.08] bg-white/[0.04] backdrop-blur-sm shadow-[0_0_20px_rgba(36,171,157,0.08)]"
+            data-aos="fade-right-sm"
+            data-aos-delay="50"
+          >
+            <span class="inline-block w-1.5 h-1.5 rounded-full bg-brand shadow-[0_0_6px_rgba(36,171,157,0.6)]"></span>
+            Products & Solutions
+          </div>
+          <h1
+            class="mb-6 text-white"
+            data-aos="fade-right-sm"
+            data-aos-delay="100"
+            set:html={markdownify(banner_title)}
+          />
+          <p
+            class="mb-10 max-w-xl text-lg leading-relaxed text-white/60"
+            data-aos="fade-right-sm"
+            data-aos-delay="200"
+            set:html={markdownify(description)}
+          />
+          <div
+            class="flex flex-wrap gap-4"
+            data-aos="fade-right-sm"
+            data-aos-delay="300"
+          >
+            {
+              button.enable && (
+                <a
+                  href={button.link}
+                  class="group relative inline-flex items-center gap-2 px-7 py-3 text-sm font-semibold text-white rounded-full bg-brand border border-brand/80 shadow-[0_1px_2px_rgba(0,0,0,0.2),0_0_20px_rgba(36,171,157,0.15)] hover:shadow-[0_1px_2px_rgba(0,0,0,0.2),0_0_30px_rgba(36,171,157,0.25)] hover:bg-brand/90 transition-all duration-300"
+                >
+                  {button.label}
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-0.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                </a>
+              )
+            }
+          </div>
+        </div>
+        <div class="hidden lg:block lg:col-5">
+          <img
+            src="/images/infrastructure/data-center-dark.svg"
+            alt="AI Infrastructure"
+            class="w-full h-auto drop-shadow-[0_0_30px_rgba(36,171,157,0.15)]"
+            data-aos="fade-left-sm"
+            data-aos-delay="200"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div
+        class="flex flex-col gap-20 mx-auto max-w-xl lg:gap-24 xl:gap-32 lg:max-w-full"
+      >
+        {
+          products.map((product, i: number) => (
+            <div class="flex flex-col gap-10 justify-between items-center lg:flex-row">
+              <div class={`lg:w-[60%] w-full ${i % 2 !== 0 && "lg:order-2"}`}>
+                <h3
+                  class="pb-4 text-4xl"
+                  data-aos="fade-up-sm"
+                  data-aos-delay="100"
+                  set:html={product.data.title}
+                />
+                <p
+                  class="pb-4 text-light leading-relaxed"
+                  data-aos="fade-up-sm"
+                  data-aos-delay="200"
+                  set:html={product.data.contact_1}
+                />
+                <p
+                  class="pb-8 text-light leading-relaxed"
+                  data-aos="fade-up-sm"
+                  data-aos-delay="300"
+                  set:html={product.data.contact_2}
+                />
+                {product.data.button.enable && (
+                  <a
+                    href={product.data.button.link}
+                    class="group inline-flex items-center gap-2 rounded-full px-6 py-2.5 text-sm font-semibold text-white bg-brand border border-brand/80 shadow-sm hover:bg-brand/90 transition-all duration-300"
+                    data-aos="fade-up-sm"
+                    data-aos-delay="400"
+                    {...(product.data.button.link.startsWith('http') && {
+                      target: '_blank',
+                      rel: 'noopener noreferrer'
+                    })}
+                  >
+                    {product.data.button.label}
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-0.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                  </a>
+                )}
+              </div>
+              <div class={`lg:w-[40%] w-full`}>
+                <div class="relative p-16 rounded-2xl border border-border/60 bg-white shadow-sm overflow-hidden">
+                  <div class="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-brand/60 via-brand to-brand/60"></div>
+                  <Icon
+                    name={product.data.image}
+                    class={`h-auto w-full mx-auto ${
+                      i !== products.length - 1 ? "spin-animation" : ""
+                    }`}
+                    data-aos="zoom-in"
+                    data-aos-delay="100"
+                    data-aos-duration="1000"
+                  />
+                </div>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section bg-primary" hidden>
+    <div class="container text-white">
+      <div class="pb-24 lg:pb-28">
+        <div class="flex flex-col gap-10 justify-center">
+          <div>
+            <h2
+              class="pb-4 text-center text-white"
+              data-aos="fade-up-sm"
+              data-aos-delay="100"
+              set:html={markdownify(testimonial.data.homepage_title)}
+            />
+            <p
+              class="mx-auto max-w-xl text-center text-theme-light/80"
+              data-aos="fade-up-sm"
+              data-aos-delay="200"
+              set:html={markdownify(testimonial.data.content)}
+            />
+          </div>
+
+          <Testimonial
+            testimonials={testimonial.data.testimonials.slice(0, 3)}
+          />
+
+          <div class="inline-block text-center">
+            <a href="/reviews" class="btn btn-outline-secondary">
+              Read All Reviews
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CustomAccordion faqs={faqs.data} client:only="react" />
+  <CallToAction call_to_action={call_to_action} />
+
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqs.data.faqs.map((f: { question: string; answer: string }) => ({
+      "@type": "Question",
+      "name": f.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": f.answer.replace(/<[^>]*>/g, '')
+      }
+    }))
+  })} />
+
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "ThisWay Global Products",
+    "itemListElement": products.map((p: any, i: number) => ({
+      "@type": "ListItem",
+      "position": i + 1,
+      "item": {
+        "@type": "Product",
+        "name": p.data.title,
+        "description": p.data.contact_1.replace(/<[^>]*>/g, ''),
+        "brand": {
+          "@type": "Brand",
+          "name": "ThisWay Global"
+        }
+      }
+    }))
+  })} />
+</Base>
