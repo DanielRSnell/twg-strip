@@ -1,49 +1,52 @@
 ---
 # Banner
 banner:
-  title: "Control Your Infrastructure.\n**Shape your AI Future.**"
-  content: "True **AI independence** belongs to enterprises and institutions with the **freedom** to build and run their own systems.\n\nThisWayGlobal provides the definitive blueprint, delivering priority access to high-demand compute, Amalgamy, our unified AI and HPC Operating System,  and local operational capability with workforce enablement."
+  title: "Control Your AI Infrastructure.\n**Advance your Mission.**"
+  content: "ThisWayGlobal helps enterprises, governments, and research institutions build and operate AI infrastructure they control, through priority access to high-demand compute, Amalgamy's AI/HPC orchestration layer, and workforce upskilling programs."
   button:
     enable: true
-    label: "Learn More"
-    link: "/products"
-  button_secondary:
-    enable: true
-    label: "Contact Us"
+    label: "Speak to a Project Architect"
     link: "/contact"
+
+# What we deliver
+value_props:
+  columns:
+    - title: "Secure the compute"
+      text: "Get priority access to high-demand AI and HPC infrastructure."
+    - title: "Orchestrate the environment"
+      text: "Deploy Amalgamy to unify compute, data, and policy for improved security, utilization, and control."
+    - title: "Build operational capability"
+      text: "Upskill local teams to build, operate, govern, and grow AI infrastructure over time."
+  result: "The result: AI capability that stays under your control, advances your mission, and strengthens your regional economy."
 
 # Social Proof
 social_proof:
   title: "From Vision to Deployed AI systems"
-  subtitle: "ThisWayGlobal is trusted by leading government, defense, and research institutions to build their own AI infrastructure and deploy it at scale."
-  logos:
-    - name: "State of Texas"
-      domain: "texas.gov"
-    - name: "Texas Tech University"
-      domain: "ttu.edu"
-    - name: "Texas A&M University (TAMU IGNITE)"
-      domain: "tamu.edu"
-    - name: "Texas State Technical College (TSTC)"
-      domain: "tstc.edu"
-    - name: "Naval Postgraduate School (NPS)"
-      domain: "nps.edu"
-  callout: "Texas Sovereign AI Data & Research Center"
-  callout_stats: "150,000 sq. ft. | 15 MW operational capacity | scaling to 50 MW | **early access to NVIDIA GB300-class GPUs**"
+  subtitle: "Texas Tech University"
+  case_study:
+    description: "Texas Tech University is among the first institutions in the country to deploy the NVIDIA GB300 NVL72, bypassing current market GPU access limitations to leapfrog directly to the most advanced supercomputing architecture available. Amalgamy provides the intelligent OS layer managing workload scheduling, policy enforcement, and infrastructure awareness across the entire deployment, ensuring the most advanced academic supercomputing environment in the country performs at its full potential."
+    quote: "Texas Tech is building AI infrastructure that has to perform at the highest level, for research, for industry, and for the state of Texas. ThisWayGlobal is helping us to ensure we have the operational intelligence to match the ambition of what we've built. This is world-class hardware, managed by world-class software."
+    attribution: "Texas Tech University"
+
+# Amalgamy
+amalgamy:
+  title: "Amalgamy: Unified AI and HPC **Operating System**"
+  intro: "AI infrastructure breaks down when compute, data, and policy systems operate as fragmented silos. The result is the **Utilization Illusion**: high-demand GPUs appear available on paper while real work stalls behind data movement, scheduling conflicts, policy reviews, and IT handoffs."
+  capabilities:
+    - title: "Intelligent Workload Scheduling"
+      text: "Route jobs to the right compute based on availability, requirements, and policy."
+    - title: "Policy-Driven Security & Compliance"
+      text: "Enforce governance without slowing down approved research and production workflows."
+    - title: "Integration with Existing Infrastructure"
+      text: "Work across the AI, HPC, data, and workflow systems institutions already use."
+  button:
+    label: "Explore Amalgamy Platform"
+    link: "/products"
 
 # Blueprint to Bluelight
 blueprint:
   title: "Blueprint to Bluelight"
-  description: "Whether you are starting from the ground up or have existing systems, we eliminate execution risk by guiding institutions from blueprint (infrastructure design) to bluelight (fully operational AI systems)."
-  points:
-    - title: "Priority access"
-      text: "to high-demand compute resources."
-    - title: "Deployment"
-      text: "of Amalgamy, our unified AI and HPC operating system."
-    - title: "integration"
-      text: "of compute, data, and operational workflows."
-    - title: "Cultivation"
-      text: "of your institutional talent pipeline."
-  footer: "Once operational, we connect institutions into a unified infrastructure ecosystem that enables coordinated scaling and shared capacity where appropriate."
+  description: "Whether you are starting from the ground up, modernizing existing infrastructure, or rescuing a project already in motion, ThisWay Global helps move AI infrastructure from plan to operational capability."
   button:
     label: "Learn more"
     link: "/products"
@@ -52,62 +55,41 @@ blueprint:
 tracks:
   title: "Built for where you are"
   track_a:
-    title: "If You Already Have GPU and HPC Infrastructure"
-    description: "Amalgamy works with existing infrastructure environments without changing how researchers work.\n\nIt improves performance, utilization, and control by:"
-    points:
-      - title: "Decoupling data transfers from compute:"
-        text: "Move and stage data ahead of time so GPUs spend their time running workloads—not wasting cycles on data transfer."
-      - title: "Unifying workloads:"
-        text: "Run low-latency agentic AI applications and high-precision batch HPC workloads on the same infrastructure without performance tradeoffs."
-      - title: "Achieving zero-click compliance:"
-        text: "Dynamically isolate secure workloads without forcing you to build rigid, inefficient hardware partitions."
+    title: "Modernize what you have"
+    description: "Improve utilization across existing GPU, HPC, and data environments without forcing teams to abandon familiar workflows."
   track_b:
-    title: "If You Are Building New or Expanding Infrastructure"
-    description: "For institutions launching new initiatives or scaling capacity, our blueprints de-risk your path from initial design to operational reality."
-    points:
-      - title: "Accelerated Deployment:"
-        text: "Skip the engineering trial-and-error with pre-validated infrastructure planning."
-      - title: "Multi-Institution Models:"
-        text: "Enable scalable, partner-based infrastructure frameworks across systems."
-      - title: "Pooled Environments:"
-        text: "Establish shared or pooled compute environments across your entire network to maximize asset efficiency from day one."
+    title: "Build what comes next"
+    description: "Coordinate compute access, facility readiness, Amalgamy deployment, governance, and workforce readiness."
+
+# Empower Your Teams
+empower:
+  title: "Empower Your Teams"
+  description: "Build the workforce behind your AI future.\n\nThisWay Global helps institutions grow the local talent needed to operate, govern, and expand advanced AI infrastructure. Through hands-on upskilling programs and Living Lab experiences, teams learn on production-grade systems and turn infrastructure investment into lasting capability."
+  button:
+    label: "Learn more"
+    link: "/products"
 
 # Sovereign Co-Op Framework
 coop:
-  title: "Join the Sovereign Co-Op Framework"
-  description: "Institutions can participate in a shared infrastructure model designed to scale securely across a trusted network.\n\nThis enables:"
+  title: "Participate in the Sovereign AI **Co-op Framework**"
+  subtitle: "Share capacity without surrendering control."
+  description: "The Sovereign AI Co-op is the business arrangement that lets institutions contribute, access, and monetize compute capacity across a governed AI infrastructure network."
   points:
-    - title: "Total autonomy:"
-      text: "Full operational and governance control always remains entirely with the institution that owns the infrastructure."
-    - title: "Monetization of Downtime:"
-      text: "Contribution of idle compute capacity into a broader, trusted network."
-    - title: "Elastic Scaling:"
-      text: "Access to liquid computing credits for intense, burst-demand workloads."
-
-# Empower Your Team
-empower:
-  title: "Empower Your Team With Operational Capabilities"
-  description: "Every deployment is designed to become a long-term institutional capability—not just a temporary hardware rollout. We work with regional partners to embed operational expertise directly into your teams:"
-  points:
-    - title: "Living Lab Models:"
-      text: "Hands-on AI infrastructure training environments through our Watts2Works program."
-    - title: "Educational Partnerships:"
-      text: "Academic pipelines with universities, technical colleges, and workforce programs."
-    - title: "Production Training:"
-      text: "Practical, day-one instruction on active, production-grade AI infrastructure systems."
+    - title: "R1 Institutions"
+      text: "Anchor regional capability."
+    - title: "Industry Partners"
+      text: "Join for priority access."
+    - title: "Capacity Buyers"
+      text: "Access excess compute on terms designed to be more flexible than hyperscalers or neoclouds."
+  button:
+    label: "Explore Co-op deployment options"
+    link: "/contact"
 
 # CTA
 cta_section:
   title: "Own Your AI Future."
-  description: "If you are responsible for building the next generation of AI capability—at a national, institutional, or enterprise level—we help you move from vision to operational reality."
+  description: "If you are responsible for building the next generation of AI capability, at a national, institutional, or enterprise level, we help you move from vision to operational reality."
   subtitle: "Speak to a Project Architect"
-  steps:
-    - label: "Assess"
-      text: "existing infrastructure or new build requirements."
-    - label: "Design"
-      text: "your custom blueprint-to-bluelight execution plan."
-    - label: "Align"
-      text: "your compute, orchestration, and operational capabilities."
   button:
     label: "Speak to a Project Architect"
     link: "/contact"

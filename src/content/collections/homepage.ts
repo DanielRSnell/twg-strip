@@ -6,6 +6,11 @@ const buttonSchema = z.object({
   link: z.string(),
 });
 
+const linkSchema = z.object({
+  label: z.string(),
+  link: z.string(),
+});
+
 const titledPointSchema = z.object({
   title: z.string(),
   text: z.string(),
@@ -22,26 +27,43 @@ export const homeCollection = defineCollection({
       brands: z.array(z.string()).optional(),
     }),
 
+    value_props: z.object({
+      columns: z.array(z.object({
+        title: z.string(),
+        text: z.string(),
+      })),
+      result: z.string(),
+    }).optional(),
+
     social_proof: z.object({
       title: z.string(),
       subtitle: z.string(),
       logos: z.array(z.object({
         name: z.string(),
         domain: z.string(),
-      })),
-      callout: z.string(),
+      })).optional(),
+      callout: z.string().optional(),
       callout_stats: z.string().optional(),
+      case_study: z.object({
+        description: z.string(),
+        quote: z.string(),
+        attribution: z.string(),
+      }).optional(),
+    }).optional(),
+
+    amalgamy: z.object({
+      title: z.string(),
+      intro: z.string(),
+      capabilities: z.array(titledPointSchema),
+      button: linkSchema,
     }).optional(),
 
     blueprint: z.object({
       title: z.string(),
       description: z.string(),
-      points: z.array(titledPointSchema),
-      footer: z.string(),
-      button: z.object({
-        label: z.string(),
-        link: z.string(),
-      }),
+      points: z.array(titledPointSchema).optional(),
+      footer: z.string().optional(),
+      button: linkSchema,
     }).optional(),
 
     tracks: z.object({
@@ -49,72 +71,40 @@ export const homeCollection = defineCollection({
       track_a: z.object({
         title: z.string(),
         description: z.string(),
-        points: z.array(titledPointSchema),
+        points: z.array(titledPointSchema).optional(),
       }),
       track_b: z.object({
         title: z.string(),
         description: z.string(),
-        points: z.array(titledPointSchema),
+        points: z.array(titledPointSchema).optional(),
       }),
+      button: linkSchema.optional(),
     }).optional(),
 
     coop: z.object({
       title: z.string(),
+      subtitle: z.string().optional(),
       description: z.string(),
       points: z.array(titledPointSchema),
+      button: linkSchema.optional(),
     }).optional(),
 
     empower: z.object({
       title: z.string(),
       description: z.string(),
-      points: z.array(titledPointSchema),
+      points: z.array(titledPointSchema).optional(),
+      button: linkSchema.optional(),
     }).optional(),
 
     cta_section: z.object({
       title: z.string(),
       description: z.string(),
-      subtitle: z.string(),
+      subtitle: z.string().optional(),
       steps: z.array(z.object({
         label: z.string(),
         text: z.string(),
-      })),
-      button: z.object({
-        label: z.string(),
-        link: z.string(),
-      }),
-    }).optional(),
-
-    // Legacy fields (kept optional for backwards compatibility)
-    service: z.object({
-      title: z.string(),
-      services: z.array(
-        z.object({
-          title: z.string(),
-          image: z.string(),
-          content: z.string(),
-          button: buttonSchema,
-        })
-      ),
-    }).optional(),
-    feature: z.object({
-      title: z.string(),
-      content: z.string(),
-      features: z.array(
-        z.object({
-          title: z.string(),
-          description: z.string(),
-          card_content: z.string(),
-          icon: z.string(),
-          image: z.string(),
-        })
-      ),
-    }).optional(),
-    about: z.object({
-      title: z.string(),
-      content: z.string(),
-      content_2: z.string(),
-      image: z.string(),
-      button: buttonSchema,
+      })).optional(),
+      button: linkSchema,
     }).optional(),
   }),
 });

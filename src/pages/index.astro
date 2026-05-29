@@ -3,10 +3,9 @@ import Base from "@/layouts/Base.astro";
 import { markdownify } from "@/lib/utils/textConverter";
 import { getEntry } from "astro:content";
 import HeroInfographic from "@/helpers/HeroInfographic";
-import ExternalLogo from "@/base/ExternalLogo.astro";
 
 const homepage = await getEntry("homepage", "-index");
-const { banner, social_proof, blueprint, tracks, coop, empower, cta_section } = homepage.data;
+const { banner, value_props, social_proof, amalgamy, blueprint, tracks, coop, empower, cta_section } = homepage.data;
 ---
 
 <Base>
@@ -62,144 +61,169 @@ const { banner, social_proof, blueprint, tracks, coop, empower, cta_section } = 
   </section>
   <!-- /Banner -->
 
-  <!-- Social Proof -->
-  {social_proof && (
+  <!-- What We Deliver -->
+  {value_props && (
     <section class="section">
+      <div class="container">
+        <div class="grid gap-6 lg:grid-cols-3 mb-8">
+          {value_props.columns.map((col, i) => (
+            <div
+              class="relative p-8 rounded-2xl border border-border/60 bg-white shadow-sm overflow-hidden"
+              data-aos="fade-up-sm"
+              data-aos-delay={(i + 1) * 100}
+            >
+              <div class="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-brand/40 via-brand/80 to-brand/40" />
+              <h3 class="mb-3 text-lg font-semibold">{col.title}</h3>
+              <p class="text-sm text-light leading-relaxed">{col.text}</p>
+            </div>
+          ))}
+        </div>
+        <p
+          class="text-center text-lg font-semibold text-dark"
+          data-aos="fade-up-sm"
+          data-aos-delay="400"
+          set:html={markdownify(value_props.result)}
+        />
+      </div>
+    </section>
+  )}
+  <!-- /What We Deliver -->
+
+  <!-- Social Proof / Case Study -->
+  {social_proof && (
+    <section class="section pt-0">
       <div class="container">
         <div class="justify-center mb-8 row">
           <div class="lg:col-8">
             <h2
-              class="pb-4 text-center"
+              class="pb-2 text-center"
               data-aos="fade-up-sm"
               data-aos-delay="100"
               set:html={markdownify(social_proof.title)}
             />
             <p
-              class="text-center text-light"
+              class="text-center text-xl font-semibold text-brand"
               data-aos="fade-up-sm"
               data-aos-delay="200"
-              set:html={markdownify(social_proof.subtitle)}
-            />
+            >
+              {social_proof.subtitle}
+            </p>
           </div>
         </div>
 
-        <div
-          class="flex items-stretch justify-center mx-auto max-w-3xl rounded-xl border border-border/60 bg-white shadow-sm overflow-hidden divide-x divide-border/60 mb-8"
-          data-aos="fade-up-sm"
-          data-aos-delay="300"
-        >
-          {social_proof.logos.map((logo) => {
-            const isTstc = logo.domain === "tstc.edu";
-            return (
-              <div class="flex-1 flex items-center justify-center py-6 px-5 hover:bg-theme-light/40 transition-colors duration-300">
-                <ExternalLogo
-                  domain={logo.domain}
-                  name={logo.name}
-                  height={isTstc ? 56 : 44}
-                  width={isTstc ? 140 : 110}
-                  class={`object-contain ${isTstc ? "max-h-14" : "max-h-11"}`}
-                />
+        {social_proof.case_study && (
+          <div
+            class="relative rounded-2xl bg-primary overflow-hidden p-8 lg:p-12"
+            data-aos="fade-up-sm"
+            data-aos-delay="300"
+          >
+            <div class="absolute inset-0 bg-gradient-to-br from-primary via-[#0d1117] to-primary"></div>
+            <div class="absolute inset-0 opacity-[0.06]" style="background-image: url('data:image/svg+xml,%3Csvg width=&quot;60&quot; height=&quot;60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cpath d=&quot;M0 30h60M30 0v60&quot; stroke=&quot;%23fff&quot; stroke-width=&quot;0.5&quot; fill=&quot;none&quot;/%3E%3C/svg%3E');"></div>
+            <div class="absolute -top-20 -right-20 w-[350px] h-[350px] rounded-full bg-brand/10 blur-3xl pointer-events-none" />
+            <div class="relative z-10 row gy-8 items-start">
+              <div class="lg:col-7">
+                <p class="text-white/60 leading-relaxed">{social_proof.case_study.description}</p>
               </div>
-            );
-          })}
-        </div>
-
-        <div
-          class="relative rounded-2xl bg-primary overflow-hidden p-8 lg:p-10 text-center"
-          data-aos="fade-up-sm"
-          data-aos-delay="400"
-        >
-          <div class="absolute inset-0 bg-gradient-to-br from-primary via-[#0d1117] to-primary"></div>
-          <div class="absolute inset-0 opacity-[0.06]" style="background-image: url('data:image/svg+xml,%3Csvg width=&quot;60&quot; height=&quot;60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cpath d=&quot;M0 30h60M30 0v60&quot; stroke=&quot;%23fff&quot; stroke-width=&quot;0.5&quot; fill=&quot;none&quot;/%3E%3C/svg%3E');"></div>
-          <div class="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-brand/0 via-brand/80 to-brand/0" />
-          <div class="absolute -top-20 -right-20 w-[350px] h-[350px] rounded-full bg-brand/10 blur-3xl pointer-events-none" />
-          <div class="relative z-10">
-            <p class="mb-4 text-xl font-bold text-white" set:html={markdownify(social_proof.callout)} />
-            {social_proof.callout_stats && (
-              <div class="flex flex-wrap justify-center gap-3 text-sm">
-                {social_proof.callout_stats.split(' | ').map((stat, i, arr) => (
-                  <span class="flex items-center gap-3">
-                    <span class="text-white/50 [&>strong]:text-brand [&>strong]:font-semibold" set:html={markdownify(stat.trim())} />
-                    {i < arr.length - 1 && (
-                      <span class="w-[3px] h-[3px] rounded-full bg-brand/50" />
-                    )}
-                  </span>
-                ))}
+              <div class="lg:col-5">
+                <div class="relative p-6 rounded-xl border border-white/[0.08] bg-white/[0.03] backdrop-blur-sm">
+                  <div class="absolute left-0 inset-y-0 w-1 bg-gradient-to-b from-brand/60 via-brand to-brand/60 rounded-l-xl" />
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="text-brand/40 mb-3"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
+                  <p class="text-sm text-white/70 leading-relaxed italic mb-3">{social_proof.case_study.quote}</p>
+                  <p class="text-xs text-brand font-semibold">{social_proof.case_study.attribution}</p>
+                </div>
               </div>
-            )}
-          </div>
-        </div>
-
-        <div
-          class="mt-8 rounded-2xl bg-dark/95 border border-border/20 overflow-hidden flex items-center justify-center aspect-video relative"
-          data-aos="fade-up-sm"
-          data-aos-delay="500"
-        >
-          <div class="absolute inset-0 opacity-[0.04]" style="background-image: url('data:image/svg+xml,%3Csvg width=&quot;60&quot; height=&quot;60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cpath d=&quot;M0 30h60M30 0v60&quot; stroke=&quot;%23fff&quot; stroke-width=&quot;0.5&quot; fill=&quot;none&quot;/%3E%3C/svg%3E');"></div>
-          <div class="text-center relative z-10">
-            <div class="inline-flex items-center justify-center w-16 h-16 rounded-full border-2 border-brand/30 bg-brand/10 mb-4 hover:bg-brand/20 hover:border-brand/50 transition-all duration-300 cursor-pointer">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="text-brand ml-1"><polygon points="5 3 19 12 5 21 5 3"/></svg>
             </div>
-            <p class="text-sm text-white/50">Video testimonial coming soon</p>
           </div>
-        </div>
+        )}
       </div>
     </section>
   )}
   <!-- /Social Proof -->
 
-  <!-- Blueprint to Bluelight -->
-  {blueprint && (
-    <section class="section pt-0">
-      <div class="container">
-        <div class="relative rounded-2xl border border-border/60 bg-white shadow-sm overflow-hidden p-8 lg:p-12">
-          <div class="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-brand/60 via-brand to-brand/60" />
-          <div class="row gy-5 items-start">
-            <div class="lg:col-5">
-              <h2
-                class="mb-6"
-                data-aos="fade-right-sm"
-                data-aos-delay="100"
-                set:html={markdownify(blueprint.title)}
-              />
-              <p
-                class="text-light leading-relaxed"
-                data-aos="fade-right-sm"
-                data-aos-delay="200"
-                set:html={markdownify(blueprint.description)}
-              />
-            </div>
-            <div class="lg:col-7">
-              <div class="mb-5 text-xs font-semibold uppercase tracking-widest text-brand" data-aos="fade-left-sm" data-aos-delay="100">
-                We provide:
-              </div>
-              <div class="flex flex-col gap-4">
-                {blueprint.points.map((point, i) => (
-                  <div
-                    class="flex gap-4 items-start p-4 rounded-xl bg-theme-light/40 border border-border/30"
-                    data-aos="fade-left-sm"
-                    data-aos-delay={(i + 1) * 100}
-                  >
-                    <div class="mt-0.5 flex-shrink-0 w-7 h-7 rounded-full bg-brand/10 flex items-center justify-center">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-brand"><path d="M20 6 9 17l-5-5"/></svg>
-                    </div>
-                    <p class="text-sm text-dark leading-relaxed">
-                      <strong>{point.title}</strong> {point.text}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          <div class="mt-8 pt-8 border-t border-border/40">
-            <p
-              class="text-light leading-relaxed"
+  <!-- Amalgamy -->
+  {amalgamy && (
+    <section class="relative section bg-primary overflow-hidden">
+      <div class="absolute inset-0 bg-gradient-to-br from-primary via-[#0d1117] to-primary"></div>
+      <div class="absolute inset-0 opacity-[0.06]" style="background-image: url('data:image/svg+xml,%3Csvg width=&quot;60&quot; height=&quot;60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cpath d=&quot;M0 30h60M30 0v60&quot; stroke=&quot;%23fff&quot; stroke-width=&quot;0.5&quot; fill=&quot;none&quot;/%3E%3C/svg%3E');"></div>
+      <div class="absolute -top-40 -right-40 w-[500px] h-[500px] rounded-full bg-brand/8 blur-3xl pointer-events-none" />
+      <div class="container relative z-10">
+        <div class="justify-center mb-8 row">
+          <div class="lg:col-8">
+            <h2
+              class="pb-4 text-center text-white"
               data-aos="fade-up-sm"
               data-aos-delay="100"
-              set:html={markdownify(blueprint.footer)}
+              set:html={markdownify(amalgamy.title)}
             />
-            <div class="mt-4" data-aos="fade-up-sm" data-aos-delay="200">
+            <div
+              class="text-center text-white/60 leading-relaxed [&>strong]:text-brand [&>strong]:font-semibold"
+              data-aos="fade-up-sm"
+              data-aos-delay="200"
+              set:html={markdownify(amalgamy.intro)}
+            />
+          </div>
+        </div>
+
+        <div class="mb-4 row">
+          <div class="lg:col-10 mx-auto">
+            <p
+              class="mb-2 text-xs font-semibold uppercase tracking-widest text-brand"
+              data-aos="fade-up-sm"
+              data-aos-delay="250"
+            >
+              Amalgamy closes this gap through three key capabilities
+            </p>
+          </div>
+        </div>
+
+        <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 mb-10">
+          {amalgamy.capabilities.map((cap, i) => (
+            <div
+              class="relative p-8 rounded-2xl border border-white/[0.08] bg-white/[0.03] overflow-hidden"
+              data-aos="fade-up-sm"
+              data-aos-delay={(i + 1) * 100}
+            >
+              <div class="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-brand/40 via-brand/80 to-brand/40" />
+              <h3 class="mb-3 text-lg font-semibold text-white">{cap.title}</h3>
+              <p class="text-sm text-white/50 leading-relaxed">{cap.text}</p>
+            </div>
+          ))}
+        </div>
+
+        <div class="text-center" data-aos="fade-up-sm" data-aos-delay="400">
+          <a
+            href={amalgamy.button.link}
+            class="group inline-flex items-center gap-2 px-7 py-3 text-sm font-semibold text-white rounded-full bg-brand border border-brand/80 shadow-[0_1px_2px_rgba(0,0,0,0.2),0_0_20px_rgba(36,171,157,0.15)] hover:shadow-[0_1px_2px_rgba(0,0,0,0.2),0_0_30px_rgba(36,171,157,0.25)] hover:bg-brand/90 transition-all duration-300"
+          >
+            {amalgamy.button.label}
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-0.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+  )}
+  <!-- /Amalgamy -->
+
+  <!-- Blueprint to Bluelight -->
+  {blueprint && (
+    <section class="section">
+      <div class="container">
+        <div class="justify-center row">
+          <div class="lg:col-8">
+            <h2
+              class="pb-4 text-center"
+              data-aos="fade-up-sm"
+              data-aos-delay="100"
+              set:html={markdownify(blueprint.title)}
+            />
+            <p
+              class="text-center text-light leading-relaxed mb-6"
+              data-aos="fade-up-sm"
+              data-aos-delay="200"
+            >
+              {blueprint.description}
+            </p>
+            <div class="text-center" data-aos="fade-up-sm" data-aos-delay="300">
               <a
                 href={blueprint.button.link}
                 class="group inline-flex items-center gap-1 text-brand font-semibold hover:opacity-80 transition duration-300"
@@ -225,57 +249,66 @@ const { banner, social_proof, blueprint, tracks, coop, empower, cta_section } = 
           data-aos-delay="100"
           set:html={markdownify(tracks.title)}
         />
-        <div class="grid gap-4 lg:grid-cols-2">
+        <div class="grid gap-6 lg:grid-cols-2">
           <div
+            class="relative p-8 lg:p-10 rounded-2xl border border-border/60 bg-white shadow-sm overflow-hidden"
             data-aos="fade-right-sm"
             data-aos-delay="200"
           >
-            <div class="relative h-full p-8 lg:p-10 rounded-2xl border border-border/60 bg-white shadow-sm overflow-hidden">
-              <div class="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-brand/60 via-brand to-brand/60" />
-              <h3 class="mb-4 text-xl font-semibold" set:html={markdownify(tracks.track_a.title)} />
-              <div class="mb-6 text-sm text-light leading-relaxed" set:html={markdownify(tracks.track_a.description)} />
-              <div class="flex flex-col gap-4">
-                {tracks.track_a.points.map((point) => (
-                  <div class="flex gap-3 items-start">
-                    <div class="mt-0.5 flex-shrink-0 w-5 h-5 rounded-full bg-brand/10 flex items-center justify-center">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="text-brand"><path d="M20 6 9 17l-5-5"/></svg>
-                    </div>
-                    <p class="text-sm text-dark leading-relaxed">
-                      <strong>{point.title}</strong> {point.text}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
+            <div class="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-brand/40 via-brand/80 to-brand/40" />
+            <h3 class="mb-4 text-xl font-semibold">{tracks.track_a.title}</h3>
+            <p class="text-sm text-light leading-relaxed">{tracks.track_a.description}</p>
           </div>
-
           <div
+            class="relative p-8 lg:p-10 rounded-2xl border border-border/60 bg-white shadow-sm overflow-hidden"
             data-aos="fade-left-sm"
             data-aos-delay="200"
           >
-            <div class="relative h-full p-8 lg:p-10 rounded-2xl border border-border/60 bg-white shadow-sm overflow-hidden">
-              <div class="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-brand/60 via-brand to-brand/60" />
-              <h3 class="mb-4 text-xl font-semibold" set:html={markdownify(tracks.track_b.title)} />
-              <div class="mb-6 text-sm text-light leading-relaxed" set:html={markdownify(tracks.track_b.description)} />
-              <div class="flex flex-col gap-4">
-                {tracks.track_b.points.map((point) => (
-                  <div class="flex gap-3 items-start">
-                    <div class="mt-0.5 flex-shrink-0 w-5 h-5 rounded-full bg-brand/10 flex items-center justify-center">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="text-brand"><path d="M20 6 9 17l-5-5"/></svg>
-                    </div>
-                    <p class="text-sm text-dark leading-relaxed">
-                      <strong>{point.title}</strong> {point.text}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
+            <div class="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-brand/40 via-brand/80 to-brand/40" />
+            <h3 class="mb-4 text-xl font-semibold">{tracks.track_b.title}</h3>
+            <p class="text-sm text-light leading-relaxed">{tracks.track_b.description}</p>
           </div>
         </div>
       </div>
     </section>
   )}
   <!-- /Built for where you are -->
+
+  <!-- Empower Your Teams -->
+  {empower && (
+    <section class="section">
+      <div class="container">
+        <div class="justify-center row">
+          <div class="lg:col-8">
+            <h2
+              class="pb-4 text-center"
+              data-aos="fade-up-sm"
+              data-aos-delay="100"
+              set:html={markdownify(empower.title)}
+            />
+            <div
+              class="text-center text-light leading-relaxed mb-6"
+              data-aos="fade-up-sm"
+              data-aos-delay="200"
+              set:html={markdownify(empower.description)}
+            />
+            {empower.button && (
+              <div class="text-center" data-aos="fade-up-sm" data-aos-delay="300">
+                <a
+                  href={empower.button.link}
+                  class="group inline-flex items-center gap-1 text-brand font-semibold hover:opacity-80 transition duration-300"
+                >
+                  {empower.button.label}
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-0.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                </a>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </section>
+  )}
+  <!-- /Empower Your Teams -->
 
   <!-- Sovereign Co-Op Framework -->
   {coop && (
@@ -285,14 +318,23 @@ const { banner, social_proof, blueprint, tracks, coop, empower, cta_section } = 
       <div class="absolute -top-40 -right-40 w-[500px] h-[500px] rounded-full bg-brand/8 blur-3xl pointer-events-none" />
       <div class="absolute -bottom-40 -left-40 w-[400px] h-[400px] rounded-full bg-brand/5 blur-3xl pointer-events-none" />
       <div class="container relative z-10">
-        <div class="justify-center mb-8 row">
+        <div class="justify-center mb-4 row">
           <div class="lg:col-8">
             <h2
-              class="pb-4 text-center text-white"
+              class="pb-2 text-center text-white"
               data-aos="fade-up-sm"
               data-aos-delay="100"
               set:html={markdownify(coop.title)}
             />
+            {coop.subtitle && (
+              <p
+                class="pb-4 text-center text-lg text-brand font-semibold"
+                data-aos="fade-up-sm"
+                data-aos-delay="150"
+              >
+                {coop.subtitle}
+              </p>
+            )}
             <div
               class="text-center text-theme-light/70"
               data-aos="fade-up-sm"
@@ -302,7 +344,19 @@ const { banner, social_proof, blueprint, tracks, coop, empower, cta_section } = 
           </div>
         </div>
 
-        <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div class="mb-4 row">
+          <div class="lg:col-10 mx-auto">
+            <p
+              class="mb-2 text-xs font-semibold uppercase tracking-widest text-brand"
+              data-aos="fade-up-sm"
+              data-aos-delay="250"
+            >
+              The Network Ecosystem
+            </p>
+          </div>
+        </div>
+
+        <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 mb-10">
           {coop.points.map((point, i) => (
             <div
               class="relative p-8 rounded-2xl border border-white/[0.08] bg-white/[0.03] overflow-hidden"
@@ -315,64 +369,22 @@ const { banner, social_proof, blueprint, tracks, coop, empower, cta_section } = 
             </div>
           ))}
         </div>
+
+        {coop.button && (
+          <div class="text-center" data-aos="fade-up-sm" data-aos-delay="400">
+            <a
+              href={coop.button.link}
+              class="group inline-flex items-center gap-2 px-7 py-3 text-sm font-semibold text-white rounded-full bg-brand border border-brand/80 shadow-[0_1px_2px_rgba(0,0,0,0.2),0_0_20px_rgba(36,171,157,0.15)] hover:shadow-[0_1px_2px_rgba(0,0,0,0.2),0_0_30px_rgba(36,171,157,0.25)] hover:bg-brand/90 transition-all duration-300"
+            >
+              {coop.button.label}
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-0.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </a>
+          </div>
+        )}
       </div>
     </section>
   )}
   <!-- /Sovereign Co-Op Framework -->
-
-  <!-- Empower Your Team -->
-  {empower && (
-    <section class="section">
-      <div class="container">
-        <div class="justify-center mb-8 row">
-          <div class="lg:col-8">
-            <h2
-              class="pb-4 text-center"
-              data-aos="fade-up-sm"
-              data-aos-delay="100"
-              set:html={markdownify(empower.title)}
-            />
-            <p
-              class="text-center text-light"
-              data-aos="fade-up-sm"
-              data-aos-delay="200"
-              set:html={markdownify(empower.description)}
-            />
-          </div>
-        </div>
-
-        <div class="row gy-5 items-stretch" data-aos="fade-up-sm" data-aos-delay="300">
-          <div class="lg:col-5">
-            <div class="h-full rounded-2xl bg-dark/95 border border-border/20 overflow-hidden flex items-center justify-center relative">
-              <div class="absolute inset-0 opacity-[0.04]" style="background-image: url('data:image/svg+xml,%3Csvg width=&quot;60&quot; height=&quot;60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cpath d=&quot;M0 30h60M30 0v60&quot; stroke=&quot;%23fff&quot; stroke-width=&quot;0.5&quot; fill=&quot;none&quot;/%3E%3C/svg%3E');"></div>
-              <div class="text-center p-8 relative z-10">
-                <div class="inline-flex items-center justify-center w-16 h-16 rounded-full border-2 border-brand/30 bg-brand/10 mb-4 hover:bg-brand/20 hover:border-brand/50 transition-all duration-300 cursor-pointer">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="text-brand ml-1"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                </div>
-                <p class="text-sm text-white/50">Video coming soon</p>
-              </div>
-            </div>
-          </div>
-          <div class="lg:col-7">
-            <div class="flex flex-col gap-4 lg:pl-2">
-              {empower.points.map((point, i) => (
-                <div
-                  class="relative p-6 rounded-xl border border-border/60 bg-white shadow-sm overflow-hidden"
-                  data-aos="fade-left-sm"
-                  data-aos-delay={(i + 1) * 100}
-                >
-                  <div class="absolute left-0 inset-y-0 w-1 bg-gradient-to-b from-brand/60 via-brand to-brand/60" />
-                  <h3 class="text-base font-semibold mb-1 pl-3">{point.title}</h3>
-                  <p class="text-sm text-light leading-relaxed pl-3">{point.text}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  )}
-  <!-- /Empower Your Team -->
 
   <!-- CTA: Own Your AI Future -->
   {cta_section && (
@@ -414,47 +426,25 @@ const { banner, social_proof, blueprint, tracks, coop, empower, cta_section } = 
             data-aos-delay="200"
             set:html={markdownify(cta_section.title)}
           />
-
           <p
-            class="mx-auto max-w-2xl pb-8 text-center text-white/60"
+            class="mx-auto max-w-2xl pb-6 text-center text-white/60"
             data-aos="fade-up-sm"
             data-aos-delay="300"
             set:html={markdownify(cta_section.description)}
           />
-
-          <div class="mx-auto max-w-2xl rounded-2xl border border-white/[0.06] bg-white/[0.03] backdrop-blur-sm p-8 lg:p-10 mb-10"
-            data-aos="fade-up-sm"
-            data-aos-delay="350"
-          >
-          <h3 class="pb-1 text-center text-lg font-semibold text-white">
-            {cta_section.subtitle}
-          </h3>
-          <p class="pb-8 text-center text-xs text-white/40">
-            Start a structured engagement to define your deployment path:
-          </p>
-
-          <div class="relative">
-            <div class="absolute top-[7px] left-0 right-0 h-[2px] bg-gradient-to-r from-brand/0 via-brand/40 to-brand/0" />
-            <div class="flex justify-between relative">
-              {cta_section.steps.map((step, i) => (
-                <div class="flex flex-col items-center" style={`width: ${100 / cta_section.steps.length}%`}>
-                  <div class="relative z-10 w-4 h-4 rounded-full border-2 border-brand bg-primary shadow-[0_0_8px_rgba(36,171,157,0.3)]">
-                    <div class="absolute inset-[3px] rounded-full bg-brand" />
-                  </div>
-                  <div class="mt-4 text-center">
-                    <p class="text-sm font-semibold text-white">{step.label}</p>
-                    <p class="mt-1 text-xs text-white/35 leading-relaxed max-w-[160px] mx-auto">{step.text}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-          </div>
-
+          {cta_section.subtitle && (
+            <p
+              class="mx-auto max-w-md pb-8 text-center text-sm text-white/40"
+              data-aos="fade-up-sm"
+              data-aos-delay="350"
+            >
+              Start a structured engagement to define your deployment path from plan to operational capability.
+            </p>
+          )}
           <div
             class="w-fit mx-auto block"
             data-aos="fade-up-sm"
-            data-aos-delay="500"
+            data-aos-delay="400"
           >
             <a
               href={cta_section.button.link}
