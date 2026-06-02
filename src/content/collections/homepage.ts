@@ -55,6 +55,7 @@ export const homeCollection = defineCollection({
         title: z.string(),
         description: z.string(),
       }),
+      button: linkSchema.optional(),
     }).optional(),
 
     empower: z.object({

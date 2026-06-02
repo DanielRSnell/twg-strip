@@ -64,6 +64,9 @@ tracks:
   track_b:
     title: "Build what comes next"
     description: "Coordinate compute access, facility readiness, Amalgamy deployment, governance, and workforce readiness."
+  button:
+    label: "Learn more"
+    link: "/contact"
 
 # Empower Your Teams
 empower:
