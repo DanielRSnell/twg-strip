@@ -32,7 +32,7 @@ blueprint:
 # Amalgamy
 amalgamy:
   title: "Amalgamy: Unified AI & HPC **Operating System**"
-  intro: "**AI infrastructure breaks down when compute, data, and policy operate in silos.**\n\nThe result is the Utilization Illusion: GPUs appear fully allocated in Slurm, but much of that allocated time is wasted because the GPUs are data-starved, waiting on data movement, data preparation, or slow network reads. Amalgamy operationalizes the Sovereign AI Blueprint by coordinating workload scheduling, data locality, policy enforcement, and infrastructure awareness across AI and HPC environments."
+  intro: "**AI infrastructure breaks down when compute, data, and policy operate in silos.**\n\nAmalgamy operationalizes the Sovereign AI Blueprint by coordinating workload scheduling, data locality, policy enforcement, and infrastructure awareness across AI and HPC environments."
   capabilities:
     - title: "Intelligent workload scheduling"
       text: "Place jobs where compute, data, and policy requirements align leveraging the environments you already support like Slurm and Kubernetes."
