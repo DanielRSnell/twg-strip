@@ -24,31 +24,17 @@ export const homeCollection = defineCollection({
       image: z.string().optional(),
       button: buttonSchema,
       button_secondary: buttonSchema.optional(),
-      brands: z.array(z.string()).optional(),
     }),
 
-    value_props: z.object({
-      columns: z.array(z.object({
-        title: z.string(),
-        text: z.string(),
-      })),
-      result: z.string(),
-    }).optional(),
-
-    social_proof: z.object({
+    blueprint: z.object({
       title: z.string(),
-      subtitle: z.string(),
-      logos: z.array(z.object({
-        name: z.string(),
-        domain: z.string(),
-      })).optional(),
-      callout: z.string().optional(),
-      callout_stats: z.string().optional(),
-      case_study: z.object({
-        description: z.string(),
-        quote: z.string(),
-        attribution: z.string(),
-      }).optional(),
+      description: z.string(),
+      infographic: z.array(z.object({
+        current: z.string(),
+        solution: z.string(),
+        destination: z.string(),
+      })),
+      button: linkSchema,
     }).optional(),
 
     amalgamy: z.object({
@@ -58,26 +44,23 @@ export const homeCollection = defineCollection({
       button: linkSchema,
     }).optional(),
 
-    blueprint: z.object({
-      title: z.string(),
-      description: z.string(),
-      points: z.array(titledPointSchema).optional(),
-      footer: z.string().optional(),
-      button: linkSchema,
-    }).optional(),
-
     tracks: z.object({
       title: z.string(),
+      audiences: z.array(titledPointSchema).optional(),
       track_a: z.object({
         title: z.string(),
         description: z.string(),
-        points: z.array(titledPointSchema).optional(),
       }),
       track_b: z.object({
         title: z.string(),
         description: z.string(),
-        points: z.array(titledPointSchema).optional(),
       }),
+    }).optional(),
+
+    empower: z.object({
+      title: z.string(),
+      subtitle: z.string().optional(),
+      description: z.string(),
       button: linkSchema.optional(),
     }).optional(),
 
@@ -89,21 +72,20 @@ export const homeCollection = defineCollection({
       button: linkSchema.optional(),
     }).optional(),
 
-    empower: z.object({
+    social_proof: z.object({
       title: z.string(),
-      description: z.string(),
-      points: z.array(titledPointSchema).optional(),
-      button: linkSchema.optional(),
+      subtitle: z.string().optional(),
+      case_study: z.object({
+        description: z.string(),
+        quote: z.string(),
+        attribution: z.string(),
+      }).optional(),
     }).optional(),
 
     cta_section: z.object({
       title: z.string(),
       description: z.string(),
       subtitle: z.string().optional(),
-      steps: z.array(z.object({
-        label: z.string(),
-        text: z.string(),
-      })).optional(),
       button: linkSchema,
     }).optional(),
   }),
