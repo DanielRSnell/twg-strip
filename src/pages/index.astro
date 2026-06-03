@@ -31,7 +31,7 @@ const infographicIcons = {
 
 <Base>
   <!-- Banner -->
-  <section class="relative overflow-hidden bg-primary pt-[100px] pb-[80px] lg:pt-[120px] lg:pb-[100px]">
+  <section class="relative overflow-hidden bg-primary pt-[100px] pb-[60px] lg:pt-[120px] lg:pb-[80px]">
     <div class="absolute inset-0 bg-gradient-to-br from-primary via-[#0d1117] to-primary"></div>
     <div class="absolute inset-0 opacity-[0.06]" style="background-image: url('data:image/svg+xml,%3Csvg width=&quot;60&quot; height=&quot;60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cpath d=&quot;M0 30h60M30 0v60&quot; stroke=&quot;%23fff&quot; stroke-width=&quot;0.5&quot; fill=&quot;none&quot;/%3E%3C/svg%3E');"></div>
     <div class="container relative z-10">
@@ -70,6 +70,21 @@ const infographicIcons = {
         </div>
       </div>
     </div>
+    <!-- Creighton Quote (inside hero) -->
+    {social_proof?.case_study && (
+      <div class="container relative z-10 mt-16 lg:mt-20 pb-4">
+        <div class="h-px bg-gradient-to-r from-transparent via-white/10 to-transparent mb-12"></div>
+        <div class="mx-auto max-w-3xl text-center" data-aos="fade-up-sm" data-aos-delay="100">
+          <blockquote class="relative mb-6">
+            <span class="absolute -top-6 left-1/2 -translate-x-1/2 text-6xl lg:text-7xl font-serif text-brand/20 leading-none select-none" aria-hidden="true">&ldquo;</span>
+            <p class="text-lg lg:text-xl font-medium text-white/80 leading-relaxed italic pt-6">
+              {social_proof.case_study.quote}
+            </p>
+          </blockquote>
+          <p class="text-sm font-semibold text-brand/70 tracking-wide">{social_proof.case_study.attribution}</p>
+        </div>
+      </div>
+    )}
   </section>
   <!-- /Banner -->
 
@@ -179,6 +194,9 @@ const infographicIcons = {
     <section class="section overflow-hidden">
       <div class="container">
         <div class="mb-10">
+          <p class="mb-5 text-base text-light italic" data-aos="fade-up-sm">
+            The Sovereign AI Blueprint is the map. <span class="text-brand font-semibold not-italic">Amalgamy</span> is the control layer that makes it operational.
+          </p>
           <div class="mb-3" data-aos="fade-up-sm" data-aos-delay="50">
             <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-brand/20 bg-brand/5 text-brand text-xs font-semibold uppercase tracking-widest">
               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
