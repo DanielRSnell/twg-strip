@@ -68,7 +68,7 @@ export const homeCollection = defineCollection({
     coop: z.object({
       title: z.string(),
       subtitle: z.string().optional(),
-      description: z.string(),
+      description: z.string().optional(),
       points: z.array(titledPointSchema),
       button: linkSchema.optional(),
     }).optional(),
@@ -77,8 +77,9 @@ export const homeCollection = defineCollection({
       title: z.string(),
       subtitle: z.string().optional(),
       case_study: z.object({
-        description: z.string(),
-        quote: z.string(),
+        description: z.string().optional(),
+        quote: z.string().optional(),
+        script: z.string(),
         attribution: z.string(),
       }).optional(),
     }).optional(),

@@ -1,7 +1,7 @@
 ---
 # Banner
 banner:
-  title: "Transform your Sovereign AI vision to reality"
+  title: "Build Sovereign AI infrastructure. Advance your mission"
   content: "Sovereign AI means controlling your data, governing your infrastructure, and enabling secure collaboration between agencies, researchers, and commercial partners.\n\nBuild the AI infrastructure you control with our Sovereign AI Blueprint: a comprehensive plan combining compute, software, workforce capability, and partnership models"
   button:
     enable: true
@@ -32,7 +32,7 @@ blueprint:
 # Amalgamy
 amalgamy:
   title: "Amalgamy: Unified AI & HPC **Operating System**"
-  intro: "**AI infrastructure breaks down when compute, data, and policy operate in silos.**\n\nAmalgamy operationalizes the Sovereign AI Blueprint by coordinating workload scheduling, data locality, policy enforcement, and infrastructure awareness across AI and HPC environments."
+  intro: "Amalgamy operationalizes the Sovereign AI Blueprint by coordinating workload scheduling, data locality, policy enforcement, and infrastructure awareness across AI and HPC environments."
   capabilities:
     - title: "Intelligent workload scheduling"
       text: "Place jobs where compute, data, and policy requirements align leveraging the environments you already support like Slurm and Kubernetes."
@@ -40,7 +40,7 @@ amalgamy:
       text: "Reduce time lost to data movement, preparation, and slow network reads."
     - title: "Policy-driven governance"
       text: "Enforce security and compliance controls and sovereign data policies automatically, without slowing down approved research and production workflows."
-    - title: "Integration with infrastructure awareness"
+    - title: "Infrastructure awareness"
       text: "Understand the real constraints of compute, storage, network, power, and cooling. Work across the AI, HPC, data, and workflow systems institutions already use."
   button:
     label: "Explore the Amalgamy platform"
@@ -81,12 +81,11 @@ empower:
 coop:
   title: "Sovereign AI **Co-Op**"
   subtitle: "Share Capacity Without Surrendering Sovereignty"
-  description: "The Sovereign AI Co-op is the business framework that lets institutions contribute, access, and monetize compute capacity across a governed AI infrastructure network on terms designed to preserve every participant's control over their own environment."
   points:
     - title: "R1 Institutions"
-      text: "Anchor regional sovereign capability."
+      text: "Anchor regional sovereign capability with advanced AI research capacity."
     - title: "Industry Partners"
-      text: "Join for priority access to sovereign infrastructure."
+      text: "Join for priority access to sovereign infrastructure with strong adherence to regulations and protection for intellectual property."
     - title: "Capacity Buyers"
       text: "Access excess compute on terms more flexible than hyperscalers or neoclouds without compromising data sovereignty."
   button:
@@ -98,8 +97,8 @@ social_proof:
   title: "From Vision to Sovereign AI Deployment"
   subtitle: "Texas Tech University System"
   case_study:
-    description: "Texas Tech University is leading the next era of AI in higher education as among one of the first institutions in the country to deploy the NVIDIA GB300 NVL72 systems, bypassing current market GPU access constraints to leapfrogging into being one of academia's most advanced AI and supercomputing environments available. Amalgamy provides the intelligence across the deployment, managing workload scheduling, policy enforcement, and infrastructure awareness so researchers, students, and partners can put that infrastructure to work ensuring the most advanced sovereign AI environment in academia performs to its full potential."
     quote: "At Texas Tech, we are building with the best of the best. ThisWay Global has been our guide from vision to execution, bringing together NVIDIA-powered infrastructure, high-performance computing, AI, and workforce development. We are not standing by and watching this happen around us. We are building it."
+    script: "At Texas Tech, we are building with the best of the best.\n\nThisWay Global has been the guide helping us move from vision to execution. They brought us together with NVIDIA, helped shape the path forward, and are making the pieces come together for artificial intelligence, high-performance computation, and workforce development.\n\nWe are creating opportunities for students who want to be at the cutting edge of AI and technology, for faculty who are knocking on our door to be part of this, and for a workforce that needs new skills as we define this era of AI and education.\n\nTexas has the work ethic, the resources, and the partners to lead. At Texas Tech, we are not standing by and watching this happen around us. We are building it."
     attribution: "Brandon Creighton, Chancellor, Texas Tech University System"
 
 # CTA
