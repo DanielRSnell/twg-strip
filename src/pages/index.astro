@@ -2,8 +2,6 @@
 import Base from "@/layouts/Base.astro";
 import { markdownify } from "@/lib/utils/textConverter";
 import { getEntry } from "astro:content";
-import HeroInfographic from "@/helpers/HeroInfographic";
-
 const homepage = await getEntry("homepage", "-index");
 const { banner, blueprint, amalgamy, tracks, empower, coop, social_proof, cta_section } = homepage.data;
 
@@ -31,663 +29,515 @@ const infographicIcons = {
 
 <Base>
   <!-- Banner -->
-  <section class="relative overflow-hidden bg-primary pt-[100px] pb-[60px] lg:pt-[120px] lg:pb-[80px]">
+  <section class="relative overflow-hidden bg-primary min-h-[85vh] lg:min-h-[90vh] flex flex-col">
     <div class="absolute inset-0 bg-gradient-to-br from-primary via-[#0d1117] to-primary"></div>
     <div class="absolute inset-0 opacity-[0.06]" style="background-image: url('data:image/svg+xml,%3Csvg width=&quot;60&quot; height=&quot;60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cpath d=&quot;M0 30h60M30 0v60&quot; stroke=&quot;%23fff&quot; stroke-width=&quot;0.5&quot; fill=&quot;none&quot;/%3E%3C/svg%3E');"></div>
-    <div class="container relative z-10">
-      <div class="items-center row gy-5">
-        <div class="lg:col-7">
-          <h1
-            class="mb-6 font-extrabold hero-gradient-text"
-            data-aos="fade-right-sm"
-            data-aos-delay="100"
-            set:html={markdownify(banner.title)}
-          />
+    <div class="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-brand/[0.04] blur-3xl pointer-events-none"></div>
+    <div class="absolute -bottom-20 -left-20 w-[400px] h-[400px] rounded-full bg-[#5969FC]/[0.03] blur-3xl pointer-events-none"></div>
+
+    <!-- Unicorn Studio animated background (perf-tuned: half-res, 1x DPI, 30fps, no mouse, off on mobile) -->
+    <div class="absolute inset-0 pointer-events-none unicorn-hero-bg" aria-hidden="true">
+      <div
+        data-us-project="FixNvEwvWwbu3QX9qC3F"
+        data-us-scale="0.5"
+        data-us-dpi="1"
+        data-us-fps="30"
+        data-us-disablemouse="true"
+        data-us-disablemobile="true"
+        data-us-lazyload="true"
+        data-us-production="true"
+      ></div>
+    </div>
+
+    <!-- Hero two-column layout -->
+    <div class="relative z-10 mt-auto pt-[120px] pb-12 lg:pb-16 mx-auto w-full max-w-[1600px] px-6 lg:px-16">
+      <div class="flex flex-col lg:flex-row gap-10 lg:gap-28">
+
+        <!-- Left: Title (top) + Quote (bottom), justified between -->
+        <div class="lg:w-[55%] flex flex-col justify-between gap-10 lg:gap-0">
+          <!-- Title block -->
+          <div>
+            <p
+              class="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-white/40"
+              data-aos="fade-up-sm"
+              data-aos-delay="50"
+            >
+              Sovereign AI Infrastructure
+            </p>
+            <h1
+              class="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-white leading-[1.05] tracking-tight capitalize"
+              data-aos="fade-up-sm"
+              data-aos-delay="100"
+              set:html={markdownify(banner.title)}
+            />
+          </div>
+
+          <!-- Quote block (pushed to bottom on desktop) -->
+          {social_proof?.case_study && (
+            <div data-aos="fade-up-sm" data-aos-delay="300">
+              <div class="h-px bg-gradient-to-r from-white/10 via-white/6 to-transparent mb-8"></div>
+              <div class="flex items-start gap-5">
+                <div class="shrink-0 w-14 h-14 rounded-full bg-white/10 border border-white/10 overflow-hidden">
+                  <img src="/images/team-members/brandon-creighton.webp" alt="Brandon Creighton" class="w-full h-full object-cover" />
+                </div>
+                <div>
+                  <blockquote class="relative mb-3 pl-5 border-l-2 border-brand/30">
+                    <p class="text-sm lg:text-base text-white/60 leading-relaxed italic">
+                      &ldquo;{social_proof.case_study.quote}&rdquo;
+                    </p>
+                  </blockquote>
+                  <p class="pl-5 text-xs font-semibold text-brand/50 tracking-wide">{social_proof.case_study.attribution}</p>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+
+        <!-- Right: Prose content + CTA -->
+        <div class="lg:w-[45%] flex flex-col justify-end">
           <div
-            class="mb-10 max-w-xl text-lg leading-relaxed text-white/60 [&>p]:mb-4 [&>p:last-child]:mb-0"
-            data-aos="fade-right-sm"
+            class="prose prose-invert prose-lg max-w-none mb-10 [&>p]:text-white/50 [&>p]:leading-relaxed [&>p]:mb-5 [&>p:last-child]:mb-0 [&>p:first-child]:text-xl [&>p:first-child]:text-white/70 [&>p:first-child]:font-medium"
+            data-aos="fade-up-sm"
             data-aos-delay="200"
-            set:html={markdownify(banner.content)}
+            set:html={markdownify(banner.content, true)}
           />
           <div
             class="flex flex-wrap gap-4"
-            data-aos="fade-right-sm"
+            data-aos="fade-up-sm"
             data-aos-delay="300"
           >
             {banner.button?.enable && (
               <a
-                class="group relative inline-flex items-center gap-2 px-7 py-3 text-sm font-semibold text-white rounded-full bg-brand border border-brand/80 shadow-[0_1px_2px_rgba(0,0,0,0.2),0_0_20px_rgba(36,171,157,0.15)] hover:shadow-[0_1px_2px_rgba(0,0,0,0.2),0_0_30px_rgba(36,171,157,0.25)] hover:bg-brand/90 transition-all duration-300"
+                class="group inline-flex items-center gap-3 px-7 py-3.5 text-sm font-semibold text-white bg-brand/15 border border-brand/30 backdrop-blur-sm rounded hover:bg-brand/25 hover:border-brand/50 transition-all duration-300 tracking-wide uppercase shadow-[0_0_20px_rgba(36,171,157,0.1)] hover:shadow-[0_0_30px_rgba(36,171,157,0.2)]"
                 href={banner.button.link}
               >
                 {banner.button.label}
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-0.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-1"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
               </a>
             )}
           </div>
         </div>
-        <div class="hidden lg:block lg:col-5">
-          <HeroInfographic client:visible />
-        </div>
+
       </div>
     </div>
-    <!-- Creighton Quote (inside hero) -->
-    {social_proof?.case_study && (
-      <div class="container relative z-10 mt-16 lg:mt-20 pb-4">
-        <div class="h-px bg-gradient-to-r from-transparent via-white/10 to-transparent mb-12"></div>
-        <div class="mx-auto max-w-3xl text-center" data-aos="fade-up-sm" data-aos-delay="100">
-          <blockquote class="relative mb-6">
-            <span class="absolute -top-6 left-1/2 -translate-x-1/2 text-6xl lg:text-7xl font-serif text-brand/20 leading-none select-none" aria-hidden="true">&ldquo;</span>
-            <p class="text-lg lg:text-xl font-medium text-white/80 leading-relaxed italic pt-6">
-              {social_proof.case_study.quote}
-            </p>
-          </blockquote>
-          <p class="text-sm font-semibold text-brand/70 tracking-wide">{social_proof.case_study.attribution}</p>
-        </div>
-      </div>
-    )}
   </section>
   <!-- /Banner -->
 
-  <!-- Sovereign AI Blueprint -->
-  {blueprint && (
-    <section class="section bg-theme-light/40 overflow-hidden">
-      <div class="container">
-        <div class="mx-auto max-w-2xl mb-12">
-          <div class="text-center mb-3" data-aos="fade-up-sm" data-aos-delay="50">
-            <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-brand/20 bg-brand/5 text-brand text-xs font-semibold uppercase tracking-widest">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
-              Blueprint
-            </span>
-          </div>
-          <h2
-            class="pb-4 text-center"
-            data-aos="fade-up-sm"
-            data-aos-delay="100"
-            set:html={markdownify(blueprint.title)}
-          />
-          <p
-            class="text-center text-light leading-relaxed text-lg"
-            data-aos="fade-up-sm"
-            data-aos-delay="200"
-          >
-            {blueprint.description}
+  <!-- Unicorn Studio loader (deferred off the critical path; skipped for reduced-motion) -->
+  <script is:inline>
+    (function () {
+      // Honor reduced-motion: don't load the WebGL background at all.
+      if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      if (window.UnicornStudio) return;
+      window.UnicornStudio = { isInitialized: false };
+
+      function loadUnicorn() {
+        var s = document.createElement("script");
+        s.src = "https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v1.4.29/dist/unicornStudio.umd.js";
+        s.async = true;
+        s.onload = function () {
+          if (!window.UnicornStudio.isInitialized) {
+            UnicornStudio.init();
+            window.UnicornStudio.isInitialized = true;
+          }
+        };
+        (document.head || document.body).appendChild(s);
+      }
+
+      // Defer to idle time so the ~150KB script + WebGL init never blocks first paint / LCP.
+      if ("requestIdleCallback" in window) {
+        requestIdleCallback(loadUnicorn, { timeout: 3000 });
+      } else {
+        window.addEventListener("load", loadUnicorn);
+      }
+    })();
+  </script>
+
+  <!-- Border Grid Content Wrapper -->
+  <div class="grid grid-cols-1 lg:grid-cols-[minmax(60px,1fr)_minmax(0,1200px)_minmax(60px,1fr)] border-t border-black/[0.08]">
+
+    <!-- Left Gutter (patterned) -->
+    <div class="hidden lg:block border-r border-black/[0.08] bg-theme-light/40 gutter-grid"></div>
+
+    <!-- Center Content (solid) -->
+    <div class="bg-body">
+
+      <!-- Connector Statement -->
+      <div class="border-b border-black/[0.08] py-14 lg:py-20 px-6 lg:px-12" data-aos="fade-up-sm">
+        <div class="max-w-3xl mx-auto text-center">
+          <p class="text-2xl lg:text-3xl font-bold text-dark leading-snug">
+            The Sovereign AI Blueprint is the map. <span class="text-brand">Amalgamy</span> is the control layer that makes it operational.
           </p>
         </div>
+      </div>
 
-        <!-- Infographic: Current State -> Blueprint -> Destination -->
+      <!-- Sovereign AI Blueprint -->
+      {blueprint && (
+        <div class="border-b border-black/[0.08]">
+          <!-- Section Header -->
+          <div class="border-b border-black/[0.08] py-10 lg:py-14 px-6 lg:px-12">
+            <div class="mb-4" data-aos="fade-up-sm" data-aos-delay="50">
+              <span class="inline-flex items-center gap-2 px-3 py-1 border border-black/[0.12] text-dark/60 text-xs font-semibold uppercase tracking-widest">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                Blueprint
+              </span>
+            </div>
+            <h2 class="pb-4 text-3xl lg:text-4xl font-bold" data-aos="fade-up-sm" data-aos-delay="100" set:html={markdownify(blueprint.title)} />
+            <p class="max-w-2xl text-light leading-relaxed text-lg" data-aos="fade-up-sm" data-aos-delay="200">{blueprint.description}</p>
+          </div>
 
-        <!-- Mobile: Vertical stacked cards -->
-        <div class="mb-12 lg:hidden space-y-4" data-aos="fade-up-sm" data-aos-delay="300">
-          {blueprint.infographic.map((row, i) => (
-            <div
-              class="rounded-2xl border border-border/50 bg-white p-5 shadow-sm"
-              data-aos="fade-up-sm"
-              data-aos-delay={350 + i * 80}
-            >
-              <!-- Current State -->
-              <div class="flex items-center gap-3 mb-3">
-                <div class="flex-shrink-0 w-9 h-9 rounded-lg border border-border/60 bg-gray-50 flex items-center justify-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-dark/40" set:html={infographicIcons.current[i]} />
-                </div>
-                <div>
-                  <p class="text-[10px] font-bold uppercase tracking-widest text-dark/30 mb-0.5">Current</p>
-                  <span class="text-sm font-medium text-dark/60">{row.current}</span>
-                </div>
+          <!-- Infographic Grid -->
+          <!-- Desktop -->
+          <div class="hidden lg:block">
+            <!-- Column Headers -->
+            <div class="grid grid-cols-3 divide-x divide-black/[0.08] border-b border-black/[0.08]">
+              <div class="py-3.5 px-6 text-center">
+                <p class="text-xs font-bold uppercase tracking-widest text-dark/40">Current State</p>
               </div>
-
-              <!-- Down arrow -->
-              <div class="flex justify-center my-2">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#7c3aed]/40"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
+              <div class="py-3.5 px-6 text-center bg-[#7c3aed]/[0.03]">
+                <p class="text-xs font-bold uppercase tracking-widest text-[#7c3aed]">Sovereign AI Blueprint</p>
               </div>
-
-              <!-- Blueprint Solution -->
-              <div class="flex items-center gap-3 rounded-xl border border-[#7c3aed]/20 bg-[#7c3aed]/[0.05] p-3 mb-3">
-                <div class="flex-shrink-0 w-9 h-9 rounded-lg border border-[#7c3aed]/20 bg-[#7c3aed]/10 flex items-center justify-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-[#7c3aed]" set:html={infographicIcons.solution[i]} />
+              <div class="py-3.5 px-6 text-center bg-brand/[0.03]">
+                <p class="text-xs font-bold uppercase tracking-widest text-brand">Destination</p>
+              </div>
+            </div>
+            <!-- Rows -->
+            {blueprint.infographic.map((row, i) => (
+              <div class="grid grid-cols-3 divide-x divide-black/[0.08] border-b border-black/[0.08] last:border-b-0" data-aos="fade-up-sm" data-aos-delay={100 + i * 60}>
+                <div class="py-5 px-6 flex items-center gap-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 text-dark/30" set:html={infographicIcons.current[i]} />
+                  <span class="text-sm text-dark/60">{row.current}</span>
                 </div>
-                <div>
-                  <p class="text-[10px] font-bold uppercase tracking-widest text-[#7c3aed]/50 mb-0.5">Blueprint</p>
+                <div class="py-5 px-6 flex items-center gap-3 bg-[#7c3aed]/[0.03]">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 text-[#7c3aed]" set:html={infographicIcons.solution[i]} />
                   <span class="text-sm font-medium text-[#7c3aed]">{row.solution}</span>
                 </div>
-              </div>
-
-              <!-- Down arrow -->
-              <div class="flex justify-center my-2">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-brand/40"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
-              </div>
-
-              <!-- Destination -->
-              <div class="flex items-center gap-3 rounded-xl border border-brand/20 bg-brand/[0.05] p-3">
-                <div class="flex-shrink-0 w-9 h-9 rounded-lg border border-brand/20 bg-brand/10 flex items-center justify-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-brand" set:html={infographicIcons.destination[i]} />
-                </div>
-                <div>
-                  <p class="text-[10px] font-bold uppercase tracking-widest text-brand/50 mb-0.5">Destination</p>
+                <div class="py-5 px-6 flex items-center gap-3 bg-brand/[0.03]">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 text-brand" set:html={infographicIcons.destination[i]} />
                   <span class="text-sm font-medium text-brand">{row.destination}</span>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
-
-        <!-- Desktop: Horizontal grid -->
-        <div class="mb-12 hidden lg:block" data-aos="fade-up-sm" data-aos-delay="300">
-          <!-- Column Headers -->
-          <div class="grid grid-cols-[1fr_auto_1fr_auto_1fr] gap-3 mb-4">
-            <div class="rounded-lg border border-border/60 bg-white py-2.5 px-4 shadow-sm">
-              <p class="text-xs font-bold uppercase tracking-widest text-dark/50 text-center">Current State</p>
-            </div>
-            <div class="w-6"></div>
-            <div class="rounded-lg border border-[#7c3aed]/30 bg-[#7c3aed]/10 py-2.5 px-4 shadow-sm">
-              <p class="text-xs font-bold uppercase tracking-widest text-[#7c3aed] text-center">Sovereign AI Blueprint</p>
-            </div>
-            <div class="w-6"></div>
-            <div class="rounded-lg border border-brand/30 bg-brand/10 py-2.5 px-4 shadow-sm">
-              <p class="text-xs font-bold uppercase tracking-widest text-brand text-center">Destination</p>
-            </div>
+            ))}
+          </div>
+          <!-- Mobile -->
+          <div class="lg:hidden divide-y divide-black/[0.08]">
+            {blueprint.infographic.map((row, i) => (
+              <div class="py-5 px-6" data-aos="fade-up-sm" data-aos-delay={100 + i * 60}>
+                <div class="flex items-center gap-2 mb-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-dark/30" set:html={infographicIcons.current[i]} />
+                  <span class="text-xs text-dark/40">{row.current}</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="text-dark/20 mx-1"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                  <span class="text-xs font-medium text-[#7c3aed]">{row.solution}</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="text-dark/20 mx-1"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                  <span class="text-xs font-medium text-brand">{row.destination}</span>
+                </div>
+              </div>
+            ))}
           </div>
 
-          <!-- Rows -->
-          {blueprint.infographic.map((row, i) => (
-            <div
-              class="grid grid-cols-[1fr_auto_1fr_auto_1fr] gap-3 mb-3 last:mb-0 items-center"
-              data-aos="fade-up-sm"
-              data-aos-delay={350 + i * 80}
-            >
-              <!-- Current State -->
-              <div class="flex items-center gap-3 rounded-xl border border-border/60 bg-white p-4 shadow-sm">
-                <div class="flex-shrink-0 w-10 h-10 rounded-lg border border-border/60 bg-gray-50 flex items-center justify-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-dark/40" set:html={infographicIcons.current[i]} />
-                </div>
-                <span class="text-sm font-medium text-dark/60">{row.current}</span>
-              </div>
-
-              <!-- Arrow -->
-              <div class="flex items-center justify-center">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-border"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-              </div>
-
-              <!-- Sovereign AI Blueprint -->
-              <div class="flex items-center gap-3 rounded-xl border border-[#7c3aed]/20 bg-[#7c3aed]/[0.06] p-4 shadow-sm">
-                <div class="flex-shrink-0 w-10 h-10 rounded-lg border border-[#7c3aed]/20 bg-[#7c3aed]/10 flex items-center justify-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-[#7c3aed]" set:html={infographicIcons.solution[i]} />
-                </div>
-                <span class="text-sm font-medium text-[#7c3aed]">{row.solution}</span>
-              </div>
-
-              <!-- Arrow -->
-              <div class="flex items-center justify-center">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-border"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-              </div>
-
-              <!-- Destination -->
-              <div class="flex items-center gap-3 rounded-xl border border-brand/20 bg-brand/[0.06] p-4 shadow-sm">
-                <div class="flex-shrink-0 w-10 h-10 rounded-lg border border-brand/20 bg-brand/10 flex items-center justify-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-brand" set:html={infographicIcons.destination[i]} />
-                </div>
-                <span class="text-sm font-medium text-brand">{row.destination}</span>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <div class="text-center" data-aos="fade-up-sm" data-aos-delay="700">
-          <a
-            href={blueprint.button.link}
-            class="group inline-flex items-center gap-2 px-7 py-3 text-sm font-semibold text-white rounded-full bg-brand border border-brand/80 shadow-[0_1px_2px_rgba(0,0,0,0.2),0_0_20px_rgba(36,171,157,0.15)] hover:shadow-[0_1px_2px_rgba(0,0,0,0.2),0_0_30px_rgba(36,171,157,0.25)] hover:bg-brand/90 transition-all duration-300"
-          >
-            {blueprint.button.label}
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-0.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-          </a>
-        </div>
-      </div>
-    </section>
-  )}
-  <!-- /Sovereign AI Blueprint -->
-
-  <!-- Amalgamy -->
-  {amalgamy && (
-    <section class="section overflow-hidden">
-      <div class="container">
-        <div class="mb-10">
-          <p class="mb-5 text-base text-light italic" data-aos="fade-up-sm">
-            The Sovereign AI Blueprint is the map. <span class="text-brand font-semibold not-italic">Amalgamy</span> is the control layer that makes it operational.
-          </p>
-          <div class="mb-3" data-aos="fade-up-sm" data-aos-delay="50">
-            <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-brand/20 bg-brand/5 text-brand text-xs font-semibold uppercase tracking-widest">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-              Platform
-            </span>
+          <!-- Button Row -->
+          <div class="border-t border-black/[0.08] py-6 px-6 lg:px-12 text-center" data-aos="fade-up-sm">
+            <a href={blueprint.button.link} class="group inline-flex items-center gap-2 px-6 py-2.5 text-sm font-semibold border border-black/[0.15] hover:border-black/[0.3] hover:bg-black/[0.02] transition-all duration-200">
+              {blueprint.button.label}
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-200 group-hover:translate-x-0.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </a>
           </div>
-          <h2
-            class="pb-4"
-            data-aos="fade-up-sm"
-            data-aos-delay="100"
-            set:html={markdownify(amalgamy.title)}
-          />
-          <div
-            class="max-w-3xl text-light leading-relaxed text-lg [&>strong]:text-dark [&>strong]:font-semibold [&>p]:mb-4 [&>p:last-child]:mb-0"
-            data-aos="fade-up-sm"
-            data-aos-delay="200"
-            set:html={markdownify(amalgamy.intro, true)}
-          />
         </div>
+      )}
 
-        <div class="mb-4">
-          <p
-            class="mb-2 text-xs font-semibold uppercase tracking-widest text-brand"
-            data-aos="fade-up-sm"
-            data-aos-delay="250"
-          >
-            Core capabilities
-          </p>
-        </div>
-
-        <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4 mb-10">
-          {amalgamy.capabilities.map((cap, i) => (
-            <div
-              class="group relative p-6 rounded-2xl border border-border/60 bg-white shadow-sm overflow-hidden transition-all duration-300 hover:shadow-lg hover:border-brand/30"
-              data-aos="fade-up-sm"
-              data-aos-delay={(i + 1) * 100}
-            >
-              <div class="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-brand/40 via-brand/80 to-brand/40" />
-              <div class="absolute -bottom-20 -right-20 w-[200px] h-[200px] rounded-full bg-brand/[0.03] blur-2xl pointer-events-none transition-opacity duration-300 opacity-0 group-hover:opacity-100" />
-              <h3 class="mb-2 text-base font-semibold">{cap.title}</h3>
-              <p class="text-sm text-light leading-relaxed">{cap.text}</p>
+      <!-- Amalgamy -->
+      {amalgamy && (
+        <div class="border-b border-black/[0.08]">
+          <!-- Section Header -->
+          <div class="border-b border-black/[0.08] py-10 lg:py-14 px-6 lg:px-12">
+            <div class="mb-4" data-aos="fade-up-sm" data-aos-delay="50">
+              <span class="inline-flex items-center gap-2 px-3 py-1 border border-black/[0.12] text-dark/60 text-xs font-semibold uppercase tracking-widest">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+                Platform
+              </span>
             </div>
-          ))}
-        </div>
+            <h2 class="pb-4 text-3xl lg:text-4xl font-bold" data-aos="fade-up-sm" data-aos-delay="100" set:html={markdownify(amalgamy.title)} />
+            <div class="max-w-3xl text-light leading-relaxed text-lg [&>strong]:text-dark [&>strong]:font-semibold [&>p]:mb-4 [&>p:last-child]:mb-0" data-aos="fade-up-sm" data-aos-delay="200" set:html={markdownify(amalgamy.intro, true)} />
+          </div>
 
-        <div class="text-center" data-aos="fade-up-sm" data-aos-delay="500">
-          <a
-            href={amalgamy.button.link}
-            class="group inline-flex items-center gap-2 px-7 py-3 text-sm font-semibold text-white rounded-full bg-brand border border-brand/80 shadow-[0_1px_2px_rgba(0,0,0,0.2),0_0_20px_rgba(36,171,157,0.15)] hover:shadow-[0_1px_2px_rgba(0,0,0,0.2),0_0_30px_rgba(36,171,157,0.25)] hover:bg-brand/90 transition-all duration-300"
-          >
-            {amalgamy.button.label}
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-0.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-          </a>
-        </div>
-      </div>
-    </section>
-  )}
-  <!-- /Amalgamy -->
+          <!-- Capabilities Label -->
+          <div class="border-b border-black/[0.08] py-3 px-6 lg:px-12" data-aos="fade-up-sm">
+            <p class="text-xs font-semibold uppercase tracking-widest text-dark/40">Core capabilities</p>
+          </div>
 
-  <!-- Built for every path -->
-  {tracks && (
-    <section class="section bg-theme-light/40 overflow-hidden">
-      <div class="container">
-        <div class="justify-center mb-10 row">
-          <div class="lg:col-8">
-            <div class="text-center mb-3" data-aos="fade-up-sm" data-aos-delay="50">
-              <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-brand/20 bg-brand/5 text-brand text-xs font-semibold uppercase tracking-widest">
+          <!-- Capabilities Grid -->
+          <div class="grid sm:grid-cols-2 lg:grid-cols-4 max-sm:divide-y sm:divide-x divide-black/[0.08]">
+            {amalgamy.capabilities.map((cap, i) => (
+              <div class="py-8 px-6 lg:px-8" data-aos="fade-up-sm" data-aos-delay={(i + 1) * 80}>
+                <h3 class="mb-3 text-base font-semibold">{cap.title}</h3>
+                <p class="text-sm text-light leading-relaxed">{cap.text}</p>
+              </div>
+            ))}
+          </div>
+
+          <!-- Button Row -->
+          <div class="border-t border-black/[0.08] py-6 px-6 lg:px-12 text-center" data-aos="fade-up-sm">
+            <a href={amalgamy.button.link} class="group inline-flex items-center gap-2 px-6 py-2.5 text-sm font-semibold border border-black/[0.15] hover:border-black/[0.3] hover:bg-black/[0.02] transition-all duration-200">
+              {amalgamy.button.label}
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-200 group-hover:translate-x-0.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </a>
+          </div>
+        </div>
+      )}
+
+      <!-- Built for every path -->
+      {tracks && (
+        <div class="border-b border-black/[0.08]">
+          <!-- Section Header -->
+          <div class="border-b border-black/[0.08] py-10 lg:py-14 px-6 lg:px-12 text-center">
+            <div class="mb-4" data-aos="fade-up-sm" data-aos-delay="50">
+              <span class="inline-flex items-center gap-2 px-3 py-1 border border-black/[0.12] text-dark/60 text-xs font-semibold uppercase tracking-widest">
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
                 Deployment Paths
               </span>
             </div>
-            <h2
-              class="pb-2 text-center"
-              data-aos="fade-up-sm"
-              data-aos-delay="100"
-              set:html={markdownify(tracks.title)}
-            />
+            <h2 class="text-3xl lg:text-4xl font-bold" data-aos="fade-up-sm" data-aos-delay="100" set:html={markdownify(tracks.title)} />
           </div>
-        </div>
 
-        {tracks.audiences && (
-          <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 mb-10">
-            {tracks.audiences.map((aud, i) => (
-              <div
-                class="relative p-6 rounded-xl border border-border/60 bg-white shadow-sm overflow-hidden"
-                data-aos="fade-up-sm"
-                data-aos-delay={(i + 1) * 80}
-              >
-                <p class="text-sm font-semibold text-brand mb-2">{aud.title}</p>
-                <p class="text-sm text-light leading-relaxed">{aud.text}</p>
-              </div>
-            ))}
-          </div>
-        )}
+          <!-- Audiences -->
+          {tracks.audiences && (
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 max-sm:divide-y sm:divide-x divide-black/[0.08] border-b border-black/[0.08]">
+              {tracks.audiences.map((aud, i) => (
+                <div class="py-6 px-6" data-aos="fade-up-sm" data-aos-delay={(i + 1) * 60}>
+                  <p class="text-sm font-semibold text-brand mb-2">{aud.title}</p>
+                  <p class="text-sm text-light leading-relaxed">{aud.text}</p>
+                </div>
+              ))}
+            </div>
+          )}
 
-        <div class="grid gap-6 lg:grid-cols-2">
-          <div
-            class="group relative p-8 lg:p-10 rounded-2xl border border-border/60 bg-white shadow-sm overflow-hidden transition-all duration-300 hover:shadow-lg hover:border-brand/30"
-            data-aos="fade-right-sm"
-            data-aos-delay="200"
-          >
-            <div class="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-brand/40 via-brand/80 to-brand/40" />
-            <div class="absolute -bottom-20 -right-20 w-[200px] h-[200px] rounded-full bg-brand/[0.03] blur-2xl pointer-events-none transition-opacity duration-300 opacity-0 group-hover:opacity-100" />
-            <div class="relative z-10">
-              <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-brand/10 to-brand/5 border border-brand/20 flex items-center justify-center text-brand mb-5">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-6.219-8.56"/><polyline points="21 3 21 9 15 9"/></svg>
+          <!-- Two Tracks -->
+          <div class="grid lg:grid-cols-2 max-lg:divide-y lg:divide-x divide-black/[0.08]">
+            <div class="py-10 lg:py-14 px-6 lg:px-10" data-aos="fade-up-sm" data-aos-delay="100">
+              <div class="w-10 h-10 border border-black/[0.1] flex items-center justify-center text-dark/40 mb-5">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-6.219-8.56"/><polyline points="21 3 21 9 15 9"/></svg>
               </div>
               <h3 class="mb-3 text-xl font-semibold">{tracks.track_a.title}</h3>
               <p class="text-sm text-light leading-relaxed">{tracks.track_a.description}</p>
             </div>
-          </div>
-          <div
-            class="group relative p-8 lg:p-10 rounded-2xl border border-border/60 bg-white shadow-sm overflow-hidden transition-all duration-300 hover:shadow-lg hover:border-brand/30"
-            data-aos="fade-left-sm"
-            data-aos-delay="200"
-          >
-            <div class="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-brand/40 via-brand/80 to-brand/40" />
-            <div class="absolute -bottom-20 -right-20 w-[200px] h-[200px] rounded-full bg-brand/[0.03] blur-2xl pointer-events-none transition-opacity duration-300 opacity-0 group-hover:opacity-100" />
-            <div class="relative z-10">
-              <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-brand/10 to-brand/5 border border-brand/20 flex items-center justify-center text-brand mb-5">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+            <div class="py-10 lg:py-14 px-6 lg:px-10" data-aos="fade-up-sm" data-aos-delay="200">
+              <div class="w-10 h-10 border border-black/[0.1] flex items-center justify-center text-dark/40 mb-5">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
               </div>
               <h3 class="mb-3 text-xl font-semibold">{tracks.track_b.title}</h3>
               <p class="text-sm text-light leading-relaxed">{tracks.track_b.description}</p>
             </div>
           </div>
+
+          <!-- Button Row -->
+          {tracks.button && (
+            <div class="border-t border-black/[0.08] py-6 px-6 lg:px-12 text-center" data-aos="fade-up-sm">
+              <a href={tracks.button.link} class="group inline-flex items-center gap-2 px-6 py-2.5 text-sm font-semibold border border-black/[0.15] hover:border-black/[0.3] hover:bg-black/[0.02] transition-all duration-200">
+                {tracks.button.label}
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-200 group-hover:translate-x-0.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              </a>
+            </div>
+          )}
         </div>
+      )}
 
-        {tracks.button && (
-          <div class="text-center mt-10" data-aos="fade-up-sm" data-aos-delay="300">
-            <a
-              href={tracks.button.link}
-              class="group inline-flex items-center gap-2 px-7 py-3 text-sm font-semibold text-white rounded-full bg-brand border border-brand/80 shadow-[0_1px_2px_rgba(0,0,0,0.2),0_0_20px_rgba(36,171,157,0.15)] hover:shadow-[0_1px_2px_rgba(0,0,0,0.2),0_0_30px_rgba(36,171,157,0.25)] hover:bg-brand/90 transition-all duration-300"
-            >
-              {tracks.button.label}
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-0.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-            </a>
-          </div>
-        )}
-      </div>
-    </section>
-  )}
-  <!-- /Built for every path -->
-
-  <!-- Empower Your Teams -->
-  {empower && (
-    <section class="section overflow-hidden">
-      <div class="container">
-        <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          <div
-            class="relative order-2 lg:order-1"
-            data-aos="fade-right-sm"
-            data-aos-delay="200"
-          >
-            <div class="relative p-8 rounded-2xl border border-border/60 bg-theme-light/30 overflow-hidden">
-              <div class="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-brand/40 via-brand/80 to-brand/40" />
-              <div class="space-y-5">
-                <div class="flex items-start gap-4">
-                  <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-gradient-to-br from-brand/10 to-brand/5 border border-brand/20 flex items-center justify-center text-brand">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
-                  </div>
-                  <div>
-                    <p class="text-sm font-semibold text-dark mb-1">Hands-on Upskilling</p>
-                    <p class="text-xs text-light">Train on production-grade AI/HPC systems</p>
-                  </div>
+      <!-- Empower Your Teams -->
+      {empower && (
+        <div class="border-b border-black/[0.08]">
+          <div class="grid lg:grid-cols-2 max-lg:divide-y lg:divide-x divide-black/[0.08]">
+            <!-- Left: Content -->
+            <div class="py-10 lg:py-14 px-6 lg:px-12">
+              <div class="mb-4" data-aos="fade-up-sm" data-aos-delay="50">
+                <span class="inline-flex items-center gap-2 px-3 py-1 border border-black/[0.12] text-dark/60 text-xs font-semibold uppercase tracking-widest">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                  Workforce
+                </span>
+              </div>
+              <h2 class="pb-2 text-3xl lg:text-4xl font-bold" data-aos="fade-up-sm" data-aos-delay="100" set:html={markdownify(empower.title)} />
+              {empower.subtitle && (
+                <p class="pb-4 text-lg text-brand font-semibold" data-aos="fade-up-sm" data-aos-delay="150">{empower.subtitle}</p>
+              )}
+              <p class="text-light leading-relaxed text-lg mb-8" data-aos="fade-up-sm" data-aos-delay="200">{empower.description}</p>
+              {empower.button && (
+                <div data-aos="fade-up-sm" data-aos-delay="300">
+                  <a href={empower.button.link} class="group inline-flex items-center gap-2 px-6 py-2.5 text-sm font-semibold border border-black/[0.15] hover:border-black/[0.3] hover:bg-black/[0.02] transition-all duration-200">
+                    {empower.button.label}
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-200 group-hover:translate-x-0.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                  </a>
                 </div>
-                <div class="w-full h-px bg-border/40" />
-                <div class="flex items-start gap-4">
-                  <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-gradient-to-br from-brand/10 to-brand/5 border border-brand/20 flex items-center justify-center text-brand">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
-                  </div>
-                  <div>
-                    <p class="text-sm font-semibold text-dark mb-1">Living Lab Experiences</p>
-                    <p class="text-xs text-light">Learn by doing on real infrastructure</p>
-                  </div>
+              )}
+            </div>
+            <!-- Right: Structured list (fills the cell as full-bleed rows) -->
+            <div class="flex flex-col divide-y divide-black/[0.08]">
+              <div class="flex-1 flex items-center gap-5 px-6 lg:px-12 py-8 lg:py-6" data-aos="fade-up-sm" data-aos-delay="100">
+                <div class="shrink-0 w-11 h-11 border border-black/[0.1] flex items-center justify-center text-dark/40">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
                 </div>
-                <div class="w-full h-px bg-border/40" />
-                <div class="flex items-start gap-4">
-                  <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-gradient-to-br from-brand/10 to-brand/5 border border-brand/20 flex items-center justify-center text-brand">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-                  </div>
-                  <div>
-                    <p class="text-sm font-semibold text-dark mb-1">Lasting Sovereign Capability</p>
-                    <p class="text-xs text-light">Turn investment into operational readiness</p>
-                  </div>
+                <div>
+                  <p class="text-base font-semibold text-dark mb-1">Hands-on Upskilling</p>
+                  <p class="text-sm text-light">Train on production-grade AI/HPC systems</p>
+                </div>
+              </div>
+              <div class="flex-1 flex items-center gap-5 px-6 lg:px-12 py-8 lg:py-6" data-aos="fade-up-sm" data-aos-delay="200">
+                <div class="shrink-0 w-11 h-11 border border-black/[0.1] flex items-center justify-center text-dark/40">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                </div>
+                <div>
+                  <p class="text-base font-semibold text-dark mb-1">Living Lab Experiences</p>
+                  <p class="text-sm text-light">Learn by doing on real infrastructure</p>
+                </div>
+              </div>
+              <div class="flex-1 flex items-center gap-5 px-6 lg:px-12 py-8 lg:py-6" data-aos="fade-up-sm" data-aos-delay="300">
+                <div class="shrink-0 w-11 h-11 border border-black/[0.1] flex items-center justify-center text-dark/40">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                </div>
+                <div>
+                  <p class="text-base font-semibold text-dark mb-1">Lasting Sovereign Capability</p>
+                  <p class="text-sm text-light">Turn investment into operational readiness</p>
                 </div>
               </div>
             </div>
           </div>
-          <div class="order-1 lg:order-2">
-            <div
-              class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-brand/20 bg-brand/5 text-brand text-xs font-semibold uppercase tracking-widest mb-6"
-              data-aos="fade-up-sm"
-              data-aos-delay="100"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-              Workforce Development
-            </div>
-            <h2
-              class="pb-2"
-              data-aos="fade-up-sm"
-              data-aos-delay="150"
-              set:html={markdownify(empower.title)}
-            />
-            {empower.subtitle && (
-              <p
-                class="pb-4 text-lg text-brand font-semibold"
-                data-aos="fade-up-sm"
-                data-aos-delay="175"
-              >
-                {empower.subtitle}
-              </p>
-            )}
-            <p
-              class="text-light leading-relaxed mb-8 text-lg"
-              data-aos="fade-up-sm"
-              data-aos-delay="200"
-            >
-              {empower.description}
-            </p>
-            {empower.button && (
-              <div data-aos="fade-up-sm" data-aos-delay="300">
-                <a
-                  href={empower.button.link}
-                  class="group inline-flex items-center gap-2 px-7 py-3 text-sm font-semibold text-white rounded-full bg-brand border border-brand/80 shadow-[0_1px_2px_rgba(0,0,0,0.2),0_0_20px_rgba(36,171,157,0.15)] hover:shadow-[0_1px_2px_rgba(0,0,0,0.2),0_0_30px_rgba(36,171,157,0.25)] hover:bg-brand/90 transition-all duration-300"
-                >
-                  {empower.button.label}
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-0.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-                </a>
-              </div>
-            )}
-          </div>
         </div>
-      </div>
-    </section>
-  )}
-  <!-- /Empower Your Teams -->
+      )}
 
-  <!-- Sovereign AI Co-Op -->
-  {coop && (
-    <section class="section bg-theme-light/40 overflow-hidden">
-      <div class="container">
-        <div class="justify-center mb-4 row">
-          <div class="lg:col-8">
-            <div class="text-center mb-3" data-aos="fade-up-sm" data-aos-delay="50">
-              <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-brand/20 bg-brand/5 text-brand text-xs font-semibold uppercase tracking-widest">
+      <!-- Sovereign AI Co-Op -->
+      {coop && (
+        <div class="border-b border-black/[0.08]">
+          <!-- Section Header -->
+          <div class="border-b border-black/[0.08] py-10 lg:py-14 px-6 lg:px-12 text-center">
+            <div class="mb-4" data-aos="fade-up-sm" data-aos-delay="50">
+              <span class="inline-flex items-center gap-2 px-3 py-1 border border-black/[0.12] text-dark/60 text-xs font-semibold uppercase tracking-widest">
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
                 Sovereign Co-Op
               </span>
             </div>
-            <h2
-              class="pb-2 text-center"
-              data-aos="fade-up-sm"
-              data-aos-delay="100"
-              set:html={markdownify(coop.title)}
-            />
+            <h2 class="pb-2 text-3xl lg:text-4xl font-bold" data-aos="fade-up-sm" data-aos-delay="100" set:html={markdownify(coop.title)} />
             {coop.subtitle && (
-              <p
-                class="pb-4 text-center text-lg text-brand font-semibold"
-                data-aos="fade-up-sm"
-                data-aos-delay="150"
-              >
-                {coop.subtitle}
-              </p>
+              <p class="pb-4 text-lg text-brand font-semibold" data-aos="fade-up-sm" data-aos-delay="150">{coop.subtitle}</p>
             )}
-            <p
-              class="text-center text-light"
-              data-aos="fade-up-sm"
-              data-aos-delay="200"
-            >
-              {coop.description}
-            </p>
+            <p class="max-w-2xl mx-auto text-light" data-aos="fade-up-sm" data-aos-delay="200">{coop.description}</p>
           </div>
-        </div>
 
-        <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 mb-10">
-          {coop.points.map((point, i) => (
-            <div
-              class="group relative p-8 rounded-2xl border border-border/60 bg-white shadow-sm overflow-hidden transition-all duration-300 hover:shadow-lg hover:border-brand/30"
-              data-aos="fade-up-sm"
-              data-aos-delay={(i + 1) * 100}
-            >
-              <div class="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-brand/40 via-brand/80 to-brand/40" />
-              <div class="absolute -bottom-20 -right-20 w-[200px] h-[200px] rounded-full bg-brand/[0.03] blur-2xl pointer-events-none transition-opacity duration-300 opacity-0 group-hover:opacity-100" />
-              <h3 class="mb-3 text-lg font-semibold text-center">{point.title}</h3>
-              <p class="text-sm text-light leading-relaxed text-center">{point.text}</p>
+          <!-- Points Grid -->
+          <div class="grid lg:grid-cols-3 max-lg:divide-y lg:divide-x divide-black/[0.08]">
+            {coop.points.map((point, i) => (
+              <div class="py-8 px-6 lg:px-8 text-center" data-aos="fade-up-sm" data-aos-delay={(i + 1) * 80}>
+                <h3 class="mb-3 text-lg font-semibold">{point.title}</h3>
+                <p class="text-sm text-light leading-relaxed">{point.text}</p>
+              </div>
+            ))}
+          </div>
+
+          <!-- Button Row -->
+          {coop.button && (
+            <div class="border-t border-black/[0.08] py-6 px-6 lg:px-12 text-center" data-aos="fade-up-sm">
+              <a href={coop.button.link} class="group inline-flex items-center gap-2 px-6 py-2.5 text-sm font-semibold border border-black/[0.15] hover:border-black/[0.3] hover:bg-black/[0.02] transition-all duration-200">
+                {coop.button.label}
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-200 group-hover:translate-x-0.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              </a>
             </div>
-          ))}
+          )}
         </div>
+      )}
 
-        {coop.button && (
-          <div class="text-center" data-aos="fade-up-sm" data-aos-delay="400">
-            <a
-              href={coop.button.link}
-              class="group inline-flex items-center gap-2 px-7 py-3 text-sm font-semibold text-white rounded-full bg-brand border border-brand/80 shadow-[0_1px_2px_rgba(0,0,0,0.2),0_0_20px_rgba(36,171,157,0.15)] hover:shadow-[0_1px_2px_rgba(0,0,0,0.2),0_0_30px_rgba(36,171,157,0.25)] hover:bg-brand/90 transition-all duration-300"
-            >
-              {coop.button.label}
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-0.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-            </a>
-          </div>
-        )}
-      </div>
-    </section>
-  )}
-  <!-- /Sovereign AI Co-Op -->
-
-  <!-- Case Study: Texas Tech -->
-  {social_proof && (
-    <section class="section">
-      <div class="container">
-        <div class="justify-center mb-8 row">
-          <div class="lg:col-8">
-            <h2
-              class="pb-2 text-center"
-              data-aos="fade-up-sm"
-              data-aos-delay="100"
-              set:html={markdownify(social_proof.title)}
-            />
+      <!-- Case Study: Texas Tech -->
+      {social_proof && (
+        <div class="border-b border-black/[0.08]">
+          <!-- Section Header -->
+          <div class="border-b border-black/[0.08] py-10 lg:py-14 px-6 lg:px-12 text-center">
+            <h2 class="pb-2 text-3xl lg:text-4xl font-bold" data-aos="fade-up-sm" data-aos-delay="100" set:html={markdownify(social_proof.title)} />
             {social_proof.subtitle && (
-              <p
-                class="text-center text-xl font-semibold text-brand"
-                data-aos="fade-up-sm"
-                data-aos-delay="200"
-              >
-                {social_proof.subtitle}
-              </p>
+              <p class="text-xl font-semibold text-brand" data-aos="fade-up-sm" data-aos-delay="200">{social_proof.subtitle}</p>
             )}
           </div>
-        </div>
 
-        {social_proof.case_study && (
-          <div
-            class="relative rounded-2xl bg-primary overflow-hidden p-8 lg:p-12"
-            data-aos="fade-up-sm"
-            data-aos-delay="300"
-          >
-            <div class="absolute inset-0 bg-gradient-to-br from-primary via-[#0d1117] to-primary"></div>
-            <div class="absolute inset-0 opacity-[0.06]" style="background-image: url('data:image/svg+xml,%3Csvg width=&quot;60&quot; height=&quot;60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cpath d=&quot;M0 30h60M30 0v60&quot; stroke=&quot;%23fff&quot; stroke-width=&quot;0.5&quot; fill=&quot;none&quot;/%3E%3C/svg%3E');"></div>
-            <div class="absolute -top-20 -right-20 w-[350px] h-[350px] rounded-full bg-brand/10 blur-3xl pointer-events-none" />
-            <div class="relative z-10 row gy-8 items-center">
-              <div class="lg:col-7">
-                <img
-                  src="/images/texas-tech-seal.png"
-                  alt="Texas Tech University System"
-                  class="h-16 w-16 mb-5 rounded-full ring-1 ring-white/10"
-                />
+          <!-- Two-column: description | quote -->
+          {social_proof.case_study && (
+            <div class="grid lg:grid-cols-[3fr_2fr] max-lg:divide-y lg:divide-x divide-black/[0.08]">
+              <div class="py-10 lg:py-14 px-6 lg:px-12" data-aos="fade-up-sm" data-aos-delay="100">
+                <div class="flex items-center gap-3 mb-6">
+                  <img src="/images/texas-tech-seal.png" alt="Texas Tech University System" class="h-12 w-12 rounded-full border border-black/[0.08]" />
+                  <p class="text-sm font-semibold text-dark">Texas Tech University System</p>
+                </div>
                 {social_proof.case_study.description.includes('Amalgamy provides') ? (
                   <div class="space-y-4">
-                    <p class="text-white/60 leading-relaxed">{social_proof.case_study.description.split('Amalgamy provides')[0].trim()}</p>
-                    <p class="text-white/60 leading-relaxed">Amalgamy provides{social_proof.case_study.description.split('Amalgamy provides')[1]}</p>
+                    <p class="text-light leading-relaxed">{social_proof.case_study.description.split('Amalgamy provides')[0].trim()}</p>
+                    <p class="text-light leading-relaxed">Amalgamy provides{social_proof.case_study.description.split('Amalgamy provides')[1]}</p>
                   </div>
                 ) : (
-                  <p class="text-white/60 leading-relaxed">{social_proof.case_study.description}</p>
+                  <p class="text-light leading-relaxed">{social_proof.case_study.description}</p>
                 )}
               </div>
-              <div class="lg:col-5">
-                <div class="relative p-6 rounded-xl border border-white/[0.08] bg-white/[0.03] backdrop-blur-sm">
-                  <div class="absolute left-0 inset-y-0 w-1 bg-gradient-to-b from-brand/60 via-brand to-brand/60 rounded-l-xl" />
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="text-brand/40 mb-3"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
-                  <p class="text-sm text-white/70 leading-relaxed italic mb-3">{social_proof.case_study.quote}</p>
-                  <p class="text-xs text-brand font-semibold">{social_proof.case_study.attribution}</p>
-                </div>
+              <div class="py-10 lg:py-14 px-6 lg:px-12 bg-black/[0.015]" data-aos="fade-up-sm" data-aos-delay="200">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor" class="text-brand/30 mb-4"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
+                <p class="text-dark/70 leading-relaxed italic mb-4">{social_proof.case_study.quote}</p>
+                <div class="h-px bg-black/[0.08] mb-4"></div>
+                <p class="text-xs font-semibold text-brand tracking-wide">{social_proof.case_study.attribution}</p>
               </div>
             </div>
-          </div>
-        )}
-      </div>
-    </section>
-  )}
-  <!-- /Case Study -->
+          )}
+        </div>
+      )}
 
   <!-- CTA: Own Your Sovereign AI Future -->
   {cta_section && (
-    <section class="mx-4 overflow-hidden section">
-      <div
-        data-aos="fade-up"
-        data-aos-delay="100"
-        class="container relative px-8 py-12 text-white bg-primary sm:px-16 sm:py-14 lg:px-24 lg:py-20 rounded-xl overflow-hidden"
-      >
-        <div class="absolute inset-0 bg-gradient-to-br from-primary via-[#0d1117] to-primary rounded-xl"></div>
-        <div class="absolute inset-0 opacity-[0.06] rounded-xl" style="background-image: url('data:image/svg+xml,%3Csvg width=&quot;60&quot; height=&quot;60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cpath d=&quot;M0 30h60M30 0v60&quot; stroke=&quot;%23fff&quot; stroke-width=&quot;0.5&quot; fill=&quot;none&quot;/%3E%3C/svg%3E');"></div>
-        <div class="absolute -top-20 -right-20 w-[350px] h-[350px] rounded-full bg-brand/10 blur-3xl pointer-events-none" />
+    <div class="p-4 sm:p-6 lg:p-8">
+    <div
+      data-aos="fade-up"
+      data-aos-delay="100"
+      class="relative px-8 py-16 text-white bg-primary sm:px-16 sm:py-20 lg:px-24 lg:py-28 overflow-hidden"
+    >
+      <div class="absolute inset-0 opacity-[0.06]" style="background-image: url('data:image/svg+xml,%3Csvg width=&quot;60&quot; height=&quot;60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cpath d=&quot;M0 30h60M30 0v60&quot; stroke=&quot;%23fff&quot; stroke-width=&quot;0.5&quot; fill=&quot;none&quot;/%3E%3C/svg%3E');"></div>
 
-        <div class="absolute bottom-0 left-1/2 w-2/3 pointer-events-none" style="transform: translateY(50%);">
-          <img
-            src="/images/cta/cta-img-1.png"
-            alt=""
-            class="w-full cta-rotate-animation opacity-90"
-            style="filter: sepia(1) hue-rotate(130deg) saturate(8) brightness(1);"
-          />
-        </div>
+      <!-- Brand glow -->
+      <div class="absolute -top-20 -right-20 w-[350px] h-[350px] rounded-full bg-brand/10 blur-3xl pointer-events-none" />
+
+      <!-- Rotating decorative orbits -->
+      <div class="absolute bottom-0 left-1/2 w-2/3 pointer-events-none" style="transform: translateY(50%);">
         <img
-          src="/images/cta/cta-img-2.png"
+          src="/images/cta/cta-img-1.png"
           alt=""
-          class="w-1/3 absolute top-[10%] -left-[10%] opacity-90 pointer-events-none"
+          class="w-full cta-rotate-animation opacity-90"
           style="filter: sepia(1) hue-rotate(130deg) saturate(8) brightness(1);"
         />
-        <img
-          src="/images/cta/cta-img-2.png"
-          alt=""
-          class="w-1/3 absolute top-[10%] -right-[10%] opacity-90 pointer-events-none"
-          style="filter: sepia(1) hue-rotate(130deg) saturate(8) brightness(1);"
-        />
+      </div>
+      <img
+        src="/images/cta/cta-img-2.png"
+        alt=""
+        class="w-1/3 absolute top-[10%] -left-[10%] opacity-90 pointer-events-none"
+        style="filter: sepia(1) hue-rotate(130deg) saturate(8) brightness(1);"
+      />
+      <img
+        src="/images/cta/cta-img-2.png"
+        alt=""
+        class="w-1/3 absolute top-[10%] -right-[10%] opacity-90 pointer-events-none"
+        style="filter: sepia(1) hue-rotate(130deg) saturate(8) brightness(1);"
+      />
 
-        <div class="relative z-10">
-          <h2
-            class="pb-4 text-center text-white"
-            data-aos="fade-up-sm"
-            data-aos-delay="200"
-            set:html={markdownify(cta_section.title)}
-          />
-          <p
-            class="mx-auto max-w-2xl pb-8 text-center text-white/60"
-            data-aos="fade-up-sm"
-            data-aos-delay="300"
-            set:html={markdownify(cta_section.description)}
-          />
-          <div
-            class="w-fit mx-auto block"
-            data-aos="fade-up-sm"
-            data-aos-delay="400"
-          >
-            <a
-              href={cta_section.button.link}
-              class="group relative z-10 inline-flex items-center gap-2 px-7 py-3 text-sm font-semibold text-white rounded-full bg-brand border border-brand/80 shadow-[0_1px_2px_rgba(0,0,0,0.2),0_0_20px_rgba(36,171,157,0.15)] hover:shadow-[0_1px_2px_rgba(0,0,0,0.2),0_0_30px_rgba(36,171,157,0.25)] hover:bg-brand/90 transition-all duration-300"
-            >
-              {cta_section.button.label}
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-0.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-            </a>
-          </div>
+      <div class="relative z-10">
+        <h2 class="pb-4 text-center text-white text-3xl lg:text-4xl font-bold" data-aos="fade-up-sm" data-aos-delay="200" set:html={markdownify(cta_section.title)} />
+        <p class="mx-auto max-w-2xl pb-8 text-center text-white/60" data-aos="fade-up-sm" data-aos-delay="300" set:html={markdownify(cta_section.description)} />
+        <div class="w-fit mx-auto block" data-aos="fade-up-sm" data-aos-delay="400">
+          <a href={cta_section.button.link} class="group relative z-10 inline-flex items-center gap-2 px-7 py-3 text-sm font-semibold text-white bg-brand/15 border border-brand/30 backdrop-blur-sm hover:bg-brand/25 hover:border-brand/50 transition-all duration-300 tracking-wide uppercase shadow-[0_0_20px_rgba(36,171,157,0.1)] hover:shadow-[0_0_30px_rgba(36,171,157,0.2)]">
+            {cta_section.button.label}
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-0.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
         </div>
       </div>
-    </section>
+    </div>
+    </div>
   )}
   <!-- /CTA -->
+
+    </div>
+    <!-- /Center Content -->
+
+    <!-- Right Gutter (patterned) -->
+    <div class="hidden lg:block border-l border-black/[0.08] bg-theme-light/40 gutter-grid"></div>
+
+  </div>
+  <!-- /Full-page Border Grid Wrapper -->
 
   <script type="application/ld+json" set:html={JSON.stringify({
     "@context": "https://schema.org",
@@ -714,6 +564,17 @@ const infographicIcons = {
   .hero-gradient-text {
     color: #fff;
   }
+  .unicorn-hero-bg {
+    filter: saturate(0.5);
+    opacity: 0.3;
+    mix-blend-mode: luminosity;
+    -webkit-mask-image: linear-gradient(to bottom, black, black 70%, transparent);
+    mask-image: linear-gradient(to bottom, black, black 70%, transparent);
+  }
+  .unicorn-hero-bg [data-us-project] {
+    width: 100%;
+    height: 100%;
+  }
   .hero-gradient-text strong {
     color: #9ca3af;
   }
@@ -723,5 +584,15 @@ const infographicIcons = {
   }
   .cta-rotate-animation {
     animation: cta-rotate 40s linear infinite;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .cta-rotate-animation {
+      animation: none;
+    }
+  }
+  .gutter-grid {
+    background-image:
+      repeating-linear-gradient(45deg, transparent, transparent 7px, rgba(213,213,213,0.3) 7px, rgba(213,213,213,0.3) 8px),
+      repeating-linear-gradient(-45deg, transparent, transparent 7px, rgba(213,213,213,0.15) 7px, rgba(213,213,213,0.15) 8px);
   }
 </style>
