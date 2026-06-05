@@ -79,7 +79,7 @@ export const homeCollection = defineCollection({
       case_study: z.object({
         description: z.string().optional(),
         quote: z.string().optional(),
-        script: z.string(),
+        script: z.string().optional(),
         attribution: z.string(),
       }).optional(),
     }).optional(),

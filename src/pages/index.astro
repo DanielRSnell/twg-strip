@@ -162,15 +162,6 @@ const infographicIcons = {
     <!-- Center Content (solid) -->
     <div class="bg-body">
 
-      <!-- Connector Statement -->
-      <div class="border-b border-black/[0.08] py-14 lg:py-20 px-6 lg:px-12" data-aos="fade-up-sm">
-        <div class="max-w-3xl mx-auto text-center">
-          <p class="text-2xl lg:text-3xl font-bold text-dark leading-snug">
-            The Sovereign AI Blueprint is the map. <span class="text-brand">Amalgamy</span> is the control layer that makes it operational.
-          </p>
-        </div>
-      </div>
-
       <!-- Sovereign AI Blueprint -->
       {blueprint && (
         <div class="border-b border-black/[0.08]">
@@ -244,6 +235,15 @@ const infographicIcons = {
           </div>
         </div>
       )}
+
+      <!-- Connector Statement: Blueprint -> Amalgamy -->
+      <div class="border-b border-black/[0.08] py-14 lg:py-20 px-6 lg:px-12" data-aos="fade-up-sm">
+        <div class="max-w-3xl mx-auto text-center">
+          <p class="text-2xl lg:text-3xl font-bold text-dark leading-snug">
+            The Sovereign AI Blueprint is the map. <span class="text-brand">Amalgamy</span> is the control layer that makes it operational.
+          </p>
+        </div>
+      </div>
 
       <!-- Amalgamy -->
       {amalgamy && (
@@ -467,10 +467,9 @@ const infographicIcons = {
                   </div>
                 </div>
               </div>
-              <!-- Right: full script -->
+              <!-- Right: deployment description -->
               <div class="py-10 lg:py-14 px-6 lg:px-12 bg-black/[0.015]" data-aos="fade-up-sm" data-aos-delay="200">
-                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor" class="text-brand/30 mb-4"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
-                <div class="text-dark/70 leading-relaxed italic [&>p]:mb-3 [&>p:last-child]:mb-0" set:html={markdownify(social_proof.case_study.script)} />
+                <div class="text-light leading-relaxed text-lg [&>p]:mb-4 [&>p:last-child]:mb-0" set:html={markdownify(social_proof.case_study.description)} />
               </div>
             </div>
           )}
