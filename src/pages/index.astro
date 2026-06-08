@@ -53,48 +53,25 @@ const infographicIcons = {
     <div class="relative z-10 mt-auto pt-[120px] pb-12 lg:pb-16 mx-auto w-full max-w-[1600px] px-6 lg:px-16">
       <div class="flex flex-col lg:flex-row gap-10 lg:gap-28">
 
-        <!-- Left: Title (top) + Quote (bottom), justified between -->
-        <div class="lg:w-[55%] flex flex-col justify-between gap-10 lg:gap-0">
-          <!-- Title block -->
-          <div>
-            <p
-              class="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-white/40"
-              data-aos="fade-up-sm"
-              data-aos-delay="50"
-            >
-              Sovereign AI Infrastructure
-            </p>
-            <h1
-              class="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-white leading-[1.05] tracking-tight capitalize"
-              data-aos="fade-up-sm"
-              data-aos-delay="100"
-              set:html={markdownify(banner.title)}
-            />
-          </div>
-
-          <!-- Quote block (pushed to bottom on desktop) -->
-          {social_proof?.case_study?.quote && (
-            <div data-aos="fade-up-sm" data-aos-delay="300">
-              <div class="h-px bg-gradient-to-r from-white/10 via-white/6 to-transparent mb-8"></div>
-              <div class="flex items-start gap-5">
-                <div class="shrink-0 w-14 h-14 rounded-full bg-white/10 border border-white/10 overflow-hidden">
-                  <img src="/images/team-members/brandon-creighton.webp" alt="Brandon Creighton" class="w-full h-full object-cover" />
-                </div>
-                <div>
-                  <blockquote class="relative mb-3 pl-5 border-l-2 border-brand/30">
-                    <p class="text-sm lg:text-base text-white/60 leading-relaxed italic">
-                      &ldquo;{social_proof.case_study.quote}&rdquo;
-                    </p>
-                  </blockquote>
-                  <p class="pl-5 text-xs font-semibold text-brand/50 tracking-wide">{social_proof.case_study.attribution}</p>
-                </div>
-              </div>
-            </div>
-          )}
+        <!-- Left: Title -->
+        <div class="lg:w-[55%]">
+          <p
+            class="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-white/40"
+            data-aos="fade-up-sm"
+            data-aos-delay="50"
+          >
+            Sovereign AI Infrastructure
+          </p>
+          <h1
+            class="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-white leading-[1.05] tracking-tight capitalize"
+            data-aos="fade-up-sm"
+            data-aos-delay="100"
+            set:html={markdownify(banner.title)}
+          />
         </div>
 
         <!-- Right: Prose content + CTA -->
-        <div class="lg:w-[45%] flex flex-col justify-end">
+        <div class="lg:w-[45%] flex flex-col justify-center">
           <div
             class="prose prose-invert prose-lg max-w-none mb-10 [&>p]:text-white/50 [&>p]:leading-relaxed [&>p]:mb-5 [&>p:last-child]:mb-0 [&>p:first-child]:text-xl [&>p:first-child]:text-white/70 [&>p:first-child]:font-medium"
             data-aos="fade-up-sm"
@@ -162,6 +139,39 @@ const infographicIcons = {
     <!-- Center Content (solid) -->
     <div class="bg-body">
 
+      <!-- Case Study: Texas Tech (below the fold) -->
+      {social_proof && (
+        <div class="border-b border-black/[0.08]">
+          <!-- Section Header -->
+          <div class="border-b border-black/[0.08] py-10 lg:py-14 px-6 lg:px-12 text-center">
+            <h2 class="pb-2 text-3xl lg:text-4xl font-bold" data-aos="fade-up-sm" data-aos-delay="100" set:html={markdownify(social_proof.title)} />
+            {social_proof.subtitle && (
+              <p class="text-xl font-semibold text-brand" data-aos="fade-up-sm" data-aos-delay="200">{social_proof.subtitle}</p>
+            )}
+          </div>
+
+          <!-- Two-column: institution (video slot) | deployment description -->
+          {social_proof.case_study && (
+            <div class="grid lg:grid-cols-[2fr_3fr] max-lg:divide-y lg:divide-x divide-black/[0.08]">
+              <!-- Left: Creighton — reserved for his video -->
+              <div class="flex flex-col justify-center py-10 lg:py-14 px-6 lg:px-12" data-aos="fade-up-sm" data-aos-delay="100">
+                <div class="flex items-center gap-4">
+                  <img src="/images/team-members/brandon-creighton.webp" alt="Brandon Creighton" class="h-16 w-16 rounded-full object-cover border border-black/[0.08]" />
+                  <div>
+                    <p class="text-base font-semibold text-dark">Brandon Creighton</p>
+                    <p class="text-sm text-light">Chancellor, Texas Tech University System</p>
+                  </div>
+                </div>
+              </div>
+              <!-- Right: deployment description -->
+              <div class="py-10 lg:py-14 px-6 lg:px-12 bg-black/[0.015]" data-aos="fade-up-sm" data-aos-delay="200">
+                <div class="text-light leading-relaxed text-lg [&>p]:mb-4 [&>p:last-child]:mb-0" set:html={markdownify(social_proof.case_study.description)} />
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+
       <!-- Sovereign AI Blueprint -->
       {blueprint && (
         <div class="border-b border-black/[0.08]">
@@ -210,17 +220,21 @@ const infographicIcons = {
               </div>
             ))}
           </div>
-          <!-- Mobile -->
-          <div class="lg:hidden divide-y divide-black/[0.08]">
+          <!-- Mobile: desktop cells, stacked vertically -->
+          <div class="lg:hidden divide-y-2 divide-black/[0.08]">
             {blueprint.infographic.map((row, i) => (
-              <div class="py-5 px-6" data-aos="fade-up-sm" data-aos-delay={100 + i * 60}>
-                <div class="flex items-center gap-2 mb-2">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-dark/30" set:html={infographicIcons.current[i]} />
-                  <span class="text-xs text-dark/40">{row.current}</span>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="text-dark/20 mx-1"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-                  <span class="text-xs font-medium text-[#7c3aed]">{row.solution}</span>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="text-dark/20 mx-1"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-                  <span class="text-xs font-medium text-brand">{row.destination}</span>
+              <div data-aos="fade-up-sm" data-aos-delay={100 + i * 60}>
+                <div class="py-4 px-6 flex items-center gap-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 text-dark/30" set:html={infographicIcons.current[i]} />
+                  <span class="text-sm text-dark/60">{row.current}</span>
+                </div>
+                <div class="py-4 px-6 flex items-center gap-3 bg-[#7c3aed]/[0.03]">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 text-[#7c3aed]" set:html={infographicIcons.solution[i]} />
+                  <span class="text-sm font-medium text-[#7c3aed]">{row.solution}</span>
+                </div>
+                <div class="py-4 px-6 flex items-center gap-3 bg-brand/[0.03]">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 text-brand" set:html={infographicIcons.destination[i]} />
+                  <span class="text-sm font-medium text-brand">{row.destination}</span>
                 </div>
               </div>
             ))}
@@ -443,39 +457,6 @@ const infographicIcons = {
         </div>
       )}
 
-      <!-- Case Study: Texas Tech -->
-      {social_proof && (
-        <div class="border-b border-black/[0.08]">
-          <!-- Section Header -->
-          <div class="border-b border-black/[0.08] py-10 lg:py-14 px-6 lg:px-12 text-center">
-            <h2 class="pb-2 text-3xl lg:text-4xl font-bold" data-aos="fade-up-sm" data-aos-delay="100" set:html={markdownify(social_proof.title)} />
-            {social_proof.subtitle && (
-              <p class="text-xl font-semibold text-brand" data-aos="fade-up-sm" data-aos-delay="200">{social_proof.subtitle}</p>
-            )}
-          </div>
-
-          <!-- Two-column: institution (video slot) | full script -->
-          {social_proof.case_study && (
-            <div class="grid lg:grid-cols-[2fr_3fr] max-lg:divide-y lg:divide-x divide-black/[0.08]">
-              <!-- Left: Creighton — reserved for his video -->
-              <div class="flex flex-col justify-center py-10 lg:py-14 px-6 lg:px-12" data-aos="fade-up-sm" data-aos-delay="100">
-                <div class="flex items-center gap-4">
-                  <img src="/images/team-members/brandon-creighton.webp" alt="Brandon Creighton" class="h-16 w-16 rounded-full object-cover border border-black/[0.08]" />
-                  <div>
-                    <p class="text-base font-semibold text-dark">Brandon Creighton</p>
-                    <p class="text-sm text-light">Chancellor, Texas Tech University System</p>
-                  </div>
-                </div>
-              </div>
-              <!-- Right: deployment description -->
-              <div class="py-10 lg:py-14 px-6 lg:px-12 bg-black/[0.015]" data-aos="fade-up-sm" data-aos-delay="200">
-                <div class="text-light leading-relaxed text-lg [&>p]:mb-4 [&>p:last-child]:mb-0" set:html={markdownify(social_proof.case_study.description)} />
-              </div>
-            </div>
-          )}
-        </div>
-      )}
-
   <!-- CTA: Own Your Sovereign AI Future -->
   {cta_section && (
     <div class="p-4 sm:p-6 lg:p-8">
@@ -557,6 +538,9 @@ const infographicIcons = {
 </Base>
 
 <style is:global>
+  html {
+    scroll-behavior: smooth;
+  }
   .hero-gradient-text {
     color: #fff;
   }
