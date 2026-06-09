@@ -2,7 +2,7 @@
 # Banner
 banner:
   title: "Build Sovereign AI infrastructure. Advance your mission"
-  content: "Sovereign AI means controlling your data, governing your infrastructure, and enabling secure collaboration between agencies, researchers, and commercial partners.\n\nBuild the AI infrastructure you control with our Sovereign AI Blueprint: a comprehensive plan combining compute, software, workforce capability, and partnership models"
+  content: "Sovereign AI means controlling your data, governing your infrastructure, and enabling secure collaboration between agencies, researchers, and commercial partners.\n\nThisWay Global guides institutions through the Sovereign AI Blueprint: the compute, software, workforce capability, and partnership models required to build AI infrastructure they control."
   button:
     enable: true
     label: "Speak to a Project Architect"
@@ -55,7 +55,7 @@ tracks:
     - title: "Research institutions"
       text: "Expand AI/HPC capacity for discovery, education, and partner-engaged innovation."
     - title: "Commercial partners"
-      text: "Access governed high-performance compute for proprietary workloads without accepting hyperscaler terms or losing control of sensitive data."
+      text: "Run proprietary AI workloads at scale on governed infrastructure that meets your data residency and IP protection requirements, without hyperscaler lock-in."
     - title: "Capacity buyers"
       text: "Use excess sovereign compute capacity through trusted Co-op arrangements with flexible terms."
   track_a:
@@ -72,7 +72,7 @@ tracks:
 empower:
   title: "Empower Your Teams"
   subtitle: "Build the Workforce Behind Your AI Future"
-  description: "ThisWayGlobal helps institutions grow the local talent needed to operate, govern, and expand advanced AI infrastructure. Through hands-on upskilling programs and Living Lab experiences, teams learn on production-grade systems and turn infrastructure investment into lasting sovereign capability."
+  description: "ThisWay Global equips institutions with the local talent needed to operate, govern, and expand advanced AI infrastructure. Through hands-on upskilling programs and Living Lab experiences, teams learn on production-grade systems and turn infrastructure investment into lasting sovereign capability."
   button:
     label: "Learn more"
     link: "/products"
@@ -81,11 +81,12 @@ empower:
 coop:
   title: "Sovereign AI **Co-Op**"
   subtitle: "Share Capacity Without Surrendering Sovereignty"
+  description: "The Sovereign AI Co-op is the business framework that lets institutions contribute, access, and generate return by sharing excess compute capacity across a governed AI infrastructure network on terms designed to preserve every participant's control over their own environment. Shared compute does not mean shared data or shared governance. Each participant preserves its own policy envelope while accessing capacity through governed Co-op terms."
   points:
     - title: "R1 Institutions"
       text: "Anchor regional sovereign capability with advanced AI research capacity."
     - title: "Industry Partners"
-      text: "Join for priority access to sovereign infrastructure with strong adherence to regulations and protection for intellectual property."
+      text: "Secure priority access to sovereign AI/HPC capacity while meeting compliance and IP protection requirements, without managing the infrastructure yourself."
     - title: "Capacity Buyers"
       text: "Access excess compute on terms more flexible than hyperscalers or neoclouds without compromising data sovereignty."
   button:
@@ -97,14 +98,13 @@ social_proof:
   title: "From Vision to Sovereign AI Deployment"
   subtitle: "Texas Tech University System"
   case_study:
-    quote: "At Texas Tech, we are building with the best of the best. ThisWay Global has been our guide from vision to execution, bringing together NVIDIA-powered infrastructure, high-performance computing, AI, and workforce development. We are not standing by and watching this happen around us. We are building it."
-    description: "Texas Tech University is putting the Sovereign AI Blueprint into practice with NVIDIA GB300 NVL72 systems purpose-built for large-scale AI training and inference. The deployment positions Texas Tech and the State of Texas at the forefront of AI, high-performance computing, workforce development, and regional innovation. Amalgamy provides the orchestration layer across the environment, coordinating workloads, policy, data locality, and infrastructure awareness so researchers, students, agencies, and industry partners can put advanced compute to work."
+    script: "At Texas Tech, we are building with the best of the best.\n\nThisWay Global has been the guide helping us move from vision to execution. They brought us together with NVIDIA, helped shape the path forward, and are making the pieces come together for artificial intelligence, high-performance computation, and workforce development.\n\nWe are creating opportunities for students who want to be at the cutting edge of AI and technology, for faculty who are knocking on our door to be part of this, and for a workforce that needs new skills as we define this era of AI and education.\n\nTexas has the work ethic, the resources, and the partners to lead. At Texas Tech, we are not standing by and watching this happen around us. We are building it."
     attribution: "Brandon Creighton, Chancellor, Texas Tech University System"
 
 # CTA
 cta_section:
-  title: "Own Your Sovereign AI Future."
-  description: "If you are responsible for building the next generation of AI capability at a national, institutional, or enterprise level, we guide you move from vision to operational reality, on your terms."
+  title: "Own Your Sovereign AI capability."
+  description: "If you are responsible for building the next generation of AI capability at a national, institutional, or enterprise level, we guide you from vision to operational reality, on your terms."
   subtitle: "Speak to a Project Architect"
   button:
     label: "Speak to a Project Architect"

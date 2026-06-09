@@ -139,39 +139,6 @@ const infographicIcons = {
     <!-- Center Content (solid) -->
     <div class="bg-body">
 
-      <!-- Case Study: Texas Tech (below the fold) -->
-      {social_proof && (
-        <div class="border-b border-black/[0.08]">
-          <!-- Section Header -->
-          <div class="border-b border-black/[0.08] py-10 lg:py-14 px-6 lg:px-12 text-center">
-            <h2 class="pb-2 text-3xl lg:text-4xl font-bold" data-aos="fade-up-sm" data-aos-delay="100" set:html={markdownify(social_proof.title)} />
-            {social_proof.subtitle && (
-              <p class="text-xl font-semibold text-brand" data-aos="fade-up-sm" data-aos-delay="200">{social_proof.subtitle}</p>
-            )}
-          </div>
-
-          <!-- Two-column: institution (video slot) | deployment description -->
-          {social_proof.case_study && (
-            <div class="grid lg:grid-cols-[2fr_3fr] max-lg:divide-y lg:divide-x divide-black/[0.08]">
-              <!-- Left: Creighton — reserved for his video -->
-              <div class="flex flex-col justify-center py-10 lg:py-14 px-6 lg:px-12" data-aos="fade-up-sm" data-aos-delay="100">
-                <div class="flex items-center gap-4">
-                  <img src="/images/team-members/brandon-creighton.webp" alt="Brandon Creighton" class="h-16 w-16 rounded-full object-cover border border-black/[0.08]" />
-                  <div>
-                    <p class="text-base font-semibold text-dark">Brandon Creighton</p>
-                    <p class="text-sm text-light">Chancellor, Texas Tech University System</p>
-                  </div>
-                </div>
-              </div>
-              <!-- Right: deployment description -->
-              <div class="py-10 lg:py-14 px-6 lg:px-12 bg-black/[0.015]" data-aos="fade-up-sm" data-aos-delay="200">
-                <div class="text-light leading-relaxed text-lg [&>p]:mb-4 [&>p:last-child]:mb-0" set:html={markdownify(social_proof.case_study.description)} />
-              </div>
-            </div>
-          )}
-        </div>
-      )}
-
       <!-- Sovereign AI Blueprint -->
       {blueprint && (
         <div class="border-b border-black/[0.08]">
@@ -249,15 +216,6 @@ const infographicIcons = {
           </div>
         </div>
       )}
-
-      <!-- Connector Statement: Blueprint -> Amalgamy -->
-      <div class="border-b border-black/[0.08] py-14 lg:py-20 px-6 lg:px-12" data-aos="fade-up-sm">
-        <div class="max-w-3xl mx-auto text-center">
-          <p class="text-2xl lg:text-3xl font-bold text-dark leading-snug">
-            The Sovereign AI Blueprint is the map. <span class="text-brand">Amalgamy</span> is the control layer that makes it operational.
-          </p>
-        </div>
-      </div>
 
       <!-- Amalgamy -->
       {amalgamy && (
@@ -452,6 +410,40 @@ const infographicIcons = {
                 {coop.button.label}
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-200 group-hover:translate-x-0.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
               </a>
+            </div>
+          )}
+        </div>
+      )}
+
+      <!-- Case Study: Texas Tech -->
+      {social_proof && (
+        <div class="border-b border-black/[0.08]">
+          <!-- Section Header -->
+          <div class="border-b border-black/[0.08] py-10 lg:py-14 px-6 lg:px-12 text-center">
+            <h2 class="pb-2 text-3xl lg:text-4xl font-bold" data-aos="fade-up-sm" data-aos-delay="100" set:html={markdownify(social_proof.title)} />
+            {social_proof.subtitle && (
+              <p class="text-xl font-semibold text-brand" data-aos="fade-up-sm" data-aos-delay="200">{social_proof.subtitle}</p>
+            )}
+          </div>
+
+          <!-- Two-column: Creighton (video slot) | full script -->
+          {social_proof.case_study && (
+            <div class="grid lg:grid-cols-[2fr_3fr] max-lg:divide-y lg:divide-x divide-black/[0.08]">
+              <!-- Left: Creighton — reserved for his video -->
+              <div class="flex flex-col justify-center py-10 lg:py-14 px-6 lg:px-12" data-aos="fade-up-sm" data-aos-delay="100">
+                <div class="flex items-center gap-4">
+                  <img src="/images/team-members/brandon-creighton.webp" alt="Brandon Creighton" class="h-16 w-16 rounded-full object-cover border border-black/[0.08]" />
+                  <div>
+                    <p class="text-base font-semibold text-dark">Brandon Creighton</p>
+                    <p class="text-sm text-light">Chancellor, Texas Tech University System</p>
+                  </div>
+                </div>
+              </div>
+              <!-- Right: full script -->
+              <div class="py-10 lg:py-14 px-6 lg:px-12 bg-black/[0.015]" data-aos="fade-up-sm" data-aos-delay="200">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor" class="text-brand/30 mb-4"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
+                <div class="text-dark/70 leading-relaxed italic [&>p]:mb-4 [&>p:last-child]:mb-0" set:html={markdownify(social_proof.case_study.script)} />
+              </div>
             </div>
           )}
         </div>
