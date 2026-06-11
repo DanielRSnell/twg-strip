@@ -148,7 +148,7 @@ const coopIcons = [
       <!-- Abbreviated Creighton quote (after hero) -->
       {social_proof?.case_study?.quote && (
         <div class="border-b border-black/[0.08]">
-          <div class="grid lg:grid-cols-[minmax(0,360px)_1fr] max-lg:divide-y lg:divide-x divide-black/[0.08]">
+          <div class="grid lg:grid-cols-[minmax(0,240px)_1fr] max-lg:divide-y lg:divide-x divide-black/[0.08]">
             <!-- Left: image / border / name / border / title -->
             <div>
               <img src="/images/team-members/brandon-creighton.webp" alt="Brandon Creighton" class="w-full aspect-[4/5] object-cover object-top" />
@@ -252,6 +252,15 @@ const coopIcons = [
           </div>
         </div>
       )}
+
+      <!-- Connector Statement: Blueprint -> Amalgamy -->
+      <div class="border-b border-black/[0.08] py-14 lg:py-20 px-6 lg:px-12" data-aos="fade-up-sm">
+        <div class="max-w-3xl mx-auto text-center">
+          <p class="text-2xl lg:text-3xl font-bold text-dark leading-snug">
+            The Sovereign AI Blueprint is the map. <span class="text-brand">Amalgamy</span> is the control layer that makes it operational.
+          </p>
+        </div>
+      </div>
 
       <!-- Amalgamy -->
       {amalgamy && (
