@@ -25,6 +25,12 @@ const infographicIcons = {
     '<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',
   ],
 };
+
+const coopIcons = [
+  '<path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/>',
+  '<rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>',
+  '<rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/>',
+];
 ---
 
 <Base>
@@ -139,40 +145,30 @@ const infographicIcons = {
     <!-- Center Content (solid) -->
     <div class="bg-body">
 
-      <!-- Case Study: Texas Tech (after hero) -->
-      {social_proof && (
+      <!-- Abbreviated Creighton quote (after hero) -->
+      {social_proof?.case_study?.quote && (
         <div class="border-b border-black/[0.08]">
-          <!-- Section Header + deployment description -->
-          <div class="border-b border-black/[0.08] py-10 lg:py-14 px-6 lg:px-12 text-center">
-            <h2 class="pb-2 text-3xl lg:text-4xl font-bold" data-aos="fade-up-sm" data-aos-delay="100" set:html={markdownify(social_proof.title)} />
-            {social_proof.subtitle && (
-              <p class="text-xl font-semibold text-brand" data-aos="fade-up-sm" data-aos-delay="200">{social_proof.subtitle}</p>
-            )}
-            {social_proof.case_study?.description && (
-              <div class="max-w-3xl mx-auto mt-6 text-light leading-relaxed text-center [&>p]:mb-4 [&>p:last-child]:mb-0" data-aos="fade-up-sm" data-aos-delay="250" set:html={markdownify(social_proof.case_study.description)} />
-            )}
-          </div>
-
-          <!-- Two-column: Creighton (video slot) | full script -->
-          {social_proof.case_study?.script && (
-            <div class="grid lg:grid-cols-[2fr_3fr] max-lg:divide-y lg:divide-x divide-black/[0.08]">
-              <!-- Left: Creighton — reserved for his video -->
-              <div class="flex flex-col justify-center py-10 lg:py-14 px-6 lg:px-12" data-aos="fade-up-sm" data-aos-delay="100">
-                <div class="flex items-center gap-4">
-                  <img src="/images/team-members/brandon-creighton.webp" alt="Brandon Creighton" class="h-16 w-16 rounded-full object-cover border border-black/[0.08]" />
-                  <div>
-                    <p class="text-base font-semibold text-dark">Brandon Creighton</p>
-                    <p class="text-sm text-light">Chancellor, Texas Tech University System</p>
-                  </div>
-                </div>
+          <div class="grid lg:grid-cols-[minmax(0,360px)_1fr] max-lg:divide-y lg:divide-x divide-black/[0.08]">
+            <!-- Left: image / border / name / border / title -->
+            <div>
+              <img src="/images/team-members/brandon-creighton.webp" alt="Brandon Creighton" class="w-full aspect-[4/5] object-cover object-top" />
+              <div class="border-t border-black/[0.08] px-6 py-4">
+                <p class="font-semibold text-dark leading-tight">Brandon Creighton</p>
               </div>
-              <!-- Right: full script -->
-              <div class="py-10 lg:py-14 px-6 lg:px-12 bg-black/[0.015]" data-aos="fade-up-sm" data-aos-delay="200">
-                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor" class="text-brand/30 mb-4"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
-                <div class="text-dark/70 leading-relaxed italic [&>p]:mb-4 [&>p:last-child]:mb-0" set:html={markdownify(social_proof.case_study.script)} />
+              <div class="border-t border-black/[0.08] px-6 py-4">
+                <p class="text-sm font-medium text-brand leading-tight">Chancellor, Texas Tech University System</p>
               </div>
             </div>
-          )}
+            <!-- Right: condensed quote -->
+            <div class="flex flex-col justify-center py-10 lg:py-14 px-6 lg:px-12 bg-white" data-aos="fade-up-sm" data-aos-delay="100">
+              <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="currentColor" class="text-brand/30 mb-4"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
+              <p class="text-xl lg:text-2xl text-dark/80 leading-relaxed italic">{social_proof.case_study.quote}</p>
+              <a href="#texas-tech" class="group inline-flex items-center gap-2 mt-7 text-sm font-semibold text-brand hover:text-brand/70 transition-colors">
+                Read the full story
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-200 group-hover:translate-x-0.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              </a>
+            </div>
+          </div>
         </div>
       )}
 
@@ -187,7 +183,10 @@ const infographicIcons = {
                 Blueprint
               </span>
             </div>
-            <h2 class="pb-4 text-3xl lg:text-4xl font-bold" data-aos="fade-up-sm" data-aos-delay="100" set:html={markdownify(blueprint.title)} />
+            <h2 class="pb-2 text-3xl lg:text-4xl font-bold" data-aos="fade-up-sm" data-aos-delay="100" set:html={markdownify(blueprint.title)} />
+            {blueprint.subtitle && (
+              <p class="pb-4 text-lg text-brand font-semibold" data-aos="fade-up-sm" data-aos-delay="150">{blueprint.subtitle}</p>
+            )}
             <p class="max-w-2xl text-light leading-relaxed text-lg" data-aos="fade-up-sm" data-aos-delay="200">{blueprint.description}</p>
           </div>
 
@@ -196,13 +195,13 @@ const infographicIcons = {
           <div class="hidden lg:block">
             <!-- Column Headers -->
             <div class="grid grid-cols-3 divide-x divide-black/[0.08] border-b border-black/[0.08]">
-              <div class="py-3.5 px-6 text-center">
+              <div class="py-3.5 px-6">
                 <p class="text-xs font-bold uppercase tracking-widest text-dark/40">Current State</p>
               </div>
-              <div class="py-3.5 px-6 text-center bg-[#7c3aed]/[0.03]">
+              <div class="py-3.5 px-6 bg-[#7c3aed]/[0.03]">
                 <p class="text-xs font-bold uppercase tracking-widest text-[#7c3aed]">Sovereign AI Blueprint</p>
               </div>
-              <div class="py-3.5 px-6 text-center bg-brand/[0.03]">
+              <div class="py-3.5 px-6 bg-brand/[0.03]">
                 <p class="text-xs font-bold uppercase tracking-widest text-brand">Destination</p>
               </div>
             </div>
@@ -265,7 +264,10 @@ const infographicIcons = {
                 Platform
               </span>
             </div>
-            <h2 class="pb-4 text-3xl lg:text-4xl font-bold" data-aos="fade-up-sm" data-aos-delay="100" set:html={markdownify(amalgamy.title)} />
+            <h2 class="pb-2 text-3xl lg:text-4xl font-bold" data-aos="fade-up-sm" data-aos-delay="100" set:html={markdownify(amalgamy.title)} />
+            {amalgamy.subtitle && (
+              <p class="pb-4 text-lg text-brand font-semibold" data-aos="fade-up-sm" data-aos-delay="150">{amalgamy.subtitle}</p>
+            )}
             <div class="max-w-3xl text-light leading-relaxed text-lg [&>strong]:text-dark [&>strong]:font-semibold [&>p]:mb-4 [&>p:last-child]:mb-0" data-aos="fade-up-sm" data-aos-delay="200" set:html={markdownify(amalgamy.intro, true)} />
           </div>
 
@@ -413,40 +415,81 @@ const infographicIcons = {
       <!-- Sovereign AI Co-Op -->
       {coop && (
         <div class="border-b border-black/[0.08]">
-          <!-- Section Header -->
-          <div class="border-b border-black/[0.08] py-10 lg:py-14 px-6 lg:px-12 text-center">
-            <div class="mb-4" data-aos="fade-up-sm" data-aos-delay="50">
-              <span class="inline-flex items-center gap-2 px-3 py-1 border border-black/[0.12] text-dark/60 text-xs font-semibold uppercase tracking-widest">
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
-                Sovereign Co-Op
-              </span>
-            </div>
-            <h2 class="pb-2 text-3xl lg:text-4xl font-bold" data-aos="fade-up-sm" data-aos-delay="100" set:html={markdownify(coop.title)} />
-            {coop.subtitle && (
-              <p class="pb-4 text-lg text-brand font-semibold" data-aos="fade-up-sm" data-aos-delay="150">{coop.subtitle}</p>
-            )}
-            {coop.description && (
-              <p class="max-w-2xl mx-auto text-light" data-aos="fade-up-sm" data-aos-delay="200">{coop.description}</p>
-            )}
-          </div>
-
-          <!-- Points Grid -->
-          <div class="grid lg:grid-cols-3 max-lg:divide-y lg:divide-x divide-black/[0.08]">
-            {coop.points.map((point, i) => (
-              <div class="py-8 px-6 lg:px-8 text-center" data-aos="fade-up-sm" data-aos-delay={(i + 1) * 80}>
-                <h3 class="mb-3 text-lg font-semibold">{point.title}</h3>
-                <p class="text-sm text-light leading-relaxed">{point.text}</p>
+          <div class="grid lg:grid-cols-2">
+            <!-- Right (desktop): chip + title + subtitle + description + CTA -->
+            <div class="flex flex-col justify-center py-10 lg:py-14 px-6 lg:px-12 lg:order-2 border-black/[0.08] max-lg:border-b lg:border-l">
+              <div class="mb-4" data-aos="fade-up-sm" data-aos-delay="50">
+                <span class="inline-flex items-center gap-2 px-3 py-1 border border-black/[0.12] text-dark/60 text-xs font-semibold uppercase tracking-widest">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+                  Sovereign Co-Op
+                </span>
               </div>
-            ))}
+              <h2 class="pb-2 text-3xl lg:text-4xl font-bold" data-aos="fade-up-sm" data-aos-delay="100" set:html={markdownify(coop.title)} />
+              {coop.subtitle && (
+                <p class="pb-4 text-lg text-brand font-semibold" data-aos="fade-up-sm" data-aos-delay="150">{coop.subtitle}</p>
+              )}
+              {coop.description && (
+                <p class="text-light leading-relaxed text-lg mb-8" data-aos="fade-up-sm" data-aos-delay="200">{coop.description}</p>
+              )}
+              {coop.button && (
+                <div data-aos="fade-up-sm" data-aos-delay="300">
+                  <a href={coop.button.link} class="group inline-flex items-center gap-2 px-6 py-2.5 text-sm font-semibold border border-black/[0.15] hover:border-black/[0.3] hover:bg-black/[0.02] transition-all duration-200">
+                    {coop.button.label}
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-200 group-hover:translate-x-0.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                  </a>
+                </div>
+              )}
+            </div>
+            <!-- Left (desktop): the three points as stacked icon rows -->
+            <div class="flex flex-col divide-y divide-black/[0.08] lg:order-1">
+              {coop.points.map((point, i) => (
+                <div class="flex-1 flex items-center gap-5 px-6 lg:px-12 py-8 lg:py-6" data-aos="fade-up-sm" data-aos-delay={(i + 1) * 80}>
+                  <div class="shrink-0 w-11 h-11 border border-black/[0.1] flex items-center justify-center text-dark/40">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" set:html={coopIcons[i]} />
+                  </div>
+                  <div>
+                    <p class="text-base font-semibold text-dark mb-1">{point.title}</p>
+                    <p class="text-sm text-light leading-relaxed">{point.text}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
+      <!-- Case Study: Texas Tech (full, bottom) -->
+      {social_proof && (
+        <div id="texas-tech" class="border-b border-black/[0.08] scroll-mt-24">
+          <!-- Section Header + deployment description -->
+          <div class="border-b border-black/[0.08] py-10 lg:py-14 px-6 lg:px-12 text-center">
+            <h2 class="pb-2 text-3xl lg:text-4xl font-bold" data-aos="fade-up-sm" data-aos-delay="100" set:html={markdownify(social_proof.title)} />
+            {social_proof.subtitle && (
+              <p class="text-xl font-semibold text-brand" data-aos="fade-up-sm" data-aos-delay="200">{social_proof.subtitle}</p>
+            )}
+            {social_proof.case_study?.description && (
+              <div class="max-w-3xl mx-auto mt-6 text-light leading-relaxed text-center [&>p]:mb-4 [&>p:last-child]:mb-0" data-aos="fade-up-sm" data-aos-delay="250" set:html={markdownify(social_proof.case_study.description)} />
+            )}
           </div>
 
-          <!-- Button Row -->
-          {coop.button && (
-            <div class="border-t border-black/[0.08] py-6 px-6 lg:px-12 text-center" data-aos="fade-up-sm">
-              <a href={coop.button.link} class="group inline-flex items-center gap-2 px-6 py-2.5 text-sm font-semibold border border-black/[0.15] hover:border-black/[0.3] hover:bg-black/[0.02] transition-all duration-200">
-                {coop.button.label}
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-200 group-hover:translate-x-0.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-              </a>
+          <!-- Two-column: Creighton (video slot) | full script -->
+          {social_proof.case_study?.script && (
+            <div class="grid lg:grid-cols-[2fr_3fr] max-lg:divide-y lg:divide-x divide-black/[0.08]">
+              <!-- Left: Creighton — reserved for his video -->
+              <div class="flex flex-col justify-center py-10 lg:py-14 px-6 lg:px-12" data-aos="fade-up-sm" data-aos-delay="100">
+                <div class="flex items-center gap-4">
+                  <img src="/images/team-members/brandon-creighton.webp" alt="Brandon Creighton" class="h-16 w-16 rounded-full object-cover border border-black/[0.08]" />
+                  <div>
+                    <p class="text-base font-semibold text-dark">Brandon Creighton</p>
+                    <p class="text-sm text-light">Chancellor, Texas Tech University System</p>
+                  </div>
+                </div>
+              </div>
+              <!-- Right: full script -->
+              <div class="py-10 lg:py-14 px-6 lg:px-12 bg-black/[0.015]" data-aos="fade-up-sm" data-aos-delay="200">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor" class="text-brand/30 mb-4"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
+                <div class="text-dark/70 leading-relaxed italic [&>p]:mb-4 [&>p:last-child]:mb-0" set:html={markdownify(social_proof.case_study.script, true)} />
+              </div>
             </div>
           )}
         </div>

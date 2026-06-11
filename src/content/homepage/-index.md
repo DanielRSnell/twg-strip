@@ -10,7 +10,8 @@ banner:
 
 # The Sovereign AI Blueprint
 blueprint:
-  title: "The Sovereign AI Blueprint: From plan to operational capability"
+  title: "The Sovereign AI Blueprint"
+  subtitle: "From plan to operational capability"
   description: "The Blueprint guides research institutions, public sector, and industry leaders on a practical path to controlled AI capability through priority compute access, Amalgamy software, workforce development, and partnership models for governed collaboration."
   infographic:
     - current: "Compute scarcity"
@@ -31,7 +32,8 @@ blueprint:
 
 # Amalgamy
 amalgamy:
-  title: "Amalgamy: Unified AI & HPC **Operating System**"
+  title: "Amalgamy"
+  subtitle: "Unified AI & HPC Operating System"
   intro: "Amalgamy operationalizes the Sovereign AI Blueprint by coordinating workload scheduling, data locality, policy enforcement, and infrastructure awareness across AI and HPC environments."
   capabilities:
     - title: "Intelligent workload scheduling"
@@ -81,7 +83,7 @@ empower:
 coop:
   title: "Sovereign AI **Co-Op**"
   subtitle: "Share Capacity Without Surrendering Sovereignty"
-  description: "The Sovereign AI Co-op is the business framework that lets institutions contribute, access, and generate return by sharing excess compute capacity across a governed AI infrastructure network on terms designed to preserve every participant's control over their own environment. Shared compute does not mean shared data or shared governance. Each participant preserves its own policy envelope while accessing capacity through governed Co-op terms."
+  description: "The Sovereign AI Co-op is a business framework that enables institutions to share excess compute capacity across a governed network while maintaining control of their own data, governance, or infrastructure."
   points:
     - title: "R1 Institutions"
       text: "Anchor regional sovereign capability with advanced AI research capacity."
@@ -98,8 +100,9 @@ social_proof:
   title: "From Vision to Sovereign AI Deployment"
   subtitle: "Texas Tech University System"
   case_study:
+    quote: "ThisWay Global has been our guide from vision to execution, bringing together NVIDIA-powered infrastructure, Sovereign AI, high-performance computing, and workforce development. We are not standing by and watching this happen around us. We are building it."
     description: "Texas Tech University is putting the Sovereign AI Blueprint into practice with NVIDIA GB300 NVL72 systems purpose-built for large-scale AI training and inference. The deployment positions Texas Tech and the State of Texas at the forefront of AI, high-performance computing, workforce development, and regional innovation. Amalgamy provides the orchestration layer across the environment, coordinating workloads, policy, data locality, and infrastructure awareness so researchers, students, agencies, and industry partners can put advanced compute to work."
-    script: "At Texas Tech, we are building with the best of the best.\n\nThisWay Global has been the guide helping us move from vision to execution. They brought us together with NVIDIA, helped shape the path forward, and are making the pieces come together for artificial intelligence, high-performance computation, and workforce development.\n\nWe are creating opportunities for students who want to be at the cutting edge of AI and technology, for faculty who are knocking on our door to be part of this, and for a workforce that needs new skills as we define this era of AI and education.\n\nTexas has the work ethic, the resources, and the partners to lead. At Texas Tech, we are not standing by and watching this happen around us. We are building it."
+    script: "ThisWay Global has been our guide from vision to execution, bringing together NVIDIA-powered infrastructure, Sovereign AI, high-performance computing, and workforce development.\n\nWe are creating opportunities for students who want to be at the cutting edge of AI and technology, for faculty who are knocking on our door to be part of this, and for a workforce that needs new skills as we define this era of AI and education.\n\nTexas has the work ethic, the resources, and the partners to lead. At Texas Tech, we are not standing by and watching this happen around us. We are building it."
     attribution: "Brandon Creighton, Chancellor, Texas Tech University System"
 
 # CTA

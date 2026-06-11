@@ -28,6 +28,7 @@ export const homeCollection = defineCollection({
 
     blueprint: z.object({
       title: z.string(),
+      subtitle: z.string().optional(),
       description: z.string(),
       infographic: z.array(z.object({
         current: z.string(),
@@ -39,6 +40,7 @@ export const homeCollection = defineCollection({
 
     amalgamy: z.object({
       title: z.string(),
+      subtitle: z.string().optional(),
       intro: z.string(),
       capabilities: z.array(titledPointSchema),
       button: linkSchema,
