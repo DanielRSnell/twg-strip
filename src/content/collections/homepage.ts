@@ -26,6 +26,12 @@ export const homeCollection = defineCollection({
       button_secondary: buttonSchema.optional(),
     }),
 
+    bottleneck: z.object({
+      title: z.string(),
+      intro: z.string(),
+      points: z.array(titledPointSchema),
+    }).optional(),
+
     blueprint: z.object({
       title: z.string(),
       subtitle: z.string().optional(),
@@ -48,6 +54,7 @@ export const homeCollection = defineCollection({
 
     tracks: z.object({
       title: z.string(),
+      description: z.string().optional(),
       audiences: z.array(titledPointSchema).optional(),
       track_a: z.object({
         title: z.string(),
