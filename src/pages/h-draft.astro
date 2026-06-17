@@ -1,5 +1,6 @@
 ---
 import Base from "@/layouts/Base.astro";
+import SovereignStackDiagram from "@/components/SovereignStackDiagram.astro";
 import { markdownify } from "@/lib/utils/textConverter";
 import { getEntry } from "astro:content";
 const homepage = await getEntry("homepage", "h-draft");
@@ -219,6 +220,11 @@ const infographicIcons = {
               <p class="pb-4 text-lg text-brand font-semibold" data-aos="fade-up-sm" data-aos-delay="150">{amalgamy.subtitle}</p>
             )}
             <div class="max-w-3xl text-light leading-relaxed text-lg [&>strong]:text-dark [&>strong]:font-semibold [&>p]:mb-4 [&>p:last-child]:mb-0" data-aos="fade-up-sm" data-aos-delay="200" set:html={markdownify(amalgamy.intro, true)} />
+          </div>
+
+          <!-- Architecture diagram: sovereign AI stack -->
+          <div class="border-b border-black/[0.08] p-6 lg:p-12" data-aos="fade-up-sm" data-aos-delay="100">
+            <SovereignStackDiagram />
           </div>
 
           <!-- Capabilities Label -->
