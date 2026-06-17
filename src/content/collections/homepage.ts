@@ -19,6 +19,7 @@ const titledPointSchema = z.object({
 export const homeCollection = defineCollection({
   schema: z.object({
     banner: z.object({
+      eyebrow: z.string().optional(),
       title: z.string(),
       content: z.string(),
       image: z.string().optional(),

@@ -1,35 +1,40 @@
 ---
-# H-DRAFT: product-first (software-first) home page variant for team comparison
+# H-DRAFT: product-first (software-first) home page variant — V3 copy
 
 # Banner
 banner:
+  eyebrow: "The AI & HPC Operating System"
   title: "Turn Your AI Infrastructure to Operational Reality."
-  content: "ThisWay Global builds Amalgamy, the software control layer for Sovereign AI infrastructure.\n\nAmalgamy is the AI & HPC operating system that turns your complex infrastructure into operational capability. By securely delivering the right workload to the right compute at the right time and automating policy enforcement, the platform maximizes researcher productivity and improves hardware utilization."
+  content: "**ThisWay Global builds Amalgamy, the software operating layer for Sovereign AI and HPC infrastructure.**\n\nWe deliver it through a proven Sovereign AI Blueprint: a model that combines Amalgamy, priority compute access, workforce readiness, and governed partner networks."
   button:
     enable: true
-    label: "Speak to a Project Architect"
-    link: "/contact"
+    label: "Explore Amalgamy"
+    link: "/products"
+  button_secondary:
+    enable: true
+    label: "See the Blueprint"
+    link: "#blueprint"
 
 # The Operational Bottleneck (product-first problem framing)
 bottleneck:
   title: "The Operational Bottleneck of AI and HPC Infrastructure"
-  intro: "AI infrastructure breaks down when compute, data, and policy operate in silos. This fragmentation results in three critical bottlenecks:"
+  intro: "AI infrastructure breaks down when compute, data, and policy operate in silos. This results in three critical bottlenecks that Amalgamy eliminates:"
   points:
-    - title: "Research Delays"
-      text: "Scientists waste critical time wrestling with infrastructure, data movement, storage permissions, and brittle scripts across mismatched environments, instead of focusing on discovery."
+    - title: "Workload Delays"
+      text: "Teams lose time to data movement, storage permissions, brittle scripts, and mismatched environments instead of running the AI, simulation, and analytics workloads that matter."
     - title: "Security & Compliance Constraints"
-      text: "IT teams must maintain rigid hardware partitions and fragmented policy tools to satisfy compliance. This creates a massive integration vacuum, resulting in multi-month delays between racking bare metal and actually running workloads securely."
-    - title: "Economic Waste"
-      text: "Disconnected HPC and AI workloads create long deployment cycles, chronic data bottlenecks, and expensive GPU capacity sitting idle."
+      text: "IT teams rely on rigid partitions and fragmented policy, resulting in complex integration and longer time to go from bare metal to secure workloads."
+    - title: "Low GPU Utilization"
+      text: "GPUs remain underused even if they appear fully allocated, starved due to slow data preparation and transfer or slow network reads."
 
 # Amalgamy (product leads)
 amalgamy:
   title: "Amalgamy"
   subtitle: "The Unified AI & HPC Operating System"
-  intro: "Amalgamy unifies and operationalizes your infrastructure by coordinating workload scheduling, data locality, policy enforcement, and infrastructure awareness across AI and HPC environments."
+  intro: "Amalgamy operationalizes complex AI and HPC environments by coordinating workload scheduling, data locality, policy enforcement, and infrastructure awareness. It connects compute, data, and policy to provide a control layer for sovereign environments."
   capabilities:
     - title: "Intelligent workload scheduling"
-      text: "Place jobs where compute, data, and policy requirements align leveraging the environments you already support like Slurm and Kubernetes."
+      text: "Place jobs where compute, data, and policy requirements align, leveraging the environments you already support like Slurm and Kubernetes."
     - title: "Data-aware orchestration"
       text: "Reduce time lost to data movement, preparation, and slow network reads."
     - title: "Policy-driven governance"
@@ -40,11 +45,11 @@ amalgamy:
     label: "Explore the Amalgamy Platform"
     link: "/products"
 
-# The Sovereign AI Blueprint (methodology for deploying Amalgamy)
+# The Sovereign AI Blueprint (delivery model for Amalgamy)
 blueprint:
   title: "The Sovereign AI Blueprint"
   subtitle: "From plan to operational capability"
-  description: "The Sovereign AI Blueprint is our proven methodology for deploying Amalgamy and transforming fragmented clusters and compute scarcity into a unified, mission-ready capability."
+  description: "The Sovereign AI Blueprint is our proven delivery model for public-sector, research, and commercial environments. It includes Amalgamy deployment, priority compute access, workforce upskilling, facility and governance planning, and partner models."
   infographic:
     - current: "Compute scarcity"
       solution: "Priority compute access"
@@ -65,22 +70,22 @@ blueprint:
 # Deployment Paths
 tracks:
   title: "One Operating System. Any AI Environment."
-  description: "Amalgamy provides the orchestration layer whether you are modernizing existing clusters or building next-generation facilities from the ground up."
+  description: "Amalgamy powers governed AI capability across existing clusters, new AI/HPC facilities, and partner-hosted capacity through the Sovereign AI Blueprint."
   audiences:
     - title: "Public-sector leaders"
-      text: "Build statewide or regional AI capability with hardcoded governance, agency access, and facility readiness from day one."
+      text: "Deploy governed AI capability across agencies with policy controls, facility readiness, workforce planning, and secure partner access from day one."
     - title: "Research institutions"
-      text: "Expand AI/HPC capacity for discovery, education, and partner-engaged innovation."
+      text: "Expand AI/HPC capacity for discovery, education, and industry collaboration without abandoning familiar research workflows."
     - title: "Commercial partners"
-      text: "Run proprietary AI workloads at scale on governed infrastructure that guarantees IP protection, without hyperscaler lock-in."
+      text: "Run proprietary research, simulation, and AI workloads at scale on governed infrastructure designed for IP protection and data control."
     - title: "Capacity buyers"
-      text: "Access scalable compute on demand through trusted Co-op arrangements with flexible terms."
+      text: "Access scalable compute through trusted Co-op arrangements with flexible terms beyond hyperscaler or neocloud models."
   track_a:
     title: "Modernize what you have"
-    description: "Improve utilization across existing GPU, HPC, and data environments without forcing teams to abandon familiar workflows."
+    description: "Use Amalgamy to improve utilization across existing GPU, HPC, and data environments without forcing teams to abandon familiar workflows."
   track_b:
     title: "Build what comes next"
-    description: "Coordinate compute access, facility readiness, Amalgamy deployment, governance, and workforce readiness."
+    description: "Deploy Amalgamy into new AI/HPC infrastructure with coordinated compute access, facility readiness, governance, and workforce readiness."
   button:
     label: "View Deployment Options"
     link: "/contact"
@@ -97,12 +102,12 @@ empower:
 coop:
   title: "The Sovereign AI **Co-Op**"
   subtitle: "A Platform-Powered Network"
-  description: "The Sovereign AI Co-op is a business framework, enabled by Amalgamy, allowing institutions to share excess compute capacity across a governed network while maintaining control of their own data, governance, or infrastructure."
+  description: "The Sovereign AI Co-op is a business framework enabled by Amalgamy. This allows institutions to share, allocate, meter, and govern excess compute capacity across a trusted network while preserving control over their own data, governance, and infrastructure."
   points:
     - title: "R1 Institutions"
-      text: "Anchor regional sovereign capability with advanced AI research capacity."
+      text: "Build regional sovereign capability with advanced AI research capacity."
     - title: "Industry Partners"
-      text: "Secure priority access to sovereign AI/HPC capacity while meeting compliance and IP protection requirements, without managing the infrastructure yourself."
+      text: "Secure priority access to sovereign AI/HPC capacity while meeting compliance and IP protection requirements, without managing the infrastructure."
     - title: "Capacity Buyers"
       text: "Access excess compute on terms more flexible than hyperscalers or neoclouds without compromising data sovereignty."
   button:
@@ -114,17 +119,17 @@ social_proof:
   title: "From Vision to Sovereign AI Deployment"
   subtitle: "Texas Tech University System"
   case_study:
-    quote: "ThisWay Global has been our guide from vision to execution for our Sovereign AI capability, bringing together NVIDIA-powered infrastructure, Amalgamy software, and workforce development. We are not standing by and watching this happen around us. We are building it."
+    quote: "We are not standing by and watching this happen around us. We are building it."
     description: "Texas Tech University is putting Sovereign AI into practice with NVIDIA GB300 NVL72 systems purpose-built for large-scale AI training and inference. Amalgamy provides the orchestration layer across the entire environment, coordinating workloads, policy, data locality, and infrastructure awareness so researchers, students, agencies, and industry partners can put advanced compute to work immediately."
     script: "ThisWay Global has been our guide from vision to execution, bringing together NVIDIA-powered infrastructure, Sovereign AI, high-performance computing, and workforce development.\n\nTexas has the work ethic, the resources, and the partners to lead. At Texas Tech, we are not standing by and watching this happen around us. We are building it."
     attribution: "Brandon Creighton, Chancellor, Texas Tech University System"
 
 # CTA
 cta_section:
-  title: "Operationalize your AI infrastructure today"
-  description: "Stop wrestling with fragmented clusters. Bring your AI and HPC environments under one operating system that securely delivers the right workload to the right compute."
-  subtitle: "Speak to an engineer"
+  title: "Operationalize your AI infrastructure"
+  subtitle: "Powered by Amalgamy."
+  description: "Stop wrestling with fragmented clusters. Bring your AI and HPC environments under one operating system, delivered through a Blueprint built for your infrastructure, teams, and partners."
   button:
-    label: "Speak to an engineer"
+    label: "Book a platform walkthrough"
     link: "/contact"
 ---

@@ -61,7 +61,7 @@ const infographicIcons = {
             data-aos="fade-up-sm"
             data-aos-delay="50"
           >
-            Sovereign AI Infrastructure
+            {banner.eyebrow || "Sovereign AI Infrastructure"}
           </p>
           <h1
             class="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-white leading-[1.05] tracking-tight capitalize"
@@ -90,6 +90,15 @@ const infographicIcons = {
                 href={banner.button.link}
               >
                 {banner.button.label}
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-1"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              </a>
+            )}
+            {banner.button_secondary?.enable && (
+              <a
+                class="group inline-flex items-center gap-3 px-7 py-3.5 text-sm font-semibold text-white/80 border border-white/15 backdrop-blur-sm rounded hover:text-white hover:border-white/30 hover:bg-white/[0.04] transition-all duration-300 tracking-wide uppercase"
+                href={banner.button_secondary.link}
+              >
+                {banner.button_secondary.label}
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-1"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
               </a>
             )}
@@ -239,7 +248,7 @@ const infographicIcons = {
 
       <!-- Sovereign AI Blueprint -->
       {blueprint && (
-        <div class="border-b border-black/[0.08]">
+        <div id="blueprint" class="border-b border-black/[0.08] scroll-mt-24">
           <!-- Section Header -->
           <div class="border-b border-black/[0.08] py-10 lg:py-14 px-6 lg:px-12">
             <div class="mb-4" data-aos="fade-up-sm" data-aos-delay="50">
@@ -552,7 +561,10 @@ const infographicIcons = {
       />
 
       <div class="relative z-10">
-        <h2 class="pb-4 text-center text-white text-3xl lg:text-4xl font-bold" data-aos="fade-up-sm" data-aos-delay="200" set:html={markdownify(cta_section.title)} />
+        <h2 class="pb-2 text-center text-white text-3xl lg:text-4xl font-bold" data-aos="fade-up-sm" data-aos-delay="200" set:html={markdownify(cta_section.title)} />
+        {cta_section.subtitle && (
+          <p class="pb-6 text-center text-lg font-semibold text-brand" data-aos="fade-up-sm" data-aos-delay="250" set:html={markdownify(cta_section.subtitle)} />
+        )}
         <p class="mx-auto max-w-2xl pb-8 text-center text-white/60" data-aos="fade-up-sm" data-aos-delay="300" set:html={markdownify(cta_section.description)} />
         <div class="w-fit mx-auto block" data-aos="fade-up-sm" data-aos-delay="400">
           <a href={cta_section.button.link} class="group relative z-10 inline-flex items-center gap-2 px-7 py-3 text-sm font-semibold text-white bg-brand/15 border border-brand/30 backdrop-blur-sm hover:bg-brand/25 hover:border-brand/50 transition-all duration-300 tracking-wide uppercase shadow-[0_0_20px_rgba(36,171,157,0.1)] hover:shadow-[0_0_30px_rgba(36,171,157,0.2)]">
