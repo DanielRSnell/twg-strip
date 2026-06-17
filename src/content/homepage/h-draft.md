@@ -119,7 +119,7 @@ social_proof:
   title: "From Vision to Sovereign AI Deployment"
   subtitle: "Texas Tech University System"
   case_study:
-    quote: "We are not standing by and watching this happen around us. We are building it."
+    quote: "ThisWay Global has been our guide from vision to execution for our Sovereign AI capability, bringing together NVIDIA-powered infrastructure, Amalgamy software, and workforce development. We are not standing by and watching this happen around us. We are building it."
     description: "Texas Tech University is putting Sovereign AI into practice with NVIDIA GB300 NVL72 systems purpose-built for large-scale AI training and inference. Amalgamy provides the orchestration layer across the entire environment, coordinating workloads, policy, data locality, and infrastructure awareness so researchers, students, agencies, and industry partners can put advanced compute to work immediately."
     script: "ThisWay Global has been our guide from vision to execution, bringing together NVIDIA-powered infrastructure, Sovereign AI, high-performance computing, and workforce development.\n\nTexas has the work ethic, the resources, and the partners to lead. At Texas Tech, we are not standing by and watching this happen around us. We are building it."
     attribution: "Brandon Creighton, Chancellor, Texas Tech University System"
