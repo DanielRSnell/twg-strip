@@ -35,6 +35,7 @@ const {
   button,
   image,
   story,
+  journey,
   value,
   team,
   career,
@@ -163,6 +164,55 @@ const careers = await getSinglePage("career");
     </div>
   </section>
 
+  {journey && (
+    <section class="section bg-theme-light/40" id="journey">
+      <div class="container">
+        <div class="max-w-2xl mb-12 xl:mb-16">
+          <h2 class="pb-4 text-4xl" data-aos="fade-up-sm" data-aos-delay="100" set:html={markdownify(journey.title)} />
+          {journey.subtitle && (
+            <p class="text-lg text-light leading-relaxed" data-aos="fade-up-sm" data-aos-delay="200" set:html={markdownify(journey.subtitle)} />
+          )}
+        </div>
+
+        <div class="justify-center row">
+          <div class="lg:col-10 xl:col-9">
+            <!-- Timeline (most recent first) -->
+            <ol class="relative border-l-2 border-border/70 ml-3 sm:ml-4">
+              {journey.milestones.map((m: { year: string; tag?: string; title: string; description: string; upcoming?: boolean }, i: number) => (
+                <li class="relative pl-8 sm:pl-10 pb-10 last:pb-0" data-aos="fade-up-sm" data-aos-delay={80 + i * 60}>
+                  <!-- Node -->
+                  <span class={`absolute -left-[9px] top-1.5 h-4 w-4 rounded-full border-2 ${m.upcoming ? "border-brand/50 bg-white" : "border-brand bg-brand shadow-[0_0_0_4px_rgba(36,171,157,0.12)]"}`}></span>
+                  <div class={`rounded-2xl border bg-white p-6 shadow-sm ${m.upcoming ? "border-dashed border-brand/40" : "border-border/60"}`}>
+                    <div class="flex flex-wrap items-center gap-3 mb-3">
+                      <span class="text-xl font-bold text-brand">{m.year}</span>
+                      {m.tag && (
+                        <span class="inline-flex items-center px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wider rounded-full bg-brand/10 text-brand">{m.tag}</span>
+                      )}
+                    </div>
+                    <h3 class="mb-2 text-xl font-semibold text-dark">{m.title}</h3>
+                    <p class="text-light leading-relaxed" set:html={markdownify(m.description)} />
+                  </div>
+                </li>
+              ))}
+            </ol>
+
+            {journey.funding && (
+              <div class="mt-4 rounded-2xl border border-brand/25 bg-brand/[0.05] p-6 sm:p-8" data-aos="fade-up-sm" data-aos-delay="120">
+                <div class="flex flex-col sm:flex-row sm:items-center gap-4">
+                  <span class="inline-flex w-fit items-center gap-2 px-3 py-1.5 text-xs font-bold uppercase tracking-widest rounded-full bg-brand text-white shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                    {journey.funding.label}
+                  </span>
+                  <p class="text-dark/80 leading-relaxed" set:html={markdownify(journey.funding.text)} />
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </section>
+  )}
+
   <section class="hidden section bg-primary">
     <div class="container">
       <div class="justify-between row g-4 gy-5">
@@ -208,7 +258,7 @@ const careers = await getSinglePage("career");
     </div>
   </section>
 
-  <section class="pb-0 section">
+  <section class="pb-0 section scroll-mt-24" id="leadership">
     <div class="container">
       <div class="mb-10 xl:mb-14">
         <h2

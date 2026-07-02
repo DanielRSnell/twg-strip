@@ -22,6 +22,23 @@ export const aboutCollection = defineCollection({
         })
       ),
     }),
+    journey: z.object({
+      title: z.string(),
+      subtitle: z.string().optional(),
+      funding: z.object({
+        label: z.string(),
+        text: z.string(),
+      }).optional(),
+      milestones: z.array(
+        z.object({
+          year: z.string(),
+          tag: z.string().optional(),
+          title: z.string(),
+          description: z.string(),
+          upcoming: z.boolean().optional(),
+        })
+      ),
+    }).optional(),
     value: z.object({
       title: z.string(),
       content: z.string(),
