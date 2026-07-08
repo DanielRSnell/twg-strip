@@ -13,73 +13,87 @@ export const productsCollection = defineCollection({
     description: z.string().optional(),
 
     hero: z.object({
-      badge: z.string(),
+      eyebrow: z.string(),
       title: z.string(),
-      tagline: z.string(),
+      content: z.string(),
       button_primary: buttonSchema,
       button_secondary: buttonSchema,
     }),
 
-    bottleneck: z.object({
+    challenges: z.object({
       title: z.string(),
       intro: z.string(),
       pain_points: z.array(z.object({
         title: z.string(),
         text: z.string(),
       })),
-      callout: z.object({
+    }),
+
+    operational: z.object({
+      title: z.string(),
+      intro: z.string(),
+      whitepaper: z.object({
         title: z.string(),
-        text: z.string(),
+        teaser: z.string(),
+        button: buttonSchema,
       }),
-      closer: z.string(),
     }),
 
     capabilities: z.object({
       title: z.string(),
-      intro: z.string(),
-      columns: z.array(z.object({
+      items: z.array(z.object({
         title: z.string(),
-        benefits: z.array(z.object({
-          bold: z.string(),
-          text: z.string(),
-        })),
+        lead: z.string(),
+        more: z.array(z.string()),
+      })),
+    }),
+
+    workloads: z.object({
+      title: z.string(),
+      intro: z.string(),
+      use_cases: z.array(z.object({
+        title: z.string(),
+        text: z.string(),
+      })),
+    }),
+
+    personas: z.object({
+      title: z.string(),
+      items: z.array(z.object({
+        title: z.string(),
+        need: z.string(),
+        how: z.string(),
+        changes: z.string(),
+        capabilities: z.string(),
+        summary: z.string().optional(),
       })),
     }),
 
     federated: z.object({
       title: z.string(),
       intro: z.string(),
+      models_label: z.string(),
       deployment_models: z.array(z.object({
         title: z.string(),
         text: z.string(),
       })),
-      handshake: z.object({
-        intro: z.string(),
-        items: z.array(z.object({
-          label: z.string(),
-          text: z.string(),
-        })),
-      }),
     }),
 
-    roadmap: z.object({
+    economics: z.object({
       title: z.string(),
-      intro: z.string(),
-      items: z.array(z.object({
-        number: z.number(),
+      groups: z.array(z.object({
         title: z.string(),
-        description: z.string(),
-        sub_points: z.array(z.object({
+        bullets: z.array(z.object({
           bold: z.string(),
           text: z.string(),
-        })).optional(),
-        sub_heading: z.string().optional(),
+        })),
       })),
     }),
 
     cta: z.object({
       title: z.string(),
       description: z.string(),
+      closer: z.string().optional(),
       button_primary: buttonSchema,
       button_secondary: buttonSchema,
     }),

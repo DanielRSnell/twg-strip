@@ -1,191 +1,385 @@
 ---
 import Base from "@/layouts/Base.astro";
+import SovereignStackDiagram from "@/components/SovereignStackDiagram.astro";
 import { markdownify } from "@/lib/utils/textConverter";
 import type { CollectionEntry } from "astro:content";
 import { getEntry } from "astro:content";
 
 const serviceIndex = await getEntry("service", "-index");
-const { title, meta_title, description, hero, bottleneck, capabilities, federated, roadmap, cta } =
+const { title, meta_title, description, hero, challenges, operational, capabilities, workloads, personas, federated, economics, cta } =
   serviceIndex.data as CollectionEntry<"service">["data"];
+
+const painIcons = [
+  '<path d="M21 5H3a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2z"/><path d="M7 10h0"/><path d="M12 10h0"/><path d="M17 10h0"/><path d="M7 14h0"/><path d="M12 14h0"/>',
+  '<rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>',
+  '<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',
+];
+
+const capabilityIcons = [
+  '<polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>',
+  '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>',
+  '<path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>',
+  '<line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/>',
+];
+
+const useCaseIcons = [
+  '<path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/>',
+  '<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>',
+  '<path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>',
+  '<path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/>',
+];
+
+const modelIcons = [
+  '<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',
+  '<circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>',
+  '<path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/>',
+  '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>',
+];
+
+const economicIcons = [
+  '<polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/>',
+  '<polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>',
+  '<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><polyline points="16 11 18 13 22 9"/>',
+];
 ---
 
 <Base title={title} meta_title={meta_title} description={description}>
 
   <!-- Hero -->
-  <section class="relative overflow-hidden bg-primary pt-[100px] pb-[60px] lg:pt-[120px] lg:pb-[80px]">
+  <section class="relative overflow-hidden bg-primary pt-[110px] pb-[60px] lg:pt-[140px] lg:pb-[90px]">
     <div class="absolute inset-0 bg-gradient-to-br from-primary via-[#0d1117] to-primary"></div>
     <div class="absolute inset-0 opacity-[0.06]" style="background-image: url('data:image/svg+xml,%3Csvg width=&quot;60&quot; height=&quot;60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cpath d=&quot;M0 30h60M30 0v60&quot; stroke=&quot;%23fff&quot; stroke-width=&quot;0.5&quot; fill=&quot;none&quot;/%3E%3C/svg%3E');"></div>
-    <div class="absolute -top-20 -right-20 w-[350px] h-[350px] rounded-full bg-brand/10 blur-3xl pointer-events-none"></div>
+    <div class="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-brand/[0.05] blur-3xl pointer-events-none"></div>
+    <div class="absolute -bottom-20 -left-20 w-[400px] h-[400px] rounded-full bg-[#5969FC]/[0.03] blur-3xl pointer-events-none"></div>
+
     <div class="container relative z-10">
       <div class="items-center row gy-5">
-        <div class="lg:col-7">
-          <div
-            class="inline-flex items-center gap-2 px-4 py-2 mb-8 text-sm font-medium text-white/90 rounded-full border border-white/[0.08] bg-white/[0.04] backdrop-blur-sm shadow-[0_0_20px_rgba(36,171,157,0.08)]"
-            data-aos="fade-right-sm"
-            data-aos-delay="50"
-          >
-            <span class="inline-block w-1.5 h-1.5 rounded-full bg-brand shadow-[0_0_6px_rgba(36,171,157,0.6)]"></span>
-            {hero.badge}
-          </div>
+        <!-- Left: copy -->
+        <div class="lg:col-6">
+          <p class="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-brand" data-aos="fade-up-sm" data-aos-delay="50">
+            {hero.eyebrow}
+          </p>
           <h1
-            class="mb-6 font-extrabold hero-gradient-text"
-            data-aos="fade-right-sm"
+            class="mb-6 text-3xl md:text-4xl lg:text-5xl font-extrabold text-white leading-[1.1] tracking-tight"
+            data-aos="fade-up-sm"
             data-aos-delay="100"
             set:html={markdownify(hero.title)}
           />
-          <p
-            class="mb-10 max-w-xl text-lg leading-relaxed text-white/60"
-            data-aos="fade-right-sm"
-            data-aos-delay="200"
-          >
-            {hero.tagline}
-          </p>
           <div
-            class="flex flex-wrap gap-4"
-            data-aos="fade-right-sm"
-            data-aos-delay="300"
-          >
+            class="mb-10 max-w-xl [&>p]:text-white/50 [&>p]:leading-relaxed [&>p]:mb-5 [&>p:last-child]:mb-0 [&>p:first-child]:text-lg [&>p:first-child]:text-white/70"
+            data-aos="fade-up-sm"
+            data-aos-delay="200"
+            set:html={markdownify(hero.content, true)}
+          />
+          <div class="flex flex-wrap gap-4" data-aos="fade-up-sm" data-aos-delay="300">
             <a
               href={hero.button_primary.link}
-              class="group relative inline-flex items-center gap-2 px-7 py-3 text-sm font-semibold text-white rounded-full bg-brand border border-brand/80 shadow-[0_1px_2px_rgba(0,0,0,0.2),0_0_20px_rgba(36,171,157,0.15)] hover:shadow-[0_1px_2px_rgba(0,0,0,0.2),0_0_30px_rgba(36,171,157,0.25)] hover:bg-brand/90 transition-all duration-300"
+              class="group inline-flex items-center gap-2 px-7 py-3 text-sm font-semibold text-white rounded-full bg-brand border border-brand/80 shadow-[0_1px_2px_rgba(0,0,0,0.2),0_0_20px_rgba(36,171,157,0.15)] hover:shadow-[0_1px_2px_rgba(0,0,0,0.2),0_0_30px_rgba(36,171,157,0.25)] hover:bg-brand/90 transition-all duration-300"
             >
               {hero.button_primary.label}
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-0.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
             </a>
             <a
               href={hero.button_secondary.link}
-              class="group relative inline-flex items-center gap-2 px-7 py-3 text-sm font-semibold text-white/90 rounded-full border border-white/[0.12] bg-white/[0.04] backdrop-blur-sm hover:bg-white/[0.08] hover:border-white/[0.2] transition-all duration-300"
+              class="group inline-flex items-center gap-2 px-7 py-3 text-sm font-semibold text-white/90 rounded-full border border-white/[0.12] bg-white/[0.04] backdrop-blur-sm hover:bg-white/[0.08] hover:border-white/[0.2] transition-all duration-300"
             >
               {hero.button_secondary.label}
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-0.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-0.5"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
             </a>
           </div>
         </div>
-        <div class="hidden lg:block lg:col-5">
-          <img
-            src="/images/infrastructure/data-center-dark.svg"
-            alt="Amalgamy AI Infrastructure"
-            class="w-full h-auto drop-shadow-[0_0_30px_rgba(36,171,157,0.15)]"
-            data-aos="fade-left-sm"
-            data-aos-delay="200"
-          />
+
+        <!-- Right: product dashboard visual (doctored screenshot placeholder built in CSS) -->
+        <div class="hidden lg:block lg:col-6" data-aos="fade-up-sm" data-aos-delay="250">
+          <div class="relative rounded-xl border border-white/10 bg-[#0d1117]/90 shadow-[0_20px_60px_rgba(0,0,0,0.5),0_0_40px_rgba(36,171,157,0.08)] overflow-hidden" aria-hidden="true">
+            <!-- Window chrome -->
+            <div class="flex items-center gap-2 px-5 py-3 border-b border-white/[0.06] bg-white/[0.02]">
+              <span class="w-2.5 h-2.5 rounded-full bg-white/10"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-white/10"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-white/10"></span>
+              <span class="ml-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/40">Amalgamy Console</span>
+              <span class="ml-auto inline-flex items-center gap-1.5 text-[11px] font-medium text-brand"><span class="w-1.5 h-1.5 rounded-full bg-brand shadow-[0_0_6px_rgba(36,171,157,0.6)]"></span>All systems governed</span>
+            </div>
+            <!-- Stat tiles -->
+            <div class="grid grid-cols-3 gap-3 px-5 pt-5">
+              <div class="rounded-lg border border-white/[0.06] bg-white/[0.02] px-4 py-3">
+                <p class="text-[10px] font-semibold uppercase tracking-widest text-white/35 mb-1">GPU Utilization</p>
+                <p class="text-xl font-bold text-brand">94%</p>
+              </div>
+              <div class="rounded-lg border border-white/[0.06] bg-white/[0.02] px-4 py-3">
+                <p class="text-[10px] font-semibold uppercase tracking-widest text-white/35 mb-1">Active Workloads</p>
+                <p class="text-xl font-bold text-white">1,284</p>
+              </div>
+              <div class="rounded-lg border border-white/[0.06] bg-white/[0.02] px-4 py-3">
+                <p class="text-[10px] font-semibold uppercase tracking-widest text-white/35 mb-1">Policy Checks</p>
+                <p class="text-xl font-bold text-white">100% <span class="text-xs font-medium text-brand">pass</span></p>
+              </div>
+            </div>
+            <!-- Cluster utilization bars -->
+            <div class="px-5 pt-5">
+              <p class="text-[10px] font-semibold uppercase tracking-widest text-white/35 mb-3">Cluster Utilization</p>
+              <div class="space-y-2.5">
+                <div class="flex items-center gap-3">
+                  <span class="w-20 shrink-0 text-[11px] text-white/50">H200 Pod A</span>
+                  <div class="flex-1 h-2 rounded-full bg-white/[0.05] overflow-hidden"><div class="h-full w-[96%] rounded-full bg-gradient-to-r from-brand/60 to-brand"></div></div>
+                  <span class="w-9 text-right text-[11px] font-medium text-brand">96%</span>
+                </div>
+                <div class="flex items-center gap-3">
+                  <span class="w-20 shrink-0 text-[11px] text-white/50">H200 Pod B</span>
+                  <div class="flex-1 h-2 rounded-full bg-white/[0.05] overflow-hidden"><div class="h-full w-[91%] rounded-full bg-gradient-to-r from-brand/60 to-brand"></div></div>
+                  <span class="w-9 text-right text-[11px] font-medium text-brand">91%</span>
+                </div>
+                <div class="flex items-center gap-3">
+                  <span class="w-20 shrink-0 text-[11px] text-white/50">A100 Legacy</span>
+                  <div class="flex-1 h-2 rounded-full bg-white/[0.05] overflow-hidden"><div class="h-full w-[88%] rounded-full bg-gradient-to-r from-[#5969FC]/60 to-[#5969FC]"></div></div>
+                  <span class="w-9 text-right text-[11px] font-medium text-[#8b96ff]">88%</span>
+                </div>
+              </div>
+            </div>
+            <!-- Workload queue -->
+            <div class="px-5 py-5">
+              <p class="text-[10px] font-semibold uppercase tracking-widest text-white/35 mb-3">Workload Queue</p>
+              <div class="space-y-2">
+                <div class="flex items-center gap-3 rounded-lg border border-white/[0.05] bg-white/[0.015] px-3.5 py-2.5">
+                  <span class="text-[11px] text-white/70 truncate">genomics-train-0412</span>
+                  <span class="ml-auto shrink-0 text-[10px] font-semibold uppercase tracking-wider text-brand bg-brand/10 border border-brand/20 rounded-full px-2 py-0.5">Running</span>
+                </div>
+                <div class="flex items-center gap-3 rounded-lg border border-white/[0.05] bg-white/[0.015] px-3.5 py-2.5">
+                  <span class="text-[11px] text-white/70 truncate">climate-sim-hpc-88</span>
+                  <span class="ml-auto shrink-0 text-[10px] font-semibold uppercase tracking-wider text-brand bg-brand/10 border border-brand/20 rounded-full px-2 py-0.5">Running</span>
+                </div>
+                <div class="flex items-center gap-3 rounded-lg border border-white/[0.05] bg-white/[0.015] px-3.5 py-2.5">
+                  <span class="text-[11px] text-white/70 truncate">partner-inference-api</span>
+                  <span class="ml-auto shrink-0 text-[10px] font-semibold uppercase tracking-wider text-[#8b96ff] bg-[#5969FC]/10 border border-[#5969FC]/20 rounded-full px-2 py-0.5">Staging data</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </section>
   <!-- /Hero -->
 
-  <!-- Operational Bottleneck -->
+  <!-- Sovereign AI capability is hard -->
   <section class="section">
     <div class="container">
-      <div class="justify-center mb-12 row">
-        <div class="lg:col-8">
-          <h2
-            class="pb-4 text-center"
-            data-aos="fade-up-sm"
-            data-aos-delay="100"
-            set:html={markdownify(bottleneck.title)}
-          />
-          <p
-            class="text-center text-light"
-            data-aos="fade-up-sm"
-            data-aos-delay="200"
-          >
-            {bottleneck.intro}
-          </p>
-        </div>
+      <div class="max-w-3xl mb-14 lg:mb-16">
+        <p class="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-brand" data-aos="fade-up-sm" data-aos-delay="50">The Challenge</p>
+        <h2 class="pb-3 text-3xl lg:text-4xl font-bold [&>strong]:text-dark/40" data-aos="fade-up-sm" data-aos-delay="100" set:html={markdownify(challenges.title)} />
+        <p class="text-light leading-relaxed text-lg" data-aos="fade-up-sm" data-aos-delay="150">{challenges.intro}</p>
       </div>
-
-      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 mb-10">
-        {bottleneck.pain_points.map((point, i) => (
-          <div
-            class="relative p-8 rounded-2xl border border-border/60 bg-white shadow-sm overflow-hidden"
-            data-aos="fade-up-sm"
-            data-aos-delay={(i + 1) * 100}
-          >
-            <div class="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-brand/40 via-brand/80 to-brand/40" />
+      <div class="grid gap-5 md:grid-cols-3">
+        {challenges.pain_points.map((point, i) => (
+          <div class="relative p-8 rounded-2xl border border-border/60 bg-white shadow-sm overflow-hidden" data-aos="fade-up-sm" data-aos-delay={(i + 1) * 80}>
+            <div class="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-brand/60 via-brand to-brand/60" />
+            <div class="w-12 h-12 rounded-xl bg-dark/[0.04] flex items-center justify-center text-dark/40 mb-6">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" set:html={painIcons[i]} />
+            </div>
             <h3 class="mb-3 text-lg font-semibold">{point.title}</h3>
             <p class="text-sm text-light leading-relaxed">{point.text}</p>
           </div>
         ))}
       </div>
-
-      <div
-        class="relative mx-auto max-w-3xl rounded-2xl bg-primary overflow-hidden mb-10"
-        data-aos="fade-up-sm"
-        data-aos-delay="400"
-      >
-        <div class="absolute inset-0 opacity-[0.06]" style="background-image: url('data:image/svg+xml,%3Csvg width=&quot;60&quot; height=&quot;60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cpath d=&quot;M0 30h60M30 0v60&quot; stroke=&quot;%23fff&quot; stroke-width=&quot;0.5&quot; fill=&quot;none&quot;/%3E%3C/svg%3E');"></div>
-        <div class="absolute -top-20 -right-20 w-[250px] h-[250px] rounded-full bg-brand/10 blur-3xl pointer-events-none" />
-        <div class="absolute left-0 inset-y-0 w-1 bg-gradient-to-b from-brand/60 via-brand to-brand/60" />
-        <div class="relative z-10 flex items-start gap-5 p-8 lg:p-10">
-          <div class="flex-shrink-0 mt-1">
-            <div class="flex items-center justify-center w-10 h-10 rounded-full border border-brand/30 bg-brand/10">
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-brand"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-            </div>
-          </div>
-          <div>
-            <p class="text-xs font-semibold uppercase tracking-widest text-brand mb-2">The &ldquo;{bottleneck.callout.title}&rdquo;</p>
-            <p class="text-white/60 leading-relaxed">{bottleneck.callout.text}</p>
-          </div>
-        </div>
-      </div>
-
-      <p
-        class="text-center text-xl font-bold text-dark"
-        data-aos="fade-up-sm"
-        data-aos-delay="500"
-      >
-        {bottleneck.closer}
-      </p>
     </div>
   </section>
-  <!-- /Operational Bottleneck -->
 
-  <!-- Key Capabilities -->
-  <section class="section bg-theme-light/40">
+  <!-- From AI Infrastructure to Operational Capability -->
+  <section class="section bg-theme-light/50">
     <div class="container">
-      <div class="justify-center mb-12 row">
-        <div class="lg:col-8">
-          <h2
-            class="pb-4 text-center"
-            data-aos="fade-up-sm"
-            data-aos-delay="100"
-            set:html={markdownify(capabilities.title)}
-          />
-          <p
-            class="text-center text-light"
-            data-aos="fade-up-sm"
-            data-aos-delay="200"
-          >
-            {capabilities.intro}
-          </p>
-        </div>
+      <div class="max-w-3xl mb-14 lg:mb-16">
+        <p class="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-brand" data-aos="fade-up-sm" data-aos-delay="50">The Control Layer</p>
+        <h2 class="pb-3 text-3xl lg:text-4xl font-bold [&>strong]:text-dark/40" data-aos="fade-up-sm" data-aos-delay="100" set:html={markdownify(operational.title)} />
+        <p class="text-light leading-relaxed text-lg" data-aos="fade-up-sm" data-aos-delay="150">{operational.intro}</p>
       </div>
+      <div data-aos="fade-up-sm" data-aos-delay="100">
+        <SovereignStackDiagram />
+      </div>
+      <!-- White paper CTA band -->
+      <div class="mt-10 rounded-2xl border border-border/60 bg-white shadow-sm p-8 lg:p-10 flex flex-col lg:flex-row lg:items-center gap-6 lg:gap-10" data-aos="fade-up-sm" data-aos-delay="150">
+        <div class="shrink-0 w-12 h-12 rounded-xl bg-brand/[0.07] flex items-center justify-center text-brand">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><polyline points="9 15 12 18 15 15"/></svg>
+        </div>
+        <div class="flex-1">
+          <h3 class="text-lg font-semibold mb-1.5">{operational.whitepaper.title}</h3>
+          <p class="text-sm text-light leading-relaxed">{operational.whitepaper.teaser}</p>
+        </div>
+        <a href={operational.whitepaper.button.link} class="group shrink-0 inline-flex items-center gap-2 px-7 py-3 text-sm font-semibold text-white rounded-full bg-brand border border-brand/80 shadow-[0_1px_2px_rgba(0,0,0,0.2),0_0_20px_rgba(36,171,157,0.15)] hover:shadow-[0_1px_2px_rgba(0,0,0,0.2),0_0_30px_rgba(36,171,157,0.25)] hover:bg-brand/90 transition-all duration-300">
+          {operational.whitepaper.button.label}
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-y-0.5"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
 
-      <div class="grid gap-6 lg:grid-cols-3">
-        {capabilities.columns.map((col, i) => (
+  <!-- Key Amalgamy Capabilities -->
+  <section class="section">
+    <div class="container">
+      <div class="max-w-3xl mb-14 lg:mb-16">
+        <p class="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-brand" data-aos="fade-up-sm" data-aos-delay="50">Capabilities</p>
+        <h2 class="text-3xl lg:text-4xl font-bold [&>strong]:text-dark/40" data-aos="fade-up-sm" data-aos-delay="100" set:html={markdownify(capabilities.title)} />
+      </div>
+      <div class="grid gap-5 md:grid-cols-2 xl:grid-cols-4 items-start">
+        {capabilities.items.map((cap, i) => (
+          <div class="relative p-8 rounded-2xl border border-border/60 bg-white shadow-sm overflow-hidden" data-aos="fade-up-sm" data-aos-delay={(i + 1) * 80}>
+            <div class="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-brand/60 via-brand to-brand/60" />
+            <div class="w-12 h-12 rounded-xl bg-brand/[0.07] flex items-center justify-center text-brand mb-6">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" set:html={capabilityIcons[i]} />
+            </div>
+            <h3 class="mb-3 text-lg font-semibold leading-snug">{cap.title}</h3>
+            <p class="text-sm font-medium text-dark/75 leading-relaxed">{cap.lead}</p>
+            <details class="group/more mt-4">
+              <summary class="inline-flex items-center gap-1.5 text-sm font-semibold text-brand cursor-pointer select-none list-none [&::-webkit-details-marker]:hidden hover:text-brand/70 transition-colors">
+                <span class="group-open/more:hidden">More</span>
+                <span class="hidden group-open/more:inline">Less</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-200 group-open/more:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
+              </summary>
+              <div class="pt-3 space-y-3">
+                {cap.more.map((para) => (
+                  <p class="text-sm text-light leading-relaxed">{para}</p>
+                ))}
+              </div>
+            </details>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Mixed Workloads, One Governed Environment -->
+  <section class="section bg-theme-light/50">
+    <div class="container">
+      <div class="max-w-3xl mb-14 lg:mb-16">
+        <p class="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-brand" data-aos="fade-up-sm" data-aos-delay="50">Use Cases</p>
+        <h2 class="pb-3 text-3xl lg:text-4xl font-bold [&>strong]:text-dark/40" data-aos="fade-up-sm" data-aos-delay="100" set:html={markdownify(workloads.title)} />
+        <p class="text-light leading-relaxed text-lg" data-aos="fade-up-sm" data-aos-delay="150">{workloads.intro}</p>
+      </div>
+      <div class="grid gap-5 md:grid-cols-2">
+        {workloads.use_cases.map((uc, i) => (
+          <div class="flex items-start gap-5 p-8 rounded-2xl border border-border/60 bg-white shadow-sm" data-aos="fade-up-sm" data-aos-delay={(i + 1) * 60}>
+            <div class="shrink-0 w-12 h-12 rounded-xl bg-brand/[0.07] flex items-center justify-center text-brand">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" set:html={useCaseIcons[i]} />
+            </div>
+            <div>
+              <h3 class="mb-2 text-lg font-semibold">{uc.title}</h3>
+              <p class="text-sm text-light leading-relaxed">{uc.text}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Who Amalgamy is built for (flip cards) -->
+  <section class="section">
+    <div class="container">
+      <div class="max-w-3xl mb-14 lg:mb-16">
+        <p class="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-brand" data-aos="fade-up-sm" data-aos-delay="50">Personas</p>
+        <h2 class="pb-3 text-3xl lg:text-4xl font-bold [&>strong]:text-dark/40" data-aos="fade-up-sm" data-aos-delay="100" set:html={markdownify(personas.title)} />
+        <p class="text-light leading-relaxed" data-aos="fade-up-sm" data-aos-delay="150">Select a card to see how Amalgamy helps.</p>
+      </div>
+      <div class="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        {personas.items.map((p, i) => (
           <div
-            class="relative p-8 rounded-2xl border border-border/60 bg-white shadow-sm overflow-hidden"
+            class="flip-card cursor-pointer [perspective:1200px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand rounded-2xl"
+            tabindex="0"
+            role="button"
+            aria-expanded="false"
+            aria-label={`${p.title}: flip card to see how Amalgamy helps`}
             data-aos="fade-up-sm"
-            data-aos-delay={(i + 1) * 100}
+            data-aos-delay={(i % 3 + 1) * 80}
           >
-            <div class="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-brand/40 via-brand/80 to-brand/40" />
-            <h3 class="mb-2 text-base font-semibold text-dark">{col.title}</h3>
-            <p class="mb-6 text-xs text-light">
-              {i === 0 && "Amalgamy dynamically routes AI and HPC jobs based on data locality and right resources availability:"}
-              {i === 1 && "Traditional schedulers are not designed for modern data governance. Amalgamy enforces policies at the orchestration layer:"}
-              {i === 2 && "You don't need to rebuild your software stack. Amalgamy operates underneath the tools and workflows your teams already use:"}
-            </p>
+            <div class="flip-inner relative grid min-h-[380px] transition-transform duration-500 [transform-style:preserve-3d]">
+              <!-- Front: Need + What changes -->
+              <div class="[grid-area:1/1] [backface-visibility:hidden] flex flex-col p-8 rounded-2xl border border-border/60 bg-white shadow-sm overflow-hidden">
+                <div class="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-brand/60 via-brand to-brand/60" />
+                <p class="text-xs font-semibold uppercase tracking-widest text-brand mb-2">For</p>
+                <h3 class="text-lg font-semibold leading-snug mb-5">{p.title}</h3>
+                <div class="mb-4">
+                  <p class="text-xs font-bold uppercase tracking-widest text-dark/35 mb-1.5">Need</p>
+                  <p class="text-sm text-light leading-relaxed">{p.need}</p>
+                </div>
+                <div>
+                  <p class="text-xs font-bold uppercase tracking-widest text-dark/35 mb-1.5">What changes</p>
+                  <p class="text-sm text-light leading-relaxed">{p.changes}</p>
+                </div>
+                <p class="mt-auto pt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-brand">
+                  How Amalgamy helps
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                </p>
+              </div>
+              <!-- Back: How Amalgamy helps + Relevant capabilities -->
+              <div class="[grid-area:1/1] [backface-visibility:hidden] [transform:rotateY(180deg)] flex flex-col p-8 rounded-2xl border border-brand/25 bg-brand/[0.04] shadow-sm overflow-hidden">
+                <div class="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-brand/60 via-brand to-brand/60" />
+                <h3 class="text-lg font-semibold leading-snug mb-5">{p.title}</h3>
+                <div class="mb-4">
+                  <p class="text-xs font-bold uppercase tracking-widest text-brand/70 mb-1.5">How Amalgamy helps</p>
+                  <p class="text-sm text-dark/70 leading-relaxed">{p.how}</p>
+                </div>
+                <div class="mb-4">
+                  <p class="text-xs font-bold uppercase tracking-widest text-brand/70 mb-1.5">Relevant capabilities</p>
+                  <p class="text-sm text-dark/70 leading-relaxed">{p.capabilities}</p>
+                </div>
+                {p.summary && (
+                  <p class="text-[13px] text-light leading-relaxed italic border-t border-brand/15 pt-4">{p.summary}</p>
+                )}
+                <p class="mt-auto pt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-brand">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+                  Back
+                </p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Federated Infrastructure -->
+  <section class="section bg-theme-light/50">
+    <div class="container">
+      <div class="max-w-3xl mb-14 lg:mb-16">
+        <p class="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-brand" data-aos="fade-up-sm" data-aos-delay="50">Collaboration</p>
+        <h2 class="pb-3 text-3xl lg:text-4xl font-bold [&>strong]:text-dark/40" data-aos="fade-up-sm" data-aos-delay="100" set:html={markdownify(federated.title)} />
+        <p class="text-light leading-relaxed text-lg" data-aos="fade-up-sm" data-aos-delay="150">{federated.intro}</p>
+      </div>
+      <p class="text-xs font-bold uppercase tracking-widest text-dark/35 mb-5" data-aos="fade-up-sm">{federated.models_label}</p>
+      <div class="grid gap-5 md:grid-cols-2">
+        {federated.deployment_models.map((model, i) => (
+          <div class="flex items-start gap-5 p-8 rounded-2xl border border-border/60 bg-white shadow-sm" data-aos="fade-up-sm" data-aos-delay={(i + 1) * 60}>
+            <div class="shrink-0 w-12 h-12 rounded-xl bg-brand/[0.07] flex items-center justify-center text-brand">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" set:html={modelIcons[i]} />
+            </div>
+            <div>
+              <h3 class="mb-2 text-lg font-semibold">{model.title}</h3>
+              <p class="text-sm text-light leading-relaxed">{model.text}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Economic benefits: three bands, one-line framing + 3 proof bullets each -->
+  <section class="section">
+    <div class="container">
+      <div class="max-w-3xl mb-14 lg:mb-16">
+        <p class="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-brand" data-aos="fade-up-sm" data-aos-delay="50">Economics</p>
+        <h2 class="text-3xl lg:text-4xl font-bold [&>strong]:text-dark/40" data-aos="fade-up-sm" data-aos-delay="100" set:html={markdownify(economics.title)} />
+      </div>
+      <div class="grid gap-5 lg:grid-cols-3">
+        {economics.groups.map((group, i) => (
+          <div class="relative p-8 rounded-2xl border border-border/60 bg-white shadow-sm overflow-hidden" data-aos="fade-up-sm" data-aos-delay={(i + 1) * 80}>
+            <div class="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-brand/60 via-brand to-brand/60" />
+            <div class="w-12 h-12 rounded-xl bg-brand/[0.07] flex items-center justify-center text-brand mb-6">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" set:html={economicIcons[i]} />
+            </div>
+            <h3 class="mb-6 text-xl font-semibold">{group.title}</h3>
             <ul class="space-y-4">
-              {col.benefits.map((b) => (
+              {group.bullets.map((b) => (
                 <li class="flex items-start gap-3">
-                  <div class="mt-1 flex-shrink-0 w-5 h-5 rounded-full bg-brand/10 flex items-center justify-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="text-brand"><polyline points="20 6 9 17 4 12"/></svg>
-                  </div>
-                  <p class="text-sm text-light leading-relaxed">
-                    <strong class="text-dark">{b.bold}</strong> {b.text}
-                  </p>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 mt-0.5 text-brand"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                  <p class="text-sm text-light leading-relaxed"><span class="font-semibold text-dark">{b.bold}:</span> {b.text}</p>
                 </li>
               ))}
             </ul>
@@ -194,218 +388,40 @@ const { title, meta_title, description, hero, bottleneck, capabilities, federate
       </div>
     </div>
   </section>
-  <!-- /Key Capabilities -->
 
-  <!-- Federated Infrastructure -->
-  <section class="relative section bg-primary overflow-hidden">
-    <div class="absolute inset-0 bg-gradient-to-br from-primary via-[#0d1117] to-primary"></div>
-    <div class="absolute inset-0 opacity-[0.06]" style="background-image: url('data:image/svg+xml,%3Csvg width=&quot;60&quot; height=&quot;60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cpath d=&quot;M0 30h60M30 0v60&quot; stroke=&quot;%23fff&quot; stroke-width=&quot;0.5&quot; fill=&quot;none&quot;/%3E%3C/svg%3E');"></div>
-    <div class="absolute -top-40 -right-40 w-[500px] h-[500px] rounded-full bg-brand/8 blur-3xl pointer-events-none" />
-    <div class="absolute -bottom-40 -left-40 w-[400px] h-[400px] rounded-full bg-brand/5 blur-3xl pointer-events-none" />
-    <div class="container relative z-10">
-      <div class="justify-center mb-12 row">
-        <div class="lg:col-8">
-          <h2
-            class="pb-4 text-center text-white"
-            data-aos="fade-up-sm"
-            data-aos-delay="100"
-            set:html={markdownify(federated.title)}
-          />
-          <p
-            class="text-center text-theme-light/70"
-            data-aos="fade-up-sm"
-            data-aos-delay="200"
-          >
-            {federated.intro}
-          </p>
-        </div>
-      </div>
-
-      <div class="mb-4 row">
-        <div class="lg:col-10 mx-auto">
-          <p
-            class="mb-2 text-xs font-semibold uppercase tracking-widest text-brand"
-            data-aos="fade-up-sm"
-            data-aos-delay="250"
-          >
-            Core Deployment Models
-          </p>
-        </div>
-      </div>
-
-      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-2 mb-16 max-w-4xl mx-auto">
-        {federated.deployment_models.map((model, i) => (
-          <div
-            class="relative p-8 rounded-2xl border border-white/[0.08] bg-white/[0.03] overflow-hidden"
-            data-aos="fade-up-sm"
-            data-aos-delay={(i + 1) * 100}
-          >
-            <div class="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-brand/40 via-brand/80 to-brand/40" />
-            <h3 class="mb-3 text-lg font-semibold text-white">{model.title}</h3>
-            <p class="text-sm text-white/50 leading-relaxed">{model.text}</p>
-          </div>
-        ))}
-      </div>
-
-      <div class="max-w-4xl mx-auto">
-        <p
-          class="mb-8 text-center text-white/70"
-          data-aos="fade-up-sm"
-          data-aos-delay="100"
-        >
-          {federated.handshake.intro}
-        </p>
-        <div class="grid gap-4 sm:grid-cols-3">
-          {federated.handshake.items.map((item, i) => (
-            <div
-              class="relative p-6 rounded-2xl border border-white/[0.08] bg-white/[0.03] backdrop-blur-sm overflow-hidden text-center"
-              data-aos="fade-up-sm"
-              data-aos-delay={(i + 1) * 100}
-            >
-              <p class="mb-2 text-xs font-semibold uppercase tracking-widest text-brand">{item.label}</p>
-              <p class="text-sm text-white/60 leading-relaxed">{item.text}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- /Federated Infrastructure -->
-
-  <!-- Roadmap -->
-  <section class="section">
+  <!-- CTA -->
+  <section class="section pt-0">
     <div class="container">
-      <div class="justify-center mb-12 row">
-        <div class="lg:col-8">
-          <h2
-            class="pb-4 text-center"
-            data-aos="fade-up-sm"
-            data-aos-delay="100"
-            set:html={markdownify(roadmap.title)}
-          />
-          <p
-            class="text-center text-light"
-            data-aos="fade-up-sm"
-            data-aos-delay="200"
-          >
-            {roadmap.intro}
-          </p>
+      <div
+        data-aos="fade-up"
+        data-aos-delay="100"
+        class="relative px-8 py-16 text-white bg-primary sm:px-16 sm:py-20 lg:px-24 lg:py-24 overflow-hidden rounded-3xl"
+      >
+        <div class="absolute inset-0 opacity-[0.06]" style="background-image: url('data:image/svg+xml,%3Csvg width=&quot;60&quot; height=&quot;60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cpath d=&quot;M0 30h60M30 0v60&quot; stroke=&quot;%23fff&quot; stroke-width=&quot;0.5&quot; fill=&quot;none&quot;/%3E%3C/svg%3E');"></div>
+        <div class="absolute -top-20 -right-20 w-[350px] h-[350px] rounded-full bg-brand/10 blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-32 -left-20 w-[400px] h-[400px] rounded-full bg-brand/[0.06] blur-3xl pointer-events-none"></div>
+        <div class="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-[900px] h-[900px] pointer-events-none opacity-20" aria-hidden="true">
+          <div class="absolute inset-0 rounded-full border border-brand/40"></div>
+          <div class="absolute inset-[12%] rounded-full border border-brand/30"></div>
+          <div class="absolute inset-[24%] rounded-full border border-brand/20"></div>
         </div>
-      </div>
 
-      <div class="mx-auto max-w-3xl">
-        {roadmap.items.map((item, i) => (
-          <div
-            class="relative flex gap-6 pb-12 last:pb-0"
-            data-aos="fade-up-sm"
-            data-aos-delay={(i + 1) * 100}
-          >
-            <div class="flex flex-col items-center">
-              <div class="relative z-10 flex items-center justify-center w-10 h-10 rounded-full border-2 border-brand bg-white shadow-[0_0_12px_rgba(36,171,157,0.2)]">
-                <span class="text-sm font-bold text-brand">{item.number}</span>
-              </div>
-              {i < roadmap.items.length - 1 && (
-                <div class="flex-1 w-[2px] bg-gradient-to-b from-brand/40 to-brand/10 mt-2" />
-              )}
-            </div>
-            <div class="flex-1 pt-1.5">
-              <h3 class="mb-2 text-lg font-semibold">{item.title}</h3>
-              <p class="text-sm text-light leading-relaxed mb-3">{item.description}</p>
-              {item.sub_heading && (
-                <p class="text-xs font-semibold text-dark mb-2">{item.sub_heading}</p>
-              )}
-              {item.sub_points && (
-                <ul class="space-y-2">
-                  {item.sub_points.map((sp) => (
-                    <li class="flex items-start gap-2">
-                      <div class="mt-1.5 flex-shrink-0 w-1.5 h-1.5 rounded-full bg-brand" />
-                      <p class="text-sm text-light leading-relaxed">
-                        <strong class="text-dark">{sp.bold}:</strong> {sp.text}
-                      </p>
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </div>
+        <div class="relative z-10">
+          <h2 class="pb-4 text-center text-white text-3xl lg:text-4xl font-bold [&>strong]:text-white/50" data-aos="fade-up-sm" data-aos-delay="200" set:html={markdownify(cta.title)} />
+          <p class="mx-auto max-w-2xl pb-4 text-center text-white/60" data-aos="fade-up-sm" data-aos-delay="300">{cta.description}</p>
+          {cta.closer && (
+            <p class="mx-auto max-w-2xl pb-8 text-center text-white/80 font-medium" data-aos="fade-up-sm" data-aos-delay="350">{cta.closer}</p>
+          )}
+          <div class="flex flex-wrap justify-center gap-4" data-aos="fade-up-sm" data-aos-delay="400">
+            <a href={cta.button_primary.link} class="group relative z-10 inline-flex items-center gap-2 px-8 py-3.5 text-sm font-semibold text-white bg-brand rounded-full hover:bg-brand/90 transition-all duration-300 shadow-[0_0_20px_rgba(36,171,157,0.25)] hover:shadow-[0_0_30px_rgba(36,171,157,0.35)]">
+              {cta.button_primary.label}
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-0.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </a>
+            <a href={cta.button_secondary.link} class="group relative z-10 inline-flex items-center gap-2 px-8 py-3.5 text-sm font-semibold text-white/90 rounded-full border border-white/[0.12] bg-white/[0.04] backdrop-blur-sm hover:bg-white/[0.08] hover:border-white/[0.2] transition-all duration-300">
+              {cta.button_secondary.label}
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-y-0.5"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
+            </a>
           </div>
-        ))}
-      </div>
-    </div>
-  </section>
-  <!-- /Roadmap -->
-
-  <!-- CTA: Speak to a Project Architect -->
-  <section class="mx-4 overflow-hidden section">
-    <div
-      data-aos="fade-up"
-      data-aos-delay="100"
-      class="container relative px-8 py-12 text-white bg-primary sm:px-16 sm:py-14 lg:px-24 lg:py-20 rounded-xl overflow-hidden"
-    >
-      <div class="absolute inset-0 bg-gradient-to-br from-primary via-[#0d1117] to-primary rounded-xl"></div>
-      <div class="absolute inset-0 opacity-[0.06] rounded-xl" style="background-image: url('data:image/svg+xml,%3Csvg width=&quot;60&quot; height=&quot;60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cpath d=&quot;M0 30h60M30 0v60&quot; stroke=&quot;%23fff&quot; stroke-width=&quot;0.5&quot; fill=&quot;none&quot;/%3E%3C/svg%3E');"></div>
-      <div class="absolute -top-20 -right-20 w-[350px] h-[350px] rounded-full bg-brand/10 blur-3xl pointer-events-none" />
-
-      <div class="absolute bottom-0 left-1/2 w-2/3 pointer-events-none" style="transform: translateY(50%);">
-        <img
-          src="/images/cta/cta-img-1.png"
-          alt=""
-          class="w-full cta-rotate-animation opacity-90"
-          style="filter: sepia(1) hue-rotate(130deg) saturate(8) brightness(1);"
-        />
-      </div>
-      <img
-        src="/images/cta/cta-img-2.png"
-        alt=""
-        class="w-1/3 absolute top-[10%] -left-[10%] opacity-90 pointer-events-none"
-        style="filter: sepia(1) hue-rotate(130deg) saturate(8) brightness(1);"
-      />
-      <img
-        src="/images/cta/cta-img-2.png"
-        alt=""
-        class="w-1/3 absolute top-[10%] -right-[10%] opacity-90 pointer-events-none"
-        style="filter: sepia(1) hue-rotate(130deg) saturate(8) brightness(1);"
-      />
-
-      <div class="relative z-10">
-        <h2
-          class="pb-4 text-center text-white"
-          data-aos="fade-up-sm"
-          data-aos-delay="200"
-          set:html={markdownify(cta.title)}
-        />
-        <p
-          class="mx-auto max-w-2xl pb-8 text-center text-white/60"
-          data-aos="fade-up-sm"
-          data-aos-delay="300"
-        >
-          {cta.description}
-        </p>
-        <p
-          class="mx-auto max-w-md pb-6 text-center text-sm text-white/40"
-          data-aos="fade-up-sm"
-          data-aos-delay="350"
-        >
-          Design, deploy, and operationalize AI infrastructure with Amalgamy.
-        </p>
-        <div
-          class="flex flex-wrap justify-center gap-4"
-          data-aos="fade-up-sm"
-          data-aos-delay="400"
-        >
-          <a
-            href={cta.button_primary.link}
-            class="group relative z-10 inline-flex items-center gap-2 px-7 py-3 text-sm font-semibold text-white rounded-full bg-brand border border-brand/80 shadow-[0_1px_2px_rgba(0,0,0,0.2),0_0_20px_rgba(36,171,157,0.15)] hover:shadow-[0_1px_2px_rgba(0,0,0,0.2),0_0_30px_rgba(36,171,157,0.25)] hover:bg-brand/90 transition-all duration-300"
-          >
-            {cta.button_primary.label}
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-0.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-          </a>
-          <a
-            href={cta.button_secondary.link}
-            class="group relative z-10 inline-flex items-center gap-2 px-7 py-3 text-sm font-semibold text-white/90 rounded-full border border-white/[0.12] bg-white/[0.04] backdrop-blur-sm hover:bg-white/[0.08] hover:border-white/[0.2] transition-all duration-300"
-          >
-            {cta.button_secondary.label}
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-0.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-          </a>
         </div>
       </div>
     </div>
@@ -432,13 +448,38 @@ const { title, meta_title, description, hero, bottleneck, capabilities, federate
       "url": "https://thiswayglobal.com"
     }
   })} />
-  <style is:global>
-    .hero-gradient-text {
-      color: #fff;
+
+  <script>
+    // Persona flip cards: click or Enter/Space toggles the flip.
+    function initFlipCards() {
+      document.querySelectorAll<HTMLElement>(".flip-card").forEach((card) => {
+        if (card.dataset.flipInit) return;
+        card.dataset.flipInit = "true";
+        const toggle = () => {
+          const flipped = card.classList.toggle("is-flipped");
+          card.setAttribute("aria-expanded", String(flipped));
+        };
+        card.addEventListener("click", toggle);
+        card.addEventListener("keydown", (e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            toggle();
+          }
+        });
+      });
     }
-    .hero-gradient-text strong {
-      color: #9ca3af;
-      font-weight: inherit;
+    initFlipCards();
+    document.addEventListener("astro:page-load", initFlipCards);
+  </script>
+
+  <style is:global>
+    .flip-card.is-flipped .flip-inner {
+      transform: rotateY(180deg);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .flip-card .flip-inner {
+        transition: none;
+      }
     }
   </style>
 </Base>
