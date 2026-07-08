@@ -191,6 +191,15 @@ const empowerItems = [
           <p class="text-light leading-relaxed text-lg" data-aos="fade-up-sm" data-aos-delay="200">{blueprint.description}</p>
         </div>
 
+        <!-- Column headers (once, desktop only; rows keep their own labels on mobile) -->
+        <div class="hidden lg:grid grid-cols-[1fr_auto_1.2fr_auto_1fr] items-center gap-4 lg:gap-8 px-6 lg:px-10 mb-4" data-aos="fade-up-sm">
+          <p class="text-[11px] font-bold uppercase tracking-widest text-dark/35">Current State</p>
+          <span class="w-5" aria-hidden="true"></span>
+          <p class="text-[11px] font-bold uppercase tracking-widest text-[#7c3aed]/70">Sovereign AI Blueprint</p>
+          <span class="w-5" aria-hidden="true"></span>
+          <p class="text-[11px] font-bold uppercase tracking-widest text-brand/70">Destination</p>
+        </div>
+
         <!-- Infographic: flowing journey rows -->
         <div class="flex flex-col gap-5">
           {blueprint.infographic.map((row, i) => (
@@ -204,7 +213,7 @@ const empowerItems = [
                   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" set:html={infographicIcons.current[i]} />
                 </div>
                 <div>
-                  <p class="text-[10px] font-bold uppercase tracking-widest text-dark/35 mb-1">Current State</p>
+                  <p class="lg:hidden text-[10px] font-bold uppercase tracking-widest text-dark/35 mb-1">Current State</p>
                   <p class="text-sm text-dark/60">{row.current}</p>
                 </div>
               </div>
@@ -215,7 +224,7 @@ const empowerItems = [
                   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" set:html={infographicIcons.solution[i]} />
                 </div>
                 <div>
-                  <p class="text-[10px] font-bold uppercase tracking-widest text-[#7c3aed]/60 mb-1">Sovereign AI Blueprint</p>
+                  <p class="lg:hidden text-[10px] font-bold uppercase tracking-widest text-[#7c3aed]/60 mb-1">Sovereign AI Blueprint</p>
                   <p class="text-sm font-medium text-[#7c3aed]">{row.solution}</p>
                 </div>
               </div>
@@ -226,7 +235,7 @@ const empowerItems = [
                   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" set:html={infographicIcons.destination[i]} />
                 </div>
                 <div>
-                  <p class="text-[10px] font-bold uppercase tracking-widest text-brand/60 mb-1">Destination</p>
+                  <p class="lg:hidden text-[10px] font-bold uppercase tracking-widest text-brand/60 mb-1">Destination</p>
                   <p class="text-sm font-medium text-brand">{row.destination}</p>
                 </div>
               </div>
