@@ -38,7 +38,7 @@ amalgamy:
     - title: "Data-aware orchestration"
       text: "Reduce time lost to data movement, preparation, and slow network reads."
     - title: "Policy-driven governance"
-      text: "Enforce security and compliance controls and sovereign data policies automatically, without slowing down approved research and production workflows."
+      text: "Enforce security, compliance controls, and sovereign data policies automatically, without slowing down approved research and production workflows."
     - title: "Infrastructure awareness"
       text: "Understand the real constraints of compute, storage, network, power, and cooling. Work across the AI, HPC, data, and workflow systems institutions already use."
   button:

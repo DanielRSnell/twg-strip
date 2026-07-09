@@ -39,7 +39,7 @@ amalgamy:
     - title: "Intelligent workload scheduling"
       text: "Routes every job to the right compute, automatically, based on readiness of hardware, data, and policy requirements."
     - title: "Policy-driven governance"
-      text: "Enforces security and compliance controls and sovereign data policies automatically."
+      text: "Enforces security, compliance controls, and sovereign data policies automatically."
     - title: "Integrates with existing infrastructure"
       text: "Creates a unified control layer across your existing storage, workflows, and environments such as Slurm and Kubernetes."
     - title: "Infrastructure awareness"
@@ -74,7 +74,7 @@ tracks:
 empower:
   title: "Empower Your Teams"
   subtitle: "Build the Workforce Behind Your AI Future"
-  description: "ThisWay Global equips institutions with the local talent needed to operate, govern, and expand advanced AI infrastructure."
+  description: "Equip your teams with the skills to operate, govern, and expand advanced AI infrastructure."
   button:
     label: "Learn more"
     link: "/products"
