@@ -61,11 +61,8 @@ export const productsCollection = defineCollection({
       title: z.string(),
       items: z.array(z.object({
         title: z.string(),
-        need: z.string(),
+        outcome: z.string(),
         how: z.string(),
-        changes: z.string(),
-        capabilities: z.string(),
-        summary: z.string().optional(),
       })),
     }),
 
