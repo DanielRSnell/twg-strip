@@ -33,7 +33,7 @@ blueprint:
 # Amalgamy
 amalgamy:
   title: "Amalgamy"
-  subtitle: "Unified AI & HPC Operating System"
+  subtitle: "Unified AI and HPC Operating System"
   intro: "Amalgamy delivers the right workload to the right compute at the right time. Run mixed AI and HPC workloads with greater security, efficiency, and control with no changes to your existing environments."
   capabilities:
     - title: "Intelligent workload scheduling"
