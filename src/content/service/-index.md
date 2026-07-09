@@ -16,7 +16,7 @@ hero:
 
 challenges:
   title: "Sovereign AI capability is hard"
-  intro: "AI and HPC compute is scarce, expensive, and hard to build and operate at scale."
+  intro: "AI and HPC compute is scarce, expensive, and hard to build and operate at scale. Key operational challenges include:"
   pain_points:
     - title: "Utilization Illusion"
       text: "Clusters appear to be fully utilized when GPUs are allocated. But much of that GPU capacity is idle as jobs wait on data movement, approvals, or facility constraints."
@@ -43,7 +43,7 @@ capabilities:
       more:
         - "Amalgamy reduces the Utilization Illusion by preventing data-starved jobs, prioritizing the newest GPUs for parallel work, and backfilling older clusters with suitable workloads."
         - "The outcome is higher utilization from existing hardware and lower pressure to buy more capacity."
-    - title: "Policy-Driven Security & Compliance"
+    - title: "Policy-Driven Security and Compliance"
       lead: "Enforces policy at the workload level, so approved work moves faster."
       more:
         - "Amalgamy builds security and compliance directly into how jobs are scheduled and isolated, removing the need for late-stage approval steps."
@@ -53,7 +53,7 @@ capabilities:
       more:
         - "Amalgamy coordinates across Slurm, Kubernetes, Run:ai, and existing hardware, so researchers submit jobs the same way while operators gain a unified control layer."
         - "The outcome is faster time-to-value and no rip-and-replace penalty."
-    - title: "Utilization & Operating Intelligence"
+    - title: "Utilization and Operating Intelligence"
       lead: "Turns workload activity and utilization into telemetry, so that decisions are data-based."
       more:
         - "Amalgamy reports on the difference between allocated time and productive time. This helps with capacity planning, grants, chargebacks, and shared governance reporting."
@@ -75,7 +75,7 @@ workloads:
 personas:
   title: "Who Amalgamy is built for"
   items:
-    - title: "AI devs & researchers"
+    - title: "AI devs and researchers"
       outcome: "Researchers spend more time on discovery, experimentation, and publication, and less time navigating storage permissions, data movement, and infrastructure handoffs."
       how: "Amalgamy runs approved AI and HPC work through familiar workflows while coordinating data readiness, policy requirements, and compute placement behind the scenes."
     - title: "HPC and AI operators"
