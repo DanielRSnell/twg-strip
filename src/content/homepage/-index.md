@@ -74,7 +74,7 @@ tracks:
 empower:
   title: "Empower Your Teams"
   subtitle: "Build the Workforce Behind Your AI Future"
-  description: "Equip your teams with the skills to operate, govern, and expand advanced AI infrastructure."
+  description: "We equip your teams with the skills needed to operate, govern, and expand advanced AI infrastructure."
   button:
     label: "Learn more"
     link: "/products"
@@ -83,7 +83,7 @@ empower:
 coop:
   title: "Sovereign AI **Co-Op**"
   subtitle: "Share Capacity Without Surrendering Sovereignty"
-  description: "The Sovereign AI Co-op is a business framework that enables institutions to share excess compute capacity across a governed network while maintaining control of their own data, governance, or infrastructure."
+  description: "Share excess compute capacity across a governed network while maintaining control of their own data, governance, or infrastructure."
   points:
     - title: "R1 Institutions"
       text: "Anchor regional sovereign capability with advanced AI research capacity."
