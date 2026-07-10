@@ -1,8 +1,8 @@
 ---
 # Banner
 banner:
-  title: "Build Sovereign AI infrastructure. Advance your mission"
-  content: "From infrastructure orchestration to workforce upskilling, ThisWay Global guides you through every stage of your journey towards Sovereign AI capability."
+  title: "Build Sovereign AI Infrastructure. Achieve Governed Innovation."
+  content: "From infrastructure orchestration to workforce upskilling, ThisWay Global guides you through every stage of your Sovereign AI journey."
   button:
     enable: true
     label: "Contact us"
