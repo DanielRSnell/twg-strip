@@ -46,6 +46,10 @@ export const productsCollection = defineCollection({
         lead: z.string(),
         more: z.array(z.string()),
       })),
+      highlight: z.object({
+        title: z.string(),
+        paragraphs: z.array(z.string()),
+      }).optional(),
     }),
 
     workloads: z.object({

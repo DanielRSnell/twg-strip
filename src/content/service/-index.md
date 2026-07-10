@@ -58,6 +58,12 @@ capabilities:
       more:
         - "Amalgamy reports on the difference between allocated time and productive time. This helps with capacity planning, grants, chargebacks, and shared governance reporting."
         - "The outcome is data-based decisions, with metrics like Grant-Dollar Efficiency and Yield per Watt."
+  highlight:
+    title: "The Dynamic Tenant Perimeter"
+    paragraphs:
+      - "Amalgamy runs each workload within a tenant whose perimeter expands and contracts dynamically in real time across shared infrastructure. As a result, each tenant gets the maximum capacity the cluster can provide."
+      - "When priorities shift, Amalgamy handles it automatically. Capacity is reallocated, lower-priority jobs are evicted or scaled back, and policy is enforced in real time, without anyone having to make that call manually."
+      - "It's zero trust, but built for the entire cluster, not just for compute and networks."
 
 workloads:
   title: "Mixed Workloads, One Governed Environment"

@@ -243,6 +243,26 @@ const economicIcons = [
           </div>
         ))}
       </div>
+
+      {capabilities.highlight && (
+        <div class="relative overflow-hidden mt-8 p-8 lg:p-12 rounded-2xl border border-brand/30 bg-brand/[0.05] shadow-sm" data-aos="fade-up-sm" data-aos-delay="100">
+          <div class="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-brand/60 via-brand to-brand/60" />
+          <div class="pointer-events-none absolute -top-16 -right-16 h-[240px] w-[240px] rounded-full bg-brand/[0.08] blur-3xl"></div>
+          <div class="relative z-10 lg:flex lg:items-start lg:gap-10">
+            <div class="shrink-0 mb-6 lg:mb-0 w-14 h-14 rounded-xl bg-brand/15 flex items-center justify-center text-brand">
+              <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><path d="M12 8v0"/><path d="M12 22s6-3 6-8V9l-6-2.5L6 9v5c0 5 6 8 6 8z" transform="scale(0.55) translate(9.5 4)"/></svg>
+            </div>
+            <div>
+              <h3 class="mb-4 text-xl lg:text-2xl font-bold">{capabilities.highlight.title}</h3>
+              <div class="space-y-3 max-w-3xl">
+                {capabilities.highlight.paragraphs.map((para) => (
+                  <p class="text-[15px] text-dark/70 leading-relaxed">{para}</p>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   </section>
 
