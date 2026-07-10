@@ -1,61 +1,104 @@
 import { defineCollection, z } from "astro:content";
 
+const buttonSchema = z.object({
+  enable: z.boolean(),
+  label: z.string(),
+  link: z.string(),
+});
+
+const linkSchema = z.object({
+  label: z.string(),
+  link: z.string(),
+});
+
+const titledPointSchema = z.object({
+  title: z.string(),
+  text: z.string(),
+});
+
 export const homeCollection = defineCollection({
   schema: z.object({
     banner: z.object({
+      eyebrow: z.string().optional(),
       title: z.string(),
       content: z.string(),
-      image: z.string(),
-      button: z.object({
-        enable: z.boolean(),
-        label: z.string(),
-        link: z.string(),
+      image: z.string().optional(),
+      button: buttonSchema,
+      button_secondary: buttonSchema.optional(),
+    }),
+
+    bottleneck: z.object({
+      title: z.string(),
+      intro: z.string(),
+      points: z.array(titledPointSchema),
+    }).optional(),
+
+    blueprint: z.object({
+      title: z.string(),
+      subtitle: z.string().optional(),
+      description: z.string(),
+      infographic: z.array(z.object({
+        current: z.string(),
+        solution: z.string(),
+        destination: z.string(),
+      })),
+      button: linkSchema,
+    }).optional(),
+
+    amalgamy: z.object({
+      title: z.string(),
+      subtitle: z.string().optional(),
+      intro: z.string(),
+      capabilities: z.array(titledPointSchema),
+      button: linkSchema,
+    }).optional(),
+
+    tracks: z.object({
+      title: z.string(),
+      description: z.string().optional(),
+      audiences: z.array(titledPointSchema).optional(),
+      track_a: z.object({
+        title: z.string(),
+        description: z.string(),
       }),
-      button_secondary: z.object({
-        enable: z.boolean(),
-        label: z.string(),
-        link: z.string(),
+      track_b: z.object({
+        title: z.string(),
+        description: z.string(),
+      }),
+      button: linkSchema.optional(),
+    }).optional(),
+
+    empower: z.object({
+      title: z.string(),
+      subtitle: z.string().optional(),
+      description: z.string(),
+      button: linkSchema.optional(),
+    }).optional(),
+
+    coop: z.object({
+      title: z.string(),
+      subtitle: z.string().optional(),
+      description: z.string().optional(),
+      points: z.array(titledPointSchema),
+      button: linkSchema.optional(),
+    }).optional(),
+
+    social_proof: z.object({
+      title: z.string(),
+      subtitle: z.string().optional(),
+      case_study: z.object({
+        description: z.string().optional(),
+        quote: z.string().optional(),
+        script: z.string().optional(),
+        attribution: z.string(),
       }).optional(),
-      brands: z.array(z.string()),
-    }),
-    service: z.object({
+    }).optional(),
+
+    cta_section: z.object({
       title: z.string(),
-      services: z.array(
-        z.object({
-          title: z.string(),
-          image: z.string(),
-          content: z.string(),
-          button: z.object({
-            enable: z.boolean(),
-            label: z.string(),
-            link: z.string(),
-          }),
-        })
-      ),
-    }),
-    feature: z.object({
-      title: z.string(),
-      content: z.string(),
-      features: z.array(
-        z.object({
-          title: z.string(),
-          description: z.string(),
-          card_content: z.string(),
-          icon: z.string(),
-          image: z.string(),
-        })
-      ),
-    }),
-    about: z.object({
-      title: z.string(),
-      content: z.string(),
-      content_2: z.string(),
-      image: z.string(),
-      button: z.object({
-        enable: z.boolean(),
-        label: z.string(),
-        link: z.string(),
-      }),
-    }),
+      description: z.string(),
+      subtitle: z.string().optional(),
+      button: linkSchema,
+    }).optional(),
   }),
 });

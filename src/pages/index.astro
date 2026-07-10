@@ -1,313 +1,405 @@
 ---
-import ImageMod from "@/components/ImageMod.astro";
 import Base from "@/layouts/Base.astro";
+import AmalgamyPlatformDiagram from "@/components/AmalgamyPlatformDiagram.astro";
+import BlueprintDiagram from "@/components/BlueprintDiagram.astro";
 import { markdownify } from "@/lib/utils/textConverter";
-import CallToAction from "@/partials/CallToAction.astro";
-import Testimonial from "@/partials/Testimonial.astro";
 import { getEntry } from "astro:content";
-import { Icon } from "astro-icon/components";
-import { getSinglePage } from "@/lib/contentParser.astro";
-import BlogCard from "@/components/BlogCard.astro";
-import ServiceSlider from "@/components/homepage/ServiceSlider";
-import HeroInfographic from "@/helpers/HeroInfographic";
-
 const homepage = await getEntry("homepage", "-index");
-const testimonial = await getEntry("sections", "testimonial");
-const call_to_action = await getEntry("sections", "call-to-action");
-const { banner, service, feature, about } = homepage.data;
+const { banner, blueprint, amalgamy, tracks, empower, coop, social_proof, cta_section } = homepage.data;
 
-const BLOG_FOLDER = "blog";
-const postIndex = await getEntry(BLOG_FOLDER, "-index");
-const { homepage_title, homepage_description } = postIndex.data;
-const posts = await getSinglePage(BLOG_FOLDER);
-
+const empowerItems = [
+  {
+    icon: '<path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>',
+    title: "Hands-on Upskilling",
+    text: "Train on production-grade AI/HPC systems",
+  },
+  {
+    icon: '<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>',
+    title: "Living Lab Experiences",
+    text: "Learn by doing on real infrastructure",
+  },
+  {
+    icon: '<polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>',
+    title: "Lasting Sovereign Capability",
+    text: "Turn investment into operational readiness",
+  },
+];
 ---
 
 <Base>
-  <!-- Banner -->
-  <section class="relative overflow-hidden bg-primary pt-[100px] pb-[80px] lg:pt-[120px] lg:pb-[100px]">
+  <!-- Banner (identical to /) -->
+  <section class="relative overflow-hidden bg-primary min-h-[58vh] lg:min-h-[66vh] flex flex-col">
     <div class="absolute inset-0 bg-gradient-to-br from-primary via-[#0d1117] to-primary"></div>
-    <div class="absolute inset-0 opacity-[0.03]" style="background-image: url('data:image/svg+xml,%3Csvg width=&quot;60&quot; height=&quot;60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cpath d=&quot;M0 30h60M30 0v60&quot; stroke=&quot;%23fff&quot; stroke-width=&quot;0.5&quot; fill=&quot;none&quot;/%3E%3C/svg%3E');"></div>
-    <div class="container relative z-10">
-      <div class="items-center row gy-5">
-        <div class="lg:col-7">
-          <div
-            class="inline-flex items-center gap-2 px-4 py-2 mb-8 text-sm font-medium text-white/90 rounded-full border border-white/[0.08] bg-white/[0.04] backdrop-blur-sm shadow-[0_0_20px_rgba(36,171,157,0.08)]"
-            data-aos="fade-right-sm"
+    <div class="absolute inset-0 opacity-[0.06]" style="background-image: url('data:image/svg+xml,%3Csvg width=&quot;60&quot; height=&quot;60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cpath d=&quot;M0 30h60M30 0v60&quot; stroke=&quot;%23fff&quot; stroke-width=&quot;0.5&quot; fill=&quot;none&quot;/%3E%3C/svg%3E');"></div>
+    <div class="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-brand/[0.04] blur-3xl pointer-events-none"></div>
+    <div class="absolute -bottom-20 -left-20 w-[400px] h-[400px] rounded-full bg-[#5969FC]/[0.03] blur-3xl pointer-events-none"></div>
+
+    <!-- Hero two-column layout -->
+    <div class="relative z-10 mt-auto pt-[120px] pb-12 lg:pb-16 mx-auto w-full max-w-[1600px] px-6 lg:px-16">
+      <div class="flex flex-col lg:flex-row gap-10 lg:gap-16 items-center">
+
+        <!-- Left: Title + copy + CTA -->
+        <div class="lg:w-[48%] flex flex-col justify-center">
+          <p
+            class="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-white/40"
+            data-aos="fade-up-sm"
             data-aos-delay="50"
           >
-            <span class="inline-block w-1.5 h-1.5 rounded-full bg-brand shadow-[0_0_6px_rgba(36,171,157,0.6)]"></span>
-            The Amalgamy.ai Platform by ThisWay Global
-          </div>
+            Sovereign AI Infrastructure
+          </p>
           <h1
-            class="mb-6 text-white"
-            data-aos="fade-right-sm"
+            class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-[1.05] tracking-tight capitalize"
+            data-aos="fade-up-sm"
             data-aos-delay="100"
             set:html={markdownify(banner.title)}
           />
-          <p
-            class="mb-10 max-w-xl text-lg leading-relaxed text-white/60"
-            data-aos="fade-right-sm"
-            data-aos-delay="200"
-            set:html={markdownify(banner.content)}
-          />
           <div
-            class="flex flex-wrap gap-4"
-            data-aos="fade-right-sm"
-            data-aos-delay="300"
-          >
+            class="mt-6 mb-9 max-w-xl [&>p]:text-lg [&>p]:text-white/60 [&>p]:leading-relaxed [&>p]:mb-4 [&>p:last-child]:mb-0"
+            data-aos="fade-up-sm"
+            data-aos-delay="200"
+            set:html={markdownify(banner.content, true)}
+          />
+          <div class="flex flex-wrap gap-4" data-aos="fade-up-sm" data-aos-delay="300">
             {banner.button?.enable && (
               <a
-                class="group relative inline-flex items-center gap-2 px-7 py-3 text-sm font-semibold text-white rounded-full bg-brand border border-brand/80 shadow-[0_1px_2px_rgba(0,0,0,0.2),0_0_20px_rgba(36,171,157,0.15)] hover:shadow-[0_1px_2px_rgba(0,0,0,0.2),0_0_30px_rgba(36,171,157,0.25)] hover:bg-brand/90 transition-all duration-300"
+                class="group inline-flex items-center gap-3 px-7 py-3.5 text-sm font-semibold text-white bg-brand/15 border border-brand/30 backdrop-blur-sm rounded hover:bg-brand/25 hover:border-brand/50 transition-all duration-300 tracking-wide uppercase shadow-[0_0_20px_rgba(36,171,157,0.1)] hover:shadow-[0_0_30px_rgba(36,171,157,0.2)]"
                 href={banner.button.link}
               >
                 {banner.button.label}
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-0.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-              </a>
-            )}
-            {banner.button_secondary?.enable && (
-              <a
-                class="group relative inline-flex items-center gap-2 px-7 py-3 text-sm font-semibold text-white/90 rounded-full border border-white/[0.12] bg-white/[0.04] backdrop-blur-sm hover:bg-white/[0.08] hover:border-white/[0.2] transition-all duration-300"
-                href={banner.button_secondary.link}
-              >
-                {banner.button_secondary.label}
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-0.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-1"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
               </a>
             )}
           </div>
         </div>
-        <div class="hidden lg:block lg:col-5">
-          <HeroInfographic client:visible />
+
+        <!-- Right: Amalgamy platform diagram -->
+        <div class="w-full max-w-3xl mx-auto lg:w-[52%] lg:max-w-none lg:mx-0 flex flex-col justify-center" data-aos="fade-up-sm" data-aos-delay="250">
+          <AmalgamyPlatformDiagram />
         </div>
+
       </div>
     </div>
   </section>
   <!-- /Banner -->
 
-
-  <!-- service -->
-  <section class="pb-0 section">
-    <div class="container">
-      <h2
-        class="pb-8"
-        data-aos="fade-right-sm"
-        set:html={markdownify(service.title)}
-      />
-      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {
-          service.services.map((s, i: number) => (
-            <div
-              class="relative p-8 rounded-2xl border border-border/60 bg-white shadow-sm overflow-hidden"
-              data-aos="fade-right-sm"
-              data-aos-delay={i * 100}
-            >
-              <div class="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-brand/60 via-brand to-brand/60" />
-              <Icon name={s.image} class="mb-20 w-14 h-14" />
-              <h3 class="mb-3 text-xl font-semibold" set:html={markdownify(s.title)} />
-              <p class="mb-4 text-sm text-light leading-relaxed" set:html={markdownify(s.content)} />
-              {s.button.enable && (
-                <a
-                  href={s.button.link}
-                  class="flex gap-1 items-center transition duration-300 text-brand hover:opacity-80"
-                >
-                  Learn More <span class="sr-only">Details</span>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    class="icon icon-tabler icons-tabler-outline icon-tabler-arrow-right"
-                  >
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                    <path d="M5 12l14 0" />
-                    <path d="M13 18l6 -6" />
-                    <path d="M13 6l6 6" />
-                  </svg>
-                </a>
-              )}
+  <!-- Abbreviated Creighton quote (after hero) -->
+  {social_proof?.case_study?.quote && (
+    <section class="section pb-0">
+      <div class="container">
+        <div class="grid gap-10 lg:gap-16 lg:grid-cols-[minmax(0,320px)_1fr] items-center">
+          <!-- Left: large portrait -->
+          <div data-aos="fade-up-sm" data-aos-delay="50">
+            <div class="relative rounded-2xl overflow-hidden border border-border/60 shadow-sm">
+              <img src="/images/team-members/brandon-creighton.webp" alt="Brandon Creighton" class="w-full aspect-[4/5] object-cover object-top" />
+              <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent px-6 pt-12 pb-5">
+                <p class="font-semibold text-white leading-tight">Brandon Creighton</p>
+                <p class="text-sm font-medium text-white/80 leading-tight mt-1">Chancellor, Texas Tech University System</p>
+              </div>
             </div>
-          ))
-        }
-      </div>
-    </div>
-  </section>
-  <!-- service -->
-
-  <!-- feature -->
-  <section class="section">
-    <div class="container">
-      <div class="justify-center mb-10 row xl:mb-14">
-        <div class="lg:col-8">
-          <h2
-            class="text-center"
-            data-aos="fade-up-sm"
-            data-aos-delay="100"
-            set:html={markdownify(feature.title)}
-          />
-        </div>
-        <div class="lg:col-6">
-          <p
-            class="text-center"
-            data-aos="fade-up-sm"
-            data-aos-delay="200"
-            set:html={markdownify(feature.content)}
-          />
-        </div>
-      </div>
-      <div
-        class="flex flex-col gap-10 justify-center md:flex-row lg:justify-between md:items-stretch"
-      >
-        <ServiceSlider feature={feature.features} client:visible />
-      </div>
-    </div>
-  </section>
-  <!-- feature -->
-
-  <!-- review -->
-  <section class="hidden section bg-primary">
-    <div class="container text-white">
-      <div class="pb-24 lg:pb-28">
-        <div class="flex flex-col gap-10 justify-center">
-          <div>
-            <h2
-              class="pb-4 text-center text-white"
-              data-aos="fade-up-sm"
-              data-aos-delay="100"
-              set:html={markdownify(testimonial.data.homepage_title)}
-            />
-            <p
-              class="mx-auto max-w-xl text-center text-theme-light/80"
-              data-aos="fade-up-sm"
-              data-aos-delay="200"
-              set:html={markdownify(testimonial.data.content)}
-            />
           </div>
-
-          <Testimonial
-            testimonials={testimonial.data.testimonials.slice(0, 3)}
-          />
-
-          <div class="inline-block text-center">
-            <a href="/reviews" class="btn btn-outline-secondary">
-              Read All Reviews
+          <!-- Right: quote -->
+          <div data-aos="fade-up-sm" data-aos-delay="150">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="currentColor" class="text-brand/30 mb-6"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
+            <p class="text-2xl lg:text-3xl text-dark/80 leading-relaxed italic mb-8">{social_proof.case_study.quote}</p>
+            <a href="#texas-tech" class="group inline-flex items-center gap-2 text-sm font-semibold text-brand hover:text-brand/70 transition-colors">
+              Learn how
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-200 group-hover:translate-x-0.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
             </a>
           </div>
         </div>
       </div>
-      <div class="pt-24 border-t lg:pt-28 border-border/20">
-        <div
-          class="justify-center items-center row md:justify-between gy-5 gx-4 xl:gx-5"
-        >
-          <div class="order-2 col-12 md:col-5 md:order-1">
-            <div class="flex flex-col gap-6">
-              <h2
-                class="text-white"
-                data-aos="fade-up-sm"
-                data-aos-delay="100"
-                set:html={markdownify(about.title)}
-              />
-              <p
-                class="text-theme-light/80"
-                data-aos="fade-up-sm"
-                data-aos-delay="200"
-                set:html={markdownify(about.content)}
-              />
-              <p
-                class="text-theme-light/80"
-                data-aos="fade-up-sm"
-                data-aos-delay="300"
-                set:html={markdownify(about.content_2)}
-              />
-              {
-                about.button.enable && (
-                  <div
-                    class="inline-block"
-                    data-aos="fade-up-sm"
-                    data-aos-delay="400"
-                  >
-                    <a
-                      href={about.button.link}
-                      class="btn btn-outline-secondary"
-                      set:html={about.button.label}
-                    />
-                  </div>
-                )
-              }
-            </div>
-          </div>
-          <div
-            class="order-1 col-12 md:col-6 md:order-2"
-            data-aos="fade-up-sm"
-            data-aos-delay="200"
-          >
-            <div
-              class="p-8 rounded-xl border bg-tertiary/20 border-border/20 md:px-24 md:py-14"
-            >
-              <ImageMod
-                class="mx-auto"
-                src={about.image}
-                width={0}
-                height={435}
-                alt={about.title}
-                format="webp"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- review -->
+    </section>
+  )}
 
-  <!-- blog -->
-  <section class="hidden pb-0 section">
-    <div class="container">
-      <div class="flex flex-col gap-14">
-        <div class="justify-center row">
-          <div class="lg:col-8">
-            <h2
-              class="pb-4 text-center"
-              data-aos="fade-up-sm"
-              data-aos-delay="100"
-              set:html={markdownify(homepage_title!)}
-            />
-            <p
-              class="text-center"
-              data-aos="fade-up-sm"
-              data-aos-delay="200"
-              set:html={markdownify(homepage_description!)}
-            />
-          </div>
+  <!-- Sovereign AI Blueprint -->
+  {blueprint && (
+    <section class="section">
+      <div class="container">
+        <!-- Section Header -->
+        <div class="max-w-3xl mb-14 lg:mb-16">
+          <p class="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-brand" data-aos="fade-up-sm" data-aos-delay="50">Blueprint</p>
+          <h2 class="pb-3 text-3xl lg:text-4xl font-bold [&>strong]:text-dark/40" data-aos="fade-up-sm" data-aos-delay="100" set:html={markdownify(blueprint.title)} />
+          {blueprint.subtitle && (
+            <p class="pb-5 text-lg text-brand font-semibold" data-aos="fade-up-sm" data-aos-delay="150">{blueprint.subtitle}</p>
+          )}
+          <p class="text-light leading-relaxed text-lg" data-aos="fade-up-sm" data-aos-delay="200">{blueprint.description}</p>
         </div>
-        <div class="row g-4">
-          {
-            posts.map((post, i: number) => (
-              <div
-                class="relative sm:col-6 lg:col-4 group"
-                data-aos="fade-up-sm"
-                data-aos-delay={(i + 1) * 100}
-              >
-                <BlogCard post={post} />
-              </div>
-            ))
-          }
+
+        <!-- 2D Blueprint diagram -->
+        <div data-aos="fade-up-sm" data-aos-delay="100">
+          <BlueprintDiagram rows={blueprint.infographic} />
         </div>
-        <div class="inline-block text-center">
-          <a class="btn btn-outline-primary" href="/blog">
-            Read All Articles
+
+        <!-- Button -->
+        <div class="text-center mt-12" data-aos="fade-up-sm">
+          <a href={blueprint.button.link} class="group inline-flex items-center gap-2 px-7 py-3 text-sm font-semibold text-white rounded-full bg-brand border border-brand/80 shadow-[0_1px_2px_rgba(0,0,0,0.2),0_0_20px_rgba(36,171,157,0.15)] hover:shadow-[0_1px_2px_rgba(0,0,0,0.2),0_0_30px_rgba(36,171,157,0.25)] hover:bg-brand/90 transition-all duration-300">
+            {blueprint.button.label}
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-0.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
           </a>
         </div>
       </div>
+    </section>
+  )}
+
+  <!-- Connector Statement: Blueprint -> Amalgamy -->
+  <section class="py-16 lg:py-20 bg-theme-light/50">
+    <div class="container">
+      <div class="max-w-3xl mx-auto text-center" data-aos="fade-up-sm">
+        <p class="text-2xl lg:text-3xl font-bold text-dark leading-snug">
+          <span class="text-brand">Amalgamy</span> is our software control layer that turns the Sovereign AI Blueprint into operational capability.
+        </p>
+      </div>
     </div>
   </section>
-  <!-- blog -->
 
-  <CallToAction call_to_action={call_to_action} />
+  <!-- Amalgamy -->
+  {amalgamy && (
+    <section class="section">
+      <div class="container">
+        <!-- Section Header -->
+        <div class="max-w-3xl mb-14 lg:mb-16">
+          <p class="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-brand" data-aos="fade-up-sm" data-aos-delay="50">Platform</p>
+          <h2 class="pb-3 text-3xl lg:text-4xl font-bold [&>strong]:text-dark/40" data-aos="fade-up-sm" data-aos-delay="100" set:html={markdownify(amalgamy.title)} />
+          {amalgamy.subtitle && (
+            <p class="pb-5 text-lg text-brand font-semibold" data-aos="fade-up-sm" data-aos-delay="150">{amalgamy.subtitle}</p>
+          )}
+          <div class="text-light leading-relaxed text-lg [&>strong]:text-dark [&>strong]:font-semibold [&>p]:mb-4 [&>p:last-child]:mb-0" data-aos="fade-up-sm" data-aos-delay="200" set:html={markdownify(amalgamy.intro, true)} />
+        </div>
+
+        <!-- Capabilities Grid -->
+        <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {amalgamy.capabilities.map((cap, i) => (
+            <div class="relative p-8 rounded-2xl border border-border/60 bg-white shadow-sm overflow-hidden" data-aos="fade-up-sm" data-aos-delay={(i + 1) * 80}>
+              <div class="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-brand/60 via-brand to-brand/60" />
+              <h3 class="mb-3 text-base font-semibold">{cap.title}</h3>
+              <p class="text-sm text-light leading-relaxed">{cap.text}</p>
+            </div>
+          ))}
+        </div>
+
+        <!-- Button -->
+        <div class="text-center mt-12" data-aos="fade-up-sm">
+          <a href={amalgamy.button.link} class="group inline-flex items-center gap-2 px-7 py-3 text-sm font-semibold text-white rounded-full bg-brand border border-brand/80 shadow-[0_1px_2px_rgba(0,0,0,0.2),0_0_20px_rgba(36,171,157,0.15)] hover:shadow-[0_1px_2px_rgba(0,0,0,0.2),0_0_30px_rgba(36,171,157,0.25)] hover:bg-brand/90 transition-all duration-300">
+            {amalgamy.button.label}
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-0.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Built for every path -->
+  {tracks && (
+    <section class="section bg-theme-light/50">
+      <div class="container">
+        <!-- Section Header -->
+        <div class="max-w-3xl mb-14 lg:mb-16">
+          <p class="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-brand" data-aos="fade-up-sm" data-aos-delay="50">Deployment Paths</p>
+          <h2 class="text-3xl lg:text-4xl font-bold [&>strong]:text-dark/40" data-aos="fade-up-sm" data-aos-delay="100" set:html={markdownify(tracks.title)} />
+        </div>
+
+        <!-- Audiences -->
+        {tracks.audiences && (
+          <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4 mb-10">
+            {tracks.audiences.map((aud, i) => (
+              <div class="p-7 rounded-2xl border border-border/60 bg-white shadow-sm" data-aos="fade-up-sm" data-aos-delay={(i + 1) * 60}>
+                <p class="text-sm font-semibold text-brand mb-2">{aud.title}</p>
+                <p class="text-sm text-light leading-relaxed">{aud.text}</p>
+              </div>
+            ))}
+          </div>
+        )}
+
+        <!-- Two Tracks -->
+        <div class="grid gap-5 lg:grid-cols-2">
+          <div class="p-8 lg:p-10 rounded-2xl border border-border/60 bg-white shadow-sm" data-aos="fade-up-sm" data-aos-delay="100">
+            <div class="w-12 h-12 rounded-xl bg-brand/[0.07] flex items-center justify-center text-brand mb-6">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-6.219-8.56"/><polyline points="21 3 21 9 15 9"/></svg>
+            </div>
+            <h3 class="mb-3 text-xl font-semibold">{tracks.track_a.title}</h3>
+            <p class="text-sm text-light leading-relaxed">{tracks.track_a.description}</p>
+          </div>
+          <div class="p-8 lg:p-10 rounded-2xl border border-border/60 bg-white shadow-sm" data-aos="fade-up-sm" data-aos-delay="200">
+            <div class="w-12 h-12 rounded-xl bg-brand/[0.07] flex items-center justify-center text-brand mb-6">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+            </div>
+            <h3 class="mb-3 text-xl font-semibold">{tracks.track_b.title}</h3>
+            <p class="text-sm text-light leading-relaxed">{tracks.track_b.description}</p>
+          </div>
+        </div>
+
+        <!-- Button -->
+        {tracks.button && (
+          <div class="text-center mt-12" data-aos="fade-up-sm">
+            <a href={tracks.button.link} class="group inline-flex items-center gap-2 px-7 py-3 text-sm font-semibold text-dark rounded-full border border-border bg-white shadow-sm hover:border-dark/30 hover:bg-black/[0.02] transition-all duration-200">
+              {tracks.button.label}
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-200 group-hover:translate-x-0.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </a>
+          </div>
+        )}
+      </div>
+    </section>
+  )}
+
+  <!-- Empower Your Teams -->
+  {empower && (
+    <section class="section">
+      <div class="container">
+        <div class="items-center row gy-5">
+          <!-- Left: Content -->
+          <div class="lg:col-6">
+            <p class="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-brand" data-aos="fade-up-sm" data-aos-delay="50">Workforce</p>
+            <h2 class="pb-3 text-3xl lg:text-4xl font-bold [&>strong]:text-dark/40" data-aos="fade-up-sm" data-aos-delay="100" set:html={markdownify(empower.title)} />
+            {empower.subtitle && (
+              <p class="pb-5 text-lg text-brand font-semibold" data-aos="fade-up-sm" data-aos-delay="150">{empower.subtitle}</p>
+            )}
+            <p class="text-light leading-relaxed text-lg mb-8" data-aos="fade-up-sm" data-aos-delay="200">{empower.description}</p>
+            {empower.button && (
+              <div data-aos="fade-up-sm" data-aos-delay="300">
+                <a href={empower.button.link} class="group inline-flex items-center gap-2 px-7 py-3 text-sm font-semibold text-dark rounded-full border border-border bg-white shadow-sm hover:border-dark/30 hover:bg-black/[0.02] transition-all duration-200">
+                  {empower.button.label}
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-200 group-hover:translate-x-0.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                </a>
+              </div>
+            )}
+          </div>
+          <!-- Right: Feature list -->
+          <div class="lg:col-6">
+            <div class="flex flex-col gap-5">
+              {empowerItems.map((item, i) => (
+                <div class="flex items-center gap-5 p-6 rounded-2xl border border-border/60 bg-white shadow-sm" data-aos="fade-up-sm" data-aos-delay={(i + 1) * 100}>
+                  <div class="shrink-0 w-12 h-12 rounded-xl bg-brand/[0.07] flex items-center justify-center text-brand">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" set:html={item.icon} />
+                  </div>
+                  <div>
+                    <p class="text-base font-semibold text-dark mb-1">{item.title}</p>
+                    <p class="text-sm text-light">{item.text}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Sovereign AI Co-Op -->
+  {coop && (
+    <section class="section bg-theme-light/50">
+      <div class="container">
+        <!-- Section Header -->
+        <div class="max-w-3xl mb-14 lg:mb-16">
+          <p class="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-brand" data-aos="fade-up-sm" data-aos-delay="50">Sovereign Co-Op</p>
+          <h2 class="pb-3 text-3xl lg:text-4xl font-bold [&>strong]:text-dark/40" data-aos="fade-up-sm" data-aos-delay="100" set:html={markdownify(coop.title)} />
+          {coop.subtitle && (
+            <p class="pb-5 text-lg text-brand font-semibold" data-aos="fade-up-sm" data-aos-delay="150">{coop.subtitle}</p>
+          )}
+          {coop.description && (
+            <p class="text-light leading-relaxed" data-aos="fade-up-sm" data-aos-delay="200">{coop.description}</p>
+          )}
+        </div>
+
+        <!-- Points Grid -->
+        <div class="grid gap-5 lg:grid-cols-3">
+          {coop.points.map((point, i) => (
+            <div class="relative p-8 rounded-2xl border border-border/60 bg-white shadow-sm overflow-hidden" data-aos="fade-up-sm" data-aos-delay={(i + 1) * 80}>
+              <div class="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-brand/60 via-brand to-brand/60" />
+              <h3 class="mb-3 text-lg font-semibold">{point.title}</h3>
+              <p class="text-sm text-light leading-relaxed">{point.text}</p>
+            </div>
+          ))}
+        </div>
+
+        <!-- Button -->
+        {coop.button && (
+          <div class="text-center mt-12" data-aos="fade-up-sm">
+            <a href={coop.button.link} class="group inline-flex items-center gap-2 px-7 py-3 text-sm font-semibold text-white rounded-full bg-brand border border-brand/80 shadow-[0_1px_2px_rgba(0,0,0,0.2),0_0_20px_rgba(36,171,157,0.15)] hover:shadow-[0_1px_2px_rgba(0,0,0,0.2),0_0_30px_rgba(36,171,157,0.25)] hover:bg-brand/90 transition-all duration-300">
+              {coop.button.label}
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-0.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </a>
+          </div>
+        )}
+      </div>
+    </section>
+  )}
+
+  <!-- Case Study: Texas Tech (full, bottom) -->
+  {social_proof && (
+    <section id="texas-tech" class="section scroll-mt-24">
+      <div class="container">
+        <!-- Section Header + deployment description -->
+        <div class="max-w-3xl mx-auto text-center mb-14 lg:mb-16">
+          <h2 class="pb-3 text-3xl lg:text-4xl font-bold" data-aos="fade-up-sm" data-aos-delay="100" set:html={markdownify(social_proof.title)} />
+          {social_proof.subtitle && (
+            <p class="text-xl font-semibold text-brand" data-aos="fade-up-sm" data-aos-delay="200">{social_proof.subtitle}</p>
+          )}
+          {social_proof.case_study?.description && (
+            <div class="mt-6 text-light leading-relaxed [&>p]:mb-4 [&>p:last-child]:mb-0" data-aos="fade-up-sm" data-aos-delay="250" set:html={markdownify(social_proof.case_study.description)} />
+          )}
+        </div>
+
+        <!-- Two-column: Creighton (video slot) | full script -->
+        {social_proof.case_study?.script && (
+          <div class="grid gap-10 lg:gap-16 lg:grid-cols-[minmax(0,320px)_1fr] items-stretch">
+            <!-- Left: Creighton — reserved for his video -->
+            <div data-aos="fade-up-sm" data-aos-delay="100">
+              <div class="relative rounded-2xl overflow-hidden border border-border/60 shadow-sm h-full">
+                <img src="/images/team-members/brandon-creighton.webp" alt="Brandon Creighton" class="w-full h-full aspect-[4/5] lg:aspect-auto object-cover object-top" />
+                <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent px-6 pt-12 pb-5">
+                  <p class="font-semibold text-white leading-tight">Brandon Creighton</p>
+                  <p class="text-sm font-medium text-white/80 leading-tight mt-1">Chancellor, Texas Tech University System</p>
+                </div>
+              </div>
+            </div>
+            <!-- Right: full script -->
+            <div class="p-8 lg:p-10 rounded-2xl border border-border/60 bg-theme-light/50" data-aos="fade-up-sm" data-aos-delay="200">
+              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor" class="text-brand/30 mb-4"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
+              <div class="text-dark/70 leading-relaxed italic [&>p]:mb-4 [&>p:last-child]:mb-0" set:html={markdownify(social_proof.case_study.script, true)} />
+            </div>
+          </div>
+        )}
+      </div>
+    </section>
+  )}
+
+  <!-- CTA: Own Your Sovereign AI Future -->
+  {cta_section && (
+    <section class="section pt-0">
+      <div class="container">
+        <div
+          data-aos="fade-up"
+          data-aos-delay="100"
+          class="relative px-8 py-16 text-white bg-primary sm:px-16 sm:py-20 lg:px-24 lg:py-28 overflow-hidden rounded-3xl"
+        >
+          <div class="absolute inset-0 opacity-[0.06]" style="background-image: url('data:image/svg+xml,%3Csvg width=&quot;60&quot; height=&quot;60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cpath d=&quot;M0 30h60M30 0v60&quot; stroke=&quot;%23fff&quot; stroke-width=&quot;0.5&quot; fill=&quot;none&quot;/%3E%3C/svg%3E');"></div>
+
+          <!-- Brand glows -->
+          <div class="absolute -top-20 -right-20 w-[350px] h-[350px] rounded-full bg-brand/10 blur-3xl pointer-events-none" />
+          <div class="absolute -bottom-32 -left-20 w-[400px] h-[400px] rounded-full bg-brand/[0.06] blur-3xl pointer-events-none" />
+
+          <!-- Concentric arc decoration (bottom, live-site style) -->
+          <div class="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-[900px] h-[900px] pointer-events-none opacity-20" aria-hidden="true">
+            <div class="absolute inset-0 rounded-full border border-brand/40"></div>
+            <div class="absolute inset-[12%] rounded-full border border-brand/30"></div>
+            <div class="absolute inset-[24%] rounded-full border border-brand/20"></div>
+          </div>
+
+          <div class="relative z-10">
+            <h2 class="pb-4 text-center text-white text-3xl lg:text-4xl font-bold" data-aos="fade-up-sm" data-aos-delay="200" set:html={markdownify(cta_section.title)} />
+            <p class="mx-auto max-w-2xl pb-8 text-center text-white/60" data-aos="fade-up-sm" data-aos-delay="300" set:html={markdownify(cta_section.description)} />
+            <div class="w-fit mx-auto block" data-aos="fade-up-sm" data-aos-delay="400">
+              <a href={cta_section.button.link} class="group relative z-10 inline-flex items-center gap-2 px-8 py-3.5 text-sm font-semibold text-white bg-brand rounded-full hover:bg-brand/90 transition-all duration-300 shadow-[0_0_20px_rgba(36,171,157,0.25)] hover:shadow-[0_0_30px_rgba(36,171,157,0.35)]">
+                {cta_section.button.label}
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-0.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )}
+  <!-- /CTA -->
 
   <script type="application/ld+json" set:html={JSON.stringify({
     "@context": "https://schema.org",
@@ -315,7 +407,7 @@ const posts = await getSinglePage(BLOG_FOLDER);
     "name": "Amalgamy.ai",
     "applicationCategory": "BusinessApplication",
     "operatingSystem": "Cloud",
-    "description": "GPU-powered HPC platform for AI and machine learning workloads. Hardware orchestration for sovereign AI infrastructure.",
+    "description": "GPU-powered HPC platform for AI and machine learning workloads. Hardware orchestration for Sovereign AI infrastructure.",
     "url": "https://amalgamy.ai",
     "offers": {
       "@type": "Offer",
@@ -325,7 +417,13 @@ const posts = await getSinglePage(BLOG_FOLDER);
     "creator": {
       "@type": "Organization",
       "name": "ThisWay Global",
-      "url": "https://thiswayglobal.com"
+      "url": "https://thiswayGlobal.com"
     }
   })} />
 </Base>
+
+<style is:global>
+  html {
+    scroll-behavior: smooth;
+  }
+</style>

@@ -10,6 +10,7 @@ import { partnersCollection } from "./collections/partners";
 import { sectionsCollection } from "./collections/sections";
 import { testimonialsCollection } from "./collections/testimonials";
 import { internalCollection } from "./collections/internal";
+import { productsCollection } from "./collections/products";
 
 export const collections = {
   about: aboutCollection,
@@ -23,5 +24,6 @@ export const collections = {
   pages: pagesCollection,
   partners: partnersCollection,
   sections: sectionsCollection,
+  service: productsCollection,
   internal: internalCollection,
 };

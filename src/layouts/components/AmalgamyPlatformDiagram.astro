@@ -1,0 +1,145 @@
+---
+// Amalgamy.ai platform stack diagram (hero asset from the V3 home page draft).
+// Teal layer stack with Developer Platform / Command Center rails and
+// labeled callouts on both sides. Callouts hide on small screens.
+
+const energyIcons = [
+  '<circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/>',
+  '<path d="M17.7 7.7a2.5 2.5 0 1 1 1.8 4.3H2"/><path d="M9.6 4.6A2 2 0 1 1 11 8H2"/><path d="M12.6 19.4A2 2 0 1 0 14 16H2"/>',
+  '<path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"/>',
+  '<path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/>',
+  '<circle cx="12" cy="12" r="1"/><path d="M20.2 20.2c2.04-2.03.02-7.36-4.5-11.9-4.54-4.52-9.87-6.54-11.9-4.5-2.04 2.03-.02 7.36 4.5 11.9 4.54 4.52 9.87 6.54 11.9 4.5Z"/><path d="M15.7 15.7c4.52-4.54 6.54-9.87 4.5-11.9-2.03-2.04-7.36-.02-11.9 4.5-4.52 4.54-6.54 9.87-4.5 11.9 2.03 2.04 7.36.02 11.9-4.5Z"/>',
+];
+
+const calloutsLeft = [
+  { title: "Infrastructure", sub: "Networking and Storage" },
+  { title: "AI4JOBS", sub: "Workforce Development" },
+];
+
+const calloutsRight = [
+  { title: "Orchestration", sub: "Compute and GPU Clusters" },
+  { title: "Sovereign Blueprint", sub: "Deployment Framework" },
+  { title: "ADCAP", sub: "Data Center Acceleration" },
+];
+---
+
+<div class="relative">
+  <!-- Header -->
+  <p class="text-center text-sm font-bold uppercase tracking-[0.35em] text-white/80">Amalgamy</p>
+  <div class="mx-auto mt-2.5 mb-6 h-2.5 w-[72%] border-x border-t border-white/15"></div>
+
+  <div class="flex items-stretch gap-3 lg:gap-4">
+    <!-- Left callouts -->
+    <div class="hidden md:flex w-[130px] shrink-0 flex-col justify-around py-6">
+      {calloutsLeft.map((c) => (
+        <div class="text-right">
+          <p class="text-xs font-semibold text-white/85 leading-tight">{c.title}</p>
+          <p class="text-[10px] text-white/40 leading-tight mt-0.5">{c.sub}</p>
+          <span class="mt-2 ml-auto block h-px w-8 bg-gradient-to-r from-transparent to-brand/60"></span>
+        </div>
+      ))}
+    </div>
+
+    <!-- Layer stack -->
+    <div class="flex-1 flex flex-col gap-2 min-w-0">
+      <div class="platform-layer">
+        <p class="platform-layer-title">Managed AI Services</p>
+        <p class="platform-layer-sub">Orchestration</p>
+      </div>
+      <div class="platform-layer">
+        <p class="platform-layer-title">Storage</p>
+      </div>
+      <div class="grid grid-cols-2 gap-2">
+        <div class="platform-layer">
+          <p class="platform-layer-title platform-layer-title-sm">Compute</p>
+        </div>
+        <div class="platform-layer">
+          <p class="platform-layer-title platform-layer-title-sm">Networking</p>
+        </div>
+      </div>
+      <div class="platform-layer">
+        <p class="platform-layer-title">Data Centers</p>
+        <p class="platform-layer-sub">Containerized to GW-Scale</p>
+      </div>
+      <div class="rounded-md border border-white/15 bg-white/[0.05] px-3 py-3.5 text-center">
+        <p class="platform-layer-title !text-white/80">Energy</p>
+        <div class="mt-2 flex items-center justify-center gap-3.5 text-white/45">
+          {energyIcons.map((icon) => (
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" set:html={icon} />
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <!-- Vertical rails -->
+    <div class="flex shrink-0 gap-2">
+      <div class="platform-rail">
+        <span>Developer Platform</span>
+      </div>
+      <div class="platform-rail">
+        <span>Command Center</span>
+      </div>
+    </div>
+
+    <!-- Right callouts -->
+    <div class="hidden md:flex w-[130px] shrink-0 flex-col justify-around py-2">
+      {calloutsRight.map((c) => (
+        <div>
+          <p class="text-xs font-semibold text-white/85 leading-tight">{c.title}</p>
+          <p class="text-[10px] text-white/40 leading-tight mt-0.5">{c.sub}</p>
+          <span class="mt-2 block h-px w-8 bg-gradient-to-l from-transparent to-brand/60"></span>
+        </div>
+      ))}
+    </div>
+  </div>
+</div>
+
+<style>
+  .platform-layer {
+    border-radius: 6px;
+    border: 1px solid rgba(36, 171, 157, 0.45);
+    background: linear-gradient(to bottom, rgba(36, 171, 157, 0.85), rgba(20, 122, 111, 0.85));
+    padding: 0.875rem 0.5rem;
+    text-align: center;
+    box-shadow: 0 0 22px rgba(36, 171, 157, 0.14);
+    min-width: 0;
+    overflow: hidden;
+  }
+  .platform-layer-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.2;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+  .platform-layer-title-sm {
+    font-size: 12px;
+  }
+  .platform-layer-sub {
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.6);
+    margin-top: 3px;
+    line-height: 1.2;
+  }
+  .platform-rail {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    border: 1px solid rgba(36, 171, 157, 0.45);
+    background: linear-gradient(to bottom, rgba(36, 171, 157, 0.55), rgba(20, 122, 111, 0.55));
+    padding: 0.5rem 0.35rem;
+    width: 32px;
+  }
+  .platform-rail span {
+    writing-mode: vertical-rl;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #fff;
+    white-space: nowrap;
+  }
+</style>
