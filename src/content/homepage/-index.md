@@ -2,7 +2,7 @@
 # Banner
 banner:
   title: "Build Sovereign AI infrastructure. Advance your mission"
-  content: "From infrastructure orchestration to workforce upskilling, ThisWay Global guides you through every stage of your journey towards sovereign AI capability."
+  content: "From infrastructure orchestration to workforce upskilling, ThisWay Global guides you through every stage of your journey towards Sovereign AI capability."
   button:
     enable: true
     label: "Contact us"
@@ -83,12 +83,12 @@ empower:
 coop:
   title: "Sovereign AI **Co-Op**"
   subtitle: "Share Capacity Without Surrendering Sovereignty"
-  description: "Share excess compute capacity across a governed network while maintaining control of their own data, governance, or infrastructure."
+  description: "Share excess compute capacity across a governed network while maintaining control of your own data, governance, and infrastructure."
   points:
     - title: "R1 Institutions"
       text: "Anchor regional sovereign capability with advanced AI research capacity."
     - title: "Industry Partners"
-      text: "Secure priority access to sovereign AI/HPC capacity without the need to manage the infrastructure yourself."
+      text: "Secure priority access to Sovereign AI/HPC capacity without the need to manage the infrastructure yourself."
     - title: "Capacity Buyers"
       text: "Access compute on terms more flexible than hyperscalers or neoclouds without compromising data sovereignty."
   button:
