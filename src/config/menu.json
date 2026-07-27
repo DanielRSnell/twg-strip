@@ -9,6 +9,10 @@
       "url": "/products"
     },
     {
+      "name": "Partners",
+      "url": "/partners"
+    },
+    {
       "name": "Resources",
       "url": "#",
       "hasChildren": true,
@@ -48,6 +52,11 @@
           "name": "Amalgamy",
           "url": "/products"
         },
+        {
+          "name": "Partners",
+          "url": "/partners"
+        },
+
         {
           "name": "Contact",
           "url": "/contact"
