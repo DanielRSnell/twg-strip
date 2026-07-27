@@ -10,9 +10,10 @@ hero:
   button_primary:
     label: "Contact us"
     link: "/contact"
-  button_secondary:
-    label: "Download Amalgamy White Paper"
-    link: "/contact"
+  # Whitepaper CTA hidden until the paper is published; uncomment to restore.
+  # button_secondary:
+  #   label: "Download Amalgamy White Paper"
+  #   link: "/contact"
 
 challenges:
   title: "Sovereign AI capability is hard"
@@ -28,12 +29,13 @@ challenges:
 operational:
   title: "From AI Infrastructure to Operational Capability"
   intro: "Amalgamy is the only AI/HPC operating system built to operationalize sovereign, multi-institution infrastructure. It brings intelligent workload placement, automated governance, and existing environments together under one control layer."
-  whitepaper:
-    title: "Download the Amalgamy White Paper"
-    teaser: "Get the full architecture, deployment models, and the economic framework behind Amalgamy, including how institutions turn scarce compute into governed, measurable capability."
-    button:
-      label: "Download Amalgamy White Paper"
-      link: "/contact"
+  # Whitepaper band hidden until the paper is published; uncomment to restore.
+  # whitepaper:
+  #   title: "Download the Amalgamy White Paper"
+  #   teaser: "Get the full architecture, deployment models, and the economic framework behind Amalgamy, including how institutions turn scarce compute into governed, measurable capability."
+  #   button:
+  #     label: "Download Amalgamy White Paper"
+  #     link: "/contact"
 
 capabilities:
   title: "Key Amalgamy Capabilities"
@@ -149,7 +151,8 @@ cta:
   button_primary:
     label: "Contact us"
     link: "/contact"
-  button_secondary:
-    label: "Download Amalgamy Whitepaper"
-    link: "/contact"
+  # Whitepaper CTA hidden until the paper is published; uncomment to restore.
+  # button_secondary:
+  #   label: "Download Amalgamy Whitepaper"
+  #   link: "/contact"
 ---

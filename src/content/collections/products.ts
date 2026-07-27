@@ -17,7 +17,7 @@ export const productsCollection = defineCollection({
       title: z.string(),
       content: z.string(),
       button_primary: buttonSchema,
-      button_secondary: buttonSchema,
+      button_secondary: buttonSchema.optional(),
     }),
 
     challenges: z.object({
@@ -36,7 +36,7 @@ export const productsCollection = defineCollection({
         title: z.string(),
         teaser: z.string(),
         button: buttonSchema,
-      }),
+      }).optional(),
     }),
 
     capabilities: z.object({
@@ -96,7 +96,7 @@ export const productsCollection = defineCollection({
       description: z.string(),
       closer: z.string().optional(),
       button_primary: buttonSchema,
-      button_secondary: buttonSchema,
+      button_secondary: buttonSchema.optional(),
     }),
   }),
 });
