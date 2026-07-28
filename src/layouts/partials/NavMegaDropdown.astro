@@ -1,0 +1,103 @@
+---
+interface Props {
+  menu: {
+    name: string;
+    url: string;
+    mega?: boolean;
+    children?: { name: string; url: string; description?: string }[];
+  };
+  pathname: string;
+}
+
+const { menu, pathname } = Astro.props;
+
+const icons: Record<string, string> = {
+  "Our Partners":
+    '<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',
+  "Become a Partner":
+    '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/>',
+};
+---
+
+<li class="nav-item nav-mega group relative">
+  <span
+    class="nav-link inline-flex items-center nav-mega-trigger"
+    role="button"
+    tabindex="0"
+  >
+    {menu.name}
+    <svg
+      class="h-4 w-4 fill-current transition duration-300 lg:rotate-0 lg:group-hover:rotate-180 nav-mega-chevron"
+      viewBox="0 0 20 20"
+    >
+      <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+    </svg>
+  </span>
+  <div
+    class="nav-mega-panel hidden lg:invisible lg:absolute lg:left-1/2 lg:-translate-x-1/2 lg:block lg:pt-3 lg:opacity-0 lg:translate-y-1 lg:transition-all lg:duration-200 lg:group-hover:visible lg:group-hover:opacity-100 lg:group-hover:translate-y-0 z-20"
+  >
+    <div
+      class="lg:w-[520px] lg:rounded-2xl lg:border lg:border-border/60 lg:bg-body lg:p-2 lg:shadow-[0_20px_50px_rgba(10,10,10,0.12)] lg:grid lg:grid-cols-2 lg:gap-1"
+    >
+      {
+        menu.children?.map((child) => (
+          <a
+            href={child.url}
+            aria-label={child.name}
+            class:list={[
+              "group/item flex items-start gap-3 rounded-xl p-3 pl-6 lg:p-4 transition-colors duration-200 hover:bg-theme-light/70",
+              {
+                "bg-theme-light/50":
+                  pathname === `${child.url}/` || pathname === child.url,
+              },
+            ]}
+          >
+            <span class="hidden lg:flex shrink-0 w-10 h-10 items-center justify-center rounded-lg bg-brand/10 text-brand">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                set:html={icons[child.name] ?? icons["Our Partners"]}
+              />
+            </span>
+            <span>
+              <span class="block text-[14px] font-semibold text-dark transition-colors duration-200 group-hover/item:text-brand">
+                {child.name}
+              </span>
+              {child.description && (
+                <span class="hidden lg:block mt-0.5 text-[12px] leading-snug text-light">
+                  {child.description}
+                </span>
+              )}
+            </span>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</li>
+
+<script>
+  function initNavMegaDropdowns() {
+    document.querySelectorAll(".nav-mega-trigger").forEach((trigger) => {
+      if (trigger.hasAttribute("data-nav-init")) return;
+      trigger.setAttribute("data-nav-init", "true");
+      trigger.addEventListener("click", () => {
+        const li = trigger.closest(".nav-mega");
+        if (!li) return;
+        const panel = li.querySelector(".nav-mega-panel");
+        const chevron = li.querySelector(".nav-mega-chevron");
+        if (panel) panel.classList.toggle("max-lg:block");
+        if (chevron) chevron.classList.toggle("rotate-180");
+      });
+    });
+  }
+  initNavMegaDropdowns();
+  document.addEventListener("astro:after-swap", initNavMegaDropdowns);
+</script>

@@ -10,7 +10,21 @@
     },
     {
       "name": "Partners",
-      "url": "/partners"
+      "url": "#",
+      "hasChildren": true,
+      "mega": true,
+      "children": [
+        {
+          "name": "Our Partners",
+          "url": "/partners",
+          "description": "The companies we build and deliver Sovereign AI infrastructure with."
+        },
+        {
+          "name": "Become a Partner",
+          "url": "/become-a-partner",
+          "description": "Join the partner ecosystem behind Amalgamy."
+        }
+      ]
     },
     {
       "name": "Resources",

@@ -3,16 +3,19 @@ import Logo from "@/components/Logo.astro";
 import config from "@/config/config.json";
 import menu from "@/config/menu.json";
 import NavDropDown from "./NavDropDown.astro";
+import NavMegaDropdown from "./NavMegaDropdown.astro";
 
 export interface ChildNavigationLink {
   name: string;
   url: string;
+  description?: string;
 }
 
 export interface NavigationLink {
   name: string;
   url: string;
   hasChildren?: boolean;
+  mega?: boolean;
   children?: ChildNavigationLink[];
 }
 
@@ -52,7 +55,9 @@ const { pathname } = Astro.url;
       {
         main.map((menu) => (
           <>
-            {menu.hasChildren ? (
+            {menu.hasChildren && menu.mega ? (
+              <NavMegaDropdown menu={menu} pathname={pathname} />
+            ) : menu.hasChildren ? (
               <NavDropDown menu={menu} pathname={pathname} />
             ) : (
               <li class="nav-item">
