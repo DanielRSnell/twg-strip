@@ -1,134 +1,231 @@
 ---
 import Base from "@/layouts/Base.astro";
-import { markdownify } from "@/lib/utils/textConverter";
-import CallToAction from "@/partials/CallToAction.astro";
 import ExternalLogo from "@/components/ExternalLogo.astro";
+import { markdownify } from "@/lib/utils/textConverter";
 import { getEntry } from "astro:content";
 
-const partners = await getEntry("partners", "-index");
-const { title, meta_title, description } = partners.data;
-const call_to_action = await getEntry("sections", "call-to-action");
+const entry = await getEntry("partners", "-index");
+const { title, meta_title, description, hero, logo_strip, types, grid, cta, partners } =
+  entry.data;
+
+const sortedPartners = [...partners].sort(
+  (a, b) => Number(b.featured ?? false) - Number(a.featured ?? false)
+);
+
+const domainOf = (website: string) =>
+  new URL(website).hostname.replace(/^www\./, "");
+
+const typeIcons = [
+  '<rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/>',
+  '<rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/>',
+  '<circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>',
+  '<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>',
+  '<line x1="16.5" y1="9.4" x2="7.5" y2="4.21"/><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/>',
+  '<path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>',
+];
 ---
 
 <Base title={title} meta_title={meta_title} description={description}>
-  <section class="relative overflow-hidden bg-primary pt-[100px] pb-[60px] lg:pt-[120px] lg:pb-[80px]">
-    <div class="absolute inset-0 bg-gradient-to-br from-primary via-[#0d1117] to-primary"></div>
-    <div class="absolute inset-0 opacity-[0.03]" style="background-image: url('data:image/svg+xml,%3Csvg width=&quot;60&quot; height=&quot;60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cpath d=&quot;M0 30h60M30 0v60&quot; stroke=&quot;%23fff&quot; stroke-width=&quot;0.5&quot; fill=&quot;none&quot;/%3E%3C/svg%3E');"></div>
-    <div class="absolute -top-20 -right-20 w-[350px] h-[350px] rounded-full bg-brand/10 blur-3xl pointer-events-none"></div>
-    <div class="container relative z-10">
-      <div class="items-center row gy-5">
-        <div class="lg:col-7">
-          <div
-            class="inline-flex items-center gap-2 px-4 py-2 mb-8 text-sm font-medium text-white/90 rounded-full border border-white/[0.08] bg-white/[0.04] backdrop-blur-sm shadow-[0_0_20px_rgba(36,171,157,0.08)]"
-            data-aos="fade-right-sm"
-            data-aos-delay="50"
-          >
-            <span class="inline-block w-1.5 h-1.5 rounded-full bg-brand shadow-[0_0_6px_rgba(36,171,157,0.6)]"></span>
-            Technology Partners
-          </div>
+  <!-- Hero -->
+  {hero && (
+    <section class="relative overflow-hidden bg-primary pt-[110px] pb-[60px] lg:pt-[140px] lg:pb-[80px]">
+      <div class="absolute inset-0 bg-gradient-to-br from-primary via-[#0d1117] to-primary"></div>
+      <div class="absolute inset-0 opacity-[0.06]" style="background-image: url('data:image/svg+xml,%3Csvg width=&quot;60&quot; height=&quot;60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cpath d=&quot;M0 30h60M30 0v60&quot; stroke=&quot;%23fff&quot; stroke-width=&quot;0.5&quot; fill=&quot;none&quot;/%3E%3C/svg%3E');"></div>
+      <div class="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-brand/[0.05] blur-3xl pointer-events-none"></div>
+      <div class="absolute -bottom-20 -left-20 w-[400px] h-[400px] rounded-full bg-[#5969FC]/[0.03] blur-3xl pointer-events-none"></div>
+
+      <div class="container relative z-10">
+        <div class="mx-auto max-w-3xl text-center">
+          <p class="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-brand" data-aos="fade-up-sm" data-aos-delay="50">
+            {hero.eyebrow}
+          </p>
           <h1
-            class="mb-6 text-white"
-            data-aos="fade-right-sm"
+            class="mb-6 text-3xl md:text-4xl lg:text-5xl font-extrabold text-white leading-[1.1] tracking-tight [&>strong]:text-brand [&>strong]:font-extrabold"
+            data-aos="fade-up-sm"
             data-aos-delay="100"
-            set:html={markdownify(title)}
+            set:html={markdownify(hero.title)}
           />
-          <p
-            class="mb-10 max-w-xl text-lg leading-relaxed text-white/60"
-            data-aos="fade-right-sm"
-            data-aos-delay="200"
-            set:html={markdownify(description)}
-          />
-        </div>
-        <div class="hidden lg:block lg:col-5">
-          <img
-            src="/images/infrastructure/energy-grid-dark.svg"
-            alt="Partner Network"
-            class="w-full h-auto drop-shadow-[0_0_30px_rgba(36,171,157,0.15)]"
-            data-aos="fade-left-sm"
-            data-aos-delay="200"
-          />
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container">
-      <div class="row g-4">
-        {
-          partners.data.partners
-            .filter((partner) => partner.featured)
-            .map((partner, i) => (
-              <div 
-                class="relative md:col-6"
-                data-aos="fade-up-sm"
-                data-aos-delay={i * 100}
+          <p class="mb-5 text-lg text-white/70 leading-relaxed" data-aos="fade-up-sm" data-aos-delay="200">
+            {hero.subtitle}
+          </p>
+          <p class="mx-auto mb-10 max-w-2xl text-white/50 leading-relaxed" data-aos="fade-up-sm" data-aos-delay="250">
+            {hero.content}
+          </p>
+          <div class="flex flex-wrap justify-center gap-4" data-aos="fade-up-sm" data-aos-delay="300">
+            <a
+              href={hero.button_primary.link}
+              class="group inline-flex items-center gap-2 px-7 py-3 text-sm font-semibold text-white rounded-full bg-brand border border-brand/80 shadow-[0_1px_2px_rgba(0,0,0,0.2),0_0_20px_rgba(36,171,157,0.15)] hover:shadow-[0_1px_2px_rgba(0,0,0,0.2),0_0_30px_rgba(36,171,157,0.25)] hover:bg-brand/90 transition-all duration-300"
+            >
+              {hero.button_primary.label}
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-0.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </a>
+            {hero.button_secondary && (
+              <a
+                href={hero.button_secondary.link}
+                class="group inline-flex items-center gap-2 px-7 py-3 text-sm font-semibold text-white/90 rounded-full border border-white/[0.12] bg-white/[0.04] backdrop-blur-sm hover:bg-white/[0.08] hover:border-white/[0.2] transition-all duration-300"
               >
-                <div class="p-6 h-full rounded-2xl border border-border/60 bg-white shadow-sm transition duration-200 hover:shadow-md">
-                  <div class="flex justify-between items-center mb-5">
-                    <span class="px-3 py-1 text-xs font-medium rounded-full text-brand bg-brand/10 border border-brand/20">
-                      {partner.partnership_type}
-                    </span>
-                    <div class="flex items-center h-8">
-                      <ExternalLogo
-                        domain={new URL(partner.website).hostname}
-                        name={partner.name}
-                        class="h-8 w-auto object-contain"
-                      />
-                    </div>
-                  </div>
-                  <p class="mb-5 text-sm text-light leading-relaxed" set:html={markdownify(partner.description)} />
-                  <a
-                    href={partner.website}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="inline-flex gap-1 items-center text-sm font-medium text-brand hover:opacity-80 transition duration-300"
-                  >
-                    Learn More
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-                  </a>
-                </div>
-              </div>
-            ))
-        }
+                {hero.button_secondary.label}
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-y-0.5"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
+              </a>
+            )}
+          </div>
+        </div>
       </div>
+    </section>
+  )}
 
-      <div class="mt-8 row g-4">
-        <h3 class="pb-10 text-center">Additional Partners</h3>
-        {
-          partners.data.partners
-            .filter((partner) => !partner.featured)
-            .map((partner, i) => (
-              <div
-                class="md:col-6"
-                data-aos="fade-up-sm"
-                data-aos-delay={i * 100}
+  <!-- Logo strip -->
+  {logo_strip && (
+    <section class="py-16 lg:py-20">
+      <div class="container">
+        <p class="mb-10 text-center text-xs font-semibold uppercase tracking-[0.2em] text-light" data-aos="fade-up-sm">
+          {logo_strip.title}
+        </p>
+        <div class="flex flex-wrap items-center justify-center gap-x-12 gap-y-8" data-aos="fade-up-sm" data-aos-delay="100">
+          {sortedPartners.map((partner) => (
+            <ExternalLogo
+              domain={domainOf(partner.website)}
+              name={partner.name}
+              height={32}
+              width={110}
+              class="h-8 w-auto object-contain opacity-60 grayscale transition duration-300 hover:opacity-100 hover:grayscale-0"
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Types of Partners -->
+  {types && (
+    <section class="section bg-theme-light/50">
+      <div class="container">
+        <div class="mx-auto mb-14 max-w-2xl text-center">
+          <p class="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-brand" data-aos="fade-up-sm">
+            {types.eyebrow}
+          </p>
+          <h2
+            class="mb-4 text-3xl lg:text-4xl font-bold [&>strong]:text-dark/40"
+            data-aos="fade-up-sm"
+            data-aos-delay="100"
+            set:html={markdownify(types.title)}
+          />
+          <p class="text-light leading-relaxed" data-aos="fade-up-sm" data-aos-delay="150">
+            {types.subtitle}
+          </p>
+        </div>
+        <div class="row g-4">
+          {types.items.map((item, index) => (
+            <div class="md:col-6 lg:col-4" data-aos="fade-up-sm" data-aos-delay={100 + index * 50}>
+              <div class="relative h-full overflow-hidden rounded-2xl border border-border/60 bg-white p-8 shadow-sm transition-shadow duration-300 hover:shadow-md">
+                <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-brand/60 via-brand to-brand/60"></div>
+                <div class="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-brand/10 text-brand">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" set:html={typeIcons[index % typeIcons.length]} />
+                </div>
+                <h3 class="mb-3 text-lg font-semibold text-dark">{item.title}</h3>
+                <p class="text-sm leading-relaxed text-light">{item.description}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Partner grid -->
+  {grid && (
+    <section id="our-partners" class="section">
+      <div class="container">
+        <div class="mx-auto mb-14 max-w-2xl text-center">
+          <p class="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-brand" data-aos="fade-up-sm">
+            {grid.eyebrow}
+          </p>
+          <h2
+            class="mb-4 text-3xl lg:text-4xl font-bold [&>strong]:text-dark/40"
+            data-aos="fade-up-sm"
+            data-aos-delay="100"
+            set:html={markdownify(grid.title)}
+          />
+          <p class="text-light leading-relaxed" data-aos="fade-up-sm" data-aos-delay="150">
+            {grid.subtitle}
+          </p>
+        </div>
+        <div class="row g-4">
+          {sortedPartners.map((partner, index) => (
+            <div class="md:col-6 lg:col-4" data-aos="fade-up-sm" data-aos-delay={100 + (index % 3) * 50}>
+              <div class="relative flex h-full flex-col overflow-hidden rounded-2xl border border-border/60 bg-white p-8 shadow-sm transition-shadow duration-300 hover:shadow-md">
+                <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-brand/60 via-brand to-brand/60"></div>
+                <div class="mb-6 flex items-center justify-between gap-4">
+                  <ExternalLogo
+                    domain={domainOf(partner.website)}
+                    name={partner.name}
+                    height={32}
+                    width={110}
+                    class="h-8 w-auto object-contain"
+                  />
+                  <span class="shrink-0 rounded-full bg-brand/10 px-3 py-1 text-[11px] font-semibold text-brand">
+                    {partner.partnership_type}
+                  </span>
+                </div>
+                <h3 class="mb-3 text-lg font-semibold text-dark">{partner.name}</h3>
+                <p class="mb-6 flex-1 text-sm leading-relaxed text-light">{partner.description}</p>
+                <a
+                  href={partner.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="group inline-flex items-center gap-1.5 text-sm font-semibold text-brand hover:text-brand/80 transition-colors duration-200"
+                >
+                  Visit Website
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- CTA -->
+  {cta && (
+    <section class="section pt-0">
+      <div class="container">
+        <div
+          data-aos="fade-up"
+          data-aos-delay="100"
+          class="relative overflow-hidden rounded-3xl bg-primary px-8 py-16 text-white sm:px-16 sm:py-20 lg:px-24 lg:py-24"
+        >
+          <div class="absolute inset-0 opacity-[0.06]" style="background-image: url('data:image/svg+xml,%3Csvg width=&quot;60&quot; height=&quot;60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cpath d=&quot;M0 30h60M30 0v60&quot; stroke=&quot;%23fff&quot; stroke-width=&quot;0.5&quot; fill=&quot;none&quot;/%3E%3C/svg%3E');"></div>
+          <div class="absolute -top-20 -right-20 w-[350px] h-[350px] rounded-full bg-brand/10 blur-3xl pointer-events-none"></div>
+          <div class="absolute -bottom-32 -left-20 w-[400px] h-[400px] rounded-full bg-brand/[0.06] blur-3xl pointer-events-none"></div>
+          <div class="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-[900px] h-[900px] pointer-events-none opacity-20" aria-hidden="true">
+            <div class="absolute inset-0 rounded-full border border-brand/40"></div>
+            <div class="absolute inset-[12%] rounded-full border border-brand/30"></div>
+            <div class="absolute inset-[24%] rounded-full border border-brand/20"></div>
+          </div>
+
+          <div class="relative z-10">
+            <h2
+              class="pb-4 text-center text-3xl font-bold text-white lg:text-4xl [&>strong]:text-white/50"
+              data-aos="fade-up-sm"
+              data-aos-delay="200"
+              set:html={markdownify(cta.title)}
+            />
+            <p class="mx-auto max-w-2xl pb-8 text-center text-white/60" data-aos="fade-up-sm" data-aos-delay="300">
+              {cta.description}
+            </p>
+            <div class="flex justify-center" data-aos="fade-up-sm" data-aos-delay="400">
+              <a
+                href={cta.button.link}
+                class="group relative z-10 inline-flex items-center gap-2 rounded-full bg-brand px-8 py-3.5 text-sm font-semibold text-white shadow-[0_0_20px_rgba(36,171,157,0.25)] transition-all duration-300 hover:bg-brand/90 hover:shadow-[0_0_30px_rgba(36,171,157,0.35)]"
               >
-                <div class="p-6 h-full rounded-2xl border border-border/60 bg-white shadow-sm transition duration-200 hover:shadow-md">
-                  <div class="flex items-center mb-5 h-8">
-                    <ExternalLogo
-                      domain={new URL(partner.website).hostname}
-                      name={partner.name}
-                      class="h-8 w-auto object-contain"
-                    />
-                  </div>
-                  <p class="mb-5 text-sm text-light leading-relaxed" set:html={markdownify(partner.description)} />
-                  <a
-                    href={partner.website}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="inline-flex gap-1 items-center text-sm font-medium text-brand hover:opacity-80 transition duration-300"
-                  >
-                    Learn More
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-                  </a>
-                </div>
-              </div>
-            ))
-        }
+                {cta.button.label}
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-0.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
-
-  <CallToAction call_to_action={call_to_action} />
+    </section>
+  )}
 </Base>
