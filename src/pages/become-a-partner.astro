@@ -1,0 +1,210 @@
+---
+import Base from "@/layouts/Base.astro";
+import BecomeAPartnerForm from "@/components/BecomeAPartnerForm";
+import ExternalLogo from "@/components/ExternalLogo.astro";
+import { markdownify } from "@/lib/utils/textConverter";
+import { getEntry } from "astro:content";
+
+const partnersEntry = await getEntry("partners", "-index");
+const { partners } = partnersEntry.data;
+
+const sortedPartners = [...partners].sort(
+  (a, b) => Number(b.featured ?? false) - Number(a.featured ?? false)
+);
+
+const domainOf = (website: string) =>
+  new URL(website).hostname.replace(/^www\./, "");
+
+const hero = {
+  eyebrow: "Partner Program",
+  title: "Partner with **ThisWay Global**",
+  subtitle:
+    "Build, deliver, and scale Sovereign AI infrastructure alongside the software that makes it run.",
+  content:
+    "ThisWay Global is channel-first by design. We go to market through and with our partners, bringing Amalgamy to institutions around the world, and we invest in the partners who invest in us.",
+  button_primary: { label: "Apply Now", link: "#apply" },
+  button_secondary: { label: "Our Partners", link: "/partners" },
+};
+
+const benefits = {
+  eyebrow: "Why Partner",
+  title: "Why partner with **ThisWay Global**?",
+  subtitle:
+    "A partnership built to grow your business, not just ours. Here is what you get when you join the ecosystem behind Amalgamy.",
+  items: [
+    {
+      title: "Channel-First by Design",
+      description:
+        "Our go-to-market runs through partners. Clear rules of engagement, protected deals, and a team that treats your pipeline like our own.",
+    },
+    {
+      title: "Grow Your Revenue",
+      description:
+        "Attach Amalgamy software and services to every infrastructure engagement and turn one-time hardware sales into recurring revenue.",
+    },
+    {
+      title: "Win in the Sovereign AI Market",
+      description:
+        "Sovereign AI is one of the fastest-growing infrastructure opportunities in the world. Lead with a proven control layer instead of building one from scratch.",
+    },
+    {
+      title: "Differentiate Your Offering",
+      description:
+        "Stand out from commodity resellers and integrators with a governed, revenue-ready AI infrastructure story customers cannot get anywhere else.",
+    },
+    {
+      title: "Go to Market Together",
+      description:
+        "Co-selling, co-marketing, enablement, and engineering support from the first conversation through production deployment.",
+    },
+    {
+      title: "A Complete, Connected Stack",
+      description:
+        "From accelerators to orchestration to governance, offer customers a full Sovereign AI stack with Amalgamy tying it together.",
+    },
+  ],
+};
+
+const apply = {
+  eyebrow: "Apply",
+  title: "Become a **Partner**",
+  subtitle:
+    "Tell us a little about yourself and our partner team will reach out within two business days.",
+};
+
+const benefitIcons = [
+  '<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',
+  '<polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/>',
+  '<circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/>',
+  '<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>',
+  '<line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>',
+  '<path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>',
+];
+---
+
+<Base
+  title="Become a Partner"
+  meta_title="Become a Partner - ThisWay Global"
+  description="Build, deliver, and scale Sovereign AI infrastructure alongside ThisWay Global. Apply to join the partner ecosystem behind Amalgamy."
+>
+  <!-- Hero -->
+  <section class="relative overflow-hidden bg-primary pt-[110px] pb-[60px] lg:pt-[140px] lg:pb-[80px]">
+    <div class="absolute inset-0 bg-gradient-to-br from-primary via-[#0d1117] to-primary"></div>
+    <div class="absolute inset-0 opacity-[0.06]" style="background-image: url('data:image/svg+xml,%3Csvg width=&quot;60&quot; height=&quot;60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cpath d=&quot;M0 30h60M30 0v60&quot; stroke=&quot;%23fff&quot; stroke-width=&quot;0.5&quot; fill=&quot;none&quot;/%3E%3C/svg%3E');"></div>
+    <div class="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-brand/[0.05] blur-3xl pointer-events-none"></div>
+    <div class="absolute -bottom-20 -left-20 w-[400px] h-[400px] rounded-full bg-[#5969FC]/[0.03] blur-3xl pointer-events-none"></div>
+
+    <div class="container relative z-10">
+      <div class="mx-auto max-w-3xl text-center">
+        <p class="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-brand" data-aos="fade-up-sm" data-aos-delay="50">
+          {hero.eyebrow}
+        </p>
+        <h1
+          class="mb-6 text-3xl md:text-4xl lg:text-5xl font-extrabold text-white leading-[1.1] tracking-tight [&>strong]:text-brand [&>strong]:font-extrabold"
+          data-aos="fade-up-sm"
+          data-aos-delay="100"
+          set:html={markdownify(hero.title)}
+        />
+        <p class="mb-5 text-lg text-white/70 leading-relaxed" data-aos="fade-up-sm" data-aos-delay="200">
+          {hero.subtitle}
+        </p>
+        <p class="mx-auto mb-10 max-w-2xl text-white/50 leading-relaxed" data-aos="fade-up-sm" data-aos-delay="250">
+          {hero.content}
+        </p>
+        <div class="flex flex-wrap justify-center gap-4" data-aos="fade-up-sm" data-aos-delay="300">
+          <a
+            href={hero.button_primary.link}
+            class="group inline-flex items-center gap-2 px-7 py-3 text-sm font-semibold text-white rounded-full bg-brand border border-brand/80 shadow-[0_1px_2px_rgba(0,0,0,0.2),0_0_20px_rgba(36,171,157,0.15)] hover:shadow-[0_1px_2px_rgba(0,0,0,0.2),0_0_30px_rgba(36,171,157,0.25)] hover:bg-brand/90 transition-all duration-300"
+          >
+            {hero.button_primary.label}
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-y-0.5"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
+          </a>
+          <a
+            href={hero.button_secondary.link}
+            class="group inline-flex items-center gap-2 px-7 py-3 text-sm font-semibold text-white/90 rounded-full border border-white/[0.12] bg-white/[0.04] backdrop-blur-sm hover:bg-white/[0.08] hover:border-white/[0.2] transition-all duration-300"
+          >
+            {hero.button_secondary.label}
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-0.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Logo strip -->
+  <section class="py-16 lg:py-20">
+    <div class="container">
+      <p class="mb-10 text-center text-xs font-semibold uppercase tracking-[0.2em] text-light" data-aos="fade-up-sm">
+        You will be in good company
+      </p>
+      <div class="flex flex-wrap items-center justify-center gap-x-12 gap-y-8" data-aos="fade-up-sm" data-aos-delay="100">
+        {sortedPartners.map((partner) => (
+          <ExternalLogo
+            domain={domainOf(partner.website)}
+            name={partner.name}
+            height={32}
+            width={110}
+            class="h-8 w-auto object-contain opacity-60 grayscale transition duration-300 hover:opacity-100 hover:grayscale-0"
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Why partner -->
+  <section class="section bg-theme-light/50">
+    <div class="container">
+      <div class="mx-auto mb-14 max-w-2xl text-center">
+        <p class="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-brand" data-aos="fade-up-sm">
+          {benefits.eyebrow}
+        </p>
+        <h2
+          class="mb-4 text-3xl lg:text-4xl font-bold [&>strong]:text-dark/40"
+          data-aos="fade-up-sm"
+          data-aos-delay="100"
+          set:html={markdownify(benefits.title)}
+        />
+        <p class="text-light leading-relaxed" data-aos="fade-up-sm" data-aos-delay="150">
+          {benefits.subtitle}
+        </p>
+      </div>
+      <div class="row g-4">
+        {benefits.items.map((item, index) => (
+          <div class="md:col-6 lg:col-4" data-aos="fade-up-sm" data-aos-delay={100 + index * 50}>
+            <div class="relative h-full overflow-hidden rounded-2xl border border-border/60 bg-white p-8 shadow-sm transition-shadow duration-300 hover:shadow-md">
+              <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-brand/60 via-brand to-brand/60"></div>
+              <div class="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-brand/10 text-brand">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" set:html={benefitIcons[index % benefitIcons.length]} />
+              </div>
+              <h3 class="mb-3 text-lg font-semibold text-dark">{item.title}</h3>
+              <p class="text-sm leading-relaxed text-light">{item.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Application form -->
+  <section id="apply" class="section">
+    <div class="container">
+      <div class="mx-auto mb-12 max-w-2xl text-center">
+        <p class="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-brand" data-aos="fade-up-sm">
+          {apply.eyebrow}
+        </p>
+        <h2
+          class="mb-4 text-3xl lg:text-4xl font-bold [&>strong]:text-dark/40"
+          data-aos="fade-up-sm"
+          data-aos-delay="100"
+          set:html={markdownify(apply.title)}
+        />
+        <p class="text-light leading-relaxed" data-aos="fade-up-sm" data-aos-delay="150">
+          {apply.subtitle}
+        </p>
+      </div>
+      <div data-aos="fade-up-sm" data-aos-delay="200">
+        <BecomeAPartnerForm client:load />
+      </div>
+    </div>
+  </section>
+</Base>
