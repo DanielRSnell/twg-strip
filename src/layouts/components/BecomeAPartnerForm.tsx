@@ -64,7 +64,7 @@ export default function BecomeAPartnerForm() {
   if (submitted) {
     return (
       <div className="mx-auto w-full max-w-2xl">
-        <div className="relative overflow-hidden rounded-2xl border border-border/60 bg-white p-6 shadow-sm sm:p-10">
+        <div className="relative overflow-hidden rounded-2xl border border-border/60 bg-white p-6 shadow-[0_20px_60px_rgba(0,0,0,0.35)] sm:p-10">
           <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-brand/60 via-brand to-brand/60"></div>
           <div className="text-center">
             <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-brand/10">
@@ -97,8 +97,16 @@ export default function BecomeAPartnerForm() {
 
   return (
     <div className="mx-auto w-full max-w-2xl">
-      <div className="relative overflow-hidden rounded-2xl border border-border/60 bg-white p-6 shadow-sm sm:p-10">
+      <div className="relative overflow-hidden rounded-2xl border border-border/60 bg-white p-6 shadow-[0_20px_60px_rgba(0,0,0,0.35)] sm:p-8">
         <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-brand/60 via-brand to-brand/60"></div>
+        <div className="mb-6 border-b border-border/60 pb-5">
+          <h2 className="mb-1 text-xl font-bold text-dark">
+            Apply to the Partner Program
+          </h2>
+          <p className="text-sm text-light">
+            Our partner team will reach out within two business days.
+          </p>
+        </div>
         <form onSubmit={handleSubmit} noValidate>
           <div className="mb-5">
             <label htmlFor="name" className="form-label">
@@ -174,7 +182,7 @@ export default function BecomeAPartnerForm() {
               onChange={(e) => setMessage(e.target.value)}
               className="form-input w-full bg-tertiary/5"
               placeholder="Tell us about your company and how you would like to partner"
-              rows={4}
+              rows={3}
             />
           </div>
 

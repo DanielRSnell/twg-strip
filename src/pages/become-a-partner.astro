@@ -22,8 +22,6 @@ const hero = {
     "Build, deliver, and scale Sovereign AI infrastructure alongside the software that makes it run.",
   content:
     "ThisWay Global is channel-first by design. We go to market through and with our partners, bringing Amalgamy to institutions around the world, and we invest in the partners who invest in us.",
-  button_primary: { label: "Apply Now", link: "#apply" },
-  button_secondary: { label: "Our Partners", link: "/partners" },
 };
 
 const benefits = {
@@ -66,10 +64,6 @@ const benefits = {
 };
 
 const apply = {
-  eyebrow: "Apply",
-  title: "Become a **Partner**",
-  subtitle:
-    "Tell us a little about yourself and our partner team will reach out within two business days.",
   points: [
     "A real conversation with our partner team, not a drip campaign",
     "We come prepared, scoped to your market and your offering",
@@ -93,44 +87,49 @@ const benefitIcons = [
   description="Build, deliver, and scale Sovereign AI infrastructure alongside ThisWay Global. Apply to join the partner ecosystem behind Amalgamy."
 >
   <!-- Hero -->
-  <section class="relative overflow-hidden bg-primary pt-[110px] pb-[60px] lg:pt-[140px] lg:pb-[80px]">
+  <section id="apply" class="relative overflow-hidden bg-primary pt-[110px] pb-[60px] lg:pt-[140px] lg:pb-[80px]">
     <div class="absolute inset-0 bg-gradient-to-br from-primary via-[#0d1117] to-primary"></div>
     <div class="absolute inset-0 opacity-[0.06]" style="background-image: url('data:image/svg+xml,%3Csvg width=&quot;60&quot; height=&quot;60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cpath d=&quot;M0 30h60M30 0v60&quot; stroke=&quot;%23fff&quot; stroke-width=&quot;0.5&quot; fill=&quot;none&quot;/%3E%3C/svg%3E');"></div>
     <div class="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-brand/[0.05] blur-3xl pointer-events-none"></div>
     <div class="absolute -bottom-20 -left-20 w-[400px] h-[400px] rounded-full bg-[#5969FC]/[0.03] blur-3xl pointer-events-none"></div>
 
     <div class="container relative z-10">
-      <div class="mx-auto max-w-3xl text-center">
-        <p class="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-brand" data-aos="fade-up-sm" data-aos-delay="50">
-          {hero.eyebrow}
-        </p>
-        <h1
-          class="mb-6 text-3xl md:text-4xl lg:text-5xl font-extrabold text-white leading-[1.1] tracking-tight [&>strong]:text-brand [&>strong]:font-extrabold"
-          data-aos="fade-up-sm"
-          data-aos-delay="100"
-          set:html={markdownify(hero.title)}
-        />
-        <p class="mb-5 text-lg text-white/70 leading-relaxed" data-aos="fade-up-sm" data-aos-delay="200">
-          {hero.subtitle}
-        </p>
-        <p class="mx-auto mb-10 max-w-2xl text-white/50 leading-relaxed" data-aos="fade-up-sm" data-aos-delay="250">
-          {hero.content}
-        </p>
-        <div class="flex flex-wrap justify-center gap-4" data-aos="fade-up-sm" data-aos-delay="300">
-          <a
-            href={hero.button_primary.link}
-            class="group inline-flex items-center gap-2 px-7 py-3 text-sm font-semibold text-white rounded-full bg-brand border border-brand/80 shadow-[0_1px_2px_rgba(0,0,0,0.2),0_0_20px_rgba(36,171,157,0.15)] hover:shadow-[0_1px_2px_rgba(0,0,0,0.2),0_0_30px_rgba(36,171,157,0.25)] hover:bg-brand/90 transition-all duration-300"
-          >
-            {hero.button_primary.label}
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-y-0.5"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
-          </a>
-          <a
-            href={hero.button_secondary.link}
-            class="group inline-flex items-center gap-2 px-7 py-3 text-sm font-semibold text-white/90 rounded-full border border-white/[0.12] bg-white/[0.04] backdrop-blur-sm hover:bg-white/[0.08] hover:border-white/[0.2] transition-all duration-300"
-          >
-            {hero.button_secondary.label}
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-0.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-          </a>
+      <div class="row gy-5 items-center">
+        <!-- Left: copy -->
+        <div class="lg:col-6">
+          <p class="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-brand" data-aos="fade-up-sm" data-aos-delay="50">
+            {hero.eyebrow}
+          </p>
+          <h1
+            class="mb-6 text-3xl md:text-4xl lg:text-5xl font-extrabold text-white leading-[1.1] tracking-tight [&>strong]:text-brand [&>strong]:font-extrabold"
+            data-aos="fade-up-sm"
+            data-aos-delay="100"
+            set:html={markdownify(hero.title)}
+          />
+          <p class="mb-5 max-w-xl text-lg text-white/70 leading-relaxed" data-aos="fade-up-sm" data-aos-delay="200">
+            {hero.subtitle}
+          </p>
+          <p class="mb-8 max-w-xl text-white/50 leading-relaxed" data-aos="fade-up-sm" data-aos-delay="250">
+            {hero.content}
+          </p>
+          <ul class="space-y-4" data-aos="fade-up-sm" data-aos-delay="300">
+            {apply.points.map((point) => (
+              <li class="flex items-start gap-3">
+                <span class="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand/15 text-brand">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+                </span>
+                <span class="text-sm leading-relaxed text-white/60">{point}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <!-- Right: application form -->
+        <div class="lg:col-6 lg:pl-10 xl:pl-14" data-aos="fade-up-sm" data-aos-delay="250">
+          <div class="relative">
+            <div class="absolute -inset-4 rounded-3xl bg-brand/[0.07] blur-2xl pointer-events-none" aria-hidden="true"></div>
+            <BecomeAPartnerForm client:load />
+          </div>
         </div>
       </div>
     </div>
@@ -190,36 +189,46 @@ const benefitIcons = [
     </div>
   </section>
 
-  <!-- Application form -->
-  <section id="apply" class="section">
+  <!-- Closing CTA -->
+  <section class="section pt-0">
     <div class="container">
-      <div class="row gy-5 items-start">
-        <div class="lg:col-5 lg:sticky lg:top-28">
-          <p class="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-brand" data-aos="fade-up-sm">
-            {apply.eyebrow}
-          </p>
-          <h2
-            class="mb-4 text-3xl lg:text-4xl font-bold [&>strong]:text-dark/40"
-            data-aos="fade-up-sm"
-            data-aos-delay="100"
-            set:html={markdownify(apply.title)}
-          />
-          <p class="mb-8 max-w-md text-light leading-relaxed" data-aos="fade-up-sm" data-aos-delay="150">
-            {apply.subtitle}
-          </p>
-          <ul class="space-y-4" data-aos="fade-up-sm" data-aos-delay="200">
-            {apply.points.map((point) => (
-              <li class="flex items-start gap-3">
-                <span class="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand/10 text-brand">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
-                </span>
-                <span class="text-sm leading-relaxed text-light">{point}</span>
-              </li>
-            ))}
-          </ul>
+      <div
+        data-aos="fade-up"
+        data-aos-delay="100"
+        class="relative overflow-hidden rounded-3xl bg-primary px-8 py-16 text-white sm:px-16 sm:py-20 lg:px-24 lg:py-24"
+      >
+        <div class="absolute inset-0 opacity-[0.06]" style="background-image: url('data:image/svg+xml,%3Csvg width=&quot;60&quot; height=&quot;60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cpath d=&quot;M0 30h60M30 0v60&quot; stroke=&quot;%23fff&quot; stroke-width=&quot;0.5&quot; fill=&quot;none&quot;/%3E%3C/svg%3E');"></div>
+        <div class="absolute -top-20 -right-20 w-[350px] h-[350px] rounded-full bg-brand/10 blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-32 -left-20 w-[400px] h-[400px] rounded-full bg-brand/[0.06] blur-3xl pointer-events-none"></div>
+        <div class="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-[900px] h-[900px] pointer-events-none opacity-20" aria-hidden="true">
+          <div class="absolute inset-0 rounded-full border border-brand/40"></div>
+          <div class="absolute inset-[12%] rounded-full border border-brand/30"></div>
+          <div class="absolute inset-[24%] rounded-full border border-brand/20"></div>
         </div>
-        <div class="lg:col-7 lg:pl-8 xl:pl-12" data-aos="fade-up-sm" data-aos-delay="200">
-          <BecomeAPartnerForm client:load />
+
+        <div class="relative z-10">
+          <h2 class="pb-4 text-center text-3xl font-bold text-white lg:text-4xl [&>strong]:text-white/50">
+            Explore our <strong>current partners</strong>
+          </h2>
+          <p class="mx-auto max-w-2xl pb-8 text-center text-white/60">
+            See the technology companies we already build and deliver Sovereign AI infrastructure with, from GPU leaders to global platforms.
+          </p>
+          <div class="flex flex-wrap justify-center gap-4">
+            <a
+              href="/partners"
+              class="group relative z-10 inline-flex items-center gap-2 rounded-full bg-brand px-8 py-3.5 text-sm font-semibold text-white shadow-[0_0_20px_rgba(36,171,157,0.25)] transition-all duration-300 hover:bg-brand/90 hover:shadow-[0_0_30px_rgba(36,171,157,0.35)]"
+            >
+              Our Partners
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-0.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </a>
+            <a
+              href="#apply"
+              class="group relative z-10 inline-flex items-center gap-2 rounded-full border border-white/[0.12] bg-white/[0.04] px-8 py-3.5 text-sm font-semibold text-white/90 backdrop-blur-sm transition-all duration-300 hover:bg-white/[0.08] hover:border-white/[0.2]"
+            >
+              Apply Now
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:-translate-y-0.5"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg>
+            </a>
+          </div>
         </div>
       </div>
     </div>
