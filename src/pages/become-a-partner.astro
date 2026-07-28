@@ -70,6 +70,11 @@ const apply = {
   title: "Become a **Partner**",
   subtitle:
     "Tell us a little about yourself and our partner team will reach out within two business days.",
+  points: [
+    "A real conversation with our partner team, not a drip campaign",
+    "We come prepared, scoped to your market and your offering",
+    "No commitment required to start the conversation",
+  ],
 };
 
 const benefitIcons = [
@@ -188,22 +193,34 @@ const benefitIcons = [
   <!-- Application form -->
   <section id="apply" class="section">
     <div class="container">
-      <div class="mx-auto mb-12 max-w-2xl text-center">
-        <p class="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-brand" data-aos="fade-up-sm">
-          {apply.eyebrow}
-        </p>
-        <h2
-          class="mb-4 text-3xl lg:text-4xl font-bold [&>strong]:text-dark/40"
-          data-aos="fade-up-sm"
-          data-aos-delay="100"
-          set:html={markdownify(apply.title)}
-        />
-        <p class="text-light leading-relaxed" data-aos="fade-up-sm" data-aos-delay="150">
-          {apply.subtitle}
-        </p>
-      </div>
-      <div data-aos="fade-up-sm" data-aos-delay="200">
-        <BecomeAPartnerForm client:load />
+      <div class="row gy-5 items-start">
+        <div class="lg:col-5 lg:sticky lg:top-28">
+          <p class="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-brand" data-aos="fade-up-sm">
+            {apply.eyebrow}
+          </p>
+          <h2
+            class="mb-4 text-3xl lg:text-4xl font-bold [&>strong]:text-dark/40"
+            data-aos="fade-up-sm"
+            data-aos-delay="100"
+            set:html={markdownify(apply.title)}
+          />
+          <p class="mb-8 max-w-md text-light leading-relaxed" data-aos="fade-up-sm" data-aos-delay="150">
+            {apply.subtitle}
+          </p>
+          <ul class="space-y-4" data-aos="fade-up-sm" data-aos-delay="200">
+            {apply.points.map((point) => (
+              <li class="flex items-start gap-3">
+                <span class="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand/10 text-brand">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+                </span>
+                <span class="text-sm leading-relaxed text-light">{point}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div class="lg:col-7 lg:pl-8 xl:pl-12" data-aos="fade-up-sm" data-aos-delay="200">
+          <BecomeAPartnerForm client:load />
+        </div>
       </div>
     </div>
   </section>
