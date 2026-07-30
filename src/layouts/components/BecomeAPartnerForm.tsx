@@ -5,6 +5,8 @@ const WEBHOOK_URL = `https://m-api.thiswayglobal.com/api/webhook/forms`;
 export default function BecomeAPartnerForm() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [company, setCompany] = useState("");
   const [title, setTitle] = useState("");
   const [message, setMessage] = useState("");
   const [submitting, setSubmitting] = useState(false);
@@ -20,6 +22,8 @@ export default function BecomeAPartnerForm() {
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       errors.email = "Please enter a valid email";
     }
+    if (!phone.trim()) errors.phone = "Phone number is required";
+    if (!company.trim()) errors.company = "Company name is required";
     if (!title.trim()) errors.title = "Title is required";
     setFieldErrors(errors);
     return Object.keys(errors).length === 0;
@@ -40,6 +44,8 @@ export default function BecomeAPartnerForm() {
           data: {
             name: name.trim(),
             email: email.trim(),
+            phone: phone.trim(),
+            company: company.trim(),
             title: title.trim(),
             message: message.trim(),
           },
@@ -147,6 +153,48 @@ export default function BecomeAPartnerForm() {
             />
             {fieldErrors.email && (
               <p className="mt-1.5 text-xs text-red-500">{fieldErrors.email}</p>
+            )}
+          </div>
+
+          <div className="mb-5">
+            <label htmlFor="phone" className="form-label">
+              Phone Number
+            </label>
+            <input
+              id="phone"
+              type="tel"
+              value={phone}
+              onChange={(e) => {
+                setPhone(e.target.value);
+                if (fieldErrors.phone)
+                  setFieldErrors((p) => ({ ...p, phone: "" }));
+              }}
+              className={`form-input w-full bg-tertiary/5 ${fieldErrors.phone ? "!border-red-400" : ""}`}
+              placeholder="(555) 123-4567"
+            />
+            {fieldErrors.phone && (
+              <p className="mt-1.5 text-xs text-red-500">{fieldErrors.phone}</p>
+            )}
+          </div>
+
+          <div className="mb-5">
+            <label htmlFor="company" className="form-label">
+              Company Name
+            </label>
+            <input
+              id="company"
+              type="text"
+              value={company}
+              onChange={(e) => {
+                setCompany(e.target.value);
+                if (fieldErrors.company)
+                  setFieldErrors((p) => ({ ...p, company: "" }));
+              }}
+              className={`form-input w-full bg-tertiary/5 ${fieldErrors.company ? "!border-red-400" : ""}`}
+              placeholder="Your company"
+            />
+            {fieldErrors.company && (
+              <p className="mt-1.5 text-xs text-red-500">{fieldErrors.company}</p>
             )}
           </div>
 

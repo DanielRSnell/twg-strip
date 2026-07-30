@@ -91,24 +91,45 @@ partners:
     website: "https://aws.amazon.com"
     featured: false
 
-  - name: "Circa"
-    logo: "/images/partners/circa.svg"
-    description: "As a reseller of ThisWay Global's AI4Jobs products, Circa helps companies build more diverse teams through AI talent sourcing, workforce management, and compliance solutions."
-    partnership_type: "Reseller Partner"
-    website: "https://circaworks.com"
+  - name: "AMD"
+    logo: "/images/partners/amd.svg"
+    description: "AMD Instinct accelerators and EPYC processors deliver the compute density sovereign AI workloads demand. ThisWay Global partners with AMD to give customers a choice of accelerated platforms governed by Amalgamy."
+    partnership_type: "AI Accelerator Partner"
+    website: "https://amd.com"
+    featured: true
+
+  - name: "Dell"
+    logo: "/images/partners/dell.svg"
+    description: "Dell Technologies provides the PowerEdge server platforms, storage, and networking infrastructure that underpin enterprise AI deployments. ThisWay Global and Dell partner to deliver turnkey sovereign AI environments."
+    partnership_type: "Hardware & OEM Partner"
+    website: "https://dell.com"
+    featured: true
+
+  - name: "HP"
+    logo: "/images/partners/hp.svg"
+    description: "HP delivers servers, workstations, and high-performance computing platforms for AI and data-intensive workloads. ThisWay Global partners with HP to bring governed AI infrastructure to enterprises worldwide."
+    partnership_type: "Hardware & OEM Partner"
+    website: "https://hp.com"
+    featured: true
+
+  - name: "Supermicro"
+    logo: "/images/partners/supermicro.svg"
+    description: "Supermicro designs and manufactures GPU-optimized server platforms purpose-built for AI and HPC workloads. ThisWay Global partners with Supermicro to deliver high-density, energy-efficient sovereign AI infrastructure."
+    partnership_type: "Hardware & OEM Partner"
+    website: "https://supermicro.com"
+    featured: true
+
+  - name: "Mirantis"
+    logo: "/images/partners/mirantis.svg"
+    description: "Mirantis provides cloud-native infrastructure and Kubernetes platforms that power modern data center operations. ThisWay Global partners with Mirantis to orchestrate and govern containerized AI workloads at scale."
+    partnership_type: "Technology Partner"
+    website: "https://mirantis.com"
     featured: false
 
-  - name: "STEPS Consulting"
-    logo: "/images/partners/steps.svg"
-    description: "STEPS Consulting refers enterprises to ThisWay Global for AI software solution design and deployment, complementing their automation and analytical solutions."
-    partnership_type: "Consulting Partner"
-    website: "https://stepsconsulting.com"
-    featured: false
-
-  - name: "Alliance Virtual Office"
-    logo: "/images/partners/alliance.svg"
-    description: "Alliance Virtual Office partners with ThisWay Global to provide AI-driven solutions for virtual office management and remote workforce optimization."
-    partnership_type: "Solution Partner"
-    website: "https://alliancevirtualoffices.com"
+  - name: "DLT"
+    logo: "/images/partners/dlt.svg"
+    description: "DLT Solutions is a premier government technology solutions aggregator, connecting public-sector agencies with best-in-class IT products and services. ThisWay Global partners with DLT to bring Amalgamy to government and defense customers."
+    partnership_type: "Distribution Partner"
+    website: "https://dlt.com"
     featured: false
 ---
