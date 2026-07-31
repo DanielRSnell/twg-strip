@@ -25,10 +25,10 @@ grid:
 
 cta:
   title: "Let's build **together**"
-  description: "Join the partner ecosystem behind the Blueprint and bring governed Sovereign AI infrastructure to your customers."
+  description: "Interested in partnering with ThisWay Global? Reach out to our partner team to start the conversation."
   button:
-    label: "Become a Partner"
-    link: "/become-a-partner"
+    label: "Contact Us"
+    link: "mailto:partner@thiswayglobal.com"
 
 partners:
   - name: "NVIDIA"
