@@ -1,0 +1,60 @@
+---
+import ExternalLogo from "./ExternalLogo.astro";
+
+interface Props {
+  partners: { name: string; website: string }[];
+}
+
+const { partners } = Astro.props;
+
+const domainOf = (website: string) =>
+  new URL(website).hostname.replace(/^www\./, "");
+---
+
+<div
+  class="logo-marquee relative overflow-hidden"
+  style="mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent); -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);"
+>
+  <div class="logo-marquee-track flex w-max items-center">
+    {
+      [0, 1].map((dup) => (
+        <div
+          class="flex shrink-0 items-center gap-x-16 pr-16"
+          aria-hidden={dup === 1 ? "true" : undefined}
+        >
+          {partners.map((partner) => (
+            <ExternalLogo
+              domain={domainOf(partner.website)}
+              name={partner.name}
+              height={32}
+              width={110}
+              class="h-8 w-auto max-w-[110px] object-contain opacity-60 grayscale transition duration-300 hover:opacity-100 hover:grayscale-0"
+            />
+          ))}
+        </div>
+      ))
+    }
+  </div>
+</div>
+
+<style>
+  .logo-marquee-track {
+    animation: logo-marquee 35s linear infinite;
+  }
+  .logo-marquee:hover .logo-marquee-track {
+    animation-play-state: paused;
+  }
+  @keyframes logo-marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .logo-marquee-track {
+      animation: none;
+    }
+  }
+</style>

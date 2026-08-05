@@ -1,7 +1,7 @@
 ---
 import Base from "@/layouts/Base.astro";
 import BecomeAPartnerForm from "@/components/BecomeAPartnerForm";
-import ExternalLogo from "@/components/ExternalLogo.astro";
+import PartnerLogoMarquee from "@/components/PartnerLogoMarquee.astro";
 import { markdownify } from "@/lib/utils/textConverter";
 import { getEntry } from "astro:content";
 
@@ -11,9 +11,6 @@ const { partners } = partnersEntry.data;
 const sortedPartners = [...partners].sort(
   (a, b) => Number(b.featured ?? false) - Number(a.featured ?? false)
 );
-
-const domainOf = (website: string) =>
-  new URL(website).hostname.replace(/^www\./, "");
 
 const hero = {
   eyebrow: "Partner Program",
@@ -141,16 +138,8 @@ const benefitIcons = [
       <p class="mb-10 text-center text-xs font-semibold uppercase tracking-[0.2em] text-light" data-aos="fade-up-sm">
         You will be in good company
       </p>
-      <div class="flex flex-wrap items-center justify-center gap-x-12 gap-y-8" data-aos="fade-up-sm" data-aos-delay="100">
-        {sortedPartners.map((partner) => (
-          <ExternalLogo
-            domain={domainOf(partner.website)}
-            name={partner.name}
-            height={32}
-            width={110}
-            class="h-8 w-auto object-contain opacity-60 grayscale transition duration-300 hover:opacity-100 hover:grayscale-0"
-          />
-        ))}
+      <div data-aos="fade-up-sm" data-aos-delay="100">
+        <PartnerLogoMarquee partners={sortedPartners} />
       </div>
     </div>
   </section>
