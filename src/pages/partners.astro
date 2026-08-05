@@ -1,5 +1,6 @@
 ---
 import Base from "@/layouts/Base.astro";
+import ComplianceSeal from "@/components/ComplianceSeal.astro";
 import ExternalLogo from "@/components/ExternalLogo.astro";
 import PartnerLogoMarquee from "@/components/PartnerLogoMarquee.astro";
 import { markdownify } from "@/lib/utils/textConverter";
@@ -200,7 +201,7 @@ const typeIcons = [
       <div class="mx-auto max-w-5xl">
         <div class="row g-4 justify-center">
           <div class="sm:col-6 lg:col-3" data-aos="fade-up-sm" data-aos-delay="100">
-            <div class="relative flex h-full flex-col items-center overflow-hidden rounded-2xl border border-border/60 bg-white p-8 shadow-sm text-center">
+            <div class="relative flex h-full flex-col items-center overflow-hidden rounded-2xl border border-border/60 bg-white px-4 py-8 shadow-sm text-center">
               <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-brand/60 via-brand to-brand/60"></div>
               <div class="mb-4 flex items-center justify-center rounded-lg bg-white p-2">
                 <img src="/images/certifications/iso/A-LIGN_ISO-27001.png" alt="ISO 27001 Certification" class="h-20 w-auto object-contain" />
@@ -210,7 +211,7 @@ const typeIcons = [
             </div>
           </div>
           <div class="sm:col-6 lg:col-3" data-aos="fade-up-sm" data-aos-delay="150">
-            <div class="relative flex h-full flex-col items-center overflow-hidden rounded-2xl border border-border/60 bg-white p-8 shadow-sm text-center">
+            <div class="relative flex h-full flex-col items-center overflow-hidden rounded-2xl border border-border/60 bg-white px-4 py-8 shadow-sm text-center">
               <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-brand/60 via-brand to-brand/60"></div>
               <div class="mb-4 flex items-center justify-center rounded-lg bg-white p-2">
                 <img src="/images/certifications/wbe.webp" alt="WBE Certification" class="h-20 w-auto object-contain" />
@@ -220,20 +221,20 @@ const typeIcons = [
             </div>
           </div>
           <div class="sm:col-6 lg:col-3" data-aos="fade-up-sm" data-aos-delay="200">
-            <div class="relative flex h-full flex-col items-center overflow-hidden rounded-2xl border border-border/60 bg-white p-8 shadow-sm text-center">
+            <div class="relative flex h-full flex-col items-center overflow-hidden rounded-2xl border border-border/60 bg-white px-4 py-8 shadow-sm text-center">
               <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-brand/60 via-brand to-brand/60"></div>
-              <div class="mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-brand/10 text-brand">
-                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+              <div class="mb-4">
+                <ComplianceSeal lines={["NIST", "CSF"]} tag="ALIGNED" />
               </div>
               <h3 class="mb-2 text-lg font-semibold text-dark">NIST CSF Aligned</h3>
               <p class="text-sm leading-relaxed text-light">Security controls mapped to the NIST Cybersecurity Framework, supporting partners in federal and enterprise qualification.</p>
             </div>
           </div>
           <div class="sm:col-6 lg:col-3" data-aos="fade-up-sm" data-aos-delay="250">
-            <div class="relative flex h-full flex-col items-center overflow-hidden rounded-2xl border border-border/60 bg-white p-8 shadow-sm text-center">
+            <div class="relative flex h-full flex-col items-center overflow-hidden rounded-2xl border border-border/60 bg-white px-4 py-8 shadow-sm text-center">
               <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-brand/60 via-brand to-brand/60"></div>
-              <div class="mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-brand/10 text-brand">
-                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 12h10"/><path d="M12 7v10"/></svg>
+              <div class="mb-4">
+                <ComplianceSeal lines={["FedRAMP"]} tag="MAPPED" />
               </div>
               <h3 class="mb-2 text-lg font-semibold text-dark">FedRAMP Baseline Mapping</h3>
               <p class="text-sm leading-relaxed text-light">Controls mapped to the FedRAMP Moderate baseline (NIST SP 800-53), the control set federal buyers assess against.</p>
