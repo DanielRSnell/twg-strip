@@ -48,21 +48,21 @@ partners:
   - name: "Dell"
     logo: "/images/partners/dell.svg"
     description: "Dell Technologies provides the PowerEdge server platforms, storage, and networking infrastructure that underpin enterprise AI deployments. ThisWay Global and Dell partner to deliver governed sovereign AI environments."
-    partnership_type: "Hardware & OEM Partner"
+    partnership_type: "Hardware and OEM Partner"
     website: "https://dell.com"
     featured: true
 
   - name: "HP"
     logo: "/images/partners/hp.svg"
     description: "HP delivers servers, workstations, and high-performance computing platforms for AI and data-intensive workloads. ThisWay Global partners with HP to bring governed AI infrastructure to enterprises worldwide."
-    partnership_type: "Hardware & OEM Partner"
+    partnership_type: "Hardware and OEM Partner"
     website: "https://hp.com"
     featured: true
 
   - name: "Supermicro"
     logo: "/images/partners/supermicro.svg"
     description: "Supermicro designs and manufactures GPU-optimized server platforms purpose-built for AI and HPC workloads. ThisWay Global partners with Supermicro to deliver high-density, energy-efficient sovereign AI infrastructure."
-    partnership_type: "Hardware & OEM Partner"
+    partnership_type: "Hardware and OEM Partner"
     website: "https://supermicro.com"
     featured: true
 
