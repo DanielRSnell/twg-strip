@@ -52,11 +52,11 @@ partners:
     website: "https://dell.com"
     featured: true
 
-  - name: "HP"
-    logo: "/images/partners/hp.svg"
-    description: "HP delivers servers, workstations, and high-performance computing platforms for AI and data-intensive workloads. ThisWay Global partners with HP to bring governed AI infrastructure to enterprises worldwide."
+  - name: "HPE"
+    logo: "/images/partners/hpe.svg"
+    description: "Hewlett Packard Enterprise delivers server, storage, and high-performance computing platforms for AI and data-intensive workloads. ThisWay Global partners with HPE to bring governed AI infrastructure to enterprises worldwide."
     partnership_type: "Hardware and OEM Partner"
-    website: "https://hp.com"
+    website: "https://hpe.com"
     featured: true
 
   - name: "Supermicro"
