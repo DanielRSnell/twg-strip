@@ -17,10 +17,10 @@ const domainOf = (website: string) =>
 >
   <div class="logo-marquee-track flex w-max items-center">
     {
-      [0, 1].map((dup) => (
+      [0, 1, 2, 3].map((dup) => (
         <div
           class="flex shrink-0 items-center gap-x-16 pr-16"
-          aria-hidden={dup === 1 ? "true" : undefined}
+          aria-hidden={dup > 0 ? "true" : undefined}
         >
           {partners.map((partner) => (
             <ExternalLogo
@@ -49,7 +49,8 @@ const domainOf = (website: string) =>
       transform: translateX(0);
     }
     to {
-      transform: translateX(-50%);
+      /* One group width; the track holds four identical groups. */
+      transform: translateX(-25%);
     }
   }
   @media (prefers-reduced-motion: reduce) {
